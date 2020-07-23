@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "yummy-b4d83": {
+      "hosting": {
+        "yummy": [
+          "yummy-b4d83"
+        ]
+      }
+    }
+  }
+}
