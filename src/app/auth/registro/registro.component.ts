@@ -25,7 +25,7 @@ export class RegistroComponent implements OnInit {
       const user=await this.authSvc.register(email, password);
       if (user) {
         //redireccion a la pagina login 
-        this.router.navigate(["/login"]);
+        this.router.navigate(["/verificacion"]);
       }
     }
     catch (err){

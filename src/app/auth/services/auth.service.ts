@@ -26,6 +26,7 @@ export class AuthService {
   async register(email: string, password: string) {
     try {
       const user = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      this.sendVerificacionEmail()  ;
       return user;
     }
     catch (err) {
@@ -46,5 +47,10 @@ export class AuthService {
 
   getCurrentUser() {
     return this.afAuth.authState.pipe(first()).toPromise();
+  }
+
+
+  async sendVerificacionEmail():Promise<any> {
+    return (await this.afAuth.currentUser).sendEmailVerification();
   }
 }

@@ -26,9 +26,15 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value;
    try {
      const user = await this.authSvc.login(email, password);
-     if (user) {
+     if (user && user.user.emailVerified) {
        //redireccion a la home page
        this.router.navigate(["/home"]);
+     }
+     else if (user) {
+       this.router.navigate(["/verificacion"]);
+     }
+     else {
+       this.router.navigate(["/registro"]);
      }
    }
    catch (err) {
@@ -38,7 +44,7 @@ export class LoginComponent implements OnInit {
  }
  getErrorMessage() {
   if (this.loginForm.hasError('required')) {
-    return 'YIngresa un valor';
+    return 'Ingresa un valor';
   }
 
   return this.loginForm.hasError('email') ? 'email no valido' : '';
