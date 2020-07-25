@@ -8,6 +8,7 @@ import { AuthService} from "../services/auth.service";
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
+  hide= true;
   registerForm = new FormGroup({
   email : new FormControl(''),
   password: new FormControl('')
@@ -30,5 +31,12 @@ export class RegistroComponent implements OnInit {
     catch (err){
       console.log(err);
     }
+  }
+  getErrorMessage() {
+    if (this.registerForm.hasError('required')) {
+      return 'YIngresa un valor';
+    }
+  
+    return this.registerForm.hasError('email') ? 'email no valido' : '';
   }
 }

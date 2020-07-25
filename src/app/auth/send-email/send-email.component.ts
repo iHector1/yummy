@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'firebase';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-send-email',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SendEmailComponent implements OnInit {
 
-  constructor() { }
 
   ngOnInit(): void {
   }
+  public user$: Observable<User> = this.authSvc.afAuth.user;
 
+  constructor(private authSvc: AuthService) {}
+
+  onSendEmail(): void {
+    
+  }
 }

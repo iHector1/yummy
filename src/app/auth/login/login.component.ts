@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { AuthService} from "../services/auth.service";
 @Component({
@@ -9,9 +9,12 @@ import { AuthService} from "../services/auth.service";
   providers:[AuthService]
 })
 export class LoginComponent implements OnInit {
-  hide: true;
+  hide= true;
   loginForm = new FormGroup({
-    email: new FormControl(''),
+    email: new FormControl('',[
+      Validators.required,
+      Validators.email,
+    ]),
     password: new FormControl('')
   });
    f:boolean;
