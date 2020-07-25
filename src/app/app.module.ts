@@ -9,11 +9,13 @@ import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { SendEmailComponent } from './auth/send-email/send-email.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    SendEmailComponent,
   ],
   imports: [
     BrowserModule,
