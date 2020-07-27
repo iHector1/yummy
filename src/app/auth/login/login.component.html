@@ -27,12 +27,18 @@
           <div class="txt">
             O
           </div>
-          <button mat-raised-button class="btn" > 
-            <img  alt="" class="google-icon"> Entrar con Google
+          <button mat-raised-button class="btn color"(click)="onGoogleLogin()" > 
+            <img  alt="" class="google-icon" > Entrar con Google
+          </button>
+          <button mat-raised-button class="btn color2 mt-2" (click)="onFacebookLogin()"> 
+            <img  alt="" class="google-icon"> Entrar con Facebook
           </button>
       </div>
       <div class="additional-link">
         <a routerLink="/registro">¿No tienes cuenta? <strong>Crea una aqui</strong></a>
+      </div>
+      <div class="additional-link">
+        <a routerLink="/olvido-contraseña">Olvide mi contraseña</a>
       </div>
     </div>
   </div>

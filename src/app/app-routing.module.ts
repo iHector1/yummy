@@ -16,6 +16,7 @@ const routes: Routes = [
     path: "verificacion",
     component:SendEmailComponent
   },
+  { path: 'olvido-contraseña', loadChildren: () => import('./auth/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule) },
 ];
 
 @NgModule({
