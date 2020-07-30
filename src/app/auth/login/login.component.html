@@ -1,0 +1,44 @@
+<div class="form-wraper">
+    <div class="form-container card">  
+        <div class="form-header">
+            <h3 class="form-title">Entra Ahora</h3>
+          </div>
+      <div class="form-body">
+    
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <mat-form-field class="justifier">
+            <mat-label>Enter your email</mat-label>
+            <input matInput placeholder="pat@example.com" formControlName="email" required>
+            <mat-error *ngIf="loginForm.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="justifier">
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="constraseña" formControlName="password" class="form-input">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" required>
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        <button mat-raised-button class="btn custom-btn" type="submit">  
+              <mat-icon>input</mat-icon> Entrar
+        </button>  
+      </form>  
+      </div>
+      <div class="form-footer">
+          
+          <div class="txt">
+            O
+          </div>
+          <button mat-raised-button class="btn color"(click)="onGoogleLogin()" > 
+            <img  alt="" class="google-icon" > Entrar con Google
+          </button>
+          <button mat-raised-button class="btn color2 mt-2" (click)="onFacebookLogin()"> 
+            <img  alt="" class="google-icon"> Entrar con Facebook
+          </button>
+      </div>
+      <div class="additional-link">
+        <a routerLink="/registro">¿No tienes cuenta? <strong>Crea una aqui</strong></a>
+      </div>
+      <div class="additional-link">
+        <a routerLink="/olvido-contraseña">Olvide mi contraseña</a>
+      </div>
+    </div>
+  </div>
