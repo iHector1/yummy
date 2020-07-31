@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Router } from '@angular/router';
+import { User } from '../models/user.inteface';
 
 @Component({
   selector: 'app-navbar',
@@ -11,32 +12,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
   providers:[AuthService],
 })
-export class NavbarComponent implements OnInit{
-  public isLogged = false;
-  public user: any;
-  public user$: Observable<any> = this.authSvc.afAuth.user;
-  //efecto del navbar
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );  
+export class NavbarComponent {
+  public user$: Observable<User> = this.authSvc.afAuth.user; 
 
-  constructor(private breakpointObserver: BreakpointObserver, private authSvc: AuthService,private router:Router) { }
+  constructor(public authSvc: AuthService, private router: Router) { }
  
-  async ngOnInit() {
-    this.user = await this.authSvc.getCurrentUser();
-    if (this.user) {
-      this.isLogged = true;
-    }
-  }
 
   async logout() {
     try {
-    await   this.authSvc.logout();
-    }
-    catch (err) {
-      console.log(err);
+      await this.authSvc.logout();
+    } catch (error) {
+      console.log(error);
     }
   }
 }

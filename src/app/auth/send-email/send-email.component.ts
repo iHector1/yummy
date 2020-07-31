@@ -16,6 +16,6 @@ public user$: Observable<User> = this.authSvc.afAuth.user;
   }
   constructor(private authSvc: AuthService) {}
   onSendEmail(): void {
-    this.authSvc.sendVerificacionEmail();
+    this.authSvc.sendVerificationEmail();
   }
 }

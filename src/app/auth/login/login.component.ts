@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { AuthService} from "../services/auth.service";
+import {  User } from '../../shared/models/user.inteface';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -26,42 +27,38 @@ export class LoginComponent implements OnInit {
   }
   //login con correo y contraseña
  async  onLogin() {
-    const { email, password } = this.loginForm.value;
-   try {
-     const user = await this.authSvc.login(email, password);
-     if (user && user.user.emailVerified) {
-       //redireccion a la home page
-       this.router.navigate(["/home"]);
-     }
-     else if (user) {
-       this.router.navigate(["/verificacion"]);
-     }
-     else {
-      window.alert("La contraseña o el email estan incorrectos");
-     }
-   }
-   catch (err) {
-     console.log(err);
-     window.alert("La contraseña o el email estan incorrectos");
-   }
+  const { email, password } = this.loginForm.value;
+  try {
+    const user = await this.authSvc.login(email, password);
+    if (user) {
+      this.checkUserIsVerified(user);
+    }
+  } catch (error) {
+    console.log(error);
+  }
  }
   
  getErrorMessage() {
   if (this.loginForm.hasError('required')) {
     return 'Ingresa un valor';
   }
-
   return this.loginForm.hasError('email') ? 'email no valido' : '';
- }
-  //login con l acuenta de google
+  }
+  
+
+  //login con la cuenta de google
  async onGoogleLogin() {
-   try {
+  try {
     const user = await this.authSvc.loginGoogle();
-    this.router.navigate(['/home']);
+    if (user) {
+      this.checkUserIsVerified(user);
+    }
   } catch (error) {
     console.log(error);
   }
- }
+  }
+  
+
   async onFacebookLogin() {
     try {
       const user = await this.authSvc.loginFacebook();
@@ -70,12 +67,13 @@ export class LoginComponent implements OnInit {
       console.log(error);
     }
   }
+
   //login con la cuenta de facebook
- private checkUserIsVerified(user: any) {
+ private checkUserIsVerified(user: User) {
   if (user && user.emailVerified) {
     this.router.navigate(['/home']);
   } else if (user) {
-    this.router.navigate(['/verification-email']);
+    this.router.navigate(['/verificacion']);
   } else {
     this.router.navigate(['/register']);
   }

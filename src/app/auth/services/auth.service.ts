@@ -1,66 +1,34 @@
 import { Injectable } from '@angular/core';
-import {auth } from "firebase/app";
-import { AngularFireAuth} from "@angular/fire/auth";
-import { User} from "firebase";
-import { first } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
+
+import { User } from 'src/app/shared/models/user.inteface';
+
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(public afAuth:AngularFireAuth) { }
   
-  //login con correo y contraseña 
-  async login(email:string,password:string)
-  { 
-    try{const user = await this.afAuth.signInWithEmailAndPassword(email, password);
-      return user;
-    }
-    catch (err) {
-      console.log(err);
-      
-    }
-    
-  }
-  //registrarse con email y contraseña 
-  async register(email: string, password: string) {
-    try {
-      const user = await this.afAuth.createUserWithEmailAndPassword(email, password);
-      this.sendVerificacionEmail()  ;
-      return user;
-    }
-    catch (err) {
-      console.log(err);
-      
-    }
-   }
-
-  //logout del sistema 
-  async logout() {
-    try {
-      await this.afAuth.signOut();
-    }
-    catch (err) {
-      console.log(err);
-    }
-  }
-  //vemos quin es el que esta haciendo login
-  getCurrentUser() {
-    return this.afAuth.authState.pipe(first()).toPromise();
+  public user$: Observable<User>;
+  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
+    this.user$ = this.afAuth.authState.pipe(
+      switchMap((user) => {
+        if (user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+        }
+        return of(null);
+      })
+    );
   }
 
-  //envio de verificaion del email
-  async sendVerificacionEmail():Promise<any> {
-    return (await this.afAuth.currentUser).sendEmailVerification();
-  }
-  //resetiear la contraseña
-  async resetPassword(email: string):Promise<void> {
-    try {
-      return this.afAuth.sendPasswordResetEmail(email);
-    } catch (error) {
-      console.log(error);
-    }    
-  }
   async loginGoogle(): Promise<User> {
     try {
       const { user } = await this.afAuth.signInWithPopup(
@@ -77,8 +45,72 @@ export class AuthService {
         new auth.FacebookAuthProvider()
       );
       return user;
+    }
+    catch (error) {
+      console.log(error);
+    }
+    
+  }
+  async resetPassword(email: string): Promise<void> {
+    try {
+      return this.afAuth.sendPasswordResetEmail(email);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async sendVerificationEmail(): Promise<void> {
+    return (await this.afAuth.currentUser).sendEmailVerification();
+  }
+
+  async login(email: string, password: string): Promise<User> {
+    try {
+      const { user } = await this.afAuth.signInWithEmailAndPassword(
+        email,
+        password
+      );
+      this.updateUserData(user);
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async register(email: string, password: string): Promise<User> {
+    try {
+      const { user } = await this.afAuth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      await this.sendVerificationEmail();
+      return user;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async logout(): Promise<void> {
+    try {
+      await this.afAuth.signOut();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  private updateUserData(user: User) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+      `users/${user.uid}`
+    );
+
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      type: "Registrado",
+    };
+
+    return userRef.set(data, { merge: true });
   }
 }
