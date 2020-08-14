@@ -2,9 +2,9 @@ export type Rol = "Registrado" | "Premiun";
 export type Level = "Principiante" | "Intermedio" | "Avanzado";
 export interface User{
     uid: string;
-  email: string;
-  displayName: string;
-  emailVerified: boolean;
+   email: string;
+   displayName: string;
+   emailVerified: boolean;
     userPremiun?: boolean;
     follower?: string[];
     follow?: string[];
@@ -14,6 +14,5 @@ export interface User{
     photoURL?: string;
     points?: number;
     level?:Level,
-  type?: Rol;
-    
+   type?: Rol;     
 }

@@ -7,24 +7,24 @@
       <div class="form-body">
         <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
           <mat-form-field class="justifier">
-            <mat-label>Enter your email</mat-label>
+            <mat-label>Inserta tu email</mat-label>
             <input matInput placeholder="pat@example.com" formControlName="email" required>
             <mat-error *ngIf="registerForm.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field class="justifier">
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="constraseña" formControlName="password" class="form-input">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" required>
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="constraseña" formControlName="password" class="form-input" required>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
           </mat-form-field>
+        <mat-form-field class="justifier">
+          <mat-label>Nombre usuario</mat-label>
+          <input matInput  formControlName="email" required>
+        </mat-form-field>
         <button mat-raised-button class="btn custom-btn" type="submit" >  
               <mat-icon>add</mat-icon> Registrarse
           </button>
       </form>
-      </div>
-  
-      <div class="form-footer">
-          
       </div>
       <div class="additional-link">
         <a routerLink="/login">¿Ya tiene una cuenta? <strong>Entra</strong></a>

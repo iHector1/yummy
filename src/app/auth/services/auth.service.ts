@@ -3,11 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from '@angular/fire/firestore';
-
+import {  AngularFirestore,AngularFirestoreDocument} from '@angular/fire/firestore';
 import { User } from 'src/app/shared/models/user.inteface';
 
 
@@ -69,19 +65,19 @@ export class AuthService {
         email,
         password
       );
-      this.updateUserData(user);
       return user;
     } catch (error) {
       console.log(error);
     }
   }
 
-  async register(email: string, password: string): Promise<User> {
+  async register(email: string, password: string,displayName:string): Promise<User> {
     try {
       const { user } = await this.afAuth.createUserWithEmailAndPassword(
         email,
         password
       );
+      this.updateUserData(user, displayName);
       await this.sendVerificationEmail();
       return user;
     } catch (error) {
@@ -97,7 +93,7 @@ export class AuthService {
     }
   }
 
-  private updateUserData(user: User) {
+  private updateUserData(user: User,displayName:string) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -106,7 +102,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       emailVerified: user.emailVerified,
-      displayName: user.displayName,
+      displayName: displayName,
       photoURL: user.photoURL,
       type: "Registrado",
     };
