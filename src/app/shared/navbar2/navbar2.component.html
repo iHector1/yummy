@@ -9,11 +9,10 @@
       <a mat-list-item (click)="logout()"*ngIf="user">Salir</a>
     </mat-nav-list>
     <ng-template #login>
-      <mat-nav-list><a mat-list-item  href="/login">Link 1</a> 
+      <a mat-list-item  href="/login">Login</a>
       <a mat-list-item  href="/registro">Registrarse</a>
-    </mat-nav-list> 
     </ng-template>
-  </mat-sidenav> 
+  </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary"> 
       <button
