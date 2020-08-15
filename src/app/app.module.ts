@@ -10,12 +10,20 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SendEmailComponent } from './auth/send-email/send-email.component';
+import { Navbar2Component } from './shared/navbar2/navbar2.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     SendEmailComponent,
+    Navbar2Component,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +32,13 @@ import { SendEmailComponent } from './auth/send-email/send-email.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent],
