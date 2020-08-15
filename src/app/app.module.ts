@@ -8,7 +8,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAnalyticsModule } from '@angular/fire/analytics';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
-import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SendEmailComponent } from './auth/send-email/send-email.component';
 import { Navbar2Component } from './shared/navbar2/navbar2.component';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -21,7 +20,6 @@ import { MatListModule } from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     SendEmailComponent,
     Navbar2Component,
   ],
