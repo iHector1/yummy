@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SendEmailComponent } from './auth/send-email/send-email.component';
+import { CanConfigGuard } from './guards/canConfiguring/can-config.guard';
 
 
 const routes: Routes = [
@@ -17,6 +18,9 @@ const routes: Routes = [
     component:SendEmailComponent
   },
   { path: 'olvido-contraseña', loadChildren: () => import('./auth/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule) },
+  {
+    path: 'configuracion', loadChildren: () => import('./auth/confirguracion/confirguracion.module').then(m => m.ConfirguracionModule),canActivate:[CanConfigGuard]
+  },
 ];
 
 @NgModule({

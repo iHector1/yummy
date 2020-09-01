@@ -12,7 +12,6 @@ export class RegistroComponent implements OnInit {
   registerForm = new FormGroup({
   email : new FormControl(''),
     password: new FormControl(''),
-  displayName:new FormControl(''),
   })
   constructor(private authSvc:AuthService,private router:Router) { }
 
@@ -21,9 +20,9 @@ export class RegistroComponent implements OnInit {
   //registro con correo electronico 
   async onRegister() {
     
-    const { email, password,displayName } = this.registerForm.value;
+    const { email, password } = this.registerForm.value;
     try {
-      const user=await this.authSvc.register(email, password,displayName);
+      const user=await this.authSvc.register(email, password);
       if (user) {
         //redireccion a la pagina login 
         this.router.navigate(["/verificacion"]);
