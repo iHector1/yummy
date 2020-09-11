@@ -1,1 +1,151 @@
-<p>confirguracion works!</p>
+<div class="form-wraper">
+  <div class="form-container card">
+    <div class="form-header">
+      <h3 class="form-title">Llena tus datos</h3>
+    </div>
+    <div class="form-body">
+      <form>
+        <div class="row ml-4">
+          <div class="col-lg-6 col-sm-6 col-12">
+            <mat-form-field class="justifier">
+              <mat-label>Nombre de Usuario</mat-label>
+              <input
+                matInput
+                placeholder="papasito33"
+                formControlName="text"
+                required
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6 col-sm-6 col-12">
+            <mat-form-field appearance="fill">
+              <mat-label required>Estado</mat-label>
+              <mat-select name="state">
+                <mat-option *ngFor="let state of states" [value]="state.value">
+                  {{ state.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row ml-4">
+          <div class="col-lg-6 col-sm-6 col-12">
+            <mat-form-field appearance="fill">
+              <mat-label>Dia de Nacimiento</mat-label>
+              <input matInput [matDatepicker]="dp" />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dp"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #dp></mat-datepicker> 
+            </mat-form-field>
+          </div>
+          <div class="col-lg-6 col-sm-6 col-12">
+            <mat-form-field appearance="fill">
+              <mat-label required>Categoria que te gusta</mat-label>
+              <mat-select name="state">
+                <mat-option *ngFor="let state of states" [value]="state.value">
+                  {{ state.value }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="center btn"><button mat-raised-button >Subir una foto de perfil</button> </div> 
+        <div class="pregresp">
+          <div class="pregunta">¿Cómo se le llama a la técnica de cocina que consiste en introducir un recipiente con la comida dentro de una olla con agua a fuego lento? <br />
+          </div>
+          <div class="respuestas">
+            <input type="radio" name="preg1" value="1" />Baño Maria<br />
+            <input type="radio" name="preg1" value="0" />Escaldar<br />
+            <input type="radio" name="preg1" value="0" /> Adobar<br />
+          </div>
+        </div>
+        <div class="pregresp">
+          <div class="pregunta">¿Cuál es la realcion ideal de café y agua en el prensado frances? <br />
+          </div>
+          <div class="respuestas">
+            <input type="radio" name="preg2" value="1" />60 a 70 gr de café por 2 litro de agua<br />
+            <input type="radio" name="preg2" value="0" />60 a 70 gr de café por litro de agua<br />
+            <input type="radio" name="preg2" value="0" /> 30 a 60 gr de café por litro de agua<br />
+          </div>
+        </div>
+        <div class="pregresp">
+          <div class="pregunta">¿Cuántas cucharaditas hay en una cuchara sopera? <br />
+          </div>
+          <div class="respuestas">
+            <input type="radio" name="preg3" value="1" />4<br />
+            <input type="radio" name="preg3" value="0" />3<br />
+            <input type="radio" name="preg3" value="0" />2<br />
+          </div>
+        </div>
+        <div class="pregresp">
+          <div class="pregunta">El marinaje perfecto para el pescado es... <br />
+          </div>
+          <div class="respuestas">
+            <input type="radio" name="preg4" value="1" />Vino tinto<br />
+            <input type="radio" name="preg4" value="0" />Vino rosado<br />
+            <input type="radio" name="preg4" value="0" />Vino blanco<br />
+          </div>
+        </div>
+        <div class="pregresp">
+          <div class="pregunta">¿Cuál es la técnica de cocina ideal ára hacer la harina más fina y quitar impurezas? <br />
+          </div>
+          <div class="respuestas">
+            <input type="radio" name="preg5" value="1" />Escalfar<br />
+            <input type="radio" name="preg5" value="0" />Reducir<br />
+            <input type="radio" name="preg5" value="0" />Tamizar<br />
+          </div>
+        </div>
+        <div class="pregresp">
+          <div class="pregunta">El merengue italiano se prepara solamente con... <br />
+          </div>
+          <div class="respuestas">
+            <input type="radio" name="preg6" value="1" />Agua y huevo<br />
+            <input type="radio" name="preg6" value="0" />Azucar y claras de huevo<br />
+            <input type="radio" name="preg6" value="0" />Agua ,azucay y claras de huevo<br />
+          </div>
+        </div>
+        <div class="pregresp">
+          <div class="pregunta">¿Para que sirve la chaira? <br />
+          </div>
+          <div class="respuestas">
+            <input type="radio" name="preg7" value="1" />Es un agitador<br />
+            <input type="radio" name="preg7" value="0" />Para afilar cuchillos<br />
+            <input type="radio" name="preg7" value="0" />PAra cortar carne<br />
+          </div>
+        </div>
+        <div class="pregresp">
+          <div class="pregunta">¿Cómo puedes evitar que la amntequilla se queme en el sartén? <br />
+          </div>
+          <div class="respuestas">
+            <input type="radio" name="preg8" value="1" />La mantequilla no se quema<br />
+            <input type="radio" name="preg8" value="0" />Agrega un poco de aceite<br />
+            <input type="radio" name="preg8" value="0" />Agregar un poco de agua<br />
+          </div>
+        </div>
+        <div class="pregresp">
+          <div class="pregunta">¿Cuánto timepo debemos precalentar le horno? <br />
+          </div>
+          <div class="respuestas">
+            <input type="radio" name="preg9" value="1" />20-25 minutos<br />
+            <input type="radio" name="preg9" value="0" />10-15 minutos<br />
+            <input type="radio" name="preg9" value="0" />15-20 minutos<br />
+          </div>
+        </div>
+        <div class="pregresp">
+          <div class="pregunta">¿Termino correcto para comer un filete de rib-eye? <br />
+          </div>
+          <div class="respuestas">
+            <input type="radio" name="preg10" value="1" />1/4<br />
+            <input type="radio" name="preg10" value="0" />1/2<br />
+            <input type="radio" name="preg10" value="0" /> 3/4<br />
+          </div>
+        </div>
+        <button mat-raised-button class="btn custom-btn" type="submit">  
+          <mat-icon>input</mat-icon> Entrar
+    </button> 
+      </form>
+    </div>
+  </div>
+</div>
