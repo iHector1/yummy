@@ -5,16 +5,18 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import {  AngularFirestore,AngularFirestoreDocument} from '@angular/fire/firestore';
 import { User } from 'src/app/shared/models/user.inteface';
+import { RoleValidator } from 'src/app/Validators/Validator_register';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends RoleValidator{
   
   public user$: Observable<User>;
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
+    super();
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -71,13 +73,13 @@ export class AuthService {
     }
   }
 
-  async register(email: string, password: string,displayName:string): Promise<User> {
+  async register(email: string, password: string): Promise<User> {
     try {
       const { user } = await this.afAuth.createUserWithEmailAndPassword(
         email,
         password
       );
-      this.updateUserData(user, displayName);
+      this.updateUserData(user);
       await this.sendVerificationEmail();
       return user;
     } catch (error) {
@@ -93,7 +95,7 @@ export class AuthService {
     }
   }
 
-  private updateUserData(user: User,displayName:string) {
+  private updateUserData(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
     );
@@ -102,8 +104,8 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       emailVerified: user.emailVerified,
-      displayName: displayName,
-      photoURL: user.photoURL,
+      displayName: user.displayName,
+      photoURL: user.photoURL, 
       type: "Registrado",
     };
 
