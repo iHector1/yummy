@@ -14,3 +14,4 @@ import {AngularMaterialModule } from '../../Angular_Material/angular_materia.mod
   ]
 })
 export class ConfirguracionModule { }
+ 
