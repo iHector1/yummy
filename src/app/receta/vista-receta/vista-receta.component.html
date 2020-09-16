@@ -48,5 +48,29 @@
       </div>
     </div>
   </mat-card>
-  
+  <div class="ing_co">
+      <mat-card class="ingredients">
+          <div class="topic_ingredients">
+            <a class="text-center txt-ing">Ingredientes</a>
+            <div class="top_ingredients">
+                <button mat-flat-button color="warn" class="plusbtn">+</button>
+                <button mat-stroked-button disabled>8</button>
+                <button mat-flat-button color="warn" class="menbtn">-</button>
+            </div>
+          </div>
+        <div class="cant_ing">
+          <table matSort >
+            <tr>
+              <th mat-sort-header="name" class="ing">ingredientes</th>
+              <th mat-sort-header="calories" class="cant">cantidad</th>
+            </tr>
+          </table>
+
+        </div>
+
+      </mat-card>
+      <mat-card class="cook">
+
+      </mat-card>
+  </div>
 </div>
