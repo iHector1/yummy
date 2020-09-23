@@ -1,0 +1,212 @@
+<div class="card ml-3 mr-3 mt-3 mb-5">
+  <mat-card>
+      <!--vista del voton y la imagen-->
+    <div class="image col-md-5 container-fluid column">
+      <img
+        src="../../../assets/image.png"
+        alt=""
+        class="img-responsive center-block"
+        class="col-md-5"
+      />
+      <div class="col-md-6 mt-3">
+        <button mat-raised-button color="primary" class="text-center">
+          Subir Imagen
+        </button>
+      </div>
+    </div>
+    <!--boton premiun y titulo de la reeceta-->
+    <div class="col-md-12 col-sm-12 row mt-2">
+        <mat-form-field class="col-md-9 col-sm-12">
+            <mat-label>Nombre de la receta</mat-label>
+            <input
+              matInput
+              placeholder="papas"
+              formControlName="text"
+              required
+            />
+          </mat-form-field>
+          <mat-slide-toggle color="warn" class="col-md-1">Premiun</mat-slide-toggle>
+    </div>
+
+    <!--insertado-->
+
+    <div class="col-md-12 col-sm-12 mt-5">
+        <mat-form-field class="col-md-4 col-sm-12">
+            <mat-label>Insertar minutos</mat-label>
+            <input
+              matInput
+              placeholder="60"
+              formControlName="number"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field class="col-md-4 col-sm-12">
+            <mat-label>Inserta porciones</mat-label>
+            <input
+              matInput
+              placeholder="5"
+              formControlName="number"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field class="col-md-4 col-sm-12">
+            <mat-label>Inserta calorias por porcion en kcal</mat-label>
+            <input
+              matInput
+              placeholder="500"
+              formControlName="number"
+              required
+            />
+          </mat-form-field>
+    </div>
+
+    <!--categoria-->
+    <div class="col-md-12 col-sm-12 row mt-5">
+        <div class="col-md-4 col-sm-12">
+            <mat-form-field appearance="fill">
+            <mat-label>Categoria</mat-label>
+            <mat-select>
+              <mat-option >
+                hola
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <mat-form-field appearance="fill">
+            <mat-label>Temporada</mat-label>
+            <mat-select>
+              <mat-option >
+                hola
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <mat-form-field appearance="fill">
+            <mat-label>Coleccion</mat-label>
+            <mat-select>
+              <mat-option >
+                hola
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        
+
+    </div>
+  <!--Ingredientes-->
+
+  <div class="col-md-12 col-sm-12 mt-5">
+      <div class="col-md-12 col-sm-12">
+          <h3>Ingredientes</h3>
+      </div>
+      <div class="col-md-12 col-sm-12 row mt-2">
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrediente</mat-label>
+                <mat-select>
+                    <mat-option >
+                    ingrediente
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-md-4 col-sm-12">
+                <mat-label>Cantidad</mat-label>
+                <input matInput placeholder="5" formControlName="number"required/>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Medida</mat-label>
+                <mat-select>
+                    <mat-option >
+                    MEdida
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+      </div>
+      <button mat-mini-fab color="accent">
+          <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <!--Utencilios-->
+  <div class="col-md-12 col-sm-12 mt-5">
+    <h3>Utencilios</h3>
+    <div class="col-md-11 col-sm-12 mt-2">
+        <mat-form-field appearance="fill">
+            <mat-label>Utensilio</mat-label>
+            <mat-select>
+                <mat-option >
+                Utensilio
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <button mat-mini-fab color="accent">
+        <mat-icon>add</mat-icon>
+  </button>
+  </div>
+
+  <!--Tecnicas-->
+  <div class="col-md-12 col-sm-12 mt-5 ml-1">
+    <h3>Tecnicas</h3>
+    <div class="col-md-4 col-sm-11 mt-2">
+        <mat-form-field appearance="fill">
+            <mat-label>Tecnicas</mat-label>
+            <mat-select>
+                <mat-option >
+                tecnica
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <button mat-mini-fab color="accent">
+        <mat-icon>add</mat-icon>
+  </button>
+  </div>
+<!--Pasos-->
+<div class="col-md-12 col-sm-12mt-2">
+    <h3>Pasos</h3>
+    <div class="container-fluid column">
+       <mat-form-field class="col-md-12 col-sm-12">
+         <mat-label>Paso de la receta</mat-label>
+           <input
+             matInput
+             placeholder="papas"
+             formControlName="text"
+             required
+           />
+          </mat-form-field>
+          <button mat-raised-button color="primary" class="text-center">
+            Subir Imagen
+          </button>
+    </div>
+    <button mat-mini-fab color="accent" class="mt-2">
+        <mat-icon>add</mat-icon>
+  </button>
+</div>
+<!--url-->
+<div class="col-md-12 col-sm-12 mt-4">
+    <mat-form-field class="col-md-12 col-sm-12">
+        <mat-label>Url del video de Youtube</mat-label>
+          <input
+            matInput
+            placeholder="https://www.youtube.com/watch?v=jNQXAC9IVRw"
+            formControlName="text"
+            required
+          />
+         </mat-form-field>
+</div>
+
+<!--Boton de subir receta-->
+<div class="col-md-12 col-sm-12 container-fluid row mt-4">
+    <div class="col-md-6">
+        
+    </div>
+    <div class="form-group">
+        <button mat-raised-button color="primary" class="text-center center-block">
+            Subir Receta
+         </button>
+    </div> 
+</div>
+  </mat-card>
+</div>
