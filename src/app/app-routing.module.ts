@@ -23,6 +23,8 @@ const routes: Routes = [
   },
   { path: 'receta/id', loadChildren: () => import('./receta/vista-receta/vista-receta.module').then(m => m.VistaRecetaModule) },
   { path: 'crear-receta', loadChildren: () => import('./receta/crear-recetas/crear-recetas.module').then(m => m.CrearRecetasModule) },
+  { path: 'notificaciones/id', loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule) },
+  { path: 'chat', loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule) },
 ];
 
 @NgModule({
