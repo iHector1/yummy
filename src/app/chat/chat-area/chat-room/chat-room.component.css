@@ -31,9 +31,9 @@
     bottom: 0;
     margin-left: 10px;
     font-size: x-small;
-    color: darkgray;
+    color: rgb(0, 0, 0);
   }
   .chat-area-message-owner {
     margin-left: auto;
-    background-color: #DCF8C6;
+    background-color: #78d631;
   }

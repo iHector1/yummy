@@ -22,4 +22,11 @@
     overflow-y: scroll;
     flex: 1;
   }
+
+  @media screen and (max-width: 360px) {
+  .sidebar {
+      width: 100px;
+      height: 100vh;
+    }
+  }
   
