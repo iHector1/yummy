@@ -1,0 +1,29 @@
+.profile-pic{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.sidebar-content {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+    border-bottom: 1px solid lightgray;
+  }
+  .sidebar-content:hover {
+    background-color: lightgray;
+  }
+  .sidebar-content-room {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+  }
+  .sidebar-content-room span {
+    font-size: small;
+  }
+  .sidebar-content-room span.sidebar-content-room-name {
+    font-size: 1.18rem;
+    align-self: flex-start;
+  }
+  
