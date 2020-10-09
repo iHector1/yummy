@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SendEmailComponent } from './auth/send-email/send-email.component';
 import { CanConfigGuard } from './guards/canConfiguring/can-config.guard';
-
+import { PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -27,7 +27,10 @@ const routes: Routes = [
   { path: 'chat', loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule) },
   { path: 'pasos/:id', loadChildren: () => import('./steps/steps.module').then(m => m.StepsModule) },
   { path: 'recetas-programadas', loadChildren: () => import('./receta/schedule-recipes/schedule-recipes.module').then(m => m.ScheduleRecipesModule) },
- 
+  {
+    path: '**',
+    component:PageNotFoundComponent
+  },
 ];
 
 @NgModule({
