@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
-  { path: 'registro', loadChildren: () => import('./auth/registro/registro.module').then(m => m.RegistroModule) },
+  { path: 'registro', loadChildren: () => import('./auth/registro/registro.module').then(m => m.RegistroModule) }, 
   {
     path: "verificacion",
     component:SendEmailComponent
@@ -37,9 +37,9 @@ const routes: Routes = [
   { path: 'pasos/:id', loadChildren: () => import('./steps/steps.module').then(m => m.StepsModule) },
   { path: 'recetas-programadas', loadChildren: () => import('./receta/schedule-recipes/schedule-recipes.module').then(m => m.ScheduleRecipesModule) },
   {
-    path: '**', 
+    path: '**',
     component:PageNotFoundComponent
-  }
+  },
 ];
 
 @NgModule({
