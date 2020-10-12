@@ -10,3 +10,4 @@ const routes: Routes = [{ path: '', component: VistaRecetaComponent }];
   exports: [RouterModule]
 })
 export class VistaRecetaRoutingModule {  }
+ 

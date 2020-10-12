@@ -1,0 +1,35 @@
+<div class="col-md-12 text-center mt-5">
+  <form>
+    <p class="clasificacion">
+      <input id="radio1" type="radio" name="estrellas" value="5" /><!--
+          --><label for="radio1">★</label
+      ><!--
+          --><input id="radio2" type="radio" name="estrellas" value="4" /><!--
+          --><label for="radio2">★</label
+      ><!--
+          --><input id="radio3" type="radio" name="estrellas" value="3" /><!--
+          --><label for="radio3">★</label
+      ><!--
+          --><input id="radio4" type="radio" name="estrellas" value="2" /><!--
+          --><label for="radio4">★</label
+      ><!--
+          --><input id="radio5" type="radio" name="estrellas" value="1" /><!--
+          --><label for="radio5">★</label>
+    </p>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Dificultad</mat-label>
+        <mat-select>
+          <mat-option> Facil </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="col-md-5 col-sm-12" appearance="fill">
+        <mat-label>Inserta un comentario</mat-label>
+        <input matInput formControlName="text" />
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="accent" type="submit">Comentar</button>
+  </form>
+</div>

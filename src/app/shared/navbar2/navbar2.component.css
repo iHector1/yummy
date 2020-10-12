@@ -16,3 +16,6 @@
   top: 0;
   z-index: 2;
 }
+mat-sidenav-content{
+  background-color: white;
+}

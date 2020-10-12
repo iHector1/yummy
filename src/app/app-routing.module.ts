@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SendEmailComponent } from './auth/send-email/send-email.component';
 import { CanConfigGuard } from './guards/canConfiguring/can-config.guard';
-
+import { PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   { path: 'olvido-contraseña', loadChildren: () => import('./auth/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule) },
   {
-    path: 'configuracion', loadChildren: () => import('./auth/confirguracion/confirguracion.module').then(m => m.ConfirguracionModule),canActivate:[CanConfigGuard]
+    path: 'configuracion', loadChildren: () => import('./auth/confirguracion/confirguracion.module').then(m => m.ConfirguracionModule)//canActivate:[CanConfigGuard]
   },
   { path: 'receta/id', loadChildren: () => import('./receta/vista-receta/vista-receta.module').then(m => m.VistaRecetaModule) },
   { path: 'mi_alacena', loadChildren: () => import('./cupboard/cupboard.module').then(m => m.CupboardModule) },
@@ -31,6 +31,15 @@ const routes: Routes = [
   { path: 'anuncio_premium', loadChildren: () => import('./premium-creation/premium-creation.module').then(m => m.PremiumCreationModule) },
   { path: 'ver_premium', loadChildren: () => import('./premium/premium.module').then(m => m.PremiumModule) },
   { path: 'perfil_usuario', loadChildren: () => import('./info-user/info-user.module').then(m => m.InfoUserModule) },
+  { path: 'crear-receta', loadChildren: () => import('./receta/crear-recetas/crear-recetas.module').then(m => m.CrearRecetasModule) },
+  { path: 'notificaciones/id', loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule) },
+  { path: 'chat', loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule) },
+  { path: 'pasos/:id', loadChildren: () => import('./steps/steps.module').then(m => m.StepsModule) },
+  { path: 'recetas-programadas', loadChildren: () => import('./receta/schedule-recipes/schedule-recipes.module').then(m => m.ScheduleRecipesModule) },
+  {
+    path: '**', 
+    component:PageNotFoundComponent
+  }
 ];
 
 @NgModule({
