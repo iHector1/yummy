@@ -1,0 +1,63 @@
+<STYLE type="text/css">
+ H1 { text-align: center}
+ H2 { text-align: center}
+</STYLE>
+<div class="card ml-2 mr-2 mt-2">
+<div class="card-body">
+<H1>Buscador de recetas</H1>
+<br>
+<div class="col-sm-12 col-md-12 text-center">
+    <mat-icon>search</mat-icon>
+    <mat-form-field class="col-md-4 col-sm-4">
+      <mat-label>Nombre de la receta</mat-label>
+        <input
+          matInput
+          formControlName="text"
+          required
+        />
+      </mat-form-field>
+</div>
+<br>
+<br>
+<h2>Filtros</h2>
+
+<div class="col-sm-12 col-md-12 text-center">
+
+  <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
+    <mat-label>Técnica</mat-label>
+    <mat-select>
+      <mat-option value="option">Vacio</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
+    <mat-label>Categoría</mat-label>
+    <mat-select>
+      <mat-option value="option">Ensalada</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
+    <mat-label>Temporada</mat-label>
+    <mat-select>
+      <mat-option value="option">Invierno</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
+    <mat-label>Región</mat-label>
+    <mat-select>
+      <mat-option value="option">Asiático</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
+    <mat-label>Colección</mat-label>
+    <mat-select>
+      <mat-option value="option">Navidad</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+</div>
+</div>
