@@ -14,7 +14,7 @@ import { RoleValidator } from 'src/app/Validators/Validator_register';
 })
 export class AuthService extends RoleValidator{
   
-  public user$: Observable<User>;
+  public user$: Observable<User>;//variable en la cual se guarda el usuario
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
     super();
     this.user$ = this.afAuth.authState.pipe(
@@ -27,6 +27,7 @@ export class AuthService extends RoleValidator{
     );
   }
 
+  //metodo para el login con google
   async loginGoogle(): Promise<User> {
     try {
       const { user } = await this.afAuth.signInWithPopup(
@@ -37,6 +38,7 @@ export class AuthService extends RoleValidator{
       console.log(error);
     }
   }
+  //metodo para el login con facebook
   async loginFacebook(): Promise<User> {
     try {
       const { user } = await this.afAuth.signInWithPopup(
@@ -49,18 +51,21 @@ export class AuthService extends RoleValidator{
     }
     
   }
+  //metodo para resetear la contraseña 
   async resetPassword(email: string): Promise<void> {
     try {
-      return this.afAuth.sendPasswordResetEmail(email);
+      return this.afAuth.sendPasswordResetEmail(email);//envio de correo electronico
     } catch (error) {
       console.log(error);
     }
   }
 
+  //metodo para el envio de correo de verificacion 
   async sendVerificationEmail(): Promise<void> {
     return (await this.afAuth.currentUser).sendEmailVerification();
   }
 
+  //metodo para el inicio de sesion con correo y contraseña
   async login(email: string, password: string): Promise<User> {
     try {
       const { user } = await this.afAuth.signInWithEmailAndPassword(
@@ -73,6 +78,7 @@ export class AuthService extends RoleValidator{
     }
   }
 
+  //metodo de registrado mediante correo y contraseña
   async register(email: string, password: string): Promise<User> {
     try {
       const { user } = await this.afAuth.createUserWithEmailAndPassword(
@@ -87,6 +93,7 @@ export class AuthService extends RoleValidator{
     }
   }
 
+  //metdodo para cerraar sesion
   async logout(): Promise<void> {
     try {
       await this.afAuth.signOut();
@@ -95,20 +102,50 @@ export class AuthService extends RoleValidator{
     }
   }
 
+  //ingreso de datos el registro de usuario
   private updateUserData(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-      `users/${user.uid}`
+      `infoUser/${user.uid}`
+    );
+
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      emailVerified: user.emailVerified, 
+      blocked:user.blocked,
+    };
+
+    return userRef.set(data, { merge: true });
+  }
+
+  private updateUserDataRegister(user: User) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+      `registerUser/${user.uid}`
     );
 
     const data: User = {
       uid: user.uid,
       email: user.email,
       emailVerified: user.emailVerified,
-      displayName: user.displayName,
-      photoURL: user.photoURL, 
-      type: "Registrado",
+      blocked:user.blocked,
+    };
+
+    return userRef.set(data, { merge: true });
+  }
+
+  private updateUserDataPremiun(user: User) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+      `premiunCreator/${user.uid}`
+    );
+
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      blocked:user.blocked,
     };
 
     return userRef.set(data, { merge: true });
   }
 }
+

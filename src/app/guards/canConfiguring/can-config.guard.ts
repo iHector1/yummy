@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 export class CanConfigGuard implements CanActivate {
   constructor(private authSvc:AuthService){}
   canActivate(): Observable<boolean> | Promise<boolean>  | boolean  {
-    return this.authSvc.user$.pipe(
+    return /*this.authSvc.user$.pipe(
       take(1),
       map((user) => user && this.authSvc.isUser(user)),
       tap(CanConfigGuard => {
@@ -18,7 +18,7 @@ export class CanConfigGuard implements CanActivate {
           window.alert("Inicia Sesion para ingresar a esta pagina")
         }
       })
-    );
+    );*/
   }
   
 }
