@@ -1,32 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-
-import {MAT_DATE_LOCALE} from '@angular/material/core';
-interface States{ 
-    value: string;
-  }
+import { AuthService} from '../services/auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import {DateAdapter} from '@angular/material/core';
+import {AngularFireStorage } from '@angular/fire/storage';
 @Component({
   selector: 'app-confirguracion',
   templateUrl: './confirguracion.component.html',
-  styleUrls: ['./confirguracion.component.css'],
-  providers:[{ provide: MAT_DATE_LOCALE, useValue: 'ja-JP' }]
+  styleUrls: ['./confirguracion.component.css']
 })
 export class ConfirguracionComponent implements OnInit {
-  
-  constructor() { } 
+  panelOpenState = false;
+  states: Observable<any[]>;
+  category: Observable<any[]>;
+  maxDate: Date = new Date(2002, 1, 1);
+  minDate:Date=new Date(1910, 12, 12);
+
+  constructor(firestore:AngularFirestore, private _adapter: DateAdapter<any>) { 
+    this.states = firestore.collection('state').valueChanges();
+    this.category = firestore.collection('category').valueChanges();
+    this._adapter.setLocale('mex');
+  } 
 
   ngOnInit(): void {
   }
-  states: States[]=[
-    { value: 'Aguascalientes' },{ value: 'Baja California' },{ value: 'Baja California Sur' },
-    { value: 'Campeche' },{ value: 'Chiapas' },{ value: 'Chihuahua' },
-    { value: 'Coahuila' },{ value: 'Colima' }, {value:'Distrito Federal'},
-    {value:'Durango'},{value:'Estado de Mexico'},{value:'Guanajuato'},
-    {value:'Guerrero'},{value:'Hidalgo'},{value:'Jalisco'},
-    {value:'Michuacán'},{ value: 'Morelos' },{ value: 'Nayarit' },
-    {value:'Nuevo León'},{value:'Oaxaca'},{value:'Puebla'},
-    {value:'Querétaro'},{value:'Quintana Roo'},{value:'San Luis Potosí'},
-    {value:'Sinaloa'},{value:'Sonora'},{value:'Tabasco'},
-    {value:'Tamaulipas'},{value:'Tlaxcala'},{value:'Veracruz'},
-    { value: 'Yucatán' }, { value: 'Zacatecas' },];
-   
+
+  onItem(value) {
+    console.log("VAlor es :", value);
+  }
+  onUpload(e) {
+  /*  const id = Math.random().toString(36).substring(2);
+    const file = e.target.files[0];
+    const filePath = `photoUser/profile_${id}`;
+    const ref = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    this.uploadPercent = task.percentageChanges();
+    task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();*/
+  }
 }

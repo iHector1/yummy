@@ -8,7 +8,7 @@ import {DateAdapter} from '@angular/material/core';
 export class ScheduleRecipesComponent implements OnInit {
 
   constructor(private _adapter: DateAdapter<any>) { 
-    this._adapter.setLocale('fr');
+    this._adapter.setLocale('mex');
   }
 
   ngOnInit(): void {

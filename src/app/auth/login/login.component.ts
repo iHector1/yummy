@@ -13,11 +13,8 @@ export class LoginComponent implements OnInit {
   //varible del form ccs
   hide = true;
   //varible del login
-  loginForm = new FormGroup({
-    email: new FormControl('',[
-      Validators.required,
-      Validators.email,
-    ]),
+  loginForm = new FormGroup({ 
+    email: new FormControl(''),
     password: new FormControl('')
   });
    
