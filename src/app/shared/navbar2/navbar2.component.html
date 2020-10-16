@@ -1,23 +1,34 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" 
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
       [attr.role]="isHandset$ ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false"color="primary"> 
+      [opened]="(isHandset$ | async) === false"color="primary">
     <mat-toolbar >Menu</mat-toolbar>
-    <mat-nav-list *ngIf="user$ | async as user; else login">  
-      <a mat-list-item href="/">{{user?.displayName}}</a>
+    <mat-nav-list *ngIf="user$ | async as user; else login">
+      <!--Aqui-->
+      <a mat-list-item  routerLink="/receta/id">Crear receta</a>
+      <a mat-list-item  routerLink="buscar_receta">Buscar</a>
+      <a mat-list-item  routerLink="lista_super">Lista de super</a>
+      <a mat-list-item  routerLink="mi_alacena">Almacen</a>
+      <a mat-list-item  routerLink="solicitar_utensilio">Solicitar utensilio</a>
+      <a mat-list-item  routerLink="solicitar_ingrediente">Solicitar ingrediente</a>
+      <a mat-list-item  routerLink="notificaciones/id">Notificaciones</a>
+      <a mat-list-item  routerLink="chat">Chats</a>
+      <a mat-list-item  routerLink="graficas">Graficas</a>
+      <a mat-list-item  routerLink="streaming">Streaming</a>
+      <!---->
       <a mat-list-item (click)="logout()"*ngIf="user">Salir</a>
     </mat-nav-list>
     <ng-template #login>
       <mat-nav-list>
-        <a mat-list-item href="/">Home</a>  
-        <a mat-list-item  routerLink="/login">Login</a> 
+        <a mat-list-item href="/">Home</a>
+        <a mat-list-item  routerLink="/login">Login</a>
       <a mat-list-item  routerLink="/registro">Registrarse</a>
-    </mat-nav-list> 
-    </ng-template> 
-  </mat-sidenav> 
-  <mat-sidenav-content> 
-    <mat-toolbar color="primary"> 
+    </mat-nav-list>
+    </ng-template>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
       <button
         type="button"
         aria-label="Toggle sidenav"

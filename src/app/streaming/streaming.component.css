@@ -1,0 +1,26 @@
+.mesgs {
+  float: left;
+  padding: 30px 15px 0 25px;
+  width: 60%;
+}
+
+.msg_history {
+  height: 300px;
+  width: 160px;
+  overflow-y: auto;
+
+}
+
+ .time_date {
+  color: #747474;
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+.outgoing_msg{ overflow:hidden; margin:40px 0 40px;}
+
+.sent_msg {float: left; width: 100%; border: 1px solid #2213a7;
+}
+
+
