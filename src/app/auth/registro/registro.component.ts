@@ -34,7 +34,7 @@ export class RegistroComponent implements OnInit {
   }
   getErrorMessage() {
     if (this.registerForm.hasError('required')) {
-      return 'YIngresa un valor';
+      return 'Ingresa un valor';
     }
   
     return this.registerForm.hasError('email') ? 'email no valido' : '';
