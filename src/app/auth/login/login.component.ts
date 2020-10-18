@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
   }
   }
   
-
+  //login con la cuenta de facebook
   async onFacebookLogin() {
     try {
       const user = await this.authSvc.loginFacebook();
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  //login con la cuenta de facebook
+
  private checkUserIsVerified(user: User) {
   if (user && user.emailVerified) {
     this.router.navigate(['/home']);

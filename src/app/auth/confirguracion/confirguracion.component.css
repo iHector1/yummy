@@ -103,7 +103,9 @@ a{
     text-decoration: none;
     color: rgb(42, 125, 219);
 }
-
+.container-input-file {
+    margin: 2rem 0;
+  }
 
 @media (min-width: 1281px) {
 

@@ -13,7 +13,7 @@
                 matInput
                 placeholder="papasito33"
                 formControlName="nameDisplay"
-                required
+                required 
               />
             </mat-form-field>
           </div>
@@ -23,7 +23,7 @@
               <mat-select name="states" required formControlName="userState"> 
                 <mat-option
                   *ngFor="let state of states | async"
-                  [value]="state.stateName"
+                  [value]="state.uid"
                required >
                   {{ state.stateName }}
                 </mat-option>
@@ -54,19 +54,20 @@
               <mat-select name="category"required formControlName="userCategory">
                 <mat-option
                   *ngFor="let categories of category | async"
-                  [value]="categories.categoryName"
+                  [value]="categories.uid"
                 >
-                  {{ categories.categoryName }}
+                  {{ categories.categoryName }} 
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div> 
         </div>
-        <div class="center btn">
+        <div class="center btn container-input-file">
           <h4>Foto de perfil :</h4>
           <input type="file"
           accept=".jpeg" (change)="onUpload($event)">
         </div>
+        <input #imageUser type="hidden" [value]="urlImage | async">
         <mat-accordion>
           <mat-expansion-panel
             (opened)="panelOpenState = true"

@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import {  AngularFirestore,AngularFirestoreDocument} from '@angular/fire/firestore';
 import { User } from 'src/app/shared/models/user.inteface';
 import { RoleValidator } from 'src/app/Validators/Validator_register';
+import { infoUser } from 'src/app/shared/models/infoUser.interface';
 
 
 
@@ -20,7 +21,7 @@ export class AuthService extends RoleValidator{
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+          return this.afs.doc<User>(`user/${user.uid}`).valueChanges();
         }
         return of(null);
       })
@@ -85,7 +86,6 @@ export class AuthService extends RoleValidator{
         email,
         password
       );
-      this.updateUserData(user);
       await this.sendVerificationEmail();
       return user;
     } catch (error) {
@@ -105,7 +105,7 @@ export class AuthService extends RoleValidator{
   //ingreso de datos el registro de usuario
   private updateUserData(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-      `infoUser/${user.uid}`
+      `user/${user.uid}`
     );
 
     const data: User = {
@@ -118,6 +118,23 @@ export class AuthService extends RoleValidator{
     return userRef.set(data, { merge: true });
   }
 
+  private infoUserData(user: infoUser) {
+    const userRef: AngularFirestoreDocument<infoUser> = this.afs.doc(
+      `infoUser/${user.uid}`
+    );
+
+    const data: infoUser = {
+      uid: user.uid,
+      uidUser: user.uidUser,
+      uidLevel:user.uidLevel,
+      uidState: user.uidState,
+      points: user.points,
+      displayName: user.displayName,
+      photoUrl: user.photoUrl
+    };
+
+    return userRef.set(data, { merge: true });
+  }
   private updateUserDataRegister(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `registerUser/${user.uid}`

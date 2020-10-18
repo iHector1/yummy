@@ -19,24 +19,20 @@ export class RegistroComponent implements OnInit {
   }
   //registro con correo electronico 
   async onRegister() {
-    
     const { email, password } = this.registerForm.value;
     try {
-      const user=await this.authSvc.register(email, password);
+      const user = await this.authSvc.register(email, password);
       if (user) {
-        //redireccion a la pagina login 
-        this.router.navigate(["/verificacion"]);
+        if (user && user.emailVerified) {
+          this.router.navigate(['/home']);
+        } else if (user) {
+          this.router.navigate(['/verification-email']);
+        } else {
+          this.router.navigate(['/register']);
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
-    catch (err){
-      console.log(err);
-    }
-  }
-  getErrorMessage() {
-    if (this.registerForm.hasError('required')) {
-      return 'Ingresa un valor';
-    }
-  
-    return this.registerForm.hasError('email') ? 'email no valido' : '';
   }
 }
