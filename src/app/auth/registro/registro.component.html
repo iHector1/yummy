@@ -9,7 +9,6 @@
           <mat-form-field class="justifier">
             <mat-label>Inserta tu email</mat-label>
             <input matInput placeholder="pat@example.com" formControlName="email" required>
-            <mat-error *ngIf="registerForm.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field class="justifier">
             <input matInput [type]="hide ? 'password' : 'text'" placeholder="constraseña" formControlName="password" class="form-input" required>

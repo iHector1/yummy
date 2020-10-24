@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { first, map, switchMap } from 'rxjs/operators';
 import {  AngularFirestore,AngularFirestoreDocument} from '@angular/fire/firestore';
 import { User } from 'src/app/shared/models/user.inteface';
 import { RoleValidator } from 'src/app/Validators/Validator_register';
 import { infoUser } from 'src/app/shared/models/infoUser.interface';
+import { registerUser } from 'src/app/shared/models/registerUser.interface';
+import { Router } from '@angular/router';
 
 
 
@@ -14,9 +16,9 @@ import { infoUser } from 'src/app/shared/models/infoUser.interface';
   providedIn: 'root'
 })
 export class AuthService extends RoleValidator{
-  
+  private userExist=true;
   public user$: Observable<User>;//variable en la cual se guarda el usuario
-  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
+  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore,private router:Router) {
     super();
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
@@ -34,7 +36,11 @@ export class AuthService extends RoleValidator{
       const { user } = await this.afAuth.signInWithPopup(
         new auth.GoogleAuthProvider()
       );
-      return user;
+      this.exist(user);
+      if (this.userExist) {
+        console.log("si existo",this.user$);
+        return user;
+      }
     } catch (error) {
       console.log(error);
     }
@@ -45,6 +51,7 @@ export class AuthService extends RoleValidator{
       const { user } = await this.afAuth.signInWithPopup(
         new auth.FacebookAuthProvider()
       );
+      this.updateUserData(user); 
       return user;
     }
     catch (error) {
@@ -65,7 +72,6 @@ export class AuthService extends RoleValidator{
   async sendVerificationEmail(): Promise<void> {
     return (await this.afAuth.currentUser).sendEmailVerification();
   }
-
   //metodo para el inicio de sesion con correo y contraseña
   async login(email: string, password: string): Promise<User> {
     try {
@@ -73,6 +79,9 @@ export class AuthService extends RoleValidator{
         email,
         password
       );
+      if (this.user$._isScalar) {
+        console.log("si existo",this.user$);
+      }
       return user;
     } catch (error) {
       console.log(error);
@@ -86,6 +95,7 @@ export class AuthService extends RoleValidator{
         email,
         password
       );
+      this.updateUserData(user); 
       await this.sendVerificationEmail();
       return user;
     } catch (error) {
@@ -105,20 +115,17 @@ export class AuthService extends RoleValidator{
   //ingreso de datos el registro de usuario
   private updateUserData(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-      `user/${user.uid}`
+      `users/${user.uid}`
     );
-
     const data: User = {
       uid: user.uid,
       email: user.email,
-      emailVerified: user.emailVerified, 
-      blocked:user.blocked,
+      emailVerified: user.emailVerified
     };
-
     return userRef.set(data, { merge: true });
   }
 
-  private infoUserData(user: infoUser) {
+  public infoUserData(user: infoUser) {
     const userRef: AngularFirestoreDocument<infoUser> = this.afs.doc(
       `infoUser/${user.uid}`
     );
@@ -132,21 +139,17 @@ export class AuthService extends RoleValidator{
       displayName: user.displayName,
       photoUrl: user.photoUrl
     };
-
     return userRef.set(data, { merge: true });
   }
-  private updateUserDataRegister(user: User) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+  public updateUserDataRegister(user: registerUser) {
+    const userRef: AngularFirestoreDocument<registerUser> = this.afs.doc(
       `registerUser/${user.uid}`
     );
-
-    const data: User = {
+    const data: registerUser = {
       uid: user.uid,
-      email: user.email,
-      emailVerified: user.emailVerified,
-      blocked:user.blocked,
+      uidUser:user.uidUser
     };
-
+ 
     return userRef.set(data, { merge: true });
   }
 
@@ -164,5 +167,18 @@ export class AuthService extends RoleValidator{
 
     return userRef.set(data, { merge: true });
   }
-}
+   
+  async exist(user: User) {
+    console.log(user.uid);
+   await this.afs.collection('infoUser', ref => ref.where('uidUser','==',user.uid)).valueChanges().subscribe(users => {
+      if (users[0]) {
+        console.log("sie xisto", users.values.toString());
+        this.userExist = true;
+      } else {
+        this.updateUserData(user); 
+        this.router.navigate(['/configuracion']); 
+      }
+    });
+  }
+ }
 

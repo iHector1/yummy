@@ -13,7 +13,7 @@
                 matInput
                 placeholder="papasito33"
                 formControlName="nameDisplay"
-                required 
+                required  (blur)="search($event)" (change)="space()"
               />
             </mat-form-field>
           </div>
@@ -68,6 +68,9 @@
           accept=".jpeg" (change)="onUpload($event)">
         </div>
         <input #imageUser type="hidden" [value]="urlImage | async">
+        <div *ngIf="user$ | async as user; " type="hidden">
+        <input #idUser type="hidden" [value]=" user.uid">
+      </div>
         <mat-accordion>
           <mat-expansion-panel
             (opened)="panelOpenState = true"

@@ -22,15 +22,7 @@ export class RegistroComponent implements OnInit {
     const { email, password } = this.registerForm.value;
     try {
       const user = await this.authSvc.register(email, password);
-      if (user) {
-        if (user && user.emailVerified) {
-          this.router.navigate(['/home']);
-        } else if (user) {
-          this.router.navigate(['/verification-email']);
-        } else {
-          this.router.navigate(['/register']);
-        }
-      }
+      this.router.navigate(['/configuracion']);
     } catch (error) {
       console.log(error);
     }
