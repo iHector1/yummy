@@ -14,7 +14,7 @@ import { infoUser } from 'src/app/shared/models/infoUser.interface';
   providedIn: 'root'
 })
 export class AuthService extends RoleValidator{
-  
+
   public user$: Observable<User>;//variable en la cual se guarda el usuario
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
     super();
@@ -50,9 +50,9 @@ export class AuthService extends RoleValidator{
     catch (error) {
       console.log(error);
     }
-    
+
   }
-  //metodo para resetear la contraseña 
+  //metodo para resetear la contraseña
   async resetPassword(email: string): Promise<void> {
     try {
       return this.afAuth.sendPasswordResetEmail(email);//envio de correo electronico
@@ -61,7 +61,7 @@ export class AuthService extends RoleValidator{
     }
   }
 
-  //metodo para el envio de correo de verificacion 
+  //metodo para el envio de correo de verificacion
   async sendVerificationEmail(): Promise<void> {
     return (await this.afAuth.currentUser).sendEmailVerification();
   }
@@ -93,7 +93,7 @@ export class AuthService extends RoleValidator{
     }
   }
 
-  //metdodo para cerraar sesion
+  //metodo para cerrar sesion
   async logout(): Promise<void> {
     try {
       await this.afAuth.signOut();
@@ -111,7 +111,7 @@ export class AuthService extends RoleValidator{
     const data: User = {
       uid: user.uid,
       email: user.email,
-      emailVerified: user.emailVerified, 
+      emailVerified: user.emailVerified,
       blocked:user.blocked,
     };
 

@@ -38,7 +38,7 @@ export class ConfirguracionComponent implements OnInit {
     preg9: new FormControl(''),
     preg10: new FormControl('')
   });
- 
+
   uploadPercent: Observable<number>;//variable de la imagen
   urlImage: Observable<any>;//variable de la direccion uyl
   @ViewChild('imageUser') inputImageUser: ElementRef;
@@ -46,22 +46,22 @@ export class ConfirguracionComponent implements OnInit {
 
 
 
-  constructor(firestore:AngularFirestore, private _adapter: DateAdapter<any>,private authService: AuthService,private storage: AngularFireStorage) { 
+  constructor(firestore:AngularFirestore, private _adapter: DateAdapter<any>,private authService: AuthService,private storage: AngularFireStorage) {
     this.states = firestore.collection('state').valueChanges();
     this.category = firestore.collection('category').valueChanges();
     this.level = firestore.collection('level').valueChanges();
     this._adapter.setLocale('mex');
-  } 
+  }
 
   ngOnInit(): void {
   }
 
 
   async insert_user() {
-    let point 
+    let point
     const { nameDisplay, userState, userCategory, userDate, preg1, preg2
       , preg3, preg4, preg5, preg6, preg7, preg8, preg9, preg10 } = this.registerForm.value;
-    
+
     let pregt1 = parseInt(preg1);
     let pregt2 = parseInt(preg2);
     let pregt3 = parseInt(preg3);
