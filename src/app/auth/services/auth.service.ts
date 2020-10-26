@@ -82,12 +82,18 @@ export class AuthService extends RoleValidator{
         email,
         password
       );
-      if (this.user$._isScalar) {
-        console.log("si existo",this.user$);
-      }
+      this.updateUserData(user);
       return user;
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if (err.code == 'auth/user-not-found') {
+        window.alert('Este usurio no esta registrado');
+     }
+     if (err.code =='auth/wrong-password') { 
+       window.alert('Contrseña incorrecta!');
+     }
+     if (err.code == 'auth/user-disabled') {
+       window.alert('Estas baneado');;
+     }
     }
   }
 
