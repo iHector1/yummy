@@ -1,6 +1,6 @@
 export interface cookWare{
   uid?: string;
-  uidKitchenArea?: string;
+  uidLevelCookWare?: string;
   nameCookWare?:string;
   request?: number;
 }

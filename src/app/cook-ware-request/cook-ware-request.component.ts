@@ -33,9 +33,11 @@ export class CookWareRequestComponent implements OnInit {
 
   async insert_cookware() {
     const { cookwareName, cookwareDificulty, cookwareRequest} = this.cookWareForm.value;
+    const id = Math.random().toString(36).substring(2);
 
     const cookwareInfo: cookWare = {
-      uidKitchenArea: cookwareDificulty,
+      uid : id,
+      uidLevelCookWare: cookwareDificulty,
       nameCookWare: cookwareName,
       request: 3
     };
