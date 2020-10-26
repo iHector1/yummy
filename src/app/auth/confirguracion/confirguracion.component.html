@@ -20,7 +20,7 @@
           <div class="col-lg-6 col-sm-6 col-12">
             <mat-form-field appearance="fill">
               <mat-label required>Estado</mat-label>
-              <mat-select name="states" required formControlName="userState"> 
+              <mat-select name="states" required formControlName="userState">
                 <mat-option
                   *ngFor="let state of states | async"
                   [value]="state.uid"
@@ -56,11 +56,11 @@
                   *ngFor="let categories of category | async"
                   [value]="categories.uid"
                 >
-                  {{ categories.categoryName }} 
+                  {{ categories.categoryName }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
-          </div> 
+          </div>
         </div>
         <div class="center btn container-input-file">
           <h4>Foto de perfil :</h4>
@@ -97,7 +97,7 @@
                 <input type="radio" formControlName="preg1" value="0.0"/> Adobar<br />
               </div>
             </div>
-  
+
             <div class="pregresp">
               <div class="pregunta">
                 ¿Cuál es la realcion ideal de café y agua en el prensado frances?

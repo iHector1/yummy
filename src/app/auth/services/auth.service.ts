@@ -60,9 +60,9 @@ export class AuthService extends RoleValidator{
     catch (error) {
       console.log(error);
     }
-    
+
   }
-  //metodo para resetear la contraseña 
+  //metodo para resetear la contraseña
   async resetPassword(email: string): Promise<void> {
     try {
       return this.afAuth.sendPasswordResetEmail(email);//envio de correo electronico
@@ -71,7 +71,7 @@ export class AuthService extends RoleValidator{
     }
   }
 
-  //metodo para el envio de correo de verificacion 
+  //metodo para el envio de correo de verificacion
   async sendVerificationEmail(): Promise<void> {
     return (await this.afAuth.currentUser).sendEmailVerification();
   }
@@ -104,7 +104,7 @@ export class AuthService extends RoleValidator{
         email,
         password
       );
-      this.updateUserData(user); 
+      this.updateUserData(user);
       await this.sendVerificationEmail();
       return user;
     } catch (error) {
@@ -112,7 +112,7 @@ export class AuthService extends RoleValidator{
     }
   }
 
-  //metdodo para cerraar sesion
+  //metodo para cerrar sesion
   async logout(): Promise<void> {
     try {
       await this.afAuth.signOut();
@@ -158,7 +158,7 @@ export class AuthService extends RoleValidator{
       uid: user.uid,
       uidUser:user.uidUser
     };
- 
+
     return userRef.set(data, { merge: true });
   }
 
@@ -176,7 +176,7 @@ export class AuthService extends RoleValidator{
 
     return userRef.set(data, { merge: true });
   }
-   
+
   async exist(user: User) {
     console.log(user.uid);
    await this.afs.collection('infoUser', ref => ref.where('uidUser','==',user.uid)).valueChanges().subscribe(users => {
@@ -184,8 +184,8 @@ export class AuthService extends RoleValidator{
         console.log("sie xisto", users.values.toString());
         this.userExist = true;
       } else {
-        this.updateUserData(user); 
-        this.router.navigate(['/configuracion']); 
+        this.updateUserData(user);
+        this.router.navigate(['/configuracion']);
       }
     });
   }

@@ -55,12 +55,12 @@ export class ConfirguracionComponent implements OnInit {
 
 
   constructor(private afs:AngularFirestore, private _adapter: DateAdapter<any>,private authService: AuthService,private storage: AngularFireStorage,private router:Router
-    ) { 
+    ) {
     this.states = afs.collection('state').valueChanges();
     this.category = afs.collection('category').valueChanges();
     this.level = afs.collection('level').valueChanges();
     this._adapter.setLocale('mex');
-  } 
+  }
   ngOnInit(): void {
   }
 
@@ -88,7 +88,7 @@ export class ConfirguracionComponent implements OnInit {
       if (result < 5) {
         point = 0;
         level = "mDoNXxyS3hFd5a5MFRml";
-        
+
       }
       if (result > 5 || result < 9) {
         point = 2200;
@@ -107,7 +107,7 @@ export class ConfirguracionComponent implements OnInit {
     if (urlphoto == "") {
       urlphoto = "https://firebasestorage.googleapis.com/v0/b/yummy-b4d83.appspot.com/o/photoUser%2Fprofile_fhgc4suqw1?alt=media&token=54ca471c-95a6-42bf-bac1-85b73d07e9ea";
     }
-    
+
     const userInfo: infoUser = {
       uid: this.inputUserid.nativeElement.value,
       uidUser:this.inputUserid.nativeElement.value,
@@ -148,7 +148,7 @@ export class ConfirguracionComponent implements OnInit {
     const q = $event.target.value;
     this.checkUsername(q);
   }
-  //funcion para saber si el nombre de usuario esta repetido 
+  //funcion para saber si el nombre de usuario esta repetido
   checkUsername(q) {
     this.afs.collection('infoUser', ref => ref.where('displayName','==',q)).valueChanges().subscribe(user => {
       if (user[0]) {
