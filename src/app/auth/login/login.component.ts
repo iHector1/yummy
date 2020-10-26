@@ -27,19 +27,26 @@ export class LoginComponent implements OnInit {
   const { email, password } = this.loginForm.value;
   try {
     const user = await this.authSvc.login(email, password);
-    console.log(user);
     if (user) {
       this.checkUserIsVerified(user);
     }
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    if (err.code == 'auth/user-not-found') {
+       window.alert('Este usurio no esta registrado');
+    }
+    if (err.code =='auth/wrong-password') { 
+      window.alert('Contrseña incorrecta!');
+    }
+    if (err.code == 'auth/user-disabled') {
+      window.alert('Estas baneado');;
+    }
   }
  }
   
  getErrorMessage() {
   if (this.loginForm.hasError('required')) {
     return 'Ingresa un valor';
-  }
+  } 
   return this.loginForm.hasError('email') ? 'email no valido' : '';
   }
   

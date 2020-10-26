@@ -126,7 +126,7 @@ export class ConfirguracionComponent implements OnInit {
     if (!this.isTaken && !this.spaces) {
      this.authService.updateUserDataRegister(registerUser);
      this.authService.infoUserData(userInfo);
-     this.router.navigate(['/verificacion']);
+    this.router.navigate(['/verificacion']);
     }    
     else {
       console.log("verifica muy bien tus datos de usuario")
@@ -158,10 +158,6 @@ export class ConfirguracionComponent implements OnInit {
         this.isTaken = false;
       }
     });
-  }
-
-  //verifica qu el nombre de usuairo no tenga espacios
-  space() {
     if (this.registerForm.controls.nameDisplay.errors.cannotContainSpace) {
       window.alert("El nombre usuario no debe tener espacios");
       this.spaces = true;
@@ -170,4 +166,4 @@ export class ConfirguracionComponent implements OnInit {
       this.spaces = false;
     }
   }
-}
+  }
