@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
     }
   } catch (error) {
     console.log(error);
+    window.alert("El correo o la contraseña no son correctos, intentalo de nuevo");
   }
   }
   
@@ -60,7 +61,9 @@ export class LoginComponent implements OnInit {
   async onFacebookLogin() {
     try {
       const user = await this.authSvc.loginFacebook();
-      this.router.navigate(['/home']);
+      if (user) {
+        this.checkUserIsVerified(user);
+      }
     } catch (error) {
       console.log(error);
     }

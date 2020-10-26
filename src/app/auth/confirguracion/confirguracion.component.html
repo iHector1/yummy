@@ -69,7 +69,7 @@
         </div>
         <input #imageUser type="hidden" [value]="urlImage | async">
         <div *ngIf="user$ | async as user; " type="hidden">
-        <input #idUser type="hidden" [value]=" user.uid">
+        <input #idUser  [value]=" user.uid">
       </div>
         <mat-accordion>
           <mat-expansion-panel

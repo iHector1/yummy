@@ -51,8 +51,11 @@ export class AuthService extends RoleValidator{
       const { user } = await this.afAuth.signInWithPopup(
         new auth.FacebookAuthProvider()
       );
-      this.updateUserData(user); 
-      return user;
+      this.exist(user);
+      if (this.userExist) {
+        console.log("si existo",this.user$);
+        return user;
+      }
     }
     catch (error) {
       console.log(error);
