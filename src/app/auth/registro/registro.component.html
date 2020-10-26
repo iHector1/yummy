@@ -11,10 +11,7 @@
             <input matInput placeholder="pat@example.com" formControlName="email" required>
         </mat-form-field>
         <mat-form-field class="justifier">
-            <input matInput [type]="hide ? 'password' : 'text'" placeholder="constraseña" formControlName="password" class="form-input" required>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="constraseña" formControlName="password" class="form-input" required  (change)="validation()"> 
           </mat-form-field>
         <button mat-raised-button class="btn custom-btn" type="submit" >
               <mat-icon>add</mat-icon> Registrarse
@@ -26,3 +23,4 @@
       </div>
     </div>
   </div>
+ 
