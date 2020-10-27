@@ -39,7 +39,7 @@ export class CookWareRequestComponent implements OnInit {
       uid : id,
       uidLevelCookWare: cookwareDificulty,
       nameCookWare: cookwareName,
-      request: 3
+      request: 2
     };
     console.log(cookwareInfo);
     this.cookWareService.CookwareData(cookwareInfo);
