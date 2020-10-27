@@ -21,16 +21,30 @@ export class CookwareService{
   uidCookWare : cookWare;
 
    //Verificar existencia del utensilio
-   public CookwareData(cookware: cookWare):void{
-    this.afs.collection('cookWare', ref => ref.where('nameCookWare','==',cookware.nameCookWare)).valueChanges().subscribe(user => {
-      if (user[0]) {
-        console.log("Si existe el utensilio", user[0]);
+  public CookwareData(cookware: cookWare):void{
+    this.afs.collection('cookWare', ref => ref.where('nameCookWare','==',cookware.nameCookWare).where('uidLevelCookWare', '==', cookware.uidLevelCookWare)).valueChanges().subscribe(users => {
+      if (users[0]) {
+        console.log("si existo", users[0]);
       } else {
-        console.log("No existe el utensilio");
+        console.log("no existo", users[0]);
         this.CookwareDataAdd(cookware);
       }
     });
   }
+
+    //Agregar utensilio
+  public CookwareDataAdd(cookware: cookWare) {
+      const userRef: AngularFirestoreDocument<cookWare> = this.afs.doc(
+        `cookWare/${cookware.uid}`
+      );
+      const data: cookWare = {
+        uid: cookware.uid,
+        uidLevelCookWare: cookware.uidLevelCookWare,
+        nameCookWare: cookware.nameCookWare,
+        request : cookware.request
+      };
+      return userRef.set(data, { merge: true });
+    }
 
   /*
   //Validación de números mínimos de request para agregar utensilio
@@ -39,18 +53,5 @@ export class CookwareService{
   }
   */
 
-  //Agregar utensilio
-  public CookwareDataAdd(cookware: cookWare) {
-    const userRef: AngularFirestoreDocument<cookWare> = this.afs.doc(
-      `cookware/${cookware.uid}`
-    );
-    const data: cookWare = {
-      uid: cookware.uid,
-      uidLevelCookWare: cookware.uidLevelCookWare,
-      nameCookWare: cookware.nameCookWare,
-      request : cookware.request
-    };
-    return userRef.set(data, { merge: true });
-  }
 
 }
