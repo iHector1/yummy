@@ -6,11 +6,11 @@
     <mat-toolbar >Menu</mat-toolbar>
     <mat-nav-list *ngIf="user$ | async as user; else login">
       <!--Aqui-->
-      <a mat-list-item  routerLink="/receta/id">Crear receta</a>
+      <a mat-list-item  routerLink="/crear-receta">Crear receta</a>
       <a mat-list-item  routerLink="buscar_receta">Buscar</a>
       <a mat-list-item  routerLink="lista_super">Lista de super</a>
       <a mat-list-item  routerLink="mi_alacena">Almacen</a>
-      <a mat-list-item  routerLink="solicitar_utensilio">Solicitar utensilio</a>
+      <a mat-list-item  href="/solicitar_utensilio">Solicitar utensilio</a>
       <a mat-list-item  routerLink="solicitar_ingrediente">Solicitar ingrediente</a>
       <a mat-list-item  routerLink="notificaciones/id">Notificaciones</a>
       <a mat-list-item  routerLink="chat">Chats</a>
@@ -21,7 +21,7 @@
     </mat-nav-list>
     <ng-template #login>
       <mat-nav-list>
-        <a mat-list-item href="/">Home</a>
+        <a mat-list-item href="/home">Home</a>
         <a mat-list-item  routerLink="/login">Login</a>
       <a mat-list-item  routerLink="/registro">Registrarse</a>
     </mat-nav-list>
