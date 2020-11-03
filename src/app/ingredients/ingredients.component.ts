@@ -17,7 +17,7 @@ import { IngredientsServiceService } from './service/ingredients-service.service
 })
 export class IngredientsComponent implements OnInit {
   uidUnit: Observable<any[]>;// Variable para recibir el nombre de las unidades
-  request: Observable<any[]>;// Variable para recibir las peticiones
+  //request: Observable<any[]>;// Variable para recibir las peticiones
   
   //variables del formulario
   ingredientForm = new FormGroup({
@@ -65,7 +65,7 @@ export class IngredientsComponent implements OnInit {
           request: [this.inputUserid.nativeElement.value]
         };
         
-        console.log(ingredient, this.inputUserid.nativeElement.value, kindFoodName);
+      //  console.log(ingredient, this.inputUserid.nativeElement.value, kindFoodName);
         this.ingredientService.ingredientCollection(ingredient,this.inputUserid. nativeElement.value,kindFoodName);
         this.router.navigate(['/home']);
       }

@@ -19,6 +19,7 @@ export class CookwareService {
      uid: any;
      count:string[];
    //Verificar existencia del utensilio
+  
   public CookwareData(cookware: cookWare,uiserr:any): void{ 
     if (this.flag2) {
       this.afs.collection('cookWare', ref => ref.where('nameCookWare', '==', cookware.nameCookWare)).valueChanges().subscribe(users => {
@@ -29,7 +30,7 @@ export class CookwareService {
            //verifica que el usuario no haya hecho solicitud otra vez 
            if (!this.uidCookWare["request"].some(x => x === uiserr)) {
              this.uidCookWare["request"].push(uiserr);
-             console.log(this.uid, "  ", this.uidCookWare["request"], " ", this.count);
+             //console.log(this.uid, "  ", this.uidCookWare["request"], " ", this.count);
              this.CookwareDataUpdate(this.uidCookWare["request"]); 
              window.alert("Haz hecho una  solicitud a este utensilio ");
              this.flag2 = false;
@@ -50,7 +51,7 @@ export class CookwareService {
   //hace un udate para insertar el nuevo usuario con la solicitud 
   public CookwareDataUpdate(request:string[]) {
     this.flag = true;
-    console.log(this.uid, "  ", request);
+    //console.log(this.uid, "  ", request);
    this.afs.collection("cookWare")
     .doc(this.uid)
       .set({ request: request }, { merge: true });
@@ -59,8 +60,8 @@ export class CookwareService {
   //Agregar utensilio
   public CookwareDataAdd(cookware: cookWare) {
     this.flag = true;
-    console.log(cookware);
-    const userRef: AngularFirestoreDocument<cookWare> = this.afs.doc(
+   // console.log(cookware);
+    const cookAreRef: AngularFirestoreDocument<cookWare> = this.afs.doc(
       `cookWare/${cookware.uid}`
     );
     const data: cookWare = {
@@ -69,7 +70,7 @@ export class CookwareService {
       nameCookWare: cookware.nameCookWare,
       request : cookware.request
     };
-    return userRef.set(data, { merge: true });
+    return cookAreRef.set(data, { merge: true });
   }
 
 }

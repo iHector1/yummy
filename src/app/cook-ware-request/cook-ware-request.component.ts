@@ -18,8 +18,8 @@ import { CookwareService } from './service/cookware.service';
 })
 export class CookWareRequestComponent implements OnInit {
   dificulty: Observable<any[]>;// Variable para recibir la dificultad de los utensilios
-  name: Observable<any[]>;// Variable para recibir el nombre de los utensilios
-  request: Observable<any[]>;// Variable para recibir las peticiones
+  //name: Observable<any[]>;// Variable para recibir el nombre de los utensilios
+  //request: Observable<any[]>;// Variable para recibir las peticiones
   //variables del formulario
   cookWareForm = new FormGroup({
     cookwareDificulty: new FormControl('', [
@@ -28,7 +28,7 @@ export class CookWareRequestComponent implements OnInit {
     cookwareName: new FormControl('', [
       //Validators.required
     ]),
-    cookwareRequest: new FormControl('')
+    //cookwareRequest: new FormControl('')
   });
 
   constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private cookWareService:CookwareService,private authService:AuthService,private router:Router) {
@@ -66,7 +66,7 @@ export class CookWareRequestComponent implements OnInit {
           nameCookWare: cookwareNameC,
           request: [this.inputUserid.nativeElement.value]
         };
-        console.log(cookwareInfo);
+        //console.log(cookwareInfo);
         this.cookWareService.CookwareData(cookwareInfo, this.inputUserid.nativeElement.value);
         this.router.navigate(['/home']);
      }

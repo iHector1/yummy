@@ -14,8 +14,7 @@ export class IngredientsServiceService {
   constructor(private afs: AngularFirestore) { }
   uid: any;
   public ingredientCollection(ingredient: ingredient, uiserr: any, food: any): void {
-    
-      this.afs.collection('cookWare', ref => ref.where('nameCookWare', '==', ingredient.nameIngredient)).valueChanges().subscribe(users => {
+      this.afs.collection('ingredient', ref => ref.where('nameIngredient', '==', ingredient.nameIngredient)).valueChanges().subscribe(users => {
         if (users[0]) {
          if (this.flag == false) {
             this.uidIngredient = users[0];
