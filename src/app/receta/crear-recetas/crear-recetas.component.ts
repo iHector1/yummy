@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormControl, FormGroup } from '@angular/forms';
+import { User } from 'firebase';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
@@ -13,23 +14,13 @@ import { RecetaService } from '../service/receta.service';
   styleUrls: ['./crear-recetas.component.css']
 })
 export class CrearRecetasComponent implements OnInit {
-  //uid?: string;
   titleRecipe: Observable<any[]>;// Variable para recibir el nombre de la receta
-  //cookTimeRecipe: Observable<any[]>;// Variable para recibir los minutos
   //uidsIngredients: Observable<any[]>;// Variable para recibir los ingredientes
+  uidUnit: Observable<any[]>;//Variable para recibir las unidades de medida de los ingredientes
   uidsCookWare: Observable<any[]>;// Variable para recibir los utensilios
   uidCategory: Observable<any[]>;// Variable para recibir la categoría
-  //uidRegion?: string;
   uidCollection: Observable<any[]>;// Variable para recibir la colección
   uidSeason: Observable<any[]>;// Variable para recibir la temporada
-  //steps?: string[];
-  //stepsPhoto: Observable<any[]>;// Variable para recibir la imagen
-  //uidsTechnique: Observable<any[]>;// Variable para recibir la técnica
-  //portions: Observable<any[]>;// Variable para recibir las porciones
-  //portionCalories: Observable<any[]>;// Variable para recibir las calorías
-  //urlVideo?: string;
-  //timeStamp?: Date;  //aqui
-  //stars?: number;
 
   //variables del formulario
   recipeForm = new FormGroup({
@@ -39,6 +30,8 @@ export class CrearRecetasComponent implements OnInit {
     ]),
     uidsIngredients: new FormControl('',[
     ]),*/
+    uidUnit: new FormControl('', [
+    ]),
     uidsCookWare: new FormControl('', [
     ]),
     uidCategory: new FormControl('', [
@@ -59,6 +52,7 @@ export class CrearRecetasComponent implements OnInit {
 
   constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private cookWareService:RecetaService,private authService:AuthService) {
     //this.uidsIngredients = firestore.collection(' ').valueChanges();
+    this.uidUnit = firestore.collection('unit').valueChanges();
     this.uidsCookWare = firestore.collection('cookWare').valueChanges();
     this.uidCategory = firestore.collection('category').valueChanges();
     this.uidCollection = firestore.collection('collection').valueChanges();
@@ -66,12 +60,14 @@ export class CrearRecetasComponent implements OnInit {
     //this.uidsTechnique = firestore.collection(' ').valueChanges();
    }
 
+  @ViewChild('idUser') inputUserid: ElementRef;
+  public user$: Observable<User> = this.authService.afAuth.user;
   ngOnInit(): void {
   }
 
   async create_recipe() {
     try {
-      const { recipeTitle, recipeCategory, recipeCollection, recipeSeason, recipeCookware } = this.recipeForm.value;
+      const { recipeTitle, recipeCategory, recipeCollection, recipeSeason, recipeCookware, recipeUnit } = this.recipeForm.value;
       if(recipeTitle ==" "){
         window.alert("Por favor que no esten vacíos ");
       } else if(recipeTitle =="  "){
@@ -91,14 +87,16 @@ export class CrearRecetasComponent implements OnInit {
         let titleC = recipeTitle;
         const recipeInfo: infoRecipe = {
           uid: id,
-          title: titleC,
+          title: recipeTitle,
           uidCategory: recipeCategory,
           uidCollection: recipeCollection,
           uidSeason: recipeSeason,
-          uidsCookWare: recipeCookware
+          uidsCookWare: recipeCookware,
+          uidUnit: recipeUnit
+          //request: [this.inputUserid.nativeElement.value]
         };
         console.log(recipeInfo);
-        this.cookWareService.RecipeDataAdd(recipeInfo /*,this.inputUserid.nativeElement.value*/);
+        this.cookWareService.RecipeDataAdd(recipeInfo/*, this.inputUserid.nativeElement.value*/);
      }
     }
     catch (error) {

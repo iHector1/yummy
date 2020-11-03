@@ -5,6 +5,7 @@ export interface infoRecipe{
   title?: string;
   cookTime?:Time;   //aqui
   uidsIngredients?: string[];
+  uidUnit?: string[]; //aqui
   uidsCookWare?: string[];
   uidCategory?: string;
   uidRegion?: string;

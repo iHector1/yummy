@@ -27,7 +27,7 @@ export class CookwareService {
          if (this.flag == false) {
             this.uidCookWare = users[0];
            this.uid = this.uidCookWare["uid"];
-           //verifica que el usuario no haya hecho solicitud otra vez 
+           //verifica que el usuario no haya hecho solicitud otra vez
            if (!this.uidCookWare["request"].some(x => x === uiserr)) {
              this.uidCookWare["request"].push(uiserr);
              //console.log(this.uid, "  ", this.uidCookWare["request"], " ", this.count);
@@ -48,7 +48,7 @@ export class CookwareService {
     }
   }
 
-  //hace un udate para insertar el nuevo usuario con la solicitud 
+  //hace un udate para insertar el nuevo usuario con la solicitud
   public CookwareDataUpdate(request:string[]) {
     this.flag = true;
     //console.log(this.uid, "  ", request);
