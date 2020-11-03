@@ -21,16 +21,16 @@ export class CookwareService {
      uid: any;
      count:string[];
    //Verificar existencia del utensilio
-  public CookwareData(cookware: cookWare,uiserr:any): void{  
+  public CookwareData(cookware: cookWare,uiserr:any): void{
     if (this.flag2) {
       this.afs.collection('cookWare', ref => ref.where('nameCookWare', '==', cookware.nameCookWare)).valueChanges().subscribe(users => {
         if (users[0]) {
          if (this.flag == false) {
             this.uidCookWare = users[0];
             this.uid = this.uidCookWare["uid"];
-            this.uidCookWare["request"].push(uiserr); 
+            this.uidCookWare["request"].push(uiserr);
             console.log(this.uid, "  ", this.uidCookWare["request"]," ",this.count);
-           this.CookwareDataUpdate(this.uidCookWare["request"]);  
+           this.CookwareDataUpdate(this.uidCookWare["request"]);
             this.flag2 = false;
           }
         } else {

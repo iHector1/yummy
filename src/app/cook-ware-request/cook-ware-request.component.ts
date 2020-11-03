@@ -41,18 +41,18 @@ export class CookWareRequestComponent implements OnInit {
   async insert_cookware() {
     try {
       const { cookwareName, cookwareDificulty } = this.cookWareForm.value;
-      if(cookwareName==" "){
+      if(cookwareName ==" "){
         window.alert("Por favor que no esten vacios ");
-      } else if(cookwareName=="  "){
-        window.alert("Por favor que no esten vacios ");
-      }
-      else if(cookwareName=="   "){
+      } else if(cookwareName =="  "){
         window.alert("Por favor que no esten vacios ");
       }
-      else if(cookwareName=="    "){
+      else if(cookwareName =="   "){
         window.alert("Por favor que no esten vacios ");
       }
-      else if(cookwareName=="     "){
+      else if(cookwareName =="    "){
+        window.alert("Por favor que no esten vacios ");
+      }
+      else if(cookwareName =="     "){
         window.alert("Por favor que no esten vacios ");
       }
      else {
@@ -63,7 +63,7 @@ export class CookWareRequestComponent implements OnInit {
           uid: id,
           uidLevelCookWare: cookwareDificulty,
           nameCookWare: cookwareNameC,
-          request: [this.inputUserid.nativeElement.value] 
+          request: [this.inputUserid.nativeElement.value]
         };
         console.log(cookwareInfo);
         this.cookWareService.CookwareData(cookwareInfo,this.inputUserid.nativeElement.value);

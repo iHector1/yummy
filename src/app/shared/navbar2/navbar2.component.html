@@ -6,7 +6,7 @@
     <mat-toolbar >Menu</mat-toolbar>
     <mat-nav-list *ngIf="user$ | async as user; else login">
       <!--Aqui-->
-      <a mat-list-item  routerLink="/receta/id">Crear receta</a>
+      <a mat-list-item  routerLink="crear-receta">Crear receta</a>
       <a mat-list-item  routerLink="buscar_receta">Buscar</a>
       <a mat-list-item  routerLink="lista_super">Lista de super</a>
       <a mat-list-item  routerLink="mi_alacena">Almacen</a>
