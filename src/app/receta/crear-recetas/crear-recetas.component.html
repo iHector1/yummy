@@ -1,4 +1,5 @@
-<div class="card ml-3 mr-3 mt-3 mb-5">
+<form [formGroup]="recipeForm" (ngSubmit)="create_recipe()">
+<div class="card ml-3 mr-3 mt-3 mb-5"  class="form-group">
   <mat-card>
       <!--vista del boton y la imagen-->
     <div class="image col-md-5 container-fluid column">
@@ -19,9 +20,9 @@
         <mat-form-field class="col-md-9 col-sm-12" appearance="fill">
             <mat-label>Nombre de la receta</mat-label>
             <input
+              formControlName = "recipeName"
               matInput
-              placeholder="papas"
-              formControlName="text"
+              placeholder="Ingrese el nombre del utensilio"
               required
             />
           </mat-form-field>
@@ -50,7 +51,7 @@
             />
           </mat-form-field>
           <mat-form-field class="col-md-4 col-sm-12" appearance="fill">
-            <mat-label>Inserta calorias por porcion en kcal</mat-label>
+            <mat-label>Inserta calorías por porción en kcal</mat-label>
             <input
               matInput
               placeholder="500"
@@ -64,7 +65,7 @@
     <div class="col-md-12 col-sm-12 row mt-5">
         <div class="col-md-4 col-sm-12">
             <mat-form-field appearance="fill">
-            <mat-label>Categoria</mat-label>
+            <mat-label>Categoría</mat-label>
             <mat-select name ="category" requiered formControlName = "recipeCategory" required>
               <mat-option
                   *ngFor="let categories of uidCategory | async"
@@ -90,7 +91,7 @@
         </div>
         <div class="col-md-4 col-sm-12">
             <mat-form-field appearance="fill">
-            <mat-label>Coleccion</mat-label>
+            <mat-label>Colección</mat-label>
             <mat-select name ="collection" requiered formControlName = "recipeCollection" required>
               <mat-option
                   *ngFor="let colletions of uidCollection | async"
@@ -113,7 +114,7 @@
       <div class="col-md-12 col-sm-12 row mt-2">
             <mat-form-field appearance="fill">
                 <mat-label>Ingrediente</mat-label>
-                <mat-select>
+                <mat-select name ="ingredient" requiered formControlName = "recipeIngredient" required>
                   <mat-option
                       *ngFor="let cookware of uidsCookWare | async"
                       [value]="cookware.uid"
@@ -129,8 +130,11 @@
             <mat-form-field appearance="fill" appearance="fill">
                 <mat-label>Medida</mat-label>
                 <mat-select>
-                    <mat-option >
-                    MEdida
+                  <mat-option
+                      *ngFor="let units of uidUnit | async"
+                      [value]="units.uid"
+                      required>
+                      {{ units.unitName }}
                   </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -142,13 +146,16 @@
 
   <!--Utencilios-->
   <div class="col-md-12 col-sm-12 mt-5">
-    <h3>Utencilios</h3>
+    <h3>Utensilios</h3>
     <div class="col-md-11 col-sm-12 mt-2">
         <mat-form-field appearance="fill">
             <mat-label>Utensilio</mat-label>
             <mat-select>
-                <mat-option >
-                Utensilio
+              <mat-option
+                      *ngFor="let cookware of uidsCookWare | async"
+                      [value]="cookware.uid"
+                      required>
+                      {{ cookware.nameCookWare }}
               </mat-option>
             </mat-select>
         </mat-form-field>
@@ -160,13 +167,13 @@
 
   <!--Tecnicas-->
   <div class="col-md-12 col-sm-12 mt-5 ml-1">
-    <h3>Tecnicas</h3>
+    <h3>Técnicas</h3>
     <div class="col-md-4 col-sm-11 mt-2">
         <mat-form-field appearance="fill">
-            <mat-label>Tecnicas</mat-label>
+            <mat-label>Técnicas</mat-label>
             <mat-select>
                 <mat-option >
-                tecnica
+                Técnica
               </mat-option>
             </mat-select>
         </mat-form-field>
@@ -208,16 +215,20 @@
          </mat-form-field>
 </div>
 
-<!--Boton de subir receta-->
-<div class="col-md-12 col-sm-12 container-fluid row mt-4">
-    <div class="col-md-6">
+  <div *ngIf="user$ | async as user; " type="hidden">
+    <input #idUser type="hidden" [value]=" user.uid">
+  </div>
 
-    </div>
-    <div class="form-group">
-        <button mat-raised-button color="primary" class="text-center center-block">
-            Subir Receta
-         </button>
-    </div>
+<!--Boton de subir receta-->
+  <div class="col-md-12 col-sm-12 container-fluid row mt-4">
+      <div class="col-md-6">
+      </div>
+      <div class="form-group">
+          <button mat-raised-button color="primary" type="submit" class="text-center center-block">
+              Subir Receta
+          </button>
+      </div>
+  </div>
+</mat-card>
 </div>
-  </mat-card>
-</div>
+</form>

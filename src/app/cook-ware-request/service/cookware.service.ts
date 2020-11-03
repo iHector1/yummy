@@ -34,7 +34,7 @@ export class CookwareService {
             this.flag2 = false;
           }
         } else {
-          console.log("no xisto");
+          console.log("no existo");
           this.CookwareDataAdd(cookware);
           this.flag2 = false;
         }

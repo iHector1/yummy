@@ -9,6 +9,7 @@ import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 export class RecetaService {
 
   private uidRecipe: any;
+  private flag: boolean = true;
   public recipe$: Observable<infoRecipe>;//Variable para guardar el utensilio
   private recipeCollection: AngularFirestoreCollection<infoRecipe>;
 
@@ -26,7 +27,8 @@ export class RecetaService {
       uidCategory: recipe.uidCategory,
       uidCollection: recipe.uidCollection,
       uidSeason: recipe.uidSeason,
-      uidsCookWare: recipe.uidsCookWare
+      uidsCookWare: recipe.uidsCookWare,
+      uidUnit: recipe.uidUnit
     };
     return userRef.set(data, { merge: true });
   }
