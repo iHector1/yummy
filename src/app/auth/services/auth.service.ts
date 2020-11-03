@@ -92,7 +92,7 @@ export class AuthService extends RoleValidator{
        window.alert('Contrseña incorrecta!');
      }
      if (err.code == 'auth/user-disabled') {
-       window.alert('Estas baneado');;
+       window.alert('Estas baneado');
      }
     }
   }
@@ -105,10 +105,13 @@ export class AuthService extends RoleValidator{
         password
       );
       this.updateUserData(user);
-      await this.sendVerificationEmail();
+      await this.sendVerificationEmail(); 
+      this.router.navigate(['/configuracion']); 
       return user;
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      if (err.code == 'auth/email-already-in-use') {
+        window.alert('Este correo ya ha sido regitrado,intenta con otro'); 
+      }
     }
   }
 

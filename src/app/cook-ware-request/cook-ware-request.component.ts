@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { firestore } from 'firebase';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth/services/auth.service';
 import { cookWare } from '../shared/models/cookWare.interface';
+import { User } from '../shared/models/user.inteface';
 import { CookwareService } from './service/cookware.service';
 
 @Component({
@@ -19,29 +21,61 @@ export class CookWareRequestComponent implements OnInit {
   request: Observable<any[]>;// Variable para recibir las peticiones
   //variables del formulario
   cookWareForm = new FormGroup({
-    cookwareDificulty: new FormControl(''),
-    cookwareName: new FormControl(''),
+    cookwareDificulty: new FormControl('', [
+      //Validators.minLength(3)
+    ]),
+    cookwareName: new FormControl('', [
+      //Validators.required
+    ]),
     cookwareRequest: new FormControl('')
   });
 
-  constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private cookWareService:CookwareService) {
+  constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private cookWareService:CookwareService,private authService:AuthService) {
     this.dificulty = firestore.collection('levelCookWare').valueChanges();
    }
-
+  @ViewChild('idUser') inputUserid: ElementRef;
+  public user$: Observable<User> = this.authService.afAuth.user;
   ngOnInit(): void {
   }
 
   async insert_cookware() {
-    const { cookwareName, cookwareDificulty, cookwareRequest} = this.cookWareForm.value;
-    const id = Math.random().toString(36).substring(2);
-
-    const cookwareInfo: cookWare = {
-      uid : id,
-      uidLevelCookWare: cookwareDificulty,
-      nameCookWare: cookwareName,
-      request: 2
-    };
-    console.log(cookwareInfo);
-    this.cookWareService.CookwareData(cookwareInfo);
+    try {
+      const { cookwareName, cookwareDificulty } = this.cookWareForm.value;
+      if(cookwareName==" "){
+        window.alert("Por favor que no esten vacios ");
+      } else if(cookwareName=="  "){
+        window.alert("Por favor que no esten vacios ");
+      }
+      else if(cookwareName=="   "){
+        window.alert("Por favor que no esten vacios ");
+      }
+      else if(cookwareName=="    "){
+        window.alert("Por favor que no esten vacios ");
+      }
+      else if(cookwareName=="     "){
+        window.alert("Por favor que no esten vacios ");
+      }
+     else {
+       const id = Math.random().toString(36).substring(2);
+        let cookwareNameC = cookwareName;
+        cookwareNameC = this.MaysPrimera(cookwareName);
+        const cookwareInfo: cookWare = {
+          uid: id,
+          uidLevelCookWare: cookwareDificulty,
+          nameCookWare: cookwareNameC,
+          request: [this.inputUserid.nativeElement.value] 
+        };
+        console.log(cookwareInfo);
+        this.cookWareService.CookwareData(cookwareInfo,this.inputUserid.nativeElement.value);
+     }
+    }
+    catch (error) {
+      console.log(error);
+    }
   }
+
+  MaysPrimera(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 }

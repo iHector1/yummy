@@ -19,22 +19,22 @@ export class CookwareService {
   constructor(private afs: AngularFirestore) {
   }
      uid: any;
-     count:any;
+     count:string[];
    //Verificar existencia del utensilio
-  public CookwareData(cookware: cookWare): void{
+  public CookwareData(cookware: cookWare,uiserr:any): void{  
     if (this.flag2) {
       this.afs.collection('cookWare', ref => ref.where('nameCookWare', '==', cookware.nameCookWare)).valueChanges().subscribe(users => {
         if (users[0]) {
-          if (this.flag == false) {
+         if (this.flag == false) {
             this.uidCookWare = users[0];
             this.uid = this.uidCookWare["uid"];
-            this.count = this.uidCookWare["request"];
-            console.log(this.uid, "  ", this.count);
-            this.CookwareDataUpdate();
+            this.uidCookWare["request"].push(uiserr); 
+            console.log(this.uid, "  ", this.uidCookWare["request"]," ",this.count);
+           this.CookwareDataUpdate(this.uidCookWare["request"]);  
             this.flag2 = false;
           }
         } else {
-          console.log("no xisto", users[0]);
+          console.log("no xisto");
           this.CookwareDataAdd(cookware);
           this.flag2 = false;
         }
@@ -42,24 +42,19 @@ export class CookwareService {
     }
   }
 
-
-
-
   //Validación de números mínimos de request para agregar utensilio
-  public CookwareDataUpdate() {
+  public CookwareDataUpdate(request:string[]) {
     this.flag = true;
-    console.log(this.uid, "  ", this.count);
-    let count2 = this.count;
-    count2 = count2 + 1;
-    console.log(count2);
+   // console.log(this.uid, "  ", request);
    this.afs.collection("cookWare")
     .doc(this.uid)
-      .set({ request: count2 }, { merge: true });
+      .set({ request: request }, { merge: true });
 
   }
-
   //Agregar utensilio
   public CookwareDataAdd(cookware: cookWare) {
+    this.flag = true;
+    console.log(cookware);
     const userRef: AngularFirestoreDocument<cookWare> = this.afs.doc(
       `cookWare/${cookware.uid}`
     );
@@ -67,7 +62,6 @@ export class CookwareService {
       uid: cookware.uid,
       uidLevelCookWare: cookware.uidLevelCookWare,
       nameCookWare: cookware.nameCookWare,
-      //request: 1
       request : cookware.request
     };
     return userRef.set(data, { merge: true });

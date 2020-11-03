@@ -10,11 +10,10 @@ import { UsernameValidators} from '../../Validators/usernameValidator';
 })
 export class RegistroComponent implements OnInit {
   hide = true;
-  validatorpassword = "^(?=(?:[^A-Z]*[A-Z]){1})(?=(?:[^a-z]*[a-z]){2})(?=(?:[^0-9]*[0-9]){2}).{8,}$";
   registerForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('', [
-      Validators.pattern(this.validatorpassword),
+      Validators.pattern("^(?=(?:[^A-Z]*[A-Z]){1})(?=(?:[^a-z]*[a-z]){2})(?=(?:[^0-9]*[0-9]){2}).{8,}$"),
       Validators.minLength(8)
     ])
   });
@@ -28,18 +27,19 @@ export class RegistroComponent implements OnInit {
   async onRegister() {
     const { email, password } = this.registerForm.value;
     try {
-      if (!this.verification) {
+      if (this.verification) {
         const user = await this.authSvc.register(email, password);
-        this.router.navigate(['/configuracion']);
+      }else{
+        window.alert("no funcionno wey");
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
-
-  validation(){
-    if (this.registerForm.controls.password.errors.pattern) {
-      //debugger;
+//    if (this.registerForm.controls.password.errors.pattern) {
+  validation() { 
+    if (this.registerForm.controls.errors) {
+      
       window.alert("La contraseña debera contener 8 caracteres (minuscular,mayuculas,numeros) ");
       this.verification = false;
     }
