@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/internal/operators/map';
 import { cookWare } from 'src/app/shared/models/cookWare.interface';
 
 @Injectable({
@@ -27,14 +25,21 @@ export class CookwareService {
         if (users[0]) {
          if (this.flag == false) {
             this.uidCookWare = users[0];
-            this.uid = this.uidCookWare["uid"];
-            this.uidCookWare["request"].push(uiserr);
-            console.log(this.uid, "  ", this.uidCookWare["request"]," ",this.count);
-           this.CookwareDataUpdate(this.uidCookWare["request"]);
-            this.flag2 = false;
+           this.uid = this.uidCookWare["uid"];
+           //verifica que el usuario no haya hecho solicitud otra vez
+           if (!this.uidCookWare["request"].some(x => x === uiserr)) {
+             this.uidCookWare["request"].push(uiserr);
+             console.log(this.uid, "  ", this.uidCookWare["request"], " ", this.count);
+             this.CookwareDataUpdate(this.uidCookWare["request"]);
+             window.alert("Haz hecho una  solicitud a este utensilio ");
+             this.flag2 = false;
+           } else {
+             window.alert("Ya has hecho solicitud a este utensilio ");
+           }
           }
         } else {
-          console.log("no existo");
+          //console.log("no xisto");
+          //si no existe agrega el utensilio
           this.CookwareDataAdd(cookware);
           this.flag2 = false;
         }
@@ -42,10 +47,10 @@ export class CookwareService {
     }
   }
 
-  //Validación de números mínimos de request para agregar utensilio
+  //hace un udate para insertar el nuevo usuario con la solicitud
   public CookwareDataUpdate(request:string[]) {
     this.flag = true;
-   // console.log(this.uid, "  ", request);
+    console.log(this.uid, "  ", request);
    this.afs.collection("cookWare")
     .doc(this.uid)
       .set({ request: request }, { merge: true });

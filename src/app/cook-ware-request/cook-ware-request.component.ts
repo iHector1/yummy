@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
+import { Router } from '@angular/router';
 import { firestore } from 'firebase';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/services/auth.service';
@@ -30,7 +31,7 @@ export class CookWareRequestComponent implements OnInit {
     cookwareRequest: new FormControl('')
   });
 
-  constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private cookWareService:CookwareService,private authService:AuthService) {
+  constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private cookWareService:CookwareService,private authService:AuthService,private router:Router) {
     this.dificulty = firestore.collection('levelCookWare').valueChanges();
    }
   @ViewChild('idUser') inputUserid: ElementRef;
@@ -66,7 +67,8 @@ export class CookWareRequestComponent implements OnInit {
           request: [this.inputUserid.nativeElement.value]
         };
         console.log(cookwareInfo);
-        this.cookWareService.CookwareData(cookwareInfo,this.inputUserid.nativeElement.value);
+        this.cookWareService.CookwareData(cookwareInfo, this.inputUserid.nativeElement.value);
+        this.router.navigate(['/home']);
      }
     }
     catch (error) {

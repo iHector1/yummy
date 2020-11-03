@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { IngredientsRoutingModule } from './ingredients-routing.module';
 import { IngredientsComponent } from './ingredients.component';
 import { AngularMaterialModule } from '../Angular_Material/angular_materia.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -11,7 +13,10 @@ import { AngularMaterialModule } from '../Angular_Material/angular_materia.modul
   imports: [
     CommonModule,
     IngredientsRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    AngularFirestoreModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class IngredientsModule { }
