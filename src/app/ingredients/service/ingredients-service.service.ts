@@ -19,11 +19,11 @@ export class IngredientsServiceService {
          if (this.flag == false) {
             this.uidIngredient = users[0];
            this.uid = this.uidIngredient["uid"];
-           //verifica que el usuario no haya hecho solicitud otra vez 
+           //verifica que el usuario no haya hecho solicitud otra vez
            if (!this.uidIngredient["request"].some(x => x === uiserr)) {
              this.uidIngredient["request"].push(uiserr);
              console.log(this.uid, "  ", this.uidIngredient["request"]);
-             this.ingredientDataUpdate(this.uidIngredient["request"]); 
+             this.ingredientDataUpdate(this.uidIngredient["request"]);
              window.alert("Haz hecho una  solicitud a este ingrediente ");
              this.flag2 = false;
            } else {
@@ -31,8 +31,6 @@ export class IngredientsServiceService {
            }
           }
         } else {
-          //console.log("no xisto");
-          //si no existe agrega el ingrediente
           this.ingredientDataAdd(ingredient, food);
           this.ingredientDataAddtable(ingredient);
           window.alert("Haz hecho una  solicitud a este ingrediente ");
@@ -43,11 +41,10 @@ export class IngredientsServiceService {
   ingredientDataUpdate(request: any) {
     this.flag = true;
     console.log(this.uid, "  ", request);
-   this.afs.collection("cookWare")
+   this.afs.collection("ingredient")
     .doc(this.uid)
       .set({ request: request }, { merge: true });
   }
-
 
   public ingredientDataAdd(ingredient: ingredient, food: any) {
     console.log(food);
@@ -61,10 +58,10 @@ export class IngredientsServiceService {
       this.uidkindfood = "cereals";
     } else if (foood=="4") {
       this.uidkindfood = "vegetables";
-    }
-    else if (foood=="5") {
+    }else if (foood=="5") {
       this.uidkindfood = "fruits";
     }
+
     this.flag = true;
     console.log(ingredient);
     const userRef: AngularFirestoreDocument<ingredient> = this.afs.doc(
@@ -75,8 +72,8 @@ export class IngredientsServiceService {
       uidIngredient:ingredient.uid
     };
     return userRef.set(data, { merge: true });
-
   }
+
   ingredientDataAddtable(ingredient:ingredient) {
     console.log(ingredient);
     const userRef: AngularFirestoreDocument<ingredient> = this.afs.doc(
@@ -91,5 +88,5 @@ export class IngredientsServiceService {
     return userRef.set(data, { merge: true });
   }
 }
-  
+
 

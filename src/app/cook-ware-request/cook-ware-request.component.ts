@@ -17,18 +17,15 @@ import { CookwareService } from './service/cookware.service';
   styleUrls: ['./cook-ware-request.component.css']
 })
 export class CookWareRequestComponent implements OnInit {
+
   dificulty: Observable<any[]>;// Variable para recibir la dificultad de los utensilios
-  //name: Observable<any[]>;// Variable para recibir el nombre de los utensilios
-  //request: Observable<any[]>;// Variable para recibir las peticiones
+
   //variables del formulario
   cookWareForm = new FormGroup({
     cookwareDificulty: new FormControl('', [
-      //Validators.minLength(3)
     ]),
     cookwareName: new FormControl('', [
-      //Validators.required
     ]),
-    //cookwareRequest: new FormControl('')
   });
 
   constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private cookWareService:CookwareService,private authService:AuthService,private router:Router) {
@@ -57,7 +54,7 @@ export class CookWareRequestComponent implements OnInit {
         window.alert("Por favor que no esten vacios ");
       }
      else {
-       const id = Math.random().toString(36).substring(2);
+        const id = Math.random().toString(36).substring(2);
         let cookwareNameC = cookwareName;
         cookwareNameC = this.MaysPrimera(cookwareName);
         const cookwareInfo: cookWare = {
