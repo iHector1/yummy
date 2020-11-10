@@ -3,16 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { SuperListRoutingModule } from './super-list-routing.module';
 import { SuperListComponent } from './super-list.component';
-import { TableSuperlistComponent } from './table-superlist/table-superlist.component';;
 import { AngularMaterialModule } from '../Angular_Material/angular_materia.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [SuperListComponent, TableSuperlistComponent],
+  declarations: [SuperListComponent],
   imports: [
     CommonModule,
     SuperListRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SuperListModule { }
