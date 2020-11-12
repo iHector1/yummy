@@ -11,16 +11,12 @@ export class SuperlistService {
   private flag: boolean = false;
   private flag2: boolean = true;
   public superlist$: Observable<superList>;//Variable para guardar el utensilio
-  //private cookWareCollection: AngularFirestoreCollection<cookWare>;
 
   constructor(private afs: AngularFirestore) { }
-
-
 
     //Agregar utensilio
     public superlistDataAdd(superList: superList) {
       this.flag = true;
-     // console.log(cookware);
       const superListRef: AngularFirestoreDocument<superList> = this.afs.doc(
         `superList/${superList.uid}`
       );

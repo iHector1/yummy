@@ -1,6 +1,5 @@
-<STYLE type="text/css">
-  H1 { text-align: center}
- </STYLE>
+
+ <!-- Form para mostrar e insertar un producto a la lista de super-->
  <form [formGroup]="superlistForm" (ngSubmit)="insert_superlist()">
  <div class="card ml-2 mr-2 mt-2 mb-2">
    <div class="card-body">
@@ -8,6 +7,7 @@
  <div class="col-dm-12 card  mt-5 ml-5 mr-5">
    <div class="col-dm-12 card-body">
 
+    <!-- Tabla que muestra lo que contiene la lista de susper del usuario-->
      <div class="pb-3 col-sm-12  mt-4">
        <table class="table table-striped table-hover">
         <th>Ingrediente</th>
@@ -35,8 +35,10 @@
 
    </div>
  </div>
+ <!-- Fin de la tabla -->
 
- <div class="col-md-12 mt-5 ml-5 mr-5 container col-sm-12">
+ <!-- Permite seleccionar el ingrediente que se agregará a la lista de super-->
+ <div class="col-md-12 mt-5 ml-2 mr-2 container col-sm-12">
    <div class="row" class="col-sm-12 col-md-12">
      <mat-form-field appearance="fill" class="col-sm-12 col-md-3">
        <mat-label>Ingredientes</mat-label>
@@ -50,16 +52,18 @@
        </mat-select>
    </mat-form-field>
 
+   <!-- Permite ingresar la cantidad correspondiente al ingrediente que se agregará-->
    <mat-form-field class="ml-5 mt-2 col-sm-12 col-md-3">
      <mat-label>Cantidad</mat-label>
        <input
-         matInput
-         placeholder="3"
-         formControlName="number"
-         required
+        formControlName = "superlistForm"
+        matInput
+        placeholder="3"
+        required
        />
       </mat-form-field>
 
+      <!-- Permite seleccionar la unidad de medida del ingrediente correspondiente que se agregará -->
       <mat-form-field appearance="fill" class="ml-5 col-sm-12 col-md-3">
        <mat-label>Medida</mat-label>
        <mat-select name ="unit" requiered formControlName = "superlistForm" required>
@@ -72,19 +76,22 @@
        </mat-select>
      </mat-form-field>
 
+     <!-- Permite identificar el usuario logueado -->
      <div *ngIf="user$ | async as user; " type="hidden">
       <input #idUser type="hidden" [value]=" user.uid">
     </div>
 
-   <button mat-mini-fab color="accent" class="ml-5">
+    <!-- Botón que agrega el ingrediente a la lista de super -->
+   <button mat-mini-fab color="accent" type="submit" class="ml-1">
        <mat-icon>add</mat-icon>
    </button>
    </div>
  </div>
 
+ <!-- Botón que permite descargar el PDF de la lista de super-->
  <div class="col-md-12 mt-5 container col-sm-12">
    <div class="col-sm-12 col-md-12 text-center">
-     <button label="Descargar" mat-raised-button color="accent">
+     <button label="Descargar" mat-raised-button color="accent" type="submit">
          Descargar PDF
      </button>
    </div>
