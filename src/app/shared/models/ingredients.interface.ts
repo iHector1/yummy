@@ -3,6 +3,7 @@ export interface ingredient{
     uidUnit?: string;
     kindFoodName?: string;
     nameIngredient?:string;
-    request?: string[];
+  request?: string[];
+  requesNumber?: number;
   }
   

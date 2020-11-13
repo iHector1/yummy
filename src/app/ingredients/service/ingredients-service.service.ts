@@ -9,26 +9,32 @@ export class IngredientsServiceService {
   private uidIngredient: any;
   private flag: boolean = false;
   private flag2: boolean = true;
-  private  uidkindfood;
+  private uidkindfood;
+  private requests;
   public ingredient$: Observable<ingredient>;//Variable para guardar el ingrediente
   constructor(private afs: AngularFirestore) { }
   uid: any;
   public ingredientCollection(ingredient: ingredient, uiserr: any, food: any): void {
-      this.afs.collection('ingredient', ref => ref.where('nameIngredient', '==', ingredient.nameIngredient)).valueChanges().subscribe(users => {
+      this.afs.collection('ingredients', ref => ref.where('nameIngredient', '==', ingredient.nameIngredient)).valueChanges().subscribe(users => {
         if (users[0]) {
          if (this.flag == false) {
             this.uidIngredient = users[0];
            this.uid = this.uidIngredient["uid"];
+          if(this.uidIngredient["requests"]<3){
            //verifica que el usuario no haya hecho solicitud otra vez 
            if (!this.uidIngredient["request"].some(x => x === uiserr)) {
              this.uidIngredient["request"].push(uiserr);
-             console.log(this.uid, "  ", this.uidIngredient["request"]);
-             this.ingredientDataUpdate(this.uidIngredient["request"]); 
-             window.alert("Haz hecho una  solicitud a este ingrediente ");
+             this.requests=this.uidIngredient["request"];
+             console.log(this.uid, "  ", this.requests.length);
+             this.ingredientDataUpdate(this.uidIngredient["request"],this.requests.length); 
+             window.alert("Haz hecho una  solicitud a este ingrediente. ");
              this.flag2 = false;
            } else {
              window.alert("Ya has hecho solicitud a este ingrediente,intenta con otro ");
-           }
+            }
+          } else {
+            window.alert("Este ingrediente ya existe,intente con otro");
+          }
           }
         } else {
           //console.log("no xisto");
@@ -40,12 +46,13 @@ export class IngredientsServiceService {
         }
       });
   }
-  ingredientDataUpdate(request: any) {
+  ingredientDataUpdate(request: any,requests:any) {
     this.flag = true;
     console.log(this.uid, "  ", request);
-   this.afs.collection("cookWare")
+   this.afs.collection("ingredients")
     .doc(this.uid)
-      .set({ request: request }, { merge: true });
+     .set({ request: request, requests: requests }, { merge: true });
+    
   }
 
 

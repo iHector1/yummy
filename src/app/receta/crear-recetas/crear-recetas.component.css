@@ -1,0 +1,12 @@
+.overflow-visible {
+    white-space: initial;
+  }
+  p {
+    width: 200px;
+    border: 1px solid;
+    padding: 2px 5px;
+  
+    /* BOTH of the following are required for text-overflow */
+    white-space: nowrap;
+    overflow: hidden;
+  }  

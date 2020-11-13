@@ -1,234 +1,267 @@
 <form [formGroup]="recipeForm" (ngSubmit)="create_recipe()">
-<div class="card ml-3 mr-3 mt-3 mb-5"  class="form-group">
-  <mat-card>
-      <!--vista del boton y la imagen-->
-    <div class="image col-md-5 container-fluid column">
-      <img
-        src="../../../assets/image.png"
-        alt=""
-        class="img-responsive center-block"
-        class="col-md-5"
-      />
-      <div class="col-md-6 mt-3">
-        <button mat-raised-button color="primary" class="text-center">
-          Subir Imagen
-        </button>
+  <div class="card ml-3 mr-3 mt-3 mb-5"  class="form-group">
+    <mat-card>
+        <!--vista del boton y la imagen-->
+      <div class="image col-md-5 container-fluid column">
+        <img
+          src="../../../assets/image.png"
+          alt=""
+          class="img-responsive center-block"
+          class="col-md-5"
+        />
+        <div class="col-md-6 mt-3">
+          <input mat-raised-button color="primary" class="text-center" type="file" accept=".jpg" (blur)="onUpload2($event) ">
+        </div>
+        <input #image2 type="hidden" [value]="urlImage2 | async">
       </div>
-    </div>
-    <!--boton premiun y titulo de la reeceta-->
-    <div class="col-md-12 col-sm-12 row mt-2">
-        <mat-form-field class="col-md-9 col-sm-12" appearance="fill">
-            <mat-label>Nombre de la receta</mat-label>
-            <input
-              formControlName = "recipeName"
-              matInput
-              placeholder="Ingrese el nombre del utensilio"
-              required
-            />
-          </mat-form-field>
-          <mat-slide-toggle color="warn" class="col-md-1">Premiun</mat-slide-toggle>
-    </div>
-
-    <!--insertado-->
-
-    <div class="col-md-12 col-sm-12 mt-5">
-        <mat-form-field class="col-md-4 col-sm-12" appearance="fill">
-            <mat-label>Insertar minutos</mat-label>
-            <input
-              matInput
-              placeholder="60"
-              formControlName="number"
-              required
-            />
-          </mat-form-field>
-          <mat-form-field class="col-md-4 col-sm-12" appearance="fill">
-            <mat-label>Inserta porciones</mat-label>
-            <input
-              matInput
-              placeholder="5"
-              formControlName="number"
-              required
-            />
-          </mat-form-field>
-          <mat-form-field class="col-md-4 col-sm-12" appearance="fill">
-            <mat-label>Inserta calorías por porción en kcal</mat-label>
-            <input
-              matInput
-              placeholder="500"
-              formControlName="number"
-              required
-            />
-          </mat-form-field>
-    </div>
-
-    <!--categoria-->
-    <div class="col-md-12 col-sm-12 row mt-5">
-        <div class="col-md-4 col-sm-12">
-            <mat-form-field appearance="fill">
-            <mat-label>Categoría</mat-label>
-            <mat-select name ="category" requiered formControlName = "recipeCategory" required>
-              <mat-option
-                  *ngFor="let categories of uidCategory | async"
-                  [value]="categories.uid"
-                  required>
-                  {{ categories.categoryName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-md-4 col-sm-12">
-            <mat-form-field appearance="fill">
-            <mat-label>Temporada</mat-label>
-            <mat-select name ="season" requiered formControlName = "recipeSeason" required>
-              <mat-option
-                  *ngFor="let season of uidSeason | async"
-                  [value]="season.uid"
-                  required>
-                  {{ season.seasonName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-md-4 col-sm-12">
-            <mat-form-field appearance="fill">
-            <mat-label>Colección</mat-label>
-            <mat-select name ="collection" requiered formControlName = "recipeCollection" required>
-              <mat-option
-                  *ngFor="let colletions of uidCollection | async"
-                  [value]="colletions.uid"
-                  required>
-                  {{ colletions.collectionName }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-
-    </div>
-  <!--Ingredientes-->
-
-  <div class="col-md-12 col-sm-12 mt-5">
-      <div class="col-md-12 col-sm-12">
-          <h3>Ingredientes</h3>
-      </div>
+      <!--boton premiun y titulo de la reeceta-->
       <div class="col-md-12 col-sm-12 row mt-2">
-            <mat-form-field appearance="fill">
-                <mat-label>Ingrediente</mat-label>
-                <mat-select name ="ingredient" requiered formControlName = "recipeIngredient" required>
-                  <mat-option
-                      *ngFor="let cookware of uidsCookWare | async"
-                      [value]="cookware.uid"
-                      required>
-                      {{ cookware.nameCookWare }}
-                </mat-option>
-                </mat-select>
+          <mat-form-field class="col-md-9 col-sm-12" appearance="fill">
+              <mat-label>Nombre de la receta</mat-label>
+              <input
+                formControlName="title"
+                matInput
+                placeholder="Ingrese el nombre del utensilio"
+                required
+              />
+            </mat-form-field>
+            <mat-slide-toggle type="hidden"color="warn" [disabled]="true" class="col-md-1">Premiun</mat-slide-toggle>
+      </div>
+  
+      <!--insertado-->
+  
+      <div class="col-md-12 col-sm-12 mt-5">
+          <mat-form-field class="col-md-4 col-sm-12" appearance="fill">
+              <mat-label>Insertar minutos</mat-label>
+              <input
+                matInput
+                placeholder="60"
+                formControlName="cookTime"
+                type="number"
+                required
+              />
             </mat-form-field>
             <mat-form-field class="col-md-4 col-sm-12" appearance="fill">
-                <mat-label>Cantidad</mat-label>
-                <input matInput placeholder="5" formControlName="number"required/>
+              <mat-label>Inserta porciones</mat-label>
+              <input
+                matInput
+                placeholder="5"
+                type="number"
+                formControlName="portions"
+                required
+              />
             </mat-form-field>
-            <mat-form-field appearance="fill" appearance="fill">
-                <mat-label>Medida</mat-label>
-                <mat-select>
-                  <mat-option
-                      *ngFor="let units of uidUnit | async"
-                      [value]="units.uid"
-                      required>
-                      {{ units.unitName }}
-                  </mat-option>
-                </mat-select>
+            <mat-form-field class="col-md-4 col-sm-12" appearance="fill">
+              <mat-label>Inserta calorías por porción en kcal</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="500"
+                formControlName="portionsCalories"
+                required
+              />
             </mat-form-field>
       </div>
-      <button mat-mini-fab color="accent">
+  
+      <!--categoria-->
+      <div class="col-md-12 col-sm-12 row mt-5">
+          <div class="col-md-4 col-sm-12">
+              <mat-form-field appearance="fill">
+              <mat-label>Categoría</mat-label>
+              <mat-select name ="category" formControlName="uidsCategory"  required>
+                <mat-option
+                    *ngFor="let categories of uidCategory | async"
+                    [value]="categories.uid"
+                    required>
+                    {{ categories.categoryName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4 col-sm-12">
+              <mat-form-field appearance="fill">
+              <mat-label>Temporada</mat-label>
+              <mat-select name ="season" formControlName="uidsSeason" required>
+                <mat-option
+                    *ngFor="let season of uidSeason | async"
+                    [value]="season.uid"
+                    required>
+                    {{ season.seasonName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4 col-sm-12">
+              <mat-form-field appearance="fill">
+              <mat-label>Colección</mat-label>
+              <mat-select name ="collection" formControlName="uidsCollection" required>
+                <mat-option
+                    *ngFor="let colletions of uidCollection | async"
+                    [value]="colletions.uid"
+                    required>
+                    {{ colletions.collectionName }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <mat-form-field appearance="fill">
+            <mat-label>Region</mat-label>
+            <mat-select name ="region" formControlName="uidsRegion"  required>
+              <mat-option
+                  *ngFor="let region of uidRegion | async"
+                  [value]="region.uid"
+                  required>
+                  {{ region.regionName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+      </div>
+    <!--Ingredientes-->
+  
+    <div class="col-md-12 col-sm-12 mt-5">
+        <div class="col-md-12 col-sm-12">
+            <h3>Ingredientes</h3>
+        </div>
+        <div class="col-md-12 col-sm-12 row mt-2">
+              <mat-form-field appearance="fill">
+                  <mat-label>Ingrediente</mat-label>
+                  <mat-select name ="ingredient" formControlName="uidsIngredients" required>
+                    <mat-option
+                        *ngFor="let ingre of uidIngredients | async"
+                        [value]="ingre" 
+                        required >
+                        {{ ingre.nameIngredient }} 
+                  </mat-option>
+                  </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-md-4 col-sm-12" appearance="fill">
+                  <mat-label>Cantidad</mat-label>
+               
+                <input matInput placeholder="5"  type="number" #cantt required/>
+              </mat-form-field>
+              <mat-form-field appearance="fill" >
+                  <mat-label>Medida</mat-label>
+                  <mat-select formControlName="uidsUnit" required>
+                    <mat-option
+                        *ngFor="let units of uidUnit | async"
+                        [value]="units" 
+                        required>
+                        {{ units.unitName }}
+                    </mat-option>
+                  </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="row">
+          <h4 class="overflow-visible badge badge-pill badge-primary ml-1" *ngFor="let ingg of ingredient">{{ingg}}</h4>
+        </div>
+    </div>    
+        <button mat-mini-fab type="button" (click)="addIngredient()" color="accent">
+            <mat-icon>add</mat-icon>
+      </button>
+  
+     <!--Utencilios-->
+    <div class="col-md-12 col-sm-12 mt-5">
+      <h3>Utensilios</h3>
+    <div class="col-md-11 col-sm-12 mt-2" >
+          <mat-form-field appearance="fill">
+              <mat-label>Utensilio</mat-label>
+              <mat-select formControlName="uidsCookWare" required>
+                <mat-option
+                        *ngFor="let cookware of uidCookWare | async"
+                        [value]="cookware" 
+                        required>
+                        {{ cookware.nameCookWare}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="row">
+        <h4 class="overflow-visible badge badge-pill badge-primary ml-1" *ngFor="let nrico of cook">{{nrico}}</h4>
+      </div>
+
+    </div> 
+    <button mat-mini-fab color="accent" type="button" (click)="addCookWare()">
           <mat-icon>add</mat-icon>
     </button>
-  </div>
-
-  <!--Utencilios-->
-  <div class="col-md-12 col-sm-12 mt-5">
-    <h3>Utensilios</h3>
-    <div class="col-md-11 col-sm-12 mt-2">
-        <mat-form-field appearance="fill">
-            <mat-label>Utensilio</mat-label>
-            <mat-select>
-              <mat-option
-                      *ngFor="let cookware of uidsCookWare | async"
-                      [value]="cookware.uid"
-                      required>
-                      {{ cookware.nameCookWare }}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <button mat-mini-fab color="accent">
-        <mat-icon>add</mat-icon>
-  </button>
-  </div>
-
-  <!--Tecnicas-->
-  <div class="col-md-12 col-sm-12 mt-5 ml-1">
-    <h3>Técnicas</h3>
-    <div class="col-md-4 col-sm-11 mt-2">
-        <mat-form-field appearance="fill">
-            <mat-label>Técnicas</mat-label>
-            <mat-select>
-                <mat-option >
-                Técnica
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </div>
-    <button mat-mini-fab color="accent">
-        <mat-icon>add</mat-icon>
-  </button>
-  </div>
-<!--Pasos-->
-<div class="col-md-12 col-sm-12 mt-2">
-    <h3>Pasos</h3>
-    <div class="container-fluid column">
-       <mat-form-field class="col-md-12 col-sm-12">
-         <mat-label>Paso de la receta</mat-label>
-           <input
-             matInput
-             placeholder="papas"
-             formControlName="text"
-             required
-           />
+  
+    <!--Tecnicas-->
+    <div class="col-md-12 col-sm-12 mt-5 ml-1">
+      <h3>Técnicas</h3>
+      <div class="col-md-4 col-sm-11 mt-2">
+          <mat-form-field appearance="fill">
+              <mat-label>Técnicas</mat-label>
+              <mat-select formControlName="uidsTechnique" required>
+                  <mat-option  *ngFor="let technique of uidsTechnique | async"
+                  [value]="technique" 
+                  required (blur)="descriptioon()">
+                  {{ technique.nameTechnique}}
+                
+                </mat-option>
+              </mat-select>
           </mat-form-field>
-          <button mat-raised-button color="primary" class="text-center">
-            Subir Imagen
-          </button>
+          <div class="row">
+            <h4 class="overflow-visible badge badge-pill badge-primary ml-1" *ngFor="let tech of technique">{{tech}}</h4>
+          </div>
+      </div>
+      <a>{{description}}</a>
+
+    </div>   
+       <button mat-mini-fab type="button"color="accent" (click)="addTechnique()">
+          <mat-icon>add</mat-icon>
+    </button>
+  <!--Pasos-->
+  <div class="col-md-12 col-sm-12 mt-2">
+      <h3>Pasos</h3>
+      <div class="container-fluid column">
+         <mat-form-field class="col-md-12 col-sm-12" appearance="fill">
+           <mat-label>Paso de la receta</mat-label>
+             <input
+               matInput
+               placeholder="papas"
+               #stepp
+               maxlength="256" 
+               required/><mat-hint align="end">{{stepp.value.length}} / 256</mat-hint>      
+            </mat-form-field>
+            <input  mat-raised-button color="primary" class="text-center" type="file"accept=".jpeg , .mp4" (change)="onUpload($event)">
+            <input #image type="hidden"[value]="urlImage | async">
+      </div>
+      <div class="row col-md-12 col-sm-12 mt-2">
+        <h4 class=" overflow-visible badge badge-pill badge-primary ml-1 " *ngFor="let spte of step">{{spte}}</h4>
+      </div> 
+  </div>  
+       <button mat-mini-fab color="accent" type="button" class="mt-2" (click)="addStep()">
+          <mat-icon>add</mat-icon>
+    </button> 
+  <!--url-->
+  <div class="col-md-12 col-sm-12 mt-4">
+      <mat-form-field class="col-md-12 col-sm-12" appearance="fill">
+          <mat-label>Url del video de Youtube</mat-label>
+            <input
+              matInput 
+              formControlName="videoUrl"
+              placeholder="https://www.youtube.com/watch?v=jNQXAC9IVRw"
+            />
+           </mat-form-field>
+  </div>
+  
+    <div *ngIf="user$ | async as user; " type="hidden">
+      <input #idUser type="hidden" [value]=" user.uid">
     </div>
-    <button mat-mini-fab color="accent" class="mt-2">
-        <mat-icon>add</mat-icon>
-  </button>
-</div>
-<!--url-->
-<div class="col-md-12 col-sm-12 mt-4">
-    <mat-form-field class="col-md-12 col-sm-12">
-        <mat-label>Url del video de Youtube</mat-label>
-          <input
-            matInput
-            placeholder="https://www.youtube.com/watch?v=jNQXAC9IVRw"
-            formControlName="text"
-          />
-         </mat-form-field>
-</div>
-
-  <div *ngIf="user$ | async as user; " type="hidden">
-    <input #idUser type="hidden" [value]=" user.uid">
+  
+  <!--Boton de subir receta-->
+    <div class="col-md-12 col-sm-12 container-fluid row mt-4">
+        <div class="col-md-6">
+        </div>
+        <div class="form-group">
+            <button mat-raised-button color="primary" type="submit" class="text-center center-block">
+                Subir Receta
+            </button>
+        </div>
+    </div>
+  </mat-card>
   </div>
-
-<!--Boton de subir receta-->
-  <div class="col-md-12 col-sm-12 container-fluid row mt-4">
-      <div class="col-md-6">
-      </div>
-      <div class="form-group">
-          <button mat-raised-button color="primary" type="submit" class="text-center center-block">
-              Subir Receta
-          </button>
-      </div>
-  </div>
-</mat-card>
-</div>
-</form>
+  </form>
+  
