@@ -18,9 +18,9 @@ export class CookwareService {
   }
      uid: any;
      count:string[];
-   //Verificar existencia del utensilio
-  
-  public CookwareData(cookware: cookWare,uiserr:any): void{ 
+
+  //Verificar existencia del utensilio
+  public CookwareData(cookware: cookWare,uiserr:any): void{
     if (this.flag2) {
       this.afs.collection('cookWare', ref => ref.where('nameCookWare', '==', cookware.nameCookWare)).valueChanges().subscribe(users => {
         if (users[0]) {
@@ -42,8 +42,6 @@ export class CookwareService {
            }
           }
         } else {
-          //console.log("no xisto");
-          //si no existe agrega el utensilio
           this.CookwareDataAdd(cookware);
           this.flag2 = false;
         }
@@ -60,6 +58,7 @@ export class CookwareService {
       .set({ request: request ,requests:requests}, { merge: true });
 
   }
+
   //Agregar utensilio
   public CookwareDataAdd(cookware: cookWare) {
     this.flag = true;

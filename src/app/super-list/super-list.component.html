@@ -1,2 +1,103 @@
-<app-table-superlist></app-table-superlist>
+
+ <!-- Form para mostrar e insertar un producto a la lista de super-->
+ <form [formGroup]="superlistForm" (ngSubmit)="insert_superlist()">
+ <div class="card ml-2 mr-2 mt-2 mb-2">
+   <div class="card-body">
+ <H1> Lista de super </H1>
+ <div class="col-dm-12 card  mt-5 ml-5 mr-5">
+   <div class="col-dm-12 card-body">
+
+    <!-- Tabla que muestra lo que contiene la lista de susper del usuario-->
+     <div class="pb-3 col-sm-12  mt-4">
+       <table class="table table-striped table-hover">
+        <th>Ingrediente</th>
+        <th>Cantidad</th>
+        <th>Medida</th>
+        <tbody>
+          <tr>
+             <td>Chorizo</td>
+             <td> 1</td>
+             <td>Kg</td>
+          </tr>
+          <tr>
+            <td>Queso</td>
+            <td> 2</td>
+            <td>Kg</td>
+         </tr>
+         <tr>
+          <td>Jamón</td>
+          <td> 1</td>
+          <td>Kg</td>
+       </tr>
+        </tbody>
+       </table>
+    </div>
+
+   </div>
+ </div>
+ <!-- Fin de la tabla -->
+
+ <!-- Permite seleccionar el ingrediente que se agregará a la lista de super-->
+ <div class="col-md-12 mt-5 ml-2 mr-2 container col-sm-12">
+   <div class="row" class="col-sm-12 col-md-12">
+     <mat-form-field appearance="fill" class="col-sm-12 col-md-3">
+       <mat-label>Ingredientes</mat-label>
+       <mat-select name ="ingredients" requiered formControlName = "superlistForm" required>
+           <mat-option
+           *ngFor="let ingredients of ingredients | async"
+                  [value]="ingredients.uid"
+                  required>
+                  {{ ingredients.nameIngredient }}
+         </mat-option>
+       </mat-select>
+   </mat-form-field>
+
+   <!-- Permite ingresar la cantidad correspondiente al ingrediente que se agregará-->
+   <mat-form-field class="ml-5 mt-2 col-sm-12 col-md-3">
+     <mat-label>Cantidad</mat-label>
+       <input
+        formControlName = "superlistForm"
+        matInput
+        placeholder="3"
+        required
+       />
+      </mat-form-field>
+
+      <!-- Permite seleccionar la unidad de medida del ingrediente correspondiente que se agregará -->
+      <mat-form-field appearance="fill" class="ml-5 col-sm-12 col-md-3">
+       <mat-label>Medida</mat-label>
+       <mat-select name ="unit" requiered formControlName = "superlistForm" required>
+           <mat-option
+           *ngFor="let units of unit | async"
+                  [value]="units.uid"
+                  required>
+                  {{ units.unitName }}
+         </mat-option>
+       </mat-select>
+     </mat-form-field>
+
+     <!-- Permite identificar el usuario logueado -->
+     <div *ngIf="user$ | async as user; " type="hidden">
+      <input #idUser type="hidden" [value]=" user.uid">
+    </div>
+
+    <!-- Botón que agrega el ingrediente a la lista de super -->
+   <button mat-mini-fab color="accent" type="submit" class="ml-1">
+       <mat-icon>add</mat-icon>
+   </button>
+   </div>
+ </div>
+
+ <!-- Botón que permite descargar el PDF de la lista de super-->
+ <div class="col-md-12 mt-5 container col-sm-12">
+   <div class="col-sm-12 col-md-12 text-center">
+     <button label="Descargar" mat-raised-button color="accent" type="submit">
+         Descargar PDF
+     </button>
+   </div>
+ </div>
+
+ </div>
+ </div>
+</form>
 

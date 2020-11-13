@@ -37,8 +37,6 @@ export class IngredientsServiceService {
           }
           }
         } else {
-          //console.log("no xisto");
-          //si no existe agrega el ingrediente
           this.ingredientDataAdd(ingredient, food);
           this.ingredientDataAddtable(ingredient);
           window.alert("Haz hecho una  solicitud a este ingrediente ");
@@ -55,7 +53,6 @@ export class IngredientsServiceService {
     
   }
 
-
   public ingredientDataAdd(ingredient: ingredient, food: any) {
     console.log(food);
     let foood = food;
@@ -68,10 +65,10 @@ export class IngredientsServiceService {
       this.uidkindfood = "cereals";
     } else if (foood=="4") {
       this.uidkindfood = "vegetables";
-    }
-    else if (foood=="5") {
+    }else if (foood=="5") {
       this.uidkindfood = "fruits";
     }
+
     this.flag = true;
     console.log(ingredient);
     const userRef: AngularFirestoreDocument<ingredient> = this.afs.doc(
@@ -82,8 +79,8 @@ export class IngredientsServiceService {
       uidIngredient:ingredient.uid
     };
     return userRef.set(data, { merge: true });
-
   }
+
   ingredientDataAddtable(ingredient:ingredient) {
     console.log(ingredient);
     const userRef: AngularFirestoreDocument<ingredient> = this.afs.doc(
@@ -98,5 +95,5 @@ export class IngredientsServiceService {
     return userRef.set(data, { merge: true });
   }
 }
-  
+
 
