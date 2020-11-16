@@ -2,6 +2,6 @@ export interface superList{
   uid?: string;
   uidUser?: string;
   uidIngredient?: string;
-  cant?: boolean;
+  cant?: number;
   uidUnit?: string;
 }
