@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { superList } from 'src/app/shared/models/superList.interface';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -59,5 +58,19 @@ export class SuperlistService {
         uidUnit : superList.uidUnit
       };
       return superListRef.set(data, { merge: true });
-    }
+  }
+  
+  getPosition(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resp => {
+        resolve({ lng: resp.coords.longitude, lat: resp.coords.latitude });
+      },
+        err => {
+          reject(err);
+        });
+    });
+  }
+   deleteItems(userUid,uidproduct){
+     const items=this.afs.collection('superList', ref => ref.where("uidUser", "==", userUid)).doc(uidproduct).delete();
+  }
 }

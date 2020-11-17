@@ -74,5 +74,4 @@ export class CookwareService {
     };
     return cookAreRef.set(data, { merge: true });
   }
-
 }

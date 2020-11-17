@@ -32,7 +32,7 @@ export class AddCupboardComponent implements OnInit {
     this.itemList = firestore.collection<myCupboard>("myCupboard",ref=>ref.where("uidUser","==",this.router.url.slice(12)))
     .valueChanges()
 
-   }
+   } 
 
   @ViewChild('idUser') inputUserid: ElementRef;
   @ViewChild('list') list: ElementRef;
