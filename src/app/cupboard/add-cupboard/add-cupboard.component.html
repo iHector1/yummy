@@ -1,35 +1,61 @@
+<!-- Permite seleccionar el ingrediente que se agregará a la alacena-->
+<form [formGroup]="cupboardForm">
 <div class="col-md-12 mt-5 ml-5 mr-5 container col-sm-12">
   <div class="row" class="col-sm-12 col-md-12">
     <mat-form-field appearance="fill" class="col-sm-12 col-md-3">
       <mat-label>Ingredientes</mat-label>
-      <mat-select>
-          <mat-option >
-          ingredientes
+      <mat-select
+        name="ingredients"
+        requiered
+        formControlName="cupboardIngredients"
+      >
+          <mat-option
+            *ngFor="let ingredients of ingredients | async"
+            [value]="ingredients.nameIngredient"
+          >
+          {{ ingredients.nameIngredient }}
         </mat-option>
       </mat-select>
   </mat-form-field>
 
+  <!-- Permite ingresar la cantidad correspondiente al ingrediente que se agregará-->
   <mat-form-field class="ml-5 mt-2 col-sm-12 col-md-3">
     <mat-label>Cantidad</mat-label>
       <input
         matInput
         placeholder="3"
-        formControlName="number"
+        formControlName="cupboardQuantity"
         required
       />
      </mat-form-field>
 
+     <!-- Permite seleccionar la unidad de medida del ingrediente correspondiente que se agregará -->
      <mat-form-field appearance="fill" class="ml-5 col-sm-12 col-md-3">
       <mat-label>Medida</mat-label>
-      <mat-select>
-          <mat-option >
-          kilogramos
+      <mat-select name="unit" formControlName="cupboardUnit">
+          <mat-option
+            *ngFor="let units of unit | async"
+            [value]="units.unitName"
+          >
+          {{ units.unitName }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-  <button mat-mini-fab color="accent" class="ml-5">
+  <!-- Permite identificar el usuario logueado -->
+  <div *ngIf="user$ | async as user" type="hidden">
+    <input #idUser type="hidden" [value]="user.uid" />
+  </div>
+
+  <button
+    mat-mini-fab
+    color="accent"
+    type="submit"
+    (click)="insert_cupboard()"
+    class="ml-1"
+  >
       <mat-icon>add</mat-icon>
   </button>
   </div>
 </div>
+</form>

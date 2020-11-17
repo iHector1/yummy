@@ -11,21 +11,11 @@
        <th>Cantidad</th>
        <th>Medida</th>
        <tbody>
-         <tr>
-            <td>Chorizo</td>
-            <td> 1</td>
-            <td>Kg</td>
-         </tr>
-         <tr>
-           <td>Chorizo</td>
-           <td> 1</td>
-           <td>Kg</td>
+        <tr *ngFor="let table of itemList |async">
+          <td>{{table.uidIngredient}}</td>
+          <td>{{table.cant}}</td>
+          <td>{{table.uidUnit}}</td>
         </tr>
-        <tr>
-         <td>Chorizo</td>
-         <td> 1</td>
-         <td>Kg</td>
-      </tr>
        </tbody>
       </table>
    </div>

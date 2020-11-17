@@ -4,4 +4,5 @@ export interface myCupboard{
     uidUser: User["uid"];
     uidIngredient: string[];
     cant: number;
+    uidUnit?: string;
 }

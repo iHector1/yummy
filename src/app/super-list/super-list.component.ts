@@ -41,7 +41,7 @@ export class SuperListComponent implements OnInit {
   public user$: Observable<User> = this.authService.afAuth.user;
 
   ngOnInit(): void {
-    
+
   }
 
   async insert_superlist() {
@@ -89,7 +89,7 @@ export class SuperListComponent implements OnInit {
         return true;
       }
     };
- 
+
     let content = this.list.nativeElement;
 
     doc.fromHTML(content.innerHTML, 10, 10, {

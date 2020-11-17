@@ -35,7 +35,7 @@ export class SuperlistService {
       });
     }
   }
-  //actializar la lista 
+  //actializar la lista
   superListUpdate(superList: superList) {
     let c = this.cant + superList.cant;
     this.flag2 = false;
@@ -44,7 +44,7 @@ export class SuperlistService {
     .doc(this.list['uid'])
      .set({ cant:c }, { merge: true });
   }
-    //Agregar ingrediente a la lista 
+    //Agregar ingrediente a la lista
     public superlistDataAdd(superList: superList) {
       this.flag2 = false;
       this.flag = false;

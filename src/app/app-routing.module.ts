@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
   { path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
-  { path: 'registro', loadChildren: () => import('./auth/registro/registro.module').then(m => m.RegistroModule) }, 
+  { path: 'registro', loadChildren: () => import('./auth/registro/registro.module').then(m => m.RegistroModule) },
   {
     path: "verificacion",
     component:SendEmailComponent
@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'configuracion', loadChildren: () => import('./auth/confirguracion/confirguracion.module').then(m => m.ConfirguracionModule)
   },
   { path: 'receta/id', loadChildren: () => import('./receta/vista-receta/vista-receta.module').then(m => m.VistaRecetaModule) },
-  { path: 'mi_alacena', loadChildren: () => import('./cupboard/cupboard.module').then(m => m.CupboardModule) },
+  { path: 'mi_alacena/:uidUser', loadChildren: () => import('./cupboard/cupboard.module').then(m => m.CupboardModule) },
   { path: 'lista_super', loadChildren: () => import('./super-list/super-list.module').then(m => m.SuperListModule) },
   { path: 'solicitar_ingrediente', loadChildren: () => import('./ingredients/ingredients.module').then(m => m.IngredientsModule) },
   { path: 'solicitar_utensilio', loadChildren: () => import('./cook-ware-request/cook-ware-request.module').then(m => m.CookWareRequestModule) },
