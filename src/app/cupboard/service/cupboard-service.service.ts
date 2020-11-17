@@ -64,6 +64,8 @@ export class CupboardServiceService {
     };
     return myCupboardRef.set(data, { merge: true });
   }
-
+  deleteItems(userUid,uidproduct){
+    const items=this.afs.collection('myCupboard', ref => ref.where("uidUser", "==", userUid)).doc(uidproduct).delete();
+ }
 
 }

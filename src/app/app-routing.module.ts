@@ -23,7 +23,7 @@ const routes: Routes = [
   },
   { path: 'receta/id', loadChildren: () => import('./receta/vista-receta/vista-receta.module').then(m => m.VistaRecetaModule) },
   { path: 'mi_alacena/:uidUser', loadChildren: () => import('./cupboard/cupboard.module').then(m => m.CupboardModule) },
-  { path: 'lista_super', loadChildren: () => import('./super-list/super-list.module').then(m => m.SuperListModule) },
+  { path: 'lista_super/:uidUser', loadChildren: () => import('./super-list/super-list.module').then(m => m.SuperListModule) },
   { path: 'solicitar_ingrediente', loadChildren: () => import('./ingredients/ingredients.module').then(m => m.IngredientsModule) },
   { path: 'solicitar_utensilio', loadChildren: () => import('./cook-ware-request/cook-ware-request.module').then(m => m.CookWareRequestModule) },
   { path: 'buscar_receta', loadChildren: () => import('./search-recipes/search-recipes.module').then(m => m.SearchRecipesModule) },

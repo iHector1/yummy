@@ -10,11 +10,18 @@
        <th>Ingrediente</th>
        <th>Cantidad</th>
        <th>Medida</th>
+       <th>Acción</th>
        <tbody>
         <tr *ngFor="let table of itemList |async">
           <td>{{table.uidIngredient}}</td>
           <td>{{table.cant}}</td>
           <td>{{table.uidUnit}}</td>
+          <td><button
+            mat-raised-button
+            color="accent"
+            type="button" (click)="deleteItems(table.uid)">
+            Eliminar
+          </button></td> 
         </tr>
        </tbody>
       </table>

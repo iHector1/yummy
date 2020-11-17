@@ -18,7 +18,10 @@ export class TableCupboardComponent implements OnInit {
     this.itemList = firestore.collection<myCupboard>("myCupboard",ref=>ref.where("uidUser","==",this.router.url.slice(12)))
     .valueChanges()
   }
-
+  deleteItems(e) {
+    this.cupboardService.deleteItems(this.router.url.slice(12), e);
+    window.alert("Ingrediente Eliminado");
+  }
   ngOnInit(): void {
   }
 
