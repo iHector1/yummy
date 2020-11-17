@@ -11,7 +11,7 @@ export class CupboardServiceService {
   private cant: number;
   private flag: boolean = true;
   private flag2: boolean = true;
-  public superlist$: Observable<myCupboard>;//Variable para guardar el utensilio
+  public myCupboard$: Observable<myCupboard>; //Variable para guardar el nuevo ingrediente
 
 
   constructor(private afs: AngularFirestore) { }

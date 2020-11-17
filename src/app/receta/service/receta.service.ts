@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { title } from 'process';
 import { Observable } from 'rxjs';
 import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 
@@ -10,7 +11,7 @@ export class RecetaService {
 
   private uidRecipe: any;
   private flag: boolean = true;
-  public recipe$: Observable<infoRecipe>;//Variable para guardar el utensilio
+  public recipe$: Observable<infoRecipe>;//Variable para guardar la receta
   private recipeCollection: AngularFirestoreCollection<infoRecipe>;
 
   constructor(private afs: AngularFirestore) { }
@@ -45,6 +46,7 @@ export class RecetaService {
     };
     return userRef.set(data, { merge: true });
   }
+
   public RecipeDataAddRecipe(recipe: infoRecipe) {
     console.log(recipe);
     const userRef: AngularFirestoreDocument<infoRecipe> = this.afs.doc(
@@ -61,4 +63,10 @@ export class RecetaService {
     };
     return userRef.set(data, { merge: true });
   }
+
+
+  retrieveUserDocumentFromRecipe(recipe){
+    return this.afs.collection('recipe', ref => ref.where('title', '==', title)).valueChanges();
+  }
+
 }

@@ -10,6 +10,7 @@ export class VistaRecetaComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }
