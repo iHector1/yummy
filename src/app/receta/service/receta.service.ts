@@ -33,7 +33,8 @@ export class RecetaService {
       uidsCookWare : recipe.uidsCookWare,
       uidCategory: recipe.uidCategory,
       points:recipe.points,
-      uidRegion :  recipe.uidRegion,
+      uidRegion :  recipe.uidRegion, 
+      count:recipe.count,
       uidCollection :  recipe.uidCollection,
       uidSeason :  recipe.uidSeason,
       steps :   recipe.steps,
@@ -41,7 +42,8 @@ export class RecetaService {
       uidsTechnique :   recipe.uidsTechnique,
       portions :  recipe.portions,
       portionCalories : recipe.portionCalories ,
-      urlVideo : recipe.urlVideo ,
+      urlVideo: recipe.urlVideo,
+      kitchenArea: recipe.kitchenArea,
       timeStamp :  recipe.timeStamp,  //aqui
     };
     return userRef.set(data, { merge: true });
@@ -66,7 +68,7 @@ export class RecetaService {
 
 
   retrieveUserDocumentFromRecipe(recipe){
-    return this.afs.collection('recipe', ref => ref.where('title', '==', title)).valueChanges();
+    return this.afs.collection('infoRecipe', ref => ref.where('uid', '==', recipe)).valueChanges();
   }
 
 }

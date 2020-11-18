@@ -137,7 +137,7 @@ export class CrearRecetasComponent implements OnInit {
           uidCollection: uidsCollection,
           uidSeason: uidsSeason,
           uidsIngredients:this.ingredienuid,
-          uidsCookWare: this.cookud,
+          uidsCookWare: this.cookud, 
           steps: this.step,
           count:this.cant,
           principalPhoto:this.imageRecipe.nativeElement.value,

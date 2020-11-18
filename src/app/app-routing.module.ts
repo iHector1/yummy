@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: 'configuracion', loadChildren: () => import('./auth/confirguracion/confirguracion.module').then(m => m.ConfirguracionModule)
   },
-  { path: 'receta/id', loadChildren: () => import('./receta/vista-receta/vista-receta.module').then(m => m.VistaRecetaModule) },
+  { path: 'receta/:id', loadChildren: () => import('./receta/vista-receta/vista-receta.module').then(m => m.VistaRecetaModule) },
   { path: 'mi_alacena/:uidUser', loadChildren: () => import('./cupboard/cupboard.module').then(m => m.CupboardModule) },
   { path: 'lista_super/:uidUser', loadChildren: () => import('./super-list/super-list.module').then(m => m.SuperListModule) },
   { path: 'solicitar_ingrediente', loadChildren: () => import('./ingredients/ingredients.module').then(m => m.IngredientsModule) },
