@@ -71,7 +71,7 @@
               <mat-select name ="category" formControlName="uidsCategory"  required>
                 <mat-option
                     *ngFor="let categories of uidCategory | async"
-                    [value]="categories.uid"
+                    [value]="categories.categoryName"
                     required>
                     {{ categories.categoryName }}
                 </mat-option>
@@ -84,7 +84,7 @@
               <mat-select name ="season" formControlName="uidsSeason" required>
                 <mat-option
                     *ngFor="let season of uidSeason | async"
-                    [value]="season.uid"
+                    [value]="season.seasonName"
                     required>
                     {{ season.seasonName }}
                 </mat-option>
@@ -97,7 +97,7 @@
               <mat-select name ="collection" formControlName="uidsCollection" required>
                 <mat-option
                     *ngFor="let colletions of uidCollection | async"
-                    [value]="colletions.uid"
+                    [value]="colletions.collectionName"
                     required>
                     {{ colletions.collectionName }}
                 </mat-option>
@@ -110,7 +110,7 @@
             <mat-select name ="region" formControlName="uidsRegion"  required>
               <mat-option
                   *ngFor="let region of uidRegion | async"
-                  [value]="region.uid"
+                  [value]="region.regionName"
                   required>
                   {{ region.regionName }}
               </mat-option>

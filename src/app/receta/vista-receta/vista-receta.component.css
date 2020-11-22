@@ -12,3 +12,7 @@
 .star_color{
     color:#FFA500;
 }
+iframe {
+    max-width:auto ;
+    height: 100%;
+}

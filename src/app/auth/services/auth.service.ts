@@ -192,5 +192,8 @@ export class AuthService extends RoleValidator{
       }
     });
   }
+  getUser(uid) {
+    return this.afs.collection("infoUser", ref => ref.where("uid", "==", uid)).valueChanges();
+  }
  }
 

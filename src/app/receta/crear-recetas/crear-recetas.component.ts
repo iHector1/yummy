@@ -162,9 +162,9 @@ export class CrearRecetasComponent implements OnInit {
   addIngredient() {
     if (this.recipeForm.controls.uidsUnit.value != " " &&this.recipeForm.controls.uidsIngredients.value != " " && this.inputCant.nativeElement.value != "") { 
       this.ingredient.push(this.recipeForm.controls.uidsIngredients.value["nameIngredient"]);
-      this.ingredienuid.push(this.recipeForm.controls.uidsIngredients.value["uid"]);
+      this.ingredienuid.push(this.recipeForm.controls.uidsIngredients.value["nameIngredient"]);
       this.unit.push(this.recipeForm.controls.uidsUnit.value["unitName"]);
-      this.unit2.push(this.recipeForm.controls.uidsUnit.value["uid"]);
+      this.unit2.push(this.recipeForm.controls.uidsUnit.value["unitName"]);
       this.cant.push(this.uidunit.push = this.inputCant.nativeElement.value);
     }
     else {
@@ -201,16 +201,16 @@ export class CrearRecetasComponent implements OnInit {
         
       }
       if (this.kitchenhot>=this.kitchenfria && this.kitchenhot>=this.kitchenBar && this.kitchenhot>=this.kitchenPas) { 
-        this.kitchenAreaa = "EWQBJXyXP7EEHG233UTV";
+        this.kitchenAreaa = "Cocina Caliente";
         this.typeKitchen = 40;
       } else if (this.kitchenfria>this.kitchenhot && this.kitchenfria>=this.kitchenBar && this.kitchenfria>=this.kitchenPas) {
-        this.kitchenAreaa = "wASjnlc1WKaHEHG4mfBX";
+        this.kitchenAreaa = "Cocina Fira";
         this.typeKitchen = 30;
       } else if (this.kitchenPas>this.kitchenhot && this.kitchenPas>this.kitchenfria && this.kitchenPas>=this.kitchenBar) {
-        this.kitchenAreaa = "dphpului3HWc8ckagmI8";
+        this.kitchenAreaa = "Pasteleria o reposteria ";
         this.typeKitchen = 20;
       } else if (this.kitchenBar>this.kitchenhot && this.kitchenBar>this.kitchenfria && this.kitchenBar>this.kitchenPas) {
-        this.kitchenAreaa = "8imxlPcifjHThZ3K9A6w";
+        this.kitchenAreaa = "Bar";
         this.typeKitchen = 10;
        }
       //console.log("area de la cocina ",this.kitchenAreaa,"hot : ",this.kitchenhot," cold: ",this.kitchenfria," pasteleria: ",this.kitchenPas, " bar ",this.kitchenBar);
@@ -224,7 +224,7 @@ export class CrearRecetasComponent implements OnInit {
     console.log(e);
     const id = Math.random().toString(36).substring(2);
     const file = e.target.files[0];
-    const filePath = `photoUser/profile_${id}`;
+    const filePath = `Imagephoto/profile_${id}`;
     const ref = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
     this.uploadPercent = task.percentageChanges();
@@ -233,7 +233,7 @@ export class CrearRecetasComponent implements OnInit {
   addCookWare() {
     if (this.recipeForm.controls.uidsCookWare.value!=" " ) {
       this.cook.push(this.recipeForm.controls.uidsCookWare.value["nameCookWare"]);
-      this.cookud.push(this.recipeForm.controls.uidsCookWare.value["uid"]);
+      this.cookud.push(this.recipeForm.controls.uidsCookWare.value["nameCookWare"]);
 
       if (this.recipeForm.controls.uidsCookWare.value["uidLevelCookWare"] =="1PYRywhGLbT2tgwcXSun") {
         this.measureco = 1 + this.measureco;

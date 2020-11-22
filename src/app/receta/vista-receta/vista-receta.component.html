@@ -1,143 +1,137 @@
 <!--Parte superior de la receta, informacion de la receta-->
-<div >
-<div class="card mt-4 ml-3 mr-3">
-  <div class="row card-body">
-    <!--Foto y estrellas de la receta-->
-    <div class="col-md-3 col-sm-12 ml-3">
-      <img
-        src="{{urlImage}}"
-        alt=""
-        class="img-fluid align-self-center"
-      />
-      <div class="stars text-center mt-1">
-        <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
-        <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
-        <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
-        <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
-        <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
-      </div>
-    </div>
-    <!--informacion de la receta-->
-    <div class="col-md-8 col-sm-12">
-      <!-- Linea de la receta 1-->
-      <div class="line1 pb-3"> 
-        <a class="recipeTitle noone ml-3 col-sm-12">{{title}}</a>
-        <a class="ml-3 color_items"
-          ><mat-icon type="button" color="primary">turned_in_not</mat-icon
-          >Guardar</a
-        >
-        <a class="ml-3 color_items"
-          ><mat-icon type="button" color="primary">calendar_today</mat-icon
-          >Programar receta</a
-        >
-        <a class="ml-3">Bbbcito333</a>
-        <button mat-flat-button class="ml-3" color="primary">
-          <mat-icon>check</mat-icon>Siguiendo
-        </button>
-      </div>
-      <!--Linea de la receta 2-->
-      <div class="line2 pb-3 col-sm-12">
-        <a class="ml-3 col-sm-6 noone"
-          ><mat-icon class="icon-blacks">signal_cellular_alt</mat-icon
-          >dificil</a
-        >
-        <a class="ml-3 col-sm-6 noone"
-          ><mat-icon class="icon-blacks">access_time</mat-icon>{{cookTime}} minutos</a
-        >
-        <a class="ml-3 col-sm-12 noone mr-5"
-          ><mat-icon class="icon-blacks">public</mat-icon>Norte de Mexico</a
-        >
-        <a class="ml-3 col-sm-12 noone"
-          ><mat-icon class="icon-blacks">today</mat-icon>Todo el año</a
-        >
-      </div>
-      <!--Linea de la receta 3-->
-      <div class="line3 pb-3">
-        <a class="ml-3 col-sm-12"
-          ><mat-icon type="button" color="warn">mail</mat-icon
-          ><mat-icon type="button" color="primary">facebook</mat-icon
-          >Compartir</a
-        >
-        <a class="ml-3 noone"
-          ><mat-icon color="warn">save_alt</mat-icon>Descargar</a
-        >
-        <a class="ml-3 noone"
-          ><mat-icon class="icon-blacks"> local_dining</mat-icon>{{typeKitchen}}</a
-        >
-        <button class="ml-3" mat-flat-button color="warn">Paso a paso</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--Parte de utencilios y de ingredientes-->
-<div class="row mt-4 ml-2 mr-3 col-md-12">
-  <div class="card mt-4 mr-3 col-md-6">
-    <div class="card-body">
-      <div class="row">
-        <a>Ingredientes</a>
-        <div class="column ml-5">
-          <button mat-flat-button color="warn">+</button>
-          <button mat-stroked-button>{{portions}}</button>
-          <button mat-flat-button color="warn">-</button>
+<div>
+  <div class="card mt-4 ml-3 mr-3">
+    <div class="row card-body">
+      <!--Foto y estrellas de la receta-->
+      <div class="col-md-3 col-sm-12 ml-3">
+        <img src="{{ urlImage }}" alt="" class="img-fluid align-self-center" />
+        <div class="stars text-center mt-1">
+          <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
+          <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
+          <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
+          <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
+          <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
         </div>
       </div>
-      <div class="pb-3 col-sm-12 mt-4">
-        <table class="table table-striped table-hover">
-          <th>Ingrediente</th>
-          <th>Cantidad</th>
-          <tbody>
-            <tr *ngFor="let ingredient of infoRecipe" >
-              <td>{{ingredient.uidsIngredients}}</td>
-              <td>1kg</td>
-            </tr>
-            <tr>
-          </tbody>
-        </table>
+      <!--informacion de la receta-->
+      <div class="col-md-8 col-sm-12">
+        <!-- Linea de la receta 1-->
+        <div class="line1 pb-3">
+          <a class="recipeTitle noone ml-3 col-sm-12">{{ title }}</a>
+          <a class="ml-3 color_items"
+            ><mat-icon type="button" color="primary">turned_in_not</mat-icon
+            >Guardar</a
+          >
+          <a class="ml-3 color_items"
+            ><mat-icon type="button" color="primary">calendar_today</mat-icon
+            >Programar receta</a
+          >
+          <a routerLink="/usuario/{{ useruid }}" class="ml-3">{{
+            displayName
+          }}</a>
+          <button mat-flat-button class="ml-3" color="primary">
+            <mat-icon>check</mat-icon>Siguiendo
+          </button>
+        </div>
+        <!--Linea de la receta 2-->
+        <div class="line2 pb-3 col-sm-12">
+          <a class="ml-3 col-sm-6 noone"
+            ><mat-icon class="icon-blacks">signal_cellular_alt</mat-icon
+            >{{ dificult }}</a
+          >
+          <a class="ml-3 col-sm-6 noone"
+            ><mat-icon class="icon-blacks">access_time</mat-icon
+            >{{ cookTime }} minutos</a
+          >
+          <a class="ml-2 col-sm-12 noone mr-5"
+            ><mat-icon class="icon-blacks">public</mat-icon>{{ region }}</a
+          >
+          <a class="ml-3 col-sm-12 noone"
+            ><mat-icon class="icon-blacks">today</mat-icon>{{ season }}</a
+          >
+        </div>
+        <!--Linea de la receta 3-->
+        <div class="line3 pb-3">
+          <a class="ml-3 col-sm-12"
+            ><mat-icon type="button" color="warn">mail</mat-icon
+            ><mat-icon type="button" color="primary">facebook</mat-icon
+            >Compartir</a
+          >
+          <a class="ml-3 noone"
+            ><mat-icon color="warn">save_alt</mat-icon>Descargar</a
+          >
+          <a class="ml-3 noone"
+            ><mat-icon class="icon-blacks"> local_dining</mat-icon
+            >{{ typeKitchen }}</a
+          >
+          <button class="ml-3" mat-flat-button color="warn">Paso a paso</button>
+        </div>
       </div>
     </div>
   </div>
-  <!--Vista de lista de los utencilios -->
-  <div class="card mt-4 ml-3 mr-3 col-md-5">
-    <div class="card-body container">
-      <a>Utencilios</a>
-      <div>
-        <mat-list role="list" *ngFor="let cookWare of cookud">
-          <mat-list-item role="listitem">{{cookWare}}</mat-list-item>
-        </mat-list>
+  <!--Parte de utencilios y de ingredientes-->
+  <div class="row mt-4 ml-2 mr-3 col-md-12">
+    <div class="card mt-4 mr-3 col-md-6">
+      <div class="card-body">
+        <div class="row">
+          <a>Ingredientes</a>
+          <div class="column ml-5">
+            <button mat-flat-button color="warn" (click)="add()">+</button>
+            <button mat-stroked-button>{{ portions }}</button>
+            <button mat-flat-button color="warn" (click)="substrac()">-</button>
+          </div>
+        </div>
+        <div class="pb-3 col-sm-12 mt-4 table-responsive">
+          <table class="table table-striped table-hover">
+            <th>Ingrediente</th>
+            <th>Cantidad</th>
+            <tbody>
+              <tr *ngFor="let roale of ingredienuid; let i = index">
+                <td>{{ roale }}</td>
+                <td>{{ cant[i] }}{{ unit[i] }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--Vista de lista de los utencilios -->
+    <div class="card mt-4 ml-3 mr-3 col-md-5">
+      <div class="card-body container">
+        <a>Utencilios</a>
+        <div>
+          <mat-list role="list" *ngFor="let cookWare of cookud">
+            <mat-list-item role="listitem">{{ cookWare }}</mat-list-item>
+          </mat-list>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!--Vista de video de youtube-->
+  <!--Vista de video de youtube-->
 
-<div class="card mt-4 ml-3 mr-3">
-  <div class="row card-body text-center">
-    <div class="col-md-12">
-
+  <div class="card mt-4 ml-3 mr-3">
+    <div class="row card-body text-center">
+      <div class="col-md-12"></div>
     </div>
   </div>
-</div>
 
-<!--Vista de pasos de la receta-->
+  <!--Vista de pasos de la receta-->
 
-<div class="card mt-4 ml-3 mr-3">
-  <div class="card-body">
-    <div class="col-md-12 col-sm-12 ml-3">
-      <div class="">
-        <a class="h6 text-justify noone"
-          >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-          expedita eum dolorum architecto accusantium neque corrupti!</a
-        >
+  <div class="card mt-4 ml-3 mr-3">
+    <div class="card-body">
+      <div
+        class="col-md-12 col-sm-12 ml-3"
+        *ngFor="let steps of step; let i = index"
+      >
+        <div class="">
+          <a class="h6 text-justify noone">{{ i + 1 }}.-{{ steps }}</a>
+        </div>
+        <div class="row col-md-12">
+          <img src="{{ photoStep[i] }}" alt="" class=" col-md-5" />
+        </div>
       </div>
-      <img
-        src="https://dam.cocinafacil.com.mx/wp-content/uploads/2019/08/papas-con-chorizo.jpg"
-        alt=""
-        class="img-fluid col-md-6"
-      />
     </div>
   </div>
-</div>
 </div>
 <app-coment></app-coment>

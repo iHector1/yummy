@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
+import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
+import { AuthService } from "../../auth/services/auth.service";
 @Component({
   selector: 'app-vista-receta',
   templateUrl: './vista-receta.component.html',
@@ -15,7 +17,7 @@ export class VistaRecetaComponent implements OnInit {
   typeKitchen: string;
   cookud = new Array();//uid del utensilio
   uidunit = new Array();//uid de la unidad 
-  ingredienuid :string[];//uid del ingrediente
+  ingredienuid = new Array();//uid del ingrediente
   cant = new Array();//cantidad 
   step = new Array();//paso
   imageStep = new Array();//array de imagenes
@@ -26,8 +28,18 @@ export class VistaRecetaComponent implements OnInit {
   title: any;
   cookTime: any;
   recipe: any;
-  infoRecipe: any;
-  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router) { 
+  infoRecipe: Observable<any>;
+  other: any;
+  repeat: any;
+  unit: any;
+  dificult: any;
+  season: any;
+  useruid: any;
+  displayName: any;
+  region: any;
+  photoStep: any;
+  cantOne: any;
+  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService) { 
 
 
   }
@@ -37,7 +49,7 @@ export class VistaRecetaComponent implements OnInit {
     this.RecipeService.retrieveUserDocumentFromRecipe(this.router.url.slice(8)).subscribe(recipe => {
       if (recipe[0]) {
         const recipeVar: any = recipe[0];
-        this.infoRecipe = recipe[0];
+        this.other = recipe[0];
         this.urlImage = recipeVar.principalPhoto;
         this.typeKitchen = recipeVar.kitchenArea;
         this.portions = recipeVar.portions;
@@ -46,9 +58,43 @@ export class VistaRecetaComponent implements OnInit {
         this.title = recipeVar.title;
         this.cookTime = recipeVar.cookTime;
         this.ingredienuid = recipeVar.uidsIngredients;
+        this.cant = recipeVar.count;
+        this.unit = recipeVar.uidUnit;
+      
+        this.dificult = recipeVar.difficult ? recipeVar.difficult : "No hay dificultad";
+        this.season = recipeVar.uidSeason;
+        this.useruid = recipeVar.uidUser;
+        this.user(this.useruid);
+        this.region = recipeVar.uidRegion;
+        this.step = recipeVar.steps;
+        this.photoStep = recipeVar.stepsPhoto;
+        console.log(this.photoStep[0]);
+        this.oneIngredient(this.cant);
      }
     });
-    console.log(this.ingredienuid);
+  
+    
   }
+  add() {
+      this.portions=this.portions+1;
+    
+  }
+  substrac() {
+    if (this.portions>1) {
+      this.portions=this.portions-1;
+    }
+  }
+  oneIngredient(cant) {
+    
 
+  }
+  user(uid) {
+    this.auth.getUser(uid).subscribe(user => {
+      if (user[0]) {
+        const uiUser:any = user[0];
+        this.displayName = uiUser.displayName;
+      }
+      
+    })
+  }
 }
