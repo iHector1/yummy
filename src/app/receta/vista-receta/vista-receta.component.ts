@@ -38,7 +38,9 @@ export class VistaRecetaComponent implements OnInit {
   displayName: any;
   region: any;
   photoStep: any;
-  cantOne: any;
+  cantOne= new Array();
+  cantLength: number;
+
   constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService) { 
 
 
@@ -68,8 +70,8 @@ export class VistaRecetaComponent implements OnInit {
         this.region = recipeVar.uidRegion;
         this.step = recipeVar.steps;
         this.photoStep = recipeVar.stepsPhoto;
-        console.log(this.photoStep[0]);
-        this.oneIngredient(this.cant);
+        console.log(this.cant.length);
+        this.oneIngredient(this.portions);
      }
     });
   
@@ -77,16 +79,28 @@ export class VistaRecetaComponent implements OnInit {
   }
   add() {
       this.portions=this.portions+1;
-    
+      this.anyCant(this.portions);
   }
   substrac() {
     if (this.portions>1) {
-      this.portions=this.portions-1;
+      this.portions=this.portions-1; 
     }
+    this.anyCant(this.portions);
   }
-  oneIngredient(cant) {
-    
+  oneIngredient(portions) {
+    console.log("hola");
+    for (let i = 0; i < this.cant.length;i++){
+      this.cantOne[i] = this.cant[i] / portions;
+      console.log(this.cant[i]);
+    }
 
+  }
+
+  anyCant(portions) {
+    for (let i = 0; i < this.cant.length;i++){
+      this.cant[i] = this.cantOne[i] * portions;
+      console.log(this.cant[i]);
+    }
   }
   user(uid) {
     this.auth.getUser(uid).subscribe(user => {
