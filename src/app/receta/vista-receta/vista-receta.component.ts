@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import * as jsPDF from 'jspdf';
+import * as html2pdf from 'html2pdf.js'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RecetaService } from '../service/receta.service';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -12,7 +14,7 @@ import { AuthService } from "../../auth/services/auth.service";
   styleUrls: ['./vista-receta.component.css']
 })
 export class VistaRecetaComponent implements OnInit {
-
+  @ViewChild('receta') receta: ElementRef;
   points: number = 0;//puntos de la reseta 
   typeKitchen: string;
   cookud = new Array();//uid del utensilio
@@ -91,7 +93,7 @@ export class VistaRecetaComponent implements OnInit {
     console.log("hola");
     for (let i = 0; i < this.cant.length;i++){
       this.cantOne[i] = this.cant[i] / portions;
-      console.log(this.cant[i]);
+     
     }
 
   }
@@ -99,7 +101,7 @@ export class VistaRecetaComponent implements OnInit {
   anyCant(portions) {
     for (let i = 0; i < this.cant.length;i++){
       this.cant[i] = this.cantOne[i] * portions;
-      console.log(this.cant[i]);
+      
     }
   }
   user(uid) {
@@ -110,5 +112,23 @@ export class VistaRecetaComponent implements OnInit {
       }
       
     })
+  }
+  dowlandPDF() {
+    const content: Element = document.getElementById('receta');
+   const option = {
+      filename:this.title+".pdf",
+      image: { type: 'png'},
+      html2canvas: {},
+      jsPDF: {format:"a3", orientation: 'portrait' }
+    };
+    
+    html2pdf().from(content).set(option).save();
+    /*
+    let doc = new jsPDF();
+    doc.addHTML(content, () => {
+      doc.autoPrint();
+      doc.save('Test.pdf');
+    });*/
+    
   }
 }

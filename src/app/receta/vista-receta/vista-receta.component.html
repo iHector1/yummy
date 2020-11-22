@@ -1,5 +1,5 @@
 <!--Parte superior de la receta, informacion de la receta-->
-<div #receta>
+<div id='receta'>
   <div class="card mt-4 ml-3 mr-3">
     <div class="row card-body">
       <!--Foto y estrellas de la receta-->
@@ -57,9 +57,8 @@
             ><mat-icon type="button" color="primary">facebook</mat-icon
             >Compartir</a
           >
-          <a class="ml-3 noone"
-            ><mat-icon color="warn">save_alt</mat-icon>Descargar</a
-          >
+          <button mat-flat-button  (click)="dowlandPDF()" class="ml-3"
+            ><mat-icon color="warn">save_alt</mat-icon>Descargar</button>
           <a class="ml-3 noone"
             ><mat-icon class="icon-blacks"> local_dining</mat-icon
             >{{ typeKitchen }}</a
@@ -88,7 +87,7 @@
             <tbody>
               <tr *ngFor="let roale of ingredienuid; let i = index">
                 <td>{{ roale }}</td>
-                <td>{{ cant[i] }}{{ unit[i] }}</td>
+                <td>{{ cant[i] }} {{ unit[i] }}</td>
               </tr>
             </tbody>
           </table>
