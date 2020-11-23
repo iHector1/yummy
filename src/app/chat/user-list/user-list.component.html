@@ -1,6 +1,9 @@
-<section class="sidebar-content">
+<section class="sidebar-content" *ngFor="let item of roomData"  routerLink="chat/room/{{ roomData}}">
     <img src="https://www.kindpng.com/picc/m/78-785827_user-profile-avatar-login-account-male-user-icon.png" alt="" class="profile-pic">
     <div class="sidebar-content-room">
-        <span class="sidebar-content-room-name">RoomName</span>
+        <span class="sidebar-content-room-name">{{item.name}}</span>
     </div>
-</section> 
+  
+</section>     <div *ngIf="user$ | async as user; " type="hidden">
+        <input #idUser type="hidden" [value]=" user.uid">
+      </div>

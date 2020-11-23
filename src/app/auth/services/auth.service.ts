@@ -16,13 +16,15 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService extends RoleValidator{
-  private userExist=true;
+  private userExist = true;
+  public userUid: string;
   public user$: Observable<User>;//variable en la cual se guarda el usuario
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore,private router:Router) {
     super();
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
+          this.userUid = user.uid;
           return this.afs.doc<User>(`user/${user.uid}`).valueChanges();
         }
         return of(null);
@@ -194,6 +196,9 @@ export class AuthService extends RoleValidator{
   }
   getUser(uid) {
     return this.afs.collection("infoUser", ref => ref.where("uid", "==", uid)).valueChanges();
+  }
+  userUidR() {
+    return this.userUid;
   }
  }
 

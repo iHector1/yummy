@@ -12,7 +12,7 @@ import { AuthService } from "../../auth/services/auth.service";
 @Component({
   selector: 'app-vista-receta',
   templateUrl: './vista-receta.component.html',
-  styleUrls: ['./vista-receta.component.css','./vista-receta-template.scss']
+  styleUrls: ['./vista-receta.component.css']
 })
 export class VistaRecetaComponent implements OnInit {
   @ViewChild('receta') receta: ElementRef;
