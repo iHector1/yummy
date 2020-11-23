@@ -17,7 +17,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    ShareButtonsModule.withConfig({
+      debug: true
+    }),
+    ShareIconsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

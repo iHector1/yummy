@@ -8,10 +8,11 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 import { AuthService } from "../../auth/services/auth.service";
+
 @Component({
   selector: 'app-vista-receta',
   templateUrl: './vista-receta.component.html',
-  styleUrls: ['./vista-receta.component.css']
+  styleUrls: ['./vista-receta.component.css','./vista-receta-template.scss']
 })
 export class VistaRecetaComponent implements OnInit {
   @ViewChild('receta') receta: ElementRef;
@@ -42,6 +43,7 @@ export class VistaRecetaComponent implements OnInit {
   photoStep: any;
   cantOne= new Array();
   cantLength: number;
+  url: any;
 
   constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService) { 
 
@@ -49,7 +51,6 @@ export class VistaRecetaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.router.url.slice(8));
     this.RecipeService.retrieveUserDocumentFromRecipe(this.router.url.slice(8)).subscribe(recipe => {
       if (recipe[0]) {
         const recipeVar: any = recipe[0];
@@ -64,7 +65,7 @@ export class VistaRecetaComponent implements OnInit {
         this.ingredienuid = recipeVar.uidsIngredients;
         this.cant = recipeVar.count;
         this.unit = recipeVar.uidUnit;
-      
+        
         this.dificult = recipeVar.difficult ? recipeVar.difficult : "No hay dificultad";
         this.season = recipeVar.uidSeason;
         this.useruid = recipeVar.uidUser;
@@ -76,6 +77,7 @@ export class VistaRecetaComponent implements OnInit {
         this.oneIngredient(this.portions);
      }
     });
+    this.url =  'https://github.com/MurhafSousli/ngx-sharebuttons/issues/262';
   
     
   }

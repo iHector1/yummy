@@ -51,12 +51,15 @@
           >
         </div>
         <!--Linea de la receta 3-->
-        <div class="line3 pb-3">
-          <a class="ml-3 col-sm-12"
-            ><mat-icon type="button" color="warn">mail</mat-icon
-            ><mat-icon type="button" color="primary">facebook</mat-icon
-            >Compartir</a
-          >
+        <div class="line3 pb-3 row">
+          <share-buttons  [theme]="'material-dark'"
+ [include]="['facebook','email']"
+ [show]="2"
+ [size]="0"
+ [url]="url"
+ [image] ="urlImage"
+ [autoSetMeta]="false"
+></share-buttons>
           <button mat-flat-button  (click)="dowlandPDF()" class="ml-3"
             ><mat-icon color="warn">save_alt</mat-icon>Descargar</button>
           <a class="ml-3 noone"
@@ -87,7 +90,7 @@
             <tbody>
               <tr *ngFor="let roale of ingredienuid; let i = index">
                 <td>{{ roale }}</td>
-                <td>{{ cant[i] }} {{ unit[i] }}</td>
+                <td>{{ cant[i] }}{{ unit[i] }}</td>
               </tr>
             </tbody>
           </table>
