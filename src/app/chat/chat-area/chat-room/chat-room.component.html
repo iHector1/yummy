@@ -1,87 +1,12 @@
-<div class="chat-area">
-    <ng-container>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message ">
-            <span class="chat-area-message-name">Chat Room</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
-        </div>
-        <div class="chat-area-message chat-area-message-owner">
-            <span class="chat-area-message-name">Juanito Lopez</span>
-            <span class="chat-area-message-text">Hello</span>
-            <span class="chat-area-message-time">12:30 pm</span>
+<div class="chat-area" *ngIf="user$ | async as user">
+    <ng-container *ngIf="messageData?.length>0;else other">
+        <div *ngFor="let m of messageData" [ngClass]="{'chat-area-message-owner':user.uid==m.uidUser}" class="chat-area-message"> 
+            <span class="chat-area-message-name">{{m.nameDisplay}}</span>
+            <span class="chat-area-message-text">{{m.message}}</span>
+            <span class="chat-area-message-time">{{m?.time?.seconds*1000|date:"mediumTime"}}</span>
         </div>
     </ng-container>
-    <ng-template>
+    <ng-template #other>
         <h1 style="text-align: center;">No message</h1>
     </ng-template>
 </div>

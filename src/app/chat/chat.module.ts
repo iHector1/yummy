@@ -8,13 +8,15 @@ import { ListComponent } from './list/list.component';
 import { ChatAreaComponent } from './chat-area/chat-area.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { ChatRoomComponent } from './chat-area/chat-room/chat-room.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ChatComponent, ListComponent, ChatAreaComponent, UserListComponent, ChatRoomComponent],
   imports: [
     CommonModule,
     ChatRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    FormsModule
   ]
 }) 
 export class ChatModule { }
