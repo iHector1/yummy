@@ -1,4 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Route } from '@angular/compiler/src/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'firebase';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
+import { RecetaService } from '../../service/receta.service';
 
 @Component({
   selector: 'app-coment',
@@ -7,9 +17,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComentComponent implements OnInit {
 
-  constructor() { }
+  constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private recetaService:RecetaService,private authService:AuthService,private router:Router)
+  {
+  }
+
+  @ViewChild('idUser') inputUserid: ElementRef;
+  public user$: Observable<User> = this.authService.afAuth.user;
 
   ngOnInit(): void {
   }
+
 
 }
