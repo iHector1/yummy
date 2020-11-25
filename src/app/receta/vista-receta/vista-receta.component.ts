@@ -8,6 +8,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 import { AuthService } from "../../auth/services/auth.service";
+import { User } from 'src/app/shared/models/user.inteface';
+import { FollowService } from 'src/app/auth/services/follow.service';
 
 @Component({
   selector: 'app-vista-receta',
@@ -24,33 +26,34 @@ export class VistaRecetaComponent implements OnInit {
   cant = new Array();//cantidad 
   step = new Array();//paso
   imageStep = new Array();//array de imagenes
-  technique = new Array();
-  urlImage: string;
-  urlVideo: any;
-  portions: any;
-  title: any;
-  cookTime: any;
-  recipe: any;
-  infoRecipe: Observable<any>;
-  other: any;
-  repeat: any;
-  unit: any;
-  dificult: any;
-  season: any;
-  useruid: any;
-  displayName: any;
-  region: any;
-  photoStep: any;
-  cantOne= new Array();
-  cantLength: number;
-  url: any;
-
-  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService) { 
-
-
+  technique = new Array();//array de las tecnicas
+  urlImage: string;//url de la foto de la receta
+  urlVideo: any;//url del video de youtube 
+  portions: any;//variable de las porciones 
+  title: any;//titulo de la receta
+  cookTime: any;//tiempo de la receta 
+  recipe: any;//varibale de receta
+  infoRecipe: Observable<any>;//observable de la informacion de la receta 
+  other: any;//guradar la informcacion de la receta 
+  unit: any;//unidad de la receta 
+  dificult: any;//dificultad de la receta 
+  season: any;//variable de la temporada de la receta 
+  useruid: any;//uid del usuario creador de la receta 
+  displayName: any;//nombre de usuario creador 
+  region: any;//region de la receta 
+  photoStep: any;//foto de los pasos de la receta 
+  cantOne= new Array();//cantidad de la receta para una porcion 
+  url: any;//url de la receta 
+  isLogget: boolean;//verificacion de usuario registrado
+  isUser: string;//nombre del usuario registrado 
+  show: boolean;//varibrle para mostrar el boton de seguir 
+  colorButton: string="accent";//color del boton 
+  isFollowing:boolean;//verificar que lo sigue 
+  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService) { 
   }
-
+  public user$: Observable<User> = this.auth.afAuth.user;
   ngOnInit(): void {
+    this.isFollowing = false;
     this.RecipeService.retrieveUserDocumentFromRecipe(this.router.url.slice(8)).subscribe(recipe => {
       if (recipe[0]) {
         const recipeVar: any = recipe[0];
@@ -81,40 +84,87 @@ export class VistaRecetaComponent implements OnInit {
   
     
   }
+  //agregar una porcion 
   add() {
       this.portions=this.portions+1;
       this.anyCant(this.portions);
   }
+  //disminuir una porcion
   substrac() {
     if (this.portions>1) {
       this.portions=this.portions-1; 
     }
     this.anyCant(this.portions);
   }
-  oneIngredient(portions) {
-    console.log("hola");
+
+  //funcion una porcion 
+  oneIngredient(portions:any) {
     for (let i = 0; i < this.cant.length;i++){
       this.cantOne[i] = this.cant[i] / portions;
      
     }
 
   }
-
-  anyCant(portions) {
+//insertar las porciones en la varible 
+  anyCant(portions:any) {
     for (let i = 0; i < this.cant.length;i++){
       this.cant[i] = this.cantOne[i] * portions;
       
     }
   }
+  //checar usuario 
   user(uid) {
     this.auth.getUser(uid).subscribe(user => {
       if (user[0]) {
         const uiUser:any = user[0];
         this.displayName = uiUser.displayName;
+        this.user$.subscribe(user => {
+          this.isUser = user.uid;
+          if (this.isUser == uiUser.uid ||this.isUser==null||this.isUser==undefined||this.isUser=="") {
+            this.show = false; 
+           
+        }
+        else {
+            this.show = true;
+            this.follow.isFollowing(uid, this.isUser).subscribe(
+              followinguser => {
+                if (followinguser[0]) {
+                  this.isFollowing = true;
+                  console.log("sie entro ");
+                }
+            });
+        }
+        console.log("primero: ",uiUser.uid,"segundo: ",this.isUser);
+        console.log(this.show);
+        });
+        
       }
       
     })
   }
+  
+
+  followUser() {
+    if (this.isFollowing) {
+      this.isFollowing = false;
+      this.follow.unfollow(this.useruid);
+    } else {
+      this.isFollowing = true;
+      this.follow.follow(this.useruid);
+    }
+  }
+
+  checkFollowing() {
+    if (this.isFollowing) {
+      this.colorButton = "primary";
+      return 'Siguiendo';
+    } else {
+      this.colorButton = "accent";
+      return 'Seguir';
+    }
+  }
+
+  //descargar la receta en pdf
   dowlandPDF() {
     const content: Element = document.getElementById('receta');
    const option = {

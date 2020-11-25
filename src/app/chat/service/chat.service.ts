@@ -16,8 +16,18 @@ export class ChatService {
 
     this.pathParam = this.pathParamState.asObservable();
   }
-
+//uid del chat 
   updatePathParamState(newPathParam: string): void {
     this.pathParamState.next(newPathParam);
+  }
+  //creacion del chat 
+  createChat(uidUser1,uidUser2,name1,name2) {
+    this.afs.collection("room", ref => ref.where("users", "array-contains", uidUser1).where("users", "array-contains", uidUser2)).valueChanges().subscribe(room => {
+      if (room[0]) {
+        
+      } else {
+
+      }
+    })
   }
 }

@@ -1,5 +1,5 @@
 <!--Parte superior de la receta, informacion de la receta-->
-<div id='receta'>
+<div id="receta">
   <div class="card mt-4 ml-3 mr-3">
     <div class="row card-body">
       <!--Foto y estrellas de la receta-->
@@ -29,8 +29,8 @@
           <a routerLink="/usuario/{{ useruid }}" class="ml-3">{{
             displayName
           }}</a>
-          <button mat-flat-button class="ml-3" color="primary">
-            <mat-icon>check</mat-icon>Siguiendo
+          <button *ngIf="show" mat-flat-button class="ml-3" (click)="followUser()" color="{{colorButton}}">
+            {{checkFollowing()}}
           </button>
         </div>
         <!--Linea de la receta 2-->
@@ -52,16 +52,18 @@
         </div>
         <!--Linea de la receta 3-->
         <div class="line3 pb-3 row">
-          <share-buttons  [theme]="'material-dark'"
- [include]="['facebook','email']"
- [show]="2"
- [size]="0"
- [url]="url"
- [image] ="urlImage"
- [autoSetMeta]="false"
-></share-buttons>
-          <button mat-flat-button  (click)="dowlandPDF()" class="ml-3"
-            ><mat-icon color="warn">save_alt</mat-icon>Descargar</button>
+          <share-buttons
+            [theme]="'material-dark'"
+            [include]="['facebook', 'email']"
+            [show]="2"
+            [size]="0"
+            [url]="url"
+            [image]="urlImage"
+            [autoSetMeta]="false"
+          ></share-buttons>
+          <button mat-flat-button (click)="dowlandPDF()" class="ml-3">
+            <mat-icon color="warn">save_alt</mat-icon>Descargar
+          </button>
           <a class="ml-3 noone"
             ><mat-icon class="icon-blacks"> local_dining</mat-icon
             >{{ typeKitchen }}</a
@@ -130,7 +132,7 @@
           <a class="h6 text-justify noone">{{ i + 1 }}.-{{ steps }}</a>
         </div>
         <div class="row col-md-12">
-          <img src="{{ photoStep[i] }}" alt="" class=" col-md-5" />
+          <img src="{{ photoStep[i] }}" alt="" class="col-md-5" />
         </div>
       </div>
     </div>

@@ -53,9 +53,7 @@ export class ChatRoomComponent implements OnInit,OnDestroy {
             .valueChanges()
             .subscribe(messages => {
               this.messageData = messages;
-            }));}
-         
-          
+            }));}      
         })
       );
     });
