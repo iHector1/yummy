@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { ChatService } from 'src/app/chat/service/chat.service';
 import { User } from 'src/app/shared/models/user.inteface';
 import { AuthService } from './auth.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class FollowService {
 
   constructor( private afs: AngularFirestore,
-    private auth: AuthService) { }
+    private auth: AuthService,private chatService:ChatService) { }
 
     public user$: Observable<User> = this.auth.afAuth.user;
   
@@ -44,6 +46,8 @@ export class FollowService {
             this.afs.collection('follower/'+profileuid+'/users' ).doc(currentuid).set(datas);
           }
         });
+        
+    
     }
     unfollow(profileuid) {
       this.user$.subscribe(

@@ -10,6 +10,7 @@ import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 import { AuthService } from "../../auth/services/auth.service";
 import { User } from 'src/app/shared/models/user.inteface';
 import { FollowService } from 'src/app/auth/services/follow.service';
+import { ChatService } from 'src/app/chat/service/chat.service';
 
 @Component({
   selector: 'app-vista-receta',
@@ -49,7 +50,8 @@ export class VistaRecetaComponent implements OnInit {
   show: boolean;//varibrle para mostrar el boton de seguir 
   colorButton: string="accent";//color del boton 
   isFollowing:boolean;//verificar que lo sigue 
-  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService) { 
+  isUserName: any;
+  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService) { 
   }
   public user$: Observable<User> = this.auth.afAuth.user;
   ngOnInit(): void {
@@ -132,8 +134,15 @@ export class VistaRecetaComponent implements OnInit {
                   this.isFollowing = true;
                   console.log("sie entro ");
                 }
-            });
-        }
+              });
+            
+          }
+          this.auth.getUser(this.isUser).subscribe(user2 => {
+            if (user2[0]) {
+              const uiUser2 :any= user2[0];
+              this.isUserName = uiUser2.displayName;
+            }
+          })
         console.log("primero: ",uiUser.uid,"segundo: ",this.isUser);
         console.log(this.show);
         });
@@ -151,6 +160,7 @@ export class VistaRecetaComponent implements OnInit {
     } else {
       this.isFollowing = true;
       this.follow.follow(this.useruid);
+      this.chat.createChat(this.useruid,this.isUser,this.displayName,this.isUserName)
     }
   }
 

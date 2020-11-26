@@ -61,7 +61,8 @@ export class RecetaService {
       uidCollection: recipe.uidCollection,
       uidSeason: recipe.uidSeason,
       uidsCookWare: recipe.uidsCookWare,
-      uidUnit: recipe.uidUnit
+      uidUnit: recipe.uidUnit,
+      timeStamp :  recipe.timeStamp
     };
     return userRef.set(data, { merge: true });
   }
