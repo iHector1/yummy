@@ -19,8 +19,13 @@
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Dificultad</mat-label>
-        <mat-select>
-          <mat-option> Facil </mat-option>
+        <mat-select name ="dificultad" requiered formControlName = "comentDificulty" required>
+          <mat-option
+                  *ngFor="let dificulties of dificulty | async"
+                  [value]="dificulties.uid"
+               required >
+                  {{ dificulties.dificultyName }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>

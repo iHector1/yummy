@@ -27,36 +27,61 @@
 
   <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
     <mat-label>Técnica</mat-label>
-    <mat-select>
-      <mat-option value="option">Vacio</mat-option>
+    <mat-select name ="técnica" requiered formControlName = "searchTechnique" required>
+      <mat-option
+        *ngFor="let technique of techniques | async"
+        [value]="technique.uid"
+      required >
+        {{ technique.nameTechnique }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
     <mat-label>Categoría</mat-label>
-    <mat-select>
-      <mat-option value="option">Ensalada</mat-option>
+    <mat-select name ="categoría" requiered formControlName = "searchCategory" required>
+      <mat-option
+        *ngFor="let categories of category | async"
+        [value]="categories.uid"
+      required >
+        {{ categories.categoryName }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
     <mat-label>Temporada</mat-label>
-    <mat-select>
-      <mat-option value="option">Invierno</mat-option>
+    <mat-select name ="temporada" requiered formControlName = "searchSeason" required>
+      <mat-option
+        *ngFor="let seasons of season | async"
+        [value]="seasons.uid"
+      required >
+        {{ seasons.seasonName }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
     <mat-label>Región</mat-label>
-    <mat-select>
-      <mat-option value="option">Asiático</mat-option>
+    <mat-select name ="región" requiered formControlName = "searchRegion" required>
+      <mat-option
+        *ngFor="let regions of region | async"
+        [value]="regions.uid"
+      required >
+        {{ regions.regionName }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
     <mat-label>Colección</mat-label>
-    <mat-select>
-      <mat-option value="option">Navidad</mat-option>
+    <mat-select name ="colección" requiered formControlName = "searchCollection" required>
+      <mat-option
+        *ngFor="let collections of collection | async"
+        [value]="collections.uid"
+      required >
+        {{ collections.collectionName }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 
