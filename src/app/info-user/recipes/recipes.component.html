@@ -1,97 +1,21 @@
   <div class="card ml-2 mr-2 mt-2">
     <div class="card-body">
 
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-4">
+      <div class="row" >
+        <div class="col-xs-12 col-sm-6 col-md-4"*ngFor="let reci of recipe|async ">
           <div class="card">
             <div class="image">
-              <img class="card-img-top" mat-card-image src="https://dam.cocinafacil.com.mx/wp-content/uploads/2018/08/pozole-rojo.jpg" alt="Pozole"/>
+              <img class="card-img-top" mat-card-image src="{{reci.principalPhoto}}" alt="Pozole"/>
             </div>
             <div class="card-body">
-              <mat-card-title>Pozole</mat-card-title>
+              <mat-card-title><a href="/receta/{{reci.uid}}">{{reci.title}}</a></mat-card-title>
               <mat-card-content><br>
-                5 estrellas<br>
-                Robertino
+                0 estrellas<br>
+                {{displayName}} 
               </mat-card-content>
             </div>
           </div>
         </div>
-
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="card">
-            <div class="image">
-              <img class="card-img-top" mat-card-image src="https://dam.cocinafacil.com.mx/wp-content/uploads/2019/08/papas-con-chorizo.jpg" alt="Papa con chorizo"/>
-            </div>
-            <div class="card-body">
-              <mat-card-title>Papas con chorizo</mat-card-title>
-              <mat-card-content><br>
-                5 estrellas<br>
-                Robertino
-              </mat-card-content>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="card">
-            <div class="image">
-              <img class="card-img-top" mat-card-image src="https://www.superama.com.mx/views/micrositio/recetas/images/fiestaspatrias/enchiladasverdes/Web_fotoreceta.jpg" alt="Enchiladas suizas"/>
-            </div>
-            <div class="card-body">
-              <mat-card-title>Enchiladas suizas</mat-card-title>
-              <mat-card-content><br>
-                5 estrellas<br>
-                Robertino
-              </mat-card-content>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="card">
-            <div class="image">
-              <img class="card-img-top" mat-card-image src="https://s1.eestatic.com/2015/05/11/cocinillas/Cocinillas_32506750_116175094_1024x576.jpg" alt="Sushi"/>
-            </div>
-            <div class="card-body">
-              <mat-card-title>Rollos de sushi</mat-card-title>
-              <mat-card-content><br>
-                5 estrellas<br>
-                Robertino
-              </mat-card-content>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="card">
-            <div class="image">
-              <img class="card-img-top" mat-card-image src="https://dam.cocinafacil.com.mx/wp-content/uploads/2020/02/como-hacer-hot-cakes-perfectos.jpg" alt="Hotcakes"/>
-            </div>
-            <div class="card-body">
-              <mat-card-title>Hot cakes</mat-card-title>
-              <mat-card-content><br>
-                5 estrellas<br>
-                Robertino
-              </mat-card-content>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <div class="card">
-            <div class="image">
-              <img class="card-img-top" mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRkWDbFGkXEEGK5USpDYryA9GaBWIykacrMXw&usqp=CAU" alt="Pavo relleno"/>
-            </div>
-            <div class="card-body">
-              <mat-card-title>Pavo relleno</mat-card-title>
-              <mat-card-content><br>
-                5 estrellas<br>
-                Robertino
-              </mat-card-content>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
