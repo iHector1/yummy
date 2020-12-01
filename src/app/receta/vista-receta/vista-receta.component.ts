@@ -51,6 +51,7 @@ export class VistaRecetaComponent implements OnInit {
   colorButton: string="accent";//color del boton 
   isFollowing:boolean;//verificar que lo sigue 
   isUserName: any;
+  videoY: any;
   constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService) { 
   }
   public user$: Observable<User> = this.auth.afAuth.user;
@@ -70,7 +71,7 @@ export class VistaRecetaComponent implements OnInit {
         this.ingredienuid = recipeVar.uidsIngredients;
         this.cant = recipeVar.count;
         this.unit = recipeVar.uidUnit;
-        
+        this.videoY = recipeVar.urlVideo;
         this.dificult = recipeVar.difficult ? recipeVar.difficult : "No hay dificultad";
         this.season = recipeVar.uidSeason;
         this.useruid = recipeVar.uidUser;

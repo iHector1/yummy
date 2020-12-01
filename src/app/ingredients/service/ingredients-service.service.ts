@@ -90,7 +90,8 @@ export class IngredientsServiceService {
       uid: ingredient.uid,
       uidUnit: ingredient.uidUnit,
       nameIngredient: ingredient.nameIngredient,
-      request : ingredient.request
+      request : ingredient.request,
+      requests:3
     };
     return userRef.set(data, { merge: true });
   }

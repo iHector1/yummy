@@ -16,7 +16,7 @@ export class RecetaService {
 
   constructor(private afs: AngularFirestore) { }
 
-  //Agregar receta
+  //Agregar receta a la colection
   public RecipeDataAdd(recipe: infoRecipe) {
     console.log(recipe);
     const userRef: AngularFirestoreDocument<infoRecipe> = this.afs.doc(
@@ -49,6 +49,7 @@ export class RecetaService {
     return userRef.set(data, { merge: true });
   }
 
+  //agregar receta a la colleciont recipe
   public RecipeDataAddRecipe(recipe: infoRecipe) {
     console.log(recipe);
     const userRef: AngularFirestoreDocument<infoRecipe> = this.afs.doc(
@@ -67,7 +68,7 @@ export class RecetaService {
     return userRef.set(data, { merge: true });
   }
 
-
+//recibir la receta mediante uid
   retrieveUserDocumentFromRecipe(recipe){
     return this.afs.collection('infoRecipe', ref => ref.where('uid', '==', recipe)).valueChanges();
   }

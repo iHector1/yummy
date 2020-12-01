@@ -4,6 +4,6 @@ export interface ingredient{
     kindFoodName?: string;
     nameIngredient?:string;
   request?: string[];
-  requesNumber?: number;
+  requests?: number;
   }
   
