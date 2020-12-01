@@ -17,8 +17,17 @@ import { RecetaService } from '../../service/receta.service';
 })
 export class ComentComponent implements OnInit {
 
+  dificulty: Observable<any[]>;// Variable para recibir la dificultad de la receta
+
+  //variables del formulario
+  comentForm = new FormGroup({
+    comentDificulty: new FormControl('', [
+    ]),
+  });
+
   constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private recetaService:RecetaService,private authService:AuthService,private router:Router)
   {
+    this.dificulty = firestore.collection('dificulty').valueChanges();
   }
 
   @ViewChild('idUser') inputUserid: ElementRef;
