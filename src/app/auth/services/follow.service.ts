@@ -19,11 +19,11 @@ export class FollowService {
       return this.afs.collection<any>('follower/' + profileuid + '/users', ref => ref.where('uid', '==', currentuid)).valueChanges();
     }
     getFollowing(uid) {
-      return this.afs.collection<any>('following/'+uid).valueChanges();
+      return this.afs.collection<any>('following/'+uid+'/users').valueChanges();
     }
   
     getFollowers(uid) {
-      return this.afs.collection<any>('follower/'+uid).valueChanges();
+      return this.afs.collection<any>('follower/'+uid+'/users').valueChanges();
     }
   follow(profileuid) {
       this.user$.subscribe(
