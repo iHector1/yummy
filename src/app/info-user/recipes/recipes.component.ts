@@ -22,7 +22,7 @@ export class RecipesComponent implements OnInit {
     this.auth.getUser(this.router.url.slice(9)).subscribe(user => {
       if (user[0]) {
         const uiUser: any = user[0];
-        this.displayName = uiUser.displayName; 
+        this.displayName = uiUser.displayName;
       }
     });
 

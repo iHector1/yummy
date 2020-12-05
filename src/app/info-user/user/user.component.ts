@@ -71,7 +71,7 @@ export class UserComponent implements OnInit {
   }
 
   recipes() {
-    this.firestore.collection("recipe", ref => ref.where("uidUser", "==", this.router.url.slice(9))).valueChanges().
+    this.firestore.collection("infoRecipe", ref => ref.where("uidUser", "==", this.router.url.slice(9))).valueChanges().
       subscribe(recipes => {
         this.totalRecipes = recipes.length;
     })
