@@ -7,8 +7,9 @@ import { AngularMaterialModule } from '../../Angular_Material/angular_materia.mo
 import { ComentComponent } from './coment/coment.component';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { VistaComentariosComponent } from './vista-comentarios/vista-comentarios.component';
 @NgModule({
-  declarations: [VistaRecetaComponent, ComentComponent],
+  declarations: [VistaRecetaComponent, ComentComponent, VistaComentariosComponent],
   imports: [
     CommonModule,
     VistaRecetaRoutingModule,
