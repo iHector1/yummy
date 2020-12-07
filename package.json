@@ -33,6 +33,7 @@
     "jquery": "^3.5.1",
     "jspdf": "^1.5.3",
     "mapbox-gl": "^1.12.0",
+    "ngx-light-carousel": "^1.1.10",
     "ngx-sharebuttons": "^8.0.4",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

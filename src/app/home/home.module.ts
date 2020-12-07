@@ -7,14 +7,15 @@ import { PopularComponent } from './popular/popular.component';
 import { NewestComponent } from './newest/newest.component';
 import { MonthComponent } from './month/month.component';
 import { AngularMaterialModule } from '../Angular_Material/angular_materia.module';
-
+import { NgxCarouselModule } from 'ngx-light-carousel'
 
 @NgModule({
   declarations: [HomeComponent, PopularComponent, NewestComponent, MonthComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    NgxCarouselModule
   ]
 })
 export class HomeModule { }
