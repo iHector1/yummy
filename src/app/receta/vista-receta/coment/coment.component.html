@@ -1,28 +1,28 @@
 <div class="col-md-12 text-center mt-5">
-  <form>
+  <form [formGroup]="comentForm">
     <p class="clasificacion">
-      <input id="radio1" type="radio" name="estrellas" value="5" /><!--
+      <input id="radio1" type="radio" formControlName="stars" name="stars" value="5" /><!--
           --><label for="radio1">★</label
       ><!--
-          --><input id="radio2" type="radio" name="estrellas" value="4" /><!--
+          --><input id="radio2" type="radio" formControlName="stars"  name="stars" value="4" /><!--
           --><label for="radio2">★</label
       ><!--
-          --><input id="radio3" type="radio" name="estrellas" value="3" /><!--
+          --><input id="radio3" type="radio" formControlName="stars"  name="stars" value="3" /><!--
           --><label for="radio3">★</label
       ><!--
-          --><input id="radio4" type="radio" name="estrellas" value="2" /><!--
+          --><input id="radio4" type="radio" formControlName="stars"  name="stars" value="2" /><!--
           --><label for="radio4">★</label
       ><!--
-          --><input id="radio5" type="radio" name="estrellas" value="1" /><!--
+          --><input id="radio5" type="radio" formControlName="stars"  name="stars" value="1" /><!--
           --><label for="radio5">★</label>
     </p>
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Dificultad</mat-label>
-        <mat-select name ="dificultad" requiered formControlName = "comentDificulty" required>
+        <mat-select name ="difficult" requiered formControlName = "difficult" required>
           <mat-option
                   *ngFor="let dificulties of dificulty | async"
-                  [value]="dificulties.uid"
+                  [value]="dificulties.dificultyName"
                required >
                   {{ dificulties.dificultyName }}
           </mat-option>
@@ -32,9 +32,9 @@
     <div>
       <mat-form-field class="col-md-5 col-sm-12" appearance="fill">
         <mat-label>Inserta un comentario</mat-label>
-        <input matInput formControlName="text" />
+        <input matInput required formControlName="coment" />
       </mat-form-field>
     </div>
-    <button mat-raised-button color="accent" type="submit">Comentar</button>
+    <button mat-raised-button color="accent" (click)="insert_coment()" type="submit">Comentar</button>
   </form>
 </div>

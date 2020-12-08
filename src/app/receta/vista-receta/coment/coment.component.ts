@@ -21,20 +21,22 @@ export class ComentComponent implements OnInit {
 
   //variables del formulario
   comentForm = new FormGroup({
-    comentDificulty: new FormControl('', [
-    ]),
+    coment: new FormControl(''),
+    difficult: new FormControl(''),
+    stars:new FormControl('')
   });
-
+  
   constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private recetaService:RecetaService,private authService:AuthService,private router:Router)
   {
     this.dificulty = firestore.collection('dificulty').valueChanges();
   }
-
-  @ViewChild('idUser') inputUserid: ElementRef;
   public user$: Observable<User> = this.authService.afAuth.user;
 
   ngOnInit(): void {
   }
-
+  insert_coment() {
+    const { coment, difficult, stars } = this.comentForm.value;
+    console.log(coment, difficult,stars);
+  }
 
 }
