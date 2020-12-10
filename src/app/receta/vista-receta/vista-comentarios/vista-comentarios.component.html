@@ -4,18 +4,18 @@
         <div class="card mt-5 ml-5 mr-5 mb-5 " *ngFor="let comentMal of mal|async">
             <div class="card-body">
                   <div class="col-md-12 col-sm-12">
-                    <h4>{{comentMal.displayName}}</h4>  
+                    <h4 routerLink="/usuario/{{comentMal.uidUser}}">{{comentMal.displayName}}</h4>  
                     <h3>{{comentMal.comment}}</h3>
                   </div>
             </div>
         </div> 
     </mat-tab>
     <mat-tab label="Medios">
-        <div class="card mt-5 ml-5 mr-5 mb-5 " *ngFor="let comentmed of med|async">
+        <div class="card mt-5 ml-5 mr-5 mb-5 " *ngFor="let comentMed of med|async">
             <div class="card-body">
                   <div class="col-md-12 col-sm-12">
-                    <h4>{{comentmed.displayName}}</h4>  
-                    <h3>{{comentmed.comment}}</h3>
+                    <h4 routerLink="/usuario/{{comentMed.uidUser}}">{{comentMed.displayName}}</h4>  
+                    <h3>{{comentMed.comment}}</h3>
                   </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
         <div class="card mt-5 ml-5 mr-5 mb-5 " *ngFor="let comentEx of exce|async">
             <div class="card-body">
                   <div class="col-md-12 col-sm-12">
-                    <h4>{{comentEx.displayName}}</h4>  
+                    <a routerLink="/usuario/{{comentEx.uidUser}}">{{comentEx.displayName}}</a>  
                     <h3>{{comentEx.comment}}</h3>
                   </div>
             </div>
