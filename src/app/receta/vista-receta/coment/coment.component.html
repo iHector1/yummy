@@ -21,8 +21,8 @@
         <mat-label>Dificultad</mat-label>
         <mat-select name ="difficult" requiered formControlName = "difficult" required>
           <mat-option
-                  *ngFor="let dificulties of dificulty | async"
-                  [value]="dificulties.dificultyName"
+                  *ngFor="let dificulties of dificultys | async"
+                  [value]="dificulties.points"
                required >
                   {{ dificulties.dificultyName }}
           </mat-option>

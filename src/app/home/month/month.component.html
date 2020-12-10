@@ -1,10 +1,9 @@
-
-<h1 style="text-align: center;">Recetas del Mes</h1>
+<h1 style="text-align: center;">Recetas de Temporada</h1>
 <hr class="my-4">
 <ngx-light-carousel [options]="options1" [data]="contact" class="wrapper c-accent"
 	style="display: block; margin-bottom: 100px;">
 	<section ngx-light-carousel-container class="content">
-		<article ngx-light-carousel-item *ngFor="let product of contact; let i = index" class="col-md-4 col-sm-12"> 
+		<article ngx-light-carousel-item *ngFor="let product of contact; let i = index" class="col-md-4 "> 
 			<div class="card mb-2">
 						<img class="card-img-top" mat-card-image src="{{product.principalPhoto}}">
             <div class="card-body">
@@ -20,7 +19,7 @@
 	</section>
 
 	<ng-template #carouselContent let-product let-i="index">
-		<article class="col-md-4 col-sm-12">
+		<article class="col-md-4 ">
 			<div>
         <img class="card-img-top" mat-card-image src="{{product.principalPhoto}}">
         <div class="card-body">

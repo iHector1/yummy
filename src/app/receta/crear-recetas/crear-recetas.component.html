@@ -10,7 +10,7 @@
           class="col-md-5"
         />
         <div class="col-md-6 mt-3">
-          <input mat-raised-button color="primary" class="text-center" type="file" accept=".jpg" (blur)="onUpload2($event) ">
+          <input mat-raised-button color="primary" class="text-center" type="file" accept=".jpg , .jpg" (blur)="onUpload2($event) ">
         </div>
         <input #image2 type="hidden" [value]="urlImage2 | async">
       </div>

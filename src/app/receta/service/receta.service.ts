@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { title } from 'process';
 import { Observable } from 'rxjs';
+import { comments } from 'src/app/shared/models/comments.interface';
 import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 
 @Injectable({
@@ -72,6 +73,11 @@ export class RecetaService {
 //recibir la receta mediante uid
   retrieveUserDocumentFromRecipe(recipe){
     return this.afs.collection('infoRecipe', ref => ref.where('uid', '==', recipe)).valueChanges();
+  }
+
+  //actualizacion de request y dificultad
+  updateRecipe(requests: any, stars:any,difficult:any,uidRecipe:any) {
+    this.afs.collection('infoRecipe').doc(uidRecipe).set({ requests: requests, stars: stars, difficult: difficult }, { merge: true });
   }
 
 }
