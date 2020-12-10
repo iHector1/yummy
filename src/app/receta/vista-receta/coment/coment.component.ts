@@ -25,16 +25,16 @@ export class ComentComponent implements OnInit {
   comentForm = new FormGroup({
     coment: new FormControl(''),
     difficult: new FormControl(''),
-    stars:new FormControl('')
+    stars: new FormControl('')
   });
   uidUser: string;
   displayName: string;
-  requests: any;
-  difficult: any;
-  stars: any;
-  
-  constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private authService:AuthService,private router:Router,private comments:ComentsService,private recipe:RecetaService)
-  {
+  requests: number;
+  difficult: number;
+  stars: number;
+  show: boolean;
+
+  constructor(private firestore: AngularFirestore, private storage: AngularFireStorage, private authService: AuthService, private router: Router, private comments: ComentsService, private recipe: RecetaService) {
     this.dificultys = firestore.collection('dificulty').valueChanges();
     firestore.collection('infoRecipe', ref => ref.where("uid", "==", this.router.url.slice(8))).valueChanges().subscribe(
       recipe => {
@@ -43,22 +43,48 @@ export class ComentComponent implements OnInit {
           this.requests = recipes.requests ? recipes.requests : 0;
           this.difficult = recipes.difficult ? recipes.difficult : 0;
           this.stars = recipes.stars ? recipes.stars : 0;
+          this.user$.subscribe(user => {
+            this.authService.getUser(user.uid).subscribe(userInfo => {
+              if (userInfo[0]) {
+                const info: any = userInfo[0];
+                this.uidUser = info.uid;
+                this.displayName = info.displayName;
+                console.log(this.displayName);
+              }
+              if (this.uidUser == recipes.uidUser || this.uidUser == undefined || this.uidUser == "") {
+              this.show = false;
+            }
+            else {
+              this.show = true;
+            }
+            this.checkComment(this.uidUser);
+            }
+            );
+          });
+          
         }
-        
+
       }
     )
+
   }
+  checkComment(uidUser: string) {
+     this.firestore.collection('comment', ref => ref.where('uidRecipe', '==', this.router.url.slice(8)).where('uid', '==', uidUser)).valueChanges().subscribe(comment => {
+      if (comment[0]) {
+        this.show = false;
+      }
+    });
+  }
+
   public user$: Observable<User> = this.authService.afAuth.user;
 
   ngOnInit(): void {
-    this.user$.subscribe(user => {
-      this.uidUser = user.uid;
-      this.displayName = user.displayName;
-    });
+
   }
+
   insert_coment() {
     const { coment, difficult, stars } = this.comentForm.value;
-    const uidRecipe=this.router.url.slice(8)
+    const uidRecipe = this.router.url.slice(8)
     console.log(coment, difficult, stars, uidRecipe);
     const comment: comments = {
       comment: coment,
@@ -66,8 +92,8 @@ export class ComentComponent implements OnInit {
       stars: stars,
       uidRecipe: uidRecipe,
       uidUser: this.uidUser,
-      uid:this.uidUser,
-      displayName:this.displayName
+      uid: this.uidUser,
+      displayName: this.displayName
     };
     this.difficult = this.difficult * this.requests;
     this.stars = this.stars * this.requests;
@@ -75,7 +101,7 @@ export class ComentComponent implements OnInit {
     this.difficult = (this.difficult + difficult) / this.requests;
     this.stars = (this.stars + stars) / this.requests;
     this.comments.insert_coment(comment);
-    this.recipe.updateRecipe(this.requests,this.stars,this.difficult,this.router.url.slice(8));
+    this.recipe.updateRecipe(this.requests, this.stars, this.difficult, this.router.url.slice(8));
     window.alert("haz hecho un comentario");
   }
 
