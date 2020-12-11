@@ -8,6 +8,7 @@ import * as firebase from 'firebase/app';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { User } from 'src/app/shared/models/user.inteface';
 import { HelpService } from 'src/app/receta/service/help.service';
+import { answerComment } from 'src/app/shared/models/answer.interface';
 @Component({
   selector: 'app-vista-helps',
   templateUrl: './vista-helps.component.html',
@@ -18,6 +19,9 @@ export class VistaHelpsComponent implements OnInit {
 
   comentHelpForm = new FormGroup({
     coment: new FormControl('')
+  });
+  comentAnswerForm = new FormGroup({
+    comentAnswer: new FormControl('')
   });
   uidUser: any;
   displayName: any;
@@ -50,6 +54,21 @@ export class VistaHelpsComponent implements OnInit {
     };
     this.helpService.insert_help(commentHelp);
     this.comentHelpForm.reset();
+  }
+  insert_answer(uidHelp) {
+    const { comentAnswer } = this.comentAnswerForm.value;
+    const id = Math.random().toString(36).substring(2);
+    const commentAnswer: answerComment = {
+      uid:id,
+      time: firebase.firestore.FieldValue.serverTimestamp(),
+      uidHelp: uidHelp,
+      uidUser: this.uidUser,
+      displayName: this.displayName,
+      comment:comentAnswer
+    };
+    console.log(commentAnswer);
+    this.helpService.insert_answer(commentAnswer);
+    this.comentAnswerForm.reset();
   }
 
 }

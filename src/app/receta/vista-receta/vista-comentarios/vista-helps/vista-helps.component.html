@@ -6,15 +6,17 @@
           </div>
     </div>
     <div class="text-center">
+        <form [formGroup]="comentAnswerForm" (ngSubmit)="insert_answer(comentHelp.uid)">
         <mat-form-field class="col-md-9 col-sm-12 mt-5" appearance="fill">
         <input
-        formControlName="coment"
           matInput
-          placeholder="Inserta una ayuda"
+          formControlName="comentAnswer"
+          placeholder="Inserta una respuesta"
           required
         />
       </mat-form-field> 
       <button  mat-stroked-button type="submit" ><mat-icon>send</mat-icon></button> 
+      </form>
     </div>
 </div> 
 <div class="text-center">
@@ -23,7 +25,7 @@
     <input
     formControlName="coment"
       matInput
-      placeholder="Inserta una ayuda"
+      placeholder="Inserta una pregunta"
       required
     />
   </mat-form-field> 
