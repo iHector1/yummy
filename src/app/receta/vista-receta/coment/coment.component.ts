@@ -11,7 +11,7 @@ import { comments } from 'src/app/shared/models/comments.interface';
 import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 import { ComentsService } from '../../service/coments.service';
 import { RecetaService } from '../../service/receta.service';
-
+import * as firebase from 'firebase/app';
 @Component({
   selector: 'app-coment',
   templateUrl: './coment.component.html',
@@ -86,14 +86,16 @@ export class ComentComponent implements OnInit {
     const { coment, difficult, stars } = this.comentForm.value;
     const uidRecipe = this.router.url.slice(8)
     console.log(coment, difficult, stars, uidRecipe);
+    const id = Math.random().toString(36).substring(2);
     const comment: comments = {
+      uid:id,
       comment: coment,
       difficult: difficult,
       stars: stars,
       uidRecipe: uidRecipe,
       uidUser: this.uidUser,
-      uid: this.uidUser,
-      displayName: this.displayName
+      displayName: this.displayName,
+      timeStamp: firebase.firestore.FieldValue.serverTimestamp()
     };
     this.difficult = this.difficult * this.requests;
     this.stars = this.stars * this.requests;

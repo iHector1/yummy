@@ -1,0 +1,33 @@
+<div class="card mt-5 ml-5 mr-5 mb-5 " *ngFor="let comentHelp of helps|async">
+    <div class="card-body">
+          <div class="col-md-12 col-sm-12">
+            <a routerLink="/usuario/{{comentHelp.uidUser}}">{{comentHelp.displayName}}</a>  
+            <h3>{{comentHelp.helpComment}}</h3>
+          </div>
+    </div>
+    <div class="text-center">
+        <mat-form-field class="col-md-9 col-sm-12 mt-5" appearance="fill">
+        <input
+        formControlName="coment"
+          matInput
+          placeholder="Inserta una ayuda"
+          required
+        />
+      </mat-form-field> 
+      <button  mat-stroked-button type="submit" ><mat-icon>send</mat-icon></button> 
+    </div>
+</div> 
+<div class="text-center">
+    <form [formGroup]="comentHelpForm" (ngSubmit)="insert_help()">
+    <mat-form-field class="col-md-9 col-sm-12 mt-5" appearance="fill">
+    <input
+    formControlName="coment"
+      matInput
+      placeholder="Inserta una ayuda"
+      required
+    />
+  </mat-form-field> 
+  <button  mat-stroked-button type="submit" ><mat-icon>send</mat-icon></button> 
+</form>
+</div>
+

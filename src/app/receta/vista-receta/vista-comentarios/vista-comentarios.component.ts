@@ -11,7 +11,7 @@ export class VistaComentariosComponent implements OnInit {
   exce: Observable<any>;
   med: Observable<any>;
   mal: Observable<any>;
-
+  
   constructor(private afs: AngularFirestore) {
     this.exce = this.afs.collection("comment", ref => ref.where("stars", ">", "3")).valueChanges();
     this.med = this.afs.collection("comment", ref => ref.where("stars", "==","3")).valueChanges();

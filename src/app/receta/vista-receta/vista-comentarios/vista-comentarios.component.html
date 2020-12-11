@@ -1,5 +1,7 @@
 <mat-tab-group mat-align-tabs="center" class="mt-5">
-    <mat-tab label="Ayuda">Content 1</mat-tab>
+    <mat-tab label="Ayuda">
+        <app-vista-helps></app-vista-helps>
+    </mat-tab>
     <mat-tab label="Malos">
         <div class="card mt-5 ml-5 mr-5 mb-5 " *ngFor="let comentMal of mal|async">
             <div class="card-body">

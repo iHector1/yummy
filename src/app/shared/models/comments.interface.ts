@@ -5,6 +5,6 @@ export interface comments{
     uidRecipe?: string;
     comment?: string;
     difficult?: number;
-    timeStamp?: Date;
+    timeStamp?: any;
     displayName?: string;
 }
