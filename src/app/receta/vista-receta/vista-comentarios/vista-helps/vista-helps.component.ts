@@ -16,7 +16,8 @@ import { answerComment } from 'src/app/shared/models/answer.interface';
 })
 export class VistaHelpsComponent implements OnInit {
   helps: Observable<any>;
-  helpComment: any[]=[];
+  helpComment: any[] = [];
+  show: boolean=false;
   comentHelpForm = new FormGroup({
     coment: new FormControl('')
   });
@@ -26,6 +27,8 @@ export class VistaHelpsComponent implements OnInit {
   uidUser: any;
   displayName: any;
   com: any;
+  points: number;
+  show2: boolean=false;
   constructor(private afs: AngularFirestore,private router:Router,private authService: AuthService,private helpService:HelpService) { 
     this.helps = this.afs.collection('help', ref => ref.where('uidRecipe', '==', this.router.url.slice(8)).orderBy('timeStamp','asc')).valueChanges();
     this.afs.collection('help', ref => ref.where('uidRecipe', '==', this.router.url.slice(8))).valueChanges().subscribe((help: any[]) => {
@@ -40,7 +43,13 @@ export class VistaHelpsComponent implements OnInit {
           const info: any = userInfo[0];
           this.uidUser = info.uid;
           this.displayName = info.displayName;
+          this.points = info.points;
+          this.show2 = true;
           console.log(this.displayName);
+          console.log(this.uidUser);
+          if (this.points>=3200) {
+            this.show = true;
+          }
         }
       })
     });
@@ -65,7 +74,7 @@ export class VistaHelpsComponent implements OnInit {
     const commentAnswer: answerComment = {
       uid:id,
       time: firebase.firestore.FieldValue.serverTimestamp(),
-      uidHelp: uidHelp,
+      uidHelp: uidHelp, 
       uidUser: this.uidUser,
       displayName: this.displayName,
       comment:comentAnswer,

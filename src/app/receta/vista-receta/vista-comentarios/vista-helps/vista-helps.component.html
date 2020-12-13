@@ -7,7 +7,7 @@
     </div>
     <app-vista-respuestas [helpComment]="comentHelp"></app-vista-respuestas>
     <div class="text-center">
-        <form [formGroup]="comentAnswerForm" (ngSubmit)="insert_answer(comentHelp.uid)">
+        <form [formGroup]="comentAnswerForm"  *ngIf="show" (ngSubmit)="insert_answer(comentHelp.uid)">
         <mat-form-field class="col-md-9 col-sm-12 mt-5" appearance="fill">
         <input
           matInput
@@ -20,7 +20,7 @@
       </form>
     </div>
 </div> 
-<div class="text-center">
+<div class="text-center" *ngIf="show2">
     <form [formGroup]="comentHelpForm" (ngSubmit)="insert_help()">
     <mat-form-field class="col-md-9 col-sm-12 mt-5" appearance="fill">
     <input
