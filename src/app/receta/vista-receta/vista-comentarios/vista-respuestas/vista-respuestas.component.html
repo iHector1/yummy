@@ -1,0 +1,21 @@
+<div [id]="helpComment.uid" >
+</div>
+<button (click)="more()">Respuestas:</button>
+<div class="card mt-2 ml-5 mr-5 mb-2" *ngFor="let ansY of answerHighlight|async">
+  <div class="card-body">
+      <div class="col-md-12 col-sm-12">
+        <a routerLink="/usuario/{{ansY.uidUser}}">★ {{ansY.displayName}}</a>  
+        <h3>{{ansY.comment}}</h3>
+      </div>
+</div>
+</div>
+
+<div class="card mt-2 ml-5 mr-5 mb-2" *ngFor="let ans of answer|async">
+    <div class="card-body">
+        <div class="col-md-12 col-sm-12">
+          <a routerLink="/usuario/{{ans.uidUser}}">{{ans.displayName}}</a>  
+          <h3>{{ans.comment}}</h3>
+          <button mat-raised-button (click)="Highlight(ans.uid)" color="accent">★</button>
+        </div>
+  </div>
+</div>

@@ -21,4 +21,9 @@ export class HelpService {
 
     return commentRef.set(answerComent, { merge: true });
   }
+  highlightAnswer(uid) {
+    const request =1;
+    const commentRef: AngularFirestoreDocument<any> = this.afs.doc(`answer/${uid}`);
+    return commentRef.set({request:request}, { merge: true });
+  }
 }

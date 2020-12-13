@@ -22,7 +22,7 @@ export class UserListComponent implements OnInit {
   
  
   }
-  onClick(): void {
+  onClick(): void { 
     this.seedValue.emit(this.randomSeed); 
   }
 }

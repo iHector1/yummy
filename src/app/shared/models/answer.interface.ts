@@ -5,6 +5,5 @@ export interface answerComment{
     displayName?: string;
     time?: any;
     comment?: string;
-    requestUid?: string[];
-    requeste?: number;
+    request?: number;
 }

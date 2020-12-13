@@ -16,7 +16,7 @@ import { answerComment } from 'src/app/shared/models/answer.interface';
 })
 export class VistaHelpsComponent implements OnInit {
   helps: Observable<any>;
-
+  helpComment: any[]=[];
   comentHelpForm = new FormGroup({
     coment: new FormControl('')
   });
@@ -25,8 +25,12 @@ export class VistaHelpsComponent implements OnInit {
   });
   uidUser: any;
   displayName: any;
+  com: any;
   constructor(private afs: AngularFirestore,private router:Router,private authService: AuthService,private helpService:HelpService) { 
-    this.helps = this.afs.collection('help', ref => ref.where('uidRecipe', '==', this.router.url.slice(8))).valueChanges();
+    this.helps = this.afs.collection('help', ref => ref.where('uidRecipe', '==', this.router.url.slice(8)).orderBy('timeStamp','asc')).valueChanges();
+    this.afs.collection('help', ref => ref.where('uidRecipe', '==', this.router.url.slice(8))).valueChanges().subscribe((help: any[]) => {
+      this.helpComment = help;
+    });
   }
   public user$: Observable<User> = this.authService.afAuth.user;
   ngOnInit(): void {
@@ -64,7 +68,8 @@ export class VistaHelpsComponent implements OnInit {
       uidHelp: uidHelp,
       uidUser: this.uidUser,
       displayName: this.displayName,
-      comment:comentAnswer
+      comment:comentAnswer,
+      request: 0
     };
     console.log(commentAnswer);
     this.helpService.insert_answer(commentAnswer);

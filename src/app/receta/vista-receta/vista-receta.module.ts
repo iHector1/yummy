@@ -10,8 +10,9 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { VistaComentariosComponent } from './vista-comentarios/vista-comentarios.component';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { VistaHelpsComponent } from './vista-comentarios/vista-helps/vista-helps.component';
+import { VistaRespuestasComponent } from './vista-comentarios/vista-respuestas/vista-respuestas.component';
 @NgModule({
-  declarations: [VistaRecetaComponent, ComentComponent, VistaComentariosComponent, VistaHelpsComponent],
+  declarations: [VistaRecetaComponent, ComentComponent, VistaComentariosComponent, VistaHelpsComponent, VistaRespuestasComponent],
   imports: [
     CommonModule,
     VistaRecetaRoutingModule,
