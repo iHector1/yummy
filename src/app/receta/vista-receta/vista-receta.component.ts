@@ -73,6 +73,12 @@ export class VistaRecetaComponent implements OnInit {
         this.unit = recipeVar.uidUnit;
         this.videoY = recipeVar.urlVideo;
         this.dificult = recipeVar.difficult ? recipeVar.difficult : "No hay dificultad";
+        if (recipeVar.requests>5) {
+          this.levelDificult(recipeVar.difficult);
+        } else {
+          this.dificult = "No hay dificultad";
+        }
+        
         this.season = recipeVar.uidSeason;
         this.useruid = recipeVar.uidUser;
         this.user(this.useruid);
@@ -85,6 +91,24 @@ export class VistaRecetaComponent implements OnInit {
     });
     this.url =  'https://github.com/MurhafSousli/ngx-sharebuttons/issues/262';
   
+    
+  }
+
+  //agregar difigultad
+  levelDificult(dificult) {
+    
+    if (dificult > 1 && dificult < 1.4) {
+      this.dificult = "Muy Facil";      
+    }
+    if (dificult > 1.5 && dificult < 2.5) {
+      this.dificult = "Facil";      
+    }
+    if (dificult > 2.6 && dificult < 3.4) {
+      this.dificult = "Medio";      
+    }
+    if (dificult > 3.5 && dificult < 4) {
+      this.dificult = "Muy Facil";      
+    }
     
   }
   //agregar una porcion 
@@ -153,7 +177,7 @@ export class VistaRecetaComponent implements OnInit {
     })
   }
   
-
+//checar que siguigue al usuario o no siguie al usuario
   followUser() {
     if (this.isFollowing) {
       this.isFollowing = false;
@@ -165,6 +189,7 @@ export class VistaRecetaComponent implements OnInit {
     }
   }
 
+  //vista del boton de dependiento si sigue al usuario o no sigue al usuario
   checkFollowing() {
     if (this.isFollowing) {
       this.colorButton = "primary";
@@ -174,6 +199,10 @@ export class VistaRecetaComponent implements OnInit {
       return 'Seguir';
     }
   }
+  //conteo de estrellas
+  starsCheck(stars) {
+    
+  }
 
   //descargar la receta en pdf
   dowlandPDF() {
@@ -182,7 +211,7 @@ export class VistaRecetaComponent implements OnInit {
       filename:this.title+".pdf",
       image: { type: 'png'},
       html2canvas: {},
-      jsPDF: {format:"a3", orientation: 'portrait' }
+      jsPDF: {format:"a4", orientation: 'portrait' }
     };
     
     html2pdf().from(content).set(option).save();

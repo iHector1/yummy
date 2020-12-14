@@ -50,14 +50,17 @@ export class ComentComponent implements OnInit {
                 this.uidUser = info.uid;
                 this.displayName = info.displayName;
                 console.log(this.displayName);
-              }
-              if (this.uidUser == recipes.uidUser || this.uidUser == undefined || this.uidUser == "") {
+            if (this.uidUser == recipes.uidUser || this.uidUser == undefined || this.uidUser == "") {
               this.show = false;
             }
             else {
               this.show = true;
+              this.checkComment(this.uidUser);
             }
-            this.checkComment(this.uidUser);
+              
+              
+              }
+            
             }
             );
           });
@@ -69,9 +72,11 @@ export class ComentComponent implements OnInit {
 
   }
   checkComment(uidUser: string) {
-     this.firestore.collection('comment', ref => ref.where('uidRecipe', '==', this.router.url.slice(8)).where('uid', '==', uidUser)).valueChanges().subscribe(comment => {
+     this.firestore.collection('comment', ref => ref.where('uidRecipe', '==', this.router.url.slice(8)).where('uidUser', '==', uidUser)).valueChanges().subscribe(comment => {
       if (comment[0]) {
         this.show = false;
+        console.log(comment[0]);
+        console.log(this.show)
       }
     });
   }
@@ -97,13 +102,16 @@ export class ComentComponent implements OnInit {
       displayName: this.displayName,
       timeStamp: firebase.firestore.FieldValue.serverTimestamp()
     };
+    console.log(this.stars," ",stars);
     this.difficult = this.difficult * this.requests;
     this.stars = this.stars * this.requests;
     this.requests = this.requests + 1;
     this.difficult = (this.difficult + difficult) / this.requests;
-    this.stars = (this.stars + stars) / this.requests;
-    this.comments.insert_coment(comment);
+    this.stars = (this.stars + Number(stars)) / this.requests;
+    console.log(this.stars);
+     this.comments.insert_coment(comment);
     this.recipe.updateRecipe(this.requests, this.stars, this.difficult, this.router.url.slice(8));
+    this.show = false;
     window.alert("haz hecho un comentario");
   }
 
