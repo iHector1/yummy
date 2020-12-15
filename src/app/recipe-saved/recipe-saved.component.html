@@ -1,130 +1,39 @@
-<STYLE type="text/css">
-H1 { text-align: center}
-
-</STYLE>
+<STYLE type="text/css"> H1 { text-align: center} </STYLE>
 <div class="card ml-2 mr-2 mt-2">
   <div class="card-body">
     <H1> Recetas guardadas </H1>
     <div class="col-md-12 text-right">
+      <form [formGroup]="recipeSavedForm">
       <mat-form-field appearance="fill" class="col-md-4 col-sm-4">
         <mat-label>Filtro por categorías</mat-label>
-        <mat-select name ="category" requiered formControlName = "recipeSavedCategory" required>
+        <mat-select
+          name="category"
+          requiered
+          formControlName="recipeSavedCategory"
+          required
+        >
           <mat-option
-                  *ngFor="let categories of category | async"
-                  [value]="categories.uid"
-               required >
-                  {{ categories.categoryName }}
+            *ngFor="let categories of category | async"
+            [value]="categories.categoryName"
+            required
+          >
+            {{ categories.categoryName }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-icon-button color="primary">
+      <button mat-icon-button (click)="search()" color="primary">
         <mat-icon>search</mat-icon>
       </button>
+      </form>
     </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="card">
-          <div class="image">
-            <img class="card-img-top" mat-card-image src="https://dam.cocinafacil.com.mx/wp-content/uploads/2018/08/pozole-rojo.jpg" alt="Pozole"/>
-          </div>
-          <div class="card-body">
-            <mat-card-title>
-              <a href="http://localhost:4200/receta/id"> Pozole</a>
-            </mat-card-title>
-            <mat-card-content><br>
-              5 estrellas<br>
-              Robertino
-            </mat-card-content>
-          </div>
-        </div>
+    <div class="row" >
+      <div class="col-sm-6 col-md-4" *ngFor="let recipes of recipe | async">
+        <div class="card" >
+        <app-card-recipe
+          [uidRecipe]="recipes.uidRecipe"
+        [uidCategory]='uidCategory'></app-card-recipe>
       </div>
-
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="card">
-          <div class="image">
-            <img class="card-img-top" mat-card-image src="https://dam.cocinafacil.com.mx/wp-content/uploads/2019/08/papas-con-chorizo.jpg" alt="Papa con chorizo"/>
-          </div>
-          <div class="card-body">
-            <mat-card-title>
-              <a href="http://localhost:4200/receta/id"> Papas con chorizo</a>
-            </mat-card-title>
-            <mat-card-content><br>
-              5 estrellas<br>
-              Robertino
-            </mat-card-content>
-          </div>
-        </div>
       </div>
-
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="card">
-          <div class="image">
-            <img class="card-img-top" mat-card-image src="https://www.superama.com.mx/views/micrositio/recetas/images/fiestaspatrias/enchiladasverdes/Web_fotoreceta.jpg" alt="Enchiladas suizas"/>
-          </div>
-          <div class="card-body">
-            <mat-card-title>
-              <a href="http://localhost:4200/receta/id"> Enchiladas suizas</a>
-            </mat-card-title>
-            <mat-card-content><br>
-              5 estrellas<br>
-              Robertino
-            </mat-card-content>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="card">
-          <div class="image">
-            <img class="card-img-top" mat-card-image src="https://s1.eestatic.com/2015/05/11/cocinillas/Cocinillas_32506750_116175094_1024x576.jpg" alt="Sushi"/>
-          </div>
-          <div class="card-body">
-            <mat-card-title>
-              <a href="http://localhost:4200/receta/id"> Rollos de suishi</a>
-            </mat-card-title>
-            <mat-card-content><br>
-              5 estrellas<br>
-              Robertino
-            </mat-card-content>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="card">
-          <div class="image">
-            <img class="card-img-top" mat-card-image src="https://dam.cocinafacil.com.mx/wp-content/uploads/2020/02/como-hacer-hot-cakes-perfectos.jpg" alt="Hotcakes"/>
-          </div>
-          <div class="card-body">
-            <mat-card-title>
-              <a href="http://localhost:4200/receta/id"> Hot-cakes</a>
-            </mat-card-title>
-            <mat-card-content><br>
-              5 estrellas<br>
-              Robertino
-            </mat-card-content>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="card">
-          <div class="image">
-            <img class="card-img-top" mat-card-image src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRkWDbFGkXEEGK5USpDYryA9GaBWIykacrMXw&usqp=CAU" alt="Pavo relleno"/>
-          </div>
-          <div class="card-body">
-            <mat-card-title>
-              <a href="http://localhost:4200/receta/id"> Pavo relleno</a>
-            </mat-card-title>
-            <mat-card-content><br>
-              5 estrellas<br>
-              Robertino
-            </mat-card-content>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>

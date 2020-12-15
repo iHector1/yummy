@@ -23,16 +23,34 @@ export class RecipeSavedComponent implements OnInit {
     recipeSavedCategory: new FormControl('', [
     ]),
   });
+  uidUser: any;
+  recipe: any;
+  uidCategory: any;
 
-  constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private recipeSavedService:RecipeSavedService,private authService:AuthService,private router:Router)
+  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private recipeSavedService:RecipeSavedService,private authService:AuthService,private router:Router)
   {
     this.category = firestore.collection('category').valueChanges();
-   }
-
-  @ViewChild('idUser') inputUserid: ElementRef;
+    this.user$.subscribe(user => {
+      this.authService.getUser(user.uid).subscribe(userInfo => {
+        if (userInfo[0]) {
+          const info: any = userInfo[0];
+          this.uidUser = info.uid;
+          this.recipe = firestore.collection('saved', ref => ref.where("uidUser", "==", this.uidUser)).valueChanges();
+        }
+      }
+      )
+    });
+  }
   public user$: Observable<User> = this.authService.afAuth.user;
 
   ngOnInit(): void {
   }
 
+  search() {
+    const { recipeSavedCategory } = this.recipeSavedForm.value;
+    this.uidCategory = recipeSavedCategory;
+    this.recipe = this.firestore.collection('saved', ref => ref.where("uidUser", "==", this.uidUser).where('uidCategory',"==",recipeSavedCategory)).valueChanges();
+    console.log(recipeSavedCategory);
+    
+  }
 }

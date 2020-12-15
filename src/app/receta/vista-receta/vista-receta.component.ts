@@ -11,6 +11,8 @@ import { AuthService } from "../../auth/services/auth.service";
 import { User } from 'src/app/shared/models/user.inteface';
 import { FollowService } from 'src/app/auth/services/follow.service';
 import { ChatService } from 'src/app/chat/service/chat.service';
+import { RecipeSavedComponent } from 'src/app/recipe-saved/recipe-saved.component';
+import { RecipeSavedService } from 'src/app/recipe-saved/service/recipe-saved.service';
 
 @Component({
   selector: 'app-vista-receta',
@@ -52,7 +54,11 @@ export class VistaRecetaComponent implements OnInit {
   isFollowing:boolean;//verificar que lo sigue 
   isUserName: any;
   videoY: any;
-  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService) { 
+  colorSave: string;
+  textSave: string;
+  isSave: boolean;
+  category: any;
+  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService,private saveService:RecipeSavedService) { 
   }
   public user$: Observable<User> = this.auth.afAuth.user;
   ngOnInit(): void {
@@ -69,6 +75,7 @@ export class VistaRecetaComponent implements OnInit {
         this.title = recipeVar.title;
         this.cookTime = recipeVar.cookTime;
         this.ingredienuid = recipeVar.uidsIngredients;
+        this.category= recipeVar.uidCategory;
         this.cant = recipeVar.count;
         this.unit = recipeVar.uidUnit;
         this.videoY = recipeVar.urlVideo;
@@ -78,7 +85,6 @@ export class VistaRecetaComponent implements OnInit {
         } else {
           this.dificult = "No hay dificultad";
         }
-        
         this.season = recipeVar.uidSeason;
         this.useruid = recipeVar.uidUser;
         this.user(this.useruid);
@@ -86,6 +92,7 @@ export class VistaRecetaComponent implements OnInit {
         this.step = recipeVar.steps;
         this.photoStep = recipeVar.stepsPhoto;
         console.log(this.cant.length);
+        this.saveCheck();
         this.oneIngredient(this.portions);
      }
     });
@@ -203,7 +210,40 @@ export class VistaRecetaComponent implements OnInit {
   starsCheck(stars) {
     
   }
+  //verificacion de guardar receta
+  saveCheck() {
+    this.user$.subscribe(user => {
+      this.isUser = user.uid;
+      this.saveService.checkRecipe(this.router.url.slice(8), this.isUser).subscribe(recipe => {
+        if (recipe[0]) {
+          this.colorSave = 'accent';
+          this.textSave = 'Guardado';
+          this.isSave = true;
+        } else {
+          this.colorSave = 'primary';
+          this.textSave = 'Guardar';
+          this.isSave = false;
 
+        }
+      })
+    })
+  }
+
+  buttonSaveAction() {
+    if (this.isSave == true) {
+      this.deleteSave();
+    } else {
+      this.saveRecipe();
+    }
+  } 
+  deleteSave() {
+    this.saveService.deleteRecipe(this.router.url.slice(8), this.isUser);
+    window.alert('Receta no Guardada');
+  }
+  saveRecipe() {
+    this.saveService.saveRecipe(this.router.url.slice(8), this.isUser,this.category);
+    window.alert('Receta Guardada');
+  }
   //descargar la receta en pdf
   dowlandPDF() {
     const content: Element = document.getElementById('receta');

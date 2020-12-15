@@ -181,7 +181,7 @@ export class AuthService extends RoleValidator{
 
     return userRef.set(data, { merge: true });
   }
-
+//funcion para ver si existe el usuario o no
   async exist(user: User) {
     console.log(user.uid);
    await this.afs.collection('infoUser', ref => ref.where('uidUser','==',user.uid)).valueChanges().subscribe(users => {
@@ -196,9 +196,6 @@ export class AuthService extends RoleValidator{
   }
   getUser(uid) {
     return this.afs.collection("infoUser", ref => ref.where("uid", "==", uid)).valueChanges();
-  }
-  userUidR() {
-    return this.userUid;
   }
  }
 

@@ -18,10 +18,9 @@
         <!-- Linea de la receta 1-->
         <div class="line1 pb-3">
           <a class="recipeTitle noone ml-3 col-sm-12">{{ title }}</a>
-          <a class="ml-3 color_items"
-            ><mat-icon type="button" color="primary">turned_in_not</mat-icon
-            >Guardar</a
-          >
+          <button *ngIf="show" mat-flat-button class="ml-3" (click)="buttonSaveAction()" color="{{colorSave}}">
+            {{textSave}}
+          </button>
           <a class="ml-3 color_items"
             ><mat-icon type="button" color="primary">calendar_today</mat-icon
             >Programar receta</a

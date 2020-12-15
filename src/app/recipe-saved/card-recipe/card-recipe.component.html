@@ -1,0 +1,8 @@
+
+
+      <div class="image" *ngFor="let reci of recipe|async ">
+        <img class="card-img-top" mat-card-image src="{{reci.principalPhoto}}" alt="Pozole"/>
+      <div class="card-body">
+        <mat-card-title><a routerLink="/receta/{{reci.uid}}">{{reci.title}}</a></mat-card-title>
+      </div>
+
