@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { User } from 'firebase';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { createRecipe } from 'src/app/shared/models/recipe.interface';
 
 @Component({
   selector: 'app-search',
@@ -22,6 +23,8 @@ export class SearchComponent implements OnInit {
 
   //variables del formulario
   recipeSavedForm = new FormGroup({
+    recipeName: new FormControl('', [
+    ]),
     recipeSavedTechnique: new FormControl('', [
     ]),
     recipeSavedCategory: new FormControl('', [
@@ -47,6 +50,42 @@ export class SearchComponent implements OnInit {
   public user$: Observable<User> = this.authService.afAuth.user;
 
   ngOnInit(): void {
+  }
+
+  search_recipe() {
+    try {
+      const { recipeName} = this.recipeSavedForm.value;
+      if (recipeName == " ") {
+        window.alert("Por favor que no esten vacios ");
+      } else if (recipeName == "  ") {
+        window.alert("Por favor que no esten vacios ");
+      }
+      else if (recipeName == "   ") {
+        window.alert("Por favor que no esten vacios ");
+      }
+      else if (recipeName == "    ") {
+        window.alert("Por favor que no esten vacios ");
+      }
+      else if (recipeName == "     ") {
+        window.alert("Por favor que no esten vacios ");
+      }
+      else {
+        const id = Math.random().toString(36).substring(2);
+        let recipeNameC = this.MaysPrimera(recipeName);
+        const recipe: createRecipe = {
+          uid: id,
+          title: recipeNameC,
+        };
+        //this.search_recipe.recipeCollection(recipe,this.inputUserid. nativeElement.value);
+        this.router.navigate(['/home']);
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+  MaysPrimera(string){
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
 
