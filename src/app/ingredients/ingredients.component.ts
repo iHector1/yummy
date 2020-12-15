@@ -18,7 +18,7 @@ import { IngredientsServiceService } from './service/ingredients-service.service
 export class IngredientsComponent implements OnInit {
   uidUnit: Observable<any[]>;// Variable para recibir el nombre de las unidades
   //request: Observable<any[]>;// Variable para recibir las peticiones
-  
+
   //variables del formulario
   ingredientForm = new FormGroup({
     kindFoodName: new FormControl('', [
@@ -29,13 +29,13 @@ export class IngredientsComponent implements OnInit {
     ]),
     uidUnit: new FormControl('')
   });
-  constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private ingredientService:IngredientsServiceService,private authService:AuthService,private router:Router) { 
+  constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private ingredientService:IngredientsServiceService,private authService:AuthService,private router:Router) {
     this.uidUnit = firestore.collection('unitMeasurement').valueChanges();
   }
 
   @ViewChild('idUser') inputUserid: ElementRef;
   public user$: Observable<User> = this.authService.afAuth.user;
-  
+
   ngOnInit(): void {
   }
   insert_ingredient() {
@@ -64,7 +64,7 @@ export class IngredientsComponent implements OnInit {
           nameIngredient: ingredientNameC,
           request: [this.inputUserid.nativeElement.value]
         };
-        
+
       //  console.log(ingredient, this.inputUserid.nativeElement.value, kindFoodName);
         this.ingredientService.ingredientCollection(ingredient,this.inputUserid. nativeElement.value,kindFoodName);
         this.router.navigate(['/home']);
