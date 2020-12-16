@@ -2,4 +2,20 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
- 
+   /* width */
+   ::-webkit-scrollbar {
+    width: 5px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #fdfdfd;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(112, 112, 112);
+    width: 10px;
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(201, 190, 190);
+  }

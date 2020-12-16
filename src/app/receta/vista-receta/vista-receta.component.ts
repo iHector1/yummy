@@ -58,6 +58,7 @@ export class VistaRecetaComponent implements OnInit {
   textSave: string;
   isSave: boolean;
   category: any;
+  starCount=new Array();
   constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService,private saveService:RecipeSavedService) { 
   }
   public user$: Observable<User> = this.auth.afAuth.user;
@@ -82,6 +83,7 @@ export class VistaRecetaComponent implements OnInit {
         this.dificult = recipeVar.difficult ? recipeVar.difficult : "No hay dificultad";
         if (recipeVar.requests>=5) {
           this.levelDificult(recipeVar.difficult);
+          this.starsCheck(recipeVar.stars)
         } else {
           this.dificult = "No hay dificultad";
         }
@@ -93,6 +95,7 @@ export class VistaRecetaComponent implements OnInit {
         this.photoStep = recipeVar.stepsPhoto;
         console.log(this.cant.length);
         this.saveCheck();
+        
         this.oneIngredient(this.portions);
      }
     });
@@ -104,16 +107,16 @@ export class VistaRecetaComponent implements OnInit {
   //agregar difigultad
   levelDificult(dificult) {
     
-    if (dificult > 1 && dificult < 1.4) {
+    if (dificult >= 1 && dificult <= 1.4) {
       this.dificult = "Muy Facil";      
     }
-    if (dificult > 1.5 && dificult < 2.5) {
+    if (dificult > 1.4 && dificult <= 2.5) {
       this.dificult = "Facil";      
     }
-    if (dificult > 2.6 && dificult < 3.4) {
+    if (dificult > 2.5 && dificult <= 3.4) {
       this.dificult = "Medio";      
     }
-    if (dificult > 3.5 && dificult < 4) {
+    if (dificult > 3.4 && dificult <= 4) {
       this.dificult = "Muy Facil";      
     }
     
@@ -209,6 +212,22 @@ export class VistaRecetaComponent implements OnInit {
   //conteo de estrellas
   starsCheck(stars) {
     
+    if (stars >= 1 && stars <= 1.4) {
+      this.starCount = [1];
+    }
+    if (stars > 1.4 && stars <= 2.5) {
+      this.starCount = [1,1];      
+    }
+    if (stars > 2.5 && stars <= 3.4) {
+      this.starCount = [1,1,1];        
+    }
+    if (stars > 3.4 && stars <= 4) {
+      this.starCount = [1,1,1,1];      
+    }
+    if (stars > 4 ) {
+      this.starCount = [1,1,1,1,1];      
+     
+    }
   }
   //verificacion de guardar receta
   saveCheck() {
@@ -228,7 +247,7 @@ export class VistaRecetaComponent implements OnInit {
       })
     })
   }
-
+//accion de guardar receta
   buttonSaveAction() {
     if (this.isSave == true) {
       this.deleteSave();
@@ -236,10 +255,12 @@ export class VistaRecetaComponent implements OnInit {
       this.saveRecipe();
     }
   } 
+  //elimitar receta guardada
   deleteSave() {
     this.saveService.deleteRecipe(this.router.url.slice(8), this.isUser);
     window.alert('Receta no Guardada');
   }
+  //agregar la receta y guardarla
   saveRecipe() {
     this.saveService.saveRecipe(this.router.url.slice(8), this.isUser,this.category);
     window.alert('Receta Guardada');

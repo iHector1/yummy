@@ -6,11 +6,7 @@
       <div class="col-md-3 col-sm-12 ml-3">
         <img src="{{ urlImage }}" alt="" class="img-fluid align-self-center" />
         <div class="stars text-center mt-1">
-          <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
-          <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
-          <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
-          <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
-          <a class="noone"><mat-icon class="star_color">star</mat-icon></a>
+          <a class="noone" *ngFor="let starCount1 of starCount"><mat-icon class="star_color">star</mat-icon></a>
         </div>
       </div>
       <!--informacion de la receta-->
