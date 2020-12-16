@@ -12,7 +12,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: rgb(112, 112, 112);
+    background: rgb(143, 140, 140);
     width: 10px;
   }
   /* Handle on hover */
