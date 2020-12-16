@@ -80,7 +80,7 @@ export class VistaRecetaComponent implements OnInit {
         this.unit = recipeVar.uidUnit;
         this.videoY = recipeVar.urlVideo;
         this.dificult = recipeVar.difficult ? recipeVar.difficult : "No hay dificultad";
-        if (recipeVar.requests>5) {
+        if (recipeVar.requests>=5) {
           this.levelDificult(recipeVar.difficult);
         } else {
           this.dificult = "No hay dificultad";

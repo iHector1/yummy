@@ -17,8 +17,6 @@ export class CardRecipeComponent implements OnInit {
   ngOnInit(): void {
       this.recipe = this.afs.collection('infoRecipe', ref => ref.where('uid', "==", this.uidRecipe)).valueChanges();
       console.log(this.uidCategory);
-  
-    
   }
 
 }
