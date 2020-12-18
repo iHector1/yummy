@@ -14,6 +14,7 @@
       <a mat-list-item  href="/solicitar_utensilio">Solicitar utensilio</a> 
       <a mat-list-item  href="/solicitar_ingrediente">Solicitar ingrediente</a>
       <a mat-list-item  routerLink="notificaciones/{{user.uid}}   ">Notificaciones</a>
+      <a mat-list-item *ngIf="hide" routerLink="anuncio_premium">Anuncio Premium</a>
       <a mat-list-item  routerLink="chat">Chats</a>
       <a mat-list-item  routerLink="recetas_guardadas">Guardadas</a>
       <a mat-list-item  routerLink="graficas">Graficas</a>

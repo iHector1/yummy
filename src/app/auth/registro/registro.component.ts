@@ -30,7 +30,7 @@ export class RegistroComponent implements OnInit {
       if (this.verification) {
         const user = await this.authSvc.register(email, password);
       }else{
-        window.alert("no funcionno wey");
+        window.alert("no funciono intenta de nuevo");
       }
     } catch (error) {
       //console.log(error);

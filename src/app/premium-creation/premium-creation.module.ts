@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PremiumCreationRoutingModule } from './premium-creation-routing.module';
 import { PremiumCreationComponent } from './premium-creation.component';
 import { AngularMaterialModule } from '../Angular_Material/angular_materia.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,10 @@ import { AngularMaterialModule } from '../Angular_Material/angular_materia.modul
   imports: [
     CommonModule,
     PremiumCreationRoutingModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PremiumCreationModule { }
+ 
