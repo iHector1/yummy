@@ -3,24 +3,26 @@
       [attr.role]="isHandset$ ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false"color="primary">
-    <mat-toolbar >Menu</mat-toolbar>
+    <mat-toolbar >Menú</mat-toolbar>
     <mat-nav-list *ngIf="user$ | async as user; else login">
       <!--Aqui-->
+      <div>
       <a mat-list-item href="/home">Home</a>
       <a mat-list-item  routerLink="crear-receta">Crear receta</a>
       <a mat-list-item  routerLink="buscar_receta">Buscar</a>
-      <a mat-list-item  routerLink="lista_super/{{user.uid}}">Lista de super</a>
-      <a mat-list-item  routerLink="mi_alacena/{{user.uid}}">Almacen</a>
+      <a mat-list-item  routerLink="lista_super/{{user.uid}}">Lista de súper</a>
+      <a mat-list-item  routerLink="mi_alacena/{{user.uid}}">Almacén</a>
       <a mat-list-item  href="/solicitar_utensilio">Solicitar utensilio</a> 
       <a mat-list-item  href="/solicitar_ingrediente">Solicitar ingrediente</a>
       <a mat-list-item  routerLink="notificaciones/{{user.uid}}   ">Notificaciones</a>
       <a mat-list-item *ngIf="hide" routerLink="anuncio_premium">Anuncio Premium</a>
       <a mat-list-item  routerLink="chat">Chats</a>
       <a mat-list-item  routerLink="recetas_guardadas">Guardadas</a>
-      <a mat-list-item  routerLink="graficas">Graficas</a>
+      <a mat-list-item  routerLink="graficas">Gráficas</a>
       <a mat-list-item  routerLink="streaming">Streaming</a>
       <!---->
       <a mat-list-item (click)="logout()"*ngIf="user">Salir</a>
+    </div>
     </mat-nav-list>
     <ng-template #login>
       <mat-nav-list>

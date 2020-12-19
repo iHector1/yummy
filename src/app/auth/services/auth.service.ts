@@ -167,19 +167,11 @@ export class AuthService extends RoleValidator{
     return userRef.set(data, { merge: true });
   }
 
-  private updateUserDataPremiun(user: User) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-      `premiunCreator/${user.uid}`
+  updateUserDataPremiun(user:string) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `premiunCreator/${user}`
     );
-
-    const data: User = {
-      uid: user.uid,
-      email: user.email,
-      emailVerified: user.emailVerified,
-      blocked:user.blocked,
-    };
-
-    return userRef.set(data, { merge: true });
+    return userRef.set({uid:user,uidUser:user}, { merge: true });
   }
 //funcion para ver si existe el usuario o no
   async exist(user: User) {

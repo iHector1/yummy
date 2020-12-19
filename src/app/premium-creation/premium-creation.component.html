@@ -8,10 +8,11 @@
       <br>
       <br>
       <div class="col-md-12">
-
+        <form  [formGroup]="adPremium" (ngSubmit)="create_ad()">
         <mat-form-field class="col-md-4 col-sm-4">
           <mat-label>Mensaje</mat-label>
-          <textarea matInput placeholder="Inserte mensaje llamativo"></textarea>
+          <textarea matInput formControlName="message" 
+          placeholder="Inserte mensaje llamativo"></textarea>
         </mat-form-field>
 
         <br>
@@ -21,11 +22,11 @@
         </div>
 
         <div class="col-md-12">
-          <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-            <mat-icon>more_vert</mat-icon>
-          </button>
+          <input type="file" accept=".mp4" (change)="onUpload($event)" >
         </div>
-
+        <video #video *ngIf="urlImage" width="320" height="240" controls [src]="urlImage|async" (loadedmetadata)="getDuration($event)">
+        </video>
+        <input [value]="urlImage|async" #inputVideo type="hidden">
         <br>
         <br>
 
@@ -34,9 +35,18 @@
           <input
             matInput
             placeholder="Inserta el costo que tendrá"
-            formControlName="text"
+            formControlName="cost"
             type="number"
             min="0"
+          />
+        </mat-form-field>
+        <mat-form-field class="col-md-4 col-sm-4">
+          <mat-label>Cuenta paypal(Client ID)</mat-label>
+          <input
+            matInput
+            placeholder="Inserta el costo que tendrá"
+            formControlName="paypalCount"
+            type="text"
           />
         </mat-form-field>
 
@@ -44,10 +54,9 @@
         <br>
 
         <div class="col-md-12 text-center">
-          <button mat-raised-button color="accent">Confirmar</button>
+          <button mat-raised-button color="accent" (click)="create_ad()">Confirmar</button>
         </div>
-
-
+        </form>
       </div>
     </div>
   </div>
