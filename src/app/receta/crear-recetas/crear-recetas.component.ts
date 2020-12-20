@@ -39,7 +39,8 @@ export class CrearRecetasComponent implements OnInit {
     uidsTechnique: new FormControl(''),
     portions: new FormControl(''),
     portionsCalories: new FormControl(''),
-    videoUrl: new FormControl('')
+    videoUrl: new FormControl(''),
+    booelanPremium:new FormControl(''),
   });
   urlImage2: Observable<any>;
   kitchenBar: number = 0;//variable del contador bar
@@ -74,25 +75,42 @@ export class CrearRecetasComponent implements OnInit {
   uploadPercent: Observable<number>;
   uploadPercent2: Observable<number>;
   urlImage: Observable<any>;
+  creatorPremium: boolean = true;
   public user$: Observable<User> = this.authService.afAuth.user;
-  constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private authService:AuthService,private router:Router) {
-    this.uidUnit = firestore.collection('unit').valueChanges();
-    this.uidCookWare = firestore.collection('cookWare',ref=>ref.where("requests",">=",3)).valueChanges();
-    this.uidCategory = firestore.collection('category').valueChanges();
-    this.uidCollection = firestore.collection('collection').valueChanges();
-    this.uidSeason = firestore.collection('season').valueChanges();
-    this.uidIngredients = firestore.collection('ingredients',ref=>ref.where("requests",">=",3)).valueChanges();
-    //this.uidIngredients = firestore.collection('ingredients').valueChanges();
-    this.uidRegion = firestore.collection('region').valueChanges();
-    this.uidsTechnique = firestore.collection('techniques').valueChanges();
+  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private authService:AuthService,private router:Router) {
+    this.uidUnit = this.firestore.collection('unit').valueChanges();
+    this.uidCookWare = this.firestore.collection('cookWare',ref=>ref.where("requests",">=",3)).valueChanges();
+    this.uidCategory = this.firestore.collection('category').valueChanges();
+    this.uidCollection = this.firestore.collection('collection').valueChanges();
+    this.uidSeason = this.firestore.collection('season').valueChanges();
+    this.uidIngredients = this.firestore.collection('ingredients',ref=>ref.where("requests",">=",3)).valueChanges();
+    this.uidRegion = this.firestore.collection('region').valueChanges();
+    this.uidsTechnique = this.firestore.collection('techniques').valueChanges();
+
   }
 
   ngOnInit(): void {
+      this.user$.subscribe(user => {
+      console.log(user.uid);
+      this.firestore.collection('premiunCreator', ref => ref.where('uidUser', '==', user.uid)).valueChanges().subscribe(
+        premium => {
+          if (premium[0]) {
+            this.creatorPremium = false;
+          } else {
+            this.creatorPremium = true;
+          }
+          console.log(this.creatorPremium);
+        }
+      )
+      })
   }
 
   async create_recipe() {
     try {
-      const { title, cookTime, portions, portionsCalories, uidsCategory, uidsSeason, uidsCollection, uidsRegion } = this.recipeForm.value;
+      let { title, cookTime, portions, portionsCalories, uidsCategory, uidsSeason, uidsCollection, uidsRegion, booelanPremium } = this.recipeForm.value;
+      if (this.creatorPremium==true) {
+        booelanPremium = false;
+      }
       let hours = 0;
       if (title == " "||title == "  "||title == "   "||title == "    "||title == "     "||title =="") {
         window.alert("Por favor que no esten vacíos ");
@@ -146,13 +164,15 @@ export class CrearRecetasComponent implements OnInit {
           uidUser: this.inputUserid.nativeElement.value,
           timeStamp: new Date(),
           urlVideo: this.recipeForm.controls.videoUrl.value,
-          kitchenArea:this.kitchenAreaa
+          kitchenArea: this.kitchenAreaa,
+          recipePremium:booelanPremium,
         };
         console.log(recipeInfo);
         this.RecipeService.RecipeDataAdd(recipeInfo);
         this.RecipeService.RecipeDataAddRecipe(recipeInfo);
         this.router.navigate(['/home']);
      }
+      console.log(booelanPremium);
     }
     catch (error) {
       console.log(error);

@@ -60,7 +60,7 @@ export class CookwareService {
   }
 
   //Agregar utensilio
-  public CookwareDataAdd(cookware: cookWare) {
+  public CookwareDataAdd(cookware: cookWare) { 
     this.flag = true;
    // console.log(cookware);
     const cookAreRef: AngularFirestoreDocument<cookWare> = this.afs.doc(
@@ -70,7 +70,8 @@ export class CookwareService {
       uid: cookware.uid,
       uidLevelCookWare: cookware.uidLevelCookWare,
       nameCookWare: cookware.nameCookWare,
-      request : cookware.request
+      request : cookware.request,
+      requests:3
     };
     return cookAreRef.set(data, { merge: true });
   }

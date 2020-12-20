@@ -3,5 +3,5 @@ export interface cookWare{
   uidLevelCookWare?: string;
   nameCookWare?:string;
   request?: string[];
-  requesNumber?: number;
+  requests?: number;
 }

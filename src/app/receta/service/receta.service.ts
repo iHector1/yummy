@@ -23,31 +23,7 @@ export class RecetaService {
     const userRef: AngularFirestoreDocument<infoRecipe> = this.afs.doc(
       `infoRecipe/${recipe.uid}`
     );
-    const data: infoRecipe = {
-      uid: recipe.uid,
-      title:recipe.title,
-      uidUser:recipe.uidUser,
-      cookTime:recipe.cookTime,   //aqui
-      uidsIngredients: recipe.uidsIngredients,
-      principalPhoto: recipe.principalPhoto,
-      uidUnit: recipe.uidUnit, //aqui
-      uidsCookWare : recipe.uidsCookWare,
-      uidCategory: recipe.uidCategory,
-      points:recipe.points,
-      uidRegion :  recipe.uidRegion, 
-      count:recipe.count,
-      uidCollection :  recipe.uidCollection,
-      uidSeason :  recipe.uidSeason,
-      steps :   recipe.steps,
-      stepsPhoto :   recipe.stepsPhoto,
-      uidsTechnique :   recipe.uidsTechnique,
-      portions :  recipe.portions,
-      portionCalories : recipe.portionCalories ,
-      urlVideo: recipe.urlVideo,
-      kitchenArea: recipe.kitchenArea,
-      timeStamp :  recipe.timeStamp,  //aqui
-    };
-    return userRef.set(data, { merge: true });
+    return userRef.set(recipe, { merge: true });
   }
 
   //agregar receta a la colleciont recipe
@@ -62,8 +38,6 @@ export class RecetaService {
       uidCategory: recipe.uidCategory,
       uidCollection: recipe.uidCollection,
       uidSeason: recipe.uidSeason,
-      uidsCookWare: recipe.uidsCookWare,
-      uidUnit: recipe.uidUnit,
       timeStamp :  recipe.timeStamp,
       uidUser:recipe.uidUser
     };

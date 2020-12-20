@@ -19,11 +19,12 @@ export interface infoRecipe{
   stepsPhoto?: string[];
   uidsTechnique?: string[];
   portions?: number;
-  portionCalories?: boolean; 
+  portionCalories?: number; 
   urlVideo?: string;
   points?: number;
   timeStamp?: Date;  //aqui
   stars?: number;
   request?: string[];
+  recipePremium?: boolean;
 }
  
