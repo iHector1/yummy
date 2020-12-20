@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'buscar_receta', loadChildren: () => import('./search-recipes/search-recipes.module').then(m => m.SearchRecipesModule) },
   { path: 'recetas_guardadas', loadChildren: () => import('./recipe-saved/recipe-saved.module').then(m => m.RecipeSavedModule) },
   { path: 'anuncio_premium', loadChildren: () => import('./premium-creation/premium-creation.module').then(m => m.PremiumCreationModule) },
-  { path: 'ver_premium', loadChildren: () => import('./premium/premium.module').then(m => m.PremiumModule) },
+  { path: 'ver_premium/:id', loadChildren: () => import('./premium/premium.module').then(m => m.PremiumModule) },
   { path: 'usuario/:id', loadChildren: () => import('./info-user/info-user.module').then(m => m.InfoUserModule) },
   { path: 'crear-receta', loadChildren: () => import('./receta/crear-recetas/crear-recetas.module').then(m => m.CrearRecetasModule) },
   { path: 'notificaciones/id', loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule) },

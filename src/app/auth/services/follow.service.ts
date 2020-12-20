@@ -34,14 +34,14 @@ export class FollowService {
               uid: profileuid,
               uidUser: profileuid,
               uidFollowing: currentuid,
-              userPremium: false,
             };
             
             this.afs.collection( 'following/'+currentuid+'/users').doc(profileuid).set(data);
            let datas = {
               uid: currentuid,
               uidUser: currentuid ,
-              uidFollower:profileuid
+             uidFollower: profileuid,
+             userPremium: false,
             };
             this.afs.collection('follower/'+profileuid+'/users' ).doc(currentuid).set(datas);
           }

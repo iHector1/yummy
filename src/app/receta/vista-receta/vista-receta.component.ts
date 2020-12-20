@@ -59,6 +59,7 @@ export class VistaRecetaComponent implements OnInit {
   isSave: boolean;
   category: any;
   starCount=new Array();
+  premiumRecipe: boolean;
   constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService,private saveService:RecipeSavedService) { 
   }
   public user$: Observable<User> = this.auth.afAuth.user;
@@ -81,6 +82,7 @@ export class VistaRecetaComponent implements OnInit {
         this.unit = recipeVar.uidUnit;
         this.videoY = recipeVar.urlVideo;
         this.dificult = recipeVar.difficult ? recipeVar.difficult : "No hay dificultad";
+        this.premiumRecipe = recipeVar.recipePremium;
         if (recipeVar.requests>=5) {
           this.levelDificult(recipeVar.difficult);
           this.starsCheck(recipeVar.stars)
@@ -89,7 +91,7 @@ export class VistaRecetaComponent implements OnInit {
         }
         this.season = recipeVar.uidSeason;
         this.useruid = recipeVar.uidUser;
-        this.user(this.useruid);
+        this.user(this.useruid,this.premiumRecipe);
         this.region = recipeVar.uidRegion;
         this.step = recipeVar.steps;
         this.photoStep = recipeVar.stepsPhoto;
@@ -150,7 +152,7 @@ export class VistaRecetaComponent implements OnInit {
     }
   }
   //checar usuario 
-  user(uid) {
+  user(uid, premium) {
     this.auth.getUser(uid).subscribe(user => {
       if (user[0]) {
         const uiUser:any = user[0];
@@ -158,8 +160,7 @@ export class VistaRecetaComponent implements OnInit {
         this.user$.subscribe(user => {
           this.isUser = user.uid;
           if (this.isUser == uiUser.uid ||this.isUser==null||this.isUser==undefined||this.isUser=="") {
-            this.show = false; 
-           
+            this.show = false;  
         }
         else {
             this.show = true;
@@ -167,7 +168,12 @@ export class VistaRecetaComponent implements OnInit {
               followinguser => {
                 if (followinguser[0]) {
                   this.isFollowing = true;
-                  console.log("sie entro ");
+                  const follow: any = followinguser[0];
+                  console.log(premium)
+                  if (premium==true) {
+                    this.checkUserPremium(follow);
+                  }
+                  console.log(follow);
                 }
               });
             
@@ -185,6 +191,13 @@ export class VistaRecetaComponent implements OnInit {
       }
       
     })
+  }
+  checkUserPremium(follow: any) {
+    console.log(follow.userPremium);
+    if (follow.userPremium == false) {
+      console.log("si entro pero no funciono");
+      this.router.navigate([`/ver_premium/${follow.uidFollower}`]);
+    }
   }
   
 //checar que siguigue al usuario o no siguie al usuario
