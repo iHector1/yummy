@@ -3,7 +3,7 @@
   </STYLE>
   <div class="card ml-2 mr-2 mt-2">
     <div class="card-body">
-      <H1> Suscripción Premium con bbcito33</H1>
+      <H1> Suscripción Premium con {{displayName}}</H1>
       <br>
       <br>
       <div class="col-md-12">
@@ -11,21 +11,18 @@
         <br>
 
         <div class="col-md-12">
-          <p>Holaaaaa amigo!, te invito a que te unas a mi hermosa comunidad,
-            tendrás grandes sorpresas si te suscribes conmigo, tendrás acceso
-            a grandes recetas y a mis videos en vivo donde estaré cocinando. </p>
+          <p>{{message}} </p>
         </div>
 
         <br>
-
-        <div style="width:245px; float:left;" class="col-md-12">
-          <iframe width="640" height="360" src="https://www.youtube.com/embed/kiVPYwa8kPs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-
-
-        <div style="width:245px; background:#ffffff; float:right;" class="card col-md-3 mt-5">
-          <div class="card-body">
-            <p class="text-center">$10.99 pesos</p>
+        
+        <div  class="row col-md-12 col-sm-12">
+          <video class="col-md-7" width="320" height="240" [src]="urlVideo" controls >
+          </video>
+          <div class="card col-md-5 h-25 d-inline-block">
+            <div class="card-body">
+            <p class="text-center">${{cost}} pesos</p>
+          </div>
           </div>
         </div>
       </div>
