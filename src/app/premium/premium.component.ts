@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/services/auth.service';
+import { FollowService } from '../auth/services/follow.service';
 import { User } from '../shared/models/user.inteface';
 declare var paypal;
 @Component({
@@ -13,21 +14,22 @@ declare var paypal;
 export class PremiumComponent implements OnInit {
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
   message: any;
-  cost: number=12;
+  cost: number;
   paypalAccount: any;
   urlVideo: any;
   displayName: any;
   showApropied: boolean;
   showLogin: boolean;
-  paypalButtons: boolean;
+  paypalButtons: boolean=true;
+  userPremium: string;
 
-  constructor(private router: Router, private afs:AngularFirestore,private auth:AuthService) {
+  constructor(private router: Router, private afs:AngularFirestore,private auth:AuthService,private follow:FollowService) {
     console.log(this.router.url.slice(13));
     this.afs.collection('premiunAd', ref => ref.where("uid", '==', this.router.url.slice(13))).valueChanges().subscribe(ad => {
       if (ad[0]) {
         const adVar: any = ad[0];
         this.message = adVar.message;
-        //this.cost = adVar.cost;
+        this.cost = adVar.cost;
         this.paypalAccount = adVar.paypalAccount;
         this.urlVideo = adVar.urlVideo;
         console.log(this.urlVideo);
@@ -40,14 +42,15 @@ export class PremiumComponent implements OnInit {
       }
     });
     this.user$.subscribe(user => {
-      console.log(user.uid);
+      this.userPremium = user.uid;
       if (user.uid==this.router.url.slice(13)) {
-        this.paypalButtons = false;
-      } if (user.uid == undefined || user.uid=="" || user.uid==null) {
-         this.paypalButtons = false;
+        this.paypalButtons = true;
+      }else if (user.uid == undefined || user.uid=="" || user.uid==null) {
+         this.paypalButtons = true;
        }
       else {
-        this.paypalButtons = true;
+        console.log("sientro pero no sirvo")
+        this.paypalButtons = false;
        }
      });
    }
@@ -71,7 +74,9 @@ export class PremiumComponent implements OnInit {
       onApprove: async (data, actions) => {
         const order = await actions.order.capture();
         console.log(order);
-        
+        this.follow.followPremium(this.router.url.slice(13), this.userPremium);
+        window.alert("Gracias por suscribirte!");
+        this.router.navigate(['/home']);
       },
       onError: err =>{
         console.log(err);
