@@ -38,7 +38,7 @@ console.log(this.contact);
 				dragMany: true,
 			},
       arrows: true,
-			infinite: true,
+			infinite: false,
 			autoplay: {
 				enabled: true,
 				direction: 'right',
