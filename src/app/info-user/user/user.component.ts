@@ -46,7 +46,11 @@ export class UserComponent implements OnInit {
             this.stateName = stateVar.stateName;
           }
         });
-
+        this.firestore.collection("premiunCreator", ref => ref.where('uid', '==', userVar)).valueChanges().subscribe(premium => {
+          if (premium[0]) {
+            this.premium = true;
+          }
+        });
         this.firestore.collection("level", ref => ref.where("uid", "==", userVar.uidLevel)).valueChanges().subscribe(level => {
           if (level[0]) {
             const levelVar: any = level[0];
