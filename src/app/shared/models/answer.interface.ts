@@ -6,4 +6,5 @@ export interface answerComment{
     time?: any;
     comment?: string;
     request?: number;
+    uidRecipe?: string;
 }

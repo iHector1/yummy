@@ -50,6 +50,14 @@ export class VistaHelpsComponent implements OnInit {
           if (this.points>=3200) {
             this.show = true;
           }
+          this.afs.collection('infoRecipe', ref => ref.where('uid', '==', this.router.url.slice(8))).valueChanges().subscribe(userRef => {
+            if (userRef[0]) {
+              let info: any = userRef[0];
+              if (this.uidUser == info.uidUser) {
+                this.show = true;
+              }
+            }
+          })
         }
       })
     });
@@ -78,7 +86,8 @@ export class VistaHelpsComponent implements OnInit {
       uidUser: this.uidUser,
       displayName: this.displayName,
       comment:comentAnswer,
-      request: 0
+      request: 0,
+      uidRecipe: this.router.url.slice(8)
     };
     console.log(commentAnswer);
     this.helpService.insert_answer(commentAnswer);

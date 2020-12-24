@@ -7,6 +7,7 @@ import { User } from 'firebase';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { NotificationsService } from 'src/app/notifications/service/notifications.service';
 import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 import { RecetaService } from '../service/receta.service';
 
@@ -77,7 +78,7 @@ export class CrearRecetasComponent implements OnInit {
   urlImage: Observable<any>;
   creatorPremium: boolean = true;
   public user$: Observable<User> = this.authService.afAuth.user;
-  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private authService:AuthService,private router:Router) {
+  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private authService:AuthService,private router:Router,private noti:NotificationsService) {
     this.uidUnit = this.firestore.collection('unit').valueChanges();
     this.uidCookWare = this.firestore.collection('cookWare',ref=>ref.where("requests",">=",3)).valueChanges();
     this.uidCategory = this.firestore.collection('category').valueChanges();
@@ -90,7 +91,7 @@ export class CrearRecetasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.user$.subscribe(user => {
+    this.user$.subscribe(user => {
       console.log(user.uid);
       this.firestore.collection('premiunCreator', ref => ref.where('uidUser', '==', user.uid)).valueChanges().subscribe(
         premium => {
@@ -102,7 +103,8 @@ export class CrearRecetasComponent implements OnInit {
           console.log(this.creatorPremium);
         }
       )
-      })
+    });
+    
   }
 
   async create_recipe() {
@@ -167,6 +169,7 @@ export class CrearRecetasComponent implements OnInit {
           kitchenArea: this.kitchenAreaa,
           recipePremium:booelanPremium,
         };
+        this.noti.sendEmailRecipe(this.inputUserid.nativeElement.value);
         console.log(recipeInfo);
         this.RecipeService.RecipeDataAdd(recipeInfo);
         this.RecipeService.RecipeDataAddRecipe(recipeInfo);

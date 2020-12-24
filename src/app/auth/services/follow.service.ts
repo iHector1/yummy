@@ -45,7 +45,7 @@ export class FollowService {
              userPremium: false,
             };
             this.afs.collection('follower/' + profileuid + '/users').doc(currentuid).set(datas);
-            this.noti.sendEmailFollower(profileuid);
+            this.noti.sendEmailFollower(profileuid,currentuid);
           }
         });
         
