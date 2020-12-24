@@ -22,7 +22,7 @@ export class Navbar2Component implements OnInit {
   hide: boolean;
 
   constructor(private breakpointObserver: BreakpointObserver, public authSvc: AuthService, private router: Router, private follow: FollowService) {
-    
+     
   }
   ngOnInit(): void {
     this.user$.subscribe(user => {

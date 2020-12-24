@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'ver_premium/:id', loadChildren: () => import('./premium/premium.module').then(m => m.PremiumModule) },
   { path: 'usuario/:id', loadChildren: () => import('./info-user/info-user.module').then(m => m.InfoUserModule) },
   { path: 'crear-receta', loadChildren: () => import('./receta/crear-recetas/crear-recetas.module').then(m => m.CrearRecetasModule) },
-  { path: 'notificaciones/id', loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule) },
+  { path: 'notificaciones/:id', loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule) },
   { path: 'chat', loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule) },
   { path: 'chat/:uidRoom', loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule) },
   { path: 'pasos/:id', loadChildren: () => import('./steps/steps.module').then(m => m.StepsModule) },

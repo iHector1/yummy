@@ -1,5 +1,7 @@
-import { DOCUMENT } from '@angular/common';
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth/services/auth.service';
+import { User } from '../shared/models/user.inteface';
 
 @Component({
   selector: 'app-home',
@@ -7,20 +9,11 @@ import { Component, HostListener, Inject, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  showGoUpButton = false;
-  private showScrollHeight = 500;
-  private hideScrollHeight = 100;
-  constructor(@Inject(DOCUMENT) private document:Document,) { }
-
+  showButtonCreate = false;
+  constructor(private auth: AuthService) { 
+  }
+  public user$: Observable<User> = this.auth.afAuth.user;
   ngOnInit(): void {
   }
-  @HostListener('window:scroll', [])
-  onWindowScroll():void {
-    const yOffSet = window.pageYOffset;
-    if ((yOffSet || this.document.documentElement.scrollTop || this.document.body.scrollTop) > this.showScrollHeight) {
-      this.showGoUpButton = true;
-    } else if (this.showGoUpButton && (yOffSet || this.document.documentElement.scrollTop || this.document.body.scrollTop) < this.hideScrollHeight) {
-      this.showGoUpButton = false;
-    }
-  }
+  
 }

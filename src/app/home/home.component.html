@@ -10,7 +10,7 @@
        <app-month></app-month>
     </div>
     <div class="float-right mt-2 ml-5">
-      <button mat-fab color="accent"  class="ml-5 mb-5" onclick="window.location.href='http://localhost:4200/crear-receta'">
+      <button mat-fab color="accent"  class="ml-5 mb-5" *ngIf='user$|async' routerLink="/crear-receta">
         <mat-icon>add</mat-icon>
       </button>
     </div>
