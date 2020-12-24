@@ -1,19 +1,11 @@
 <h1 class="text-center mt-5">Notificaciones</h1>
 
 
-<div class="card mt-5 ml-5 mr-5 mb-5 ">
+<div class="card mt-5 ml-5 mr-5 mb-5" *ngFor='let notifi of noti|async'>
     <div class="card-body">
           <div class="col-md-12 col-sm-12">
-              <h3>El suario bbcito33 te sigue</h3>
-              <h3 class="float-right">hola</h3>
-          </div>
-    </div>
-</div>
-<div class="card mt-5 ml-5 mr-5 mb-5 ">
-    <div class="card-body">
-          <div class="col-md-12 col-sm-12">
-              <h3>El suario bbcito33 te sigue</h3>
-              <h3 class="float-right">hola</h3>
+              <h3 [innerHTML]="notifi.message.html"></h3>
+              <h3 class="float-right">{{notifi.delivery.startTime.seconds*1000|date:'medium'}}</h3>
           </div>
     </div>
 </div>
