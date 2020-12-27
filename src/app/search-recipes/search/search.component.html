@@ -7,7 +7,7 @@
 <H1>Buscador de recetas</H1>
 <br>
 <div class="col-sm-12 col-md-12 text-center">
-  <button mat-icon-button color="primary">
+  <button mat-icon-button color="primary" >
     <mat-icon>search</mat-icon>
   </button>
     <mat-form-field class="col-md-4 col-sm-4">
@@ -15,9 +15,8 @@
         <input
           matInput
           placeholder="Ingrese el nombre de la receta"
-          formControlName="text"
-          required
-          formControlName="recipeName"
+          name="filterRecipe"
+          [(ngModel)]="filterRecipe"
         />
       </mat-form-field>
 </div>
@@ -28,24 +27,12 @@
 <div class="col-sm-12 col-md-12 text-center">
 
   <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
-    <mat-label>Técnica</mat-label>
-    <mat-select name ="técnica" requiered formControlName = "searchTechnique" required>
-      <mat-option
-        *ngFor="let technique of techniques | async"
-        [value]="technique.uid"
-      required >
-        {{ technique.nameTechnique }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
     <mat-label>Categoría</mat-label>
-    <mat-select name ="categoría" requiered formControlName = "searchCategory" required>
+    <mat-select name ="filterCategory" [(ngModel)]="filterCategory" >
       <mat-option
         *ngFor="let categories of category | async"
-        [value]="categories.uid"
-      required >
+        [value]="categories.categoryName"
+       >
         {{ categories.categoryName }}
       </mat-option>
     </mat-select>
@@ -53,11 +40,11 @@
 
   <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
     <mat-label>Temporada</mat-label>
-    <mat-select name ="temporada" requiered formControlName = "searchSeason" required>
+    <mat-select name ="filterSeason" [(ngModel)]="filterSeason"  >
       <mat-option
         *ngFor="let seasons of season | async"
-        [value]="seasons.uid"
-      required >
+        [value]="seasons.seasonName"
+       >
         {{ seasons.seasonName }}
       </mat-option>
     </mat-select>
@@ -65,11 +52,11 @@
 
   <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
     <mat-label>Región</mat-label>
-    <mat-select name ="región" requiered formControlName = "searchRegion" required>
+    <mat-select name ="filterRegion" [(ngModel)]="filterRegion">
       <mat-option
         *ngFor="let regions of region | async"
-        [value]="regions.uid"
-      required >
+        [value]="regions.regionName"
+       >
         {{ regions.regionName }}
       </mat-option>
     </mat-select>
@@ -77,11 +64,11 @@
 
   <mat-form-field appearance="fill" class="col-md-2 col-sm-2">
     <mat-label>Colección</mat-label>
-    <mat-select name ="colección" requiered formControlName = "searchCollection" required>
+    <mat-select name ="filterCollection" [(ngModel)]="filterCollection"  >
       <mat-option
         *ngFor="let collections of collection | async"
-        [value]="collections.uid"
-      required >
+        [value]="collections.collectionName"
+       >
         {{ collections.collectionName }}
       </mat-option>
     </mat-select>
@@ -89,4 +76,24 @@
 
 </div>
 </div>
+</div>
+<div class="card ml-2 mr-2 mt-2">
+  <div class="card-body">
+    <H2>Resultados obtenidos:</H2>
+  </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let recipe of recipes|filter:filterRecipe|filterCategory:filterCategory|filterSeason:filterSeason|filterCollection:filterCollection|filterRegion:filterRegion">
+            <div class="card">
+              <div class="image">
+                <img class="card-img-top" mat-card-image src="{{recipe.principalPhoto}}" alt="Pozole"/>
+              </div>
+              <div class="card-body">
+                <mat-card-title>
+                  <a routerLink="/receta/{{recipe.uid}}">{{recipe.title}}</a>
+                </mat-card-title>
+              </div>
+            </div>
+          </div>
+    </div>
 </div>
