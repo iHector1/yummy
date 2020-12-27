@@ -9,8 +9,7 @@ export class FilterCollectionPipe implements PipeTransform {
     if (arg === '') return value;
     const resultPosts = [];
     for (const post of value) {
-      if (post.uidCategory == arg) {
-        console.log(post.uidCategory)
+      if (post.uidCollection == arg) {
         resultPosts.push(post);
       };
     };
