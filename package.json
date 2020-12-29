@@ -36,6 +36,7 @@
     "ngx-light-carousel": "^1.1.10",
     "ngx-sharebuttons": "^8.0.4",
     "rxjs": "~6.5.4",
+    "socket.io-client": "^3.0.4",
     "tslib": "^1.10.0",
     "wrapper": "^0.1.0",
     "zone.js": "~0.10.2"
