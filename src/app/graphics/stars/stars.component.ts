@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+
 import { BaseChartDirective, Color, Label } from 'ng2-charts';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { User } from 'src/app/shared/models/user.inteface';
 
 @Component({
   selector: 'app-stars',
@@ -8,33 +13,17 @@ import { BaseChartDirective, Color, Label } from 'ng2-charts';
   styleUrls: ['./stars.component.css']
 })
 export class StarsComponent implements OnInit {
-
+  private mounth = [0,0,0];
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-    { data: [180, 480, 770, 90, 1000, 270, 400], label: 'Series C', yAxisID: 'y-axis-1' }
+    { data: this.mounth , label: 'Estrellas' }
   ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels: Label[] = ['Diciembre', 'Enero', 'Febrero'];
   public lineChartOptions: (ChartOptions & { annotation: any }) = {
     responsive: true,
     scales: {
       // We use this empty structure as a placeholder for dynamic theming.
       xAxes: [{}],
       yAxes: [
-        {
-          id: 'y-axis-0',
-          position: 'left',
-        },
-        {
-          id: 'y-axis-1',
-          position: 'right',
-          gridLines: {
-            color: 'rgba(255,0,0,0.3)',
-          },
-          ticks: {
-            fontColor: 'red',
-          }
-        }
       ]
     },
     annotation: {
@@ -71,14 +60,6 @@ export class StarsComponent implements OnInit {
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // red
-      backgroundColor: 'rgba(255,0,0,0.3)',
-      borderColor: 'red',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     }
   ];
   public lineChartLegend = true;
@@ -86,49 +67,49 @@ export class StarsComponent implements OnInit {
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
 
-  constructor() { }
+
+   constructor(private afs: AngularFirestore,private auth:AuthService) {
+     this.user$.subscribe(user => {
+         const uidUser:any = user.uid;
+         this.afs.collection('comment', ref => ref.where('userRecipe', "==", uidUser)).valueChanges().subscribe(comment => {
+           comment.forEach((x) => {
+            // console.log(x['timeStamp']);
+             var time = x['timeStamp'];
+             var timeSeconds = time.seconds * 1000;
+             var date = new Date(timeSeconds);
+            var dates = date.getDate(); //returns date (1 to 31) you can getUTCDate() for UTC date
+            var mounth = date.getMonth(); // returns 1 less than month count since it starts from 0
+             var year = date.getFullYear(); //returns year
+             //console.log("date: ", date, " dates :", dates, " mounth: ", mounth, " year: ", year,"stars: ",x['stars']);
+             if (mounth == 0) {
+               var number = this.mounth[1];
+               this.mounth[1]=number+Number(x['stars']);
+             }
+             if (mounth == 11) {
+              var number = this.mounth[0];
+              this.mounth[0]=number+Number(x['stars']);
+            }
+           })
+          // console.log(this.mounth[0]);
+          // console.log(this.mounth[1]);
+           this.lineChartData['data'] = this.mounth;
+           this.chart.update();
+         } 
+         )
+      
+    })
+  }
+  public user$: Observable<User> = this.auth.afAuth.user;
 
   ngOnInit(): void {
   }
-
-  public randomize(): void {
-    for (let i = 0; i < this.lineChartData.length; i++) {
-      for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-        this.lineChartData[i].data[j] = this.generateNumber(i);
-      }
-    }
-    this.chart.update();
-  }
-
-  private generateNumber(i: number): number {
-    return Math.floor((Math.random() * (i < 2 ? 100 : 1000)) + 1);
-  }
-
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+   // console.log(event, active);
   }
 
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
+  //  console.log(event, active);
   }
 
-  public hideOne(): void {
-    const isHidden = this.chart.isDatasetHidden(1);
-    this.chart.hideDataset(1, !isHidden);
-  }
-
-  public pushOne(): void {
-    this.lineChartData.forEach((x, i) => {
-      const num = this.generateNumber(i);
-      const data: number[] = x.data as number[];
-      data.push(num);
-    });
-    this.lineChartLabels.push(`Label ${this.lineChartLabels.length}`);
-  }
-
-
-  public changeLabel(): void {
-    this.lineChartLabels[2] = ['1st Line', '2nd Line'];
-  }
 }

@@ -33,6 +33,7 @@ export class ComentComponent implements OnInit {
   difficult: number;
   stars: number;
   show: boolean;
+  userRecipe: any;
 
   constructor(private firestore: AngularFirestore, private storage: AngularFireStorage, private authService: AuthService, private router: Router, private comments: ComentsService, private recipe: RecetaService) {
     this.dificultys = firestore.collection('dificulty').valueChanges();
@@ -43,6 +44,7 @@ export class ComentComponent implements OnInit {
           this.requests = recipes.requests ? recipes.requests : 0;
           this.difficult = recipes.difficult ? recipes.difficult : 0;
           this.stars = recipes.stars ? recipes.stars : 0;
+          this.userRecipe = recipes.uidUser;
           this.user$.subscribe(user => {
             this.authService.getUser(user.uid).subscribe(userInfo => {
               if (userInfo[0]) {
@@ -100,7 +102,8 @@ export class ComentComponent implements OnInit {
       uidRecipe: uidRecipe,
       uidUser: this.uidUser,
       displayName: this.displayName,
-      timeStamp: firebase.firestore.FieldValue.serverTimestamp()
+      timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+      userRecipe:this.userRecipe
     };
     console.log(this.stars," ",stars);
     this.difficult = this.difficult * this.requests;

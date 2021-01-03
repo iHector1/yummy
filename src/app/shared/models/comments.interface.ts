@@ -7,4 +7,5 @@ export interface comments{
     difficult?: number;
     timeStamp?: any;
     displayName?: string;
+    userRecipe?: string;
 }
