@@ -5,6 +5,7 @@ import { ChatService } from 'src/app/chat/service/chat.service';
 import { NotificationsService } from 'src/app/notifications/service/notifications.service';
 import { User } from 'src/app/shared/models/user.inteface';
 import { AuthService } from './auth.service';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,7 @@ export class FollowService {
               uidUser: currentuid ,
              uidFollower: profileuid,
              userPremium: false,
+             date:firebase.firestore.FieldValue.serverTimestamp()
             };
             this.afs.collection('follower/' + profileuid + '/users').doc(currentuid).set(datas);
             this.noti.sendEmailFollower(profileuid,currentuid);

@@ -77,9 +77,7 @@ export class StarsComponent implements OnInit {
              var time = x['timeStamp'];
              var timeSeconds = time.seconds * 1000;
              var date = new Date(timeSeconds);
-            var dates = date.getDate(); //returns date (1 to 31) you can getUTCDate() for UTC date
             var mounth = date.getMonth(); // returns 1 less than month count since it starts from 0
-             var year = date.getFullYear(); //returns year
              //console.log("date: ", date, " dates :", dates, " mounth: ", mounth, " year: ", year,"stars: ",x['stars']);
              if (mounth == 0) {
                var number = this.mounth[1];
