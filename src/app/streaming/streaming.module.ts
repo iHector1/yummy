@@ -7,7 +7,7 @@ import { AngularMaterialModule } from '../Angular_Material/angular_materia.modul
 
 
 @NgModule({
-  declarations: [StreamingComponent],
+  declarations: [StreamingComponent, ],
   imports: [
     CommonModule,
     StreamingRoutingModule,
@@ -15,3 +15,4 @@ import { AngularMaterialModule } from '../Angular_Material/angular_materia.modul
   ]
 })
 export class StreamingModule { }
+ 
