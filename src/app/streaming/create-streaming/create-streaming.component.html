@@ -1,1 +1,102 @@
-<p>create-streaming works!</p>
+<form [formGroup]="streamForm" (ngSubmit)='submit()'>
+<div class="card mt-4 ml-3 mr-3">
+  <div class="card-body">
+    <div class="text-center">
+      <h1 class="text-center">Crear Streaming</h1>
+    </div>
+    <h3 >Ingredientes</h3>
+    <div class="col-md-12 col-sm-12 row mt-2">
+      <mat-form-field appearance="fill">
+        <mat-label>Ingrediente</mat-label>
+        <mat-select
+          name="ingredient"
+          formControlName="uidsIngredients"
+          required
+        >
+          <mat-option
+            *ngFor="let ingre of uidIngredients | async"
+            [value]="ingre"
+            required
+          >
+            {{ ingre.nameIngredient }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col-md-4 col-sm-12" appearance="fill">
+        <mat-label>Cantidad</mat-label>
+        <input matInput placeholder="5" type="number" #cantt required />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Medida</mat-label>
+        <mat-select formControlName="uidsUnit" required>
+          <mat-option
+            *ngFor="let units of uidUnit | async"
+            [value]="units"
+            required
+          >
+            {{ units.unitName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row ml-2">
+      <h4
+        class="overflow-visible badge badge-pill badge-primary ml-1 mr-1"
+        *ngFor="let ingg of ingredient"
+      >
+        {{ ingg }}
+      </h4>
+    </div>
+  
+  <button mat-mini-fab type="button" (click)="addIngredient()" color="accent">
+    <mat-icon>add</mat-icon>
+  </button>
+  <div class="col-md-12 col-sm-12 mt-5">
+    <h3>Utensilios</h3>
+  <div class="col-md-11 col-sm-12 mt-2" >
+        <mat-form-field appearance="fill">
+            <mat-label>Utensilio</mat-label>
+            <mat-select formControlName="uidsCookWare" required>
+              <mat-option
+                      *ngFor="let cookware of uidCookWare | async"
+                      [value]="cookware" 
+                      required>
+                      {{ cookware.nameCookWare}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="row">
+      <h4 class="overflow-visible badge badge-pill badge-primary ml-1" *ngFor="let nrico of cook">{{nrico}}</h4>
+    </div>
+
+  </div> 
+  <button mat-mini-fab color="accent" type="button" (click)="addCookWare()">
+        <mat-icon>add</mat-icon>
+  </button>
+  <div class="col-lg-6 col-sm-6 col-12">
+    <mat-form-field appearance="fill">
+        <mat-label>Fecha y dia del Streaming</mat-label>
+        <input
+          matInput
+          [ngxMatDatetimePicker]="dp"
+          [min]="minDate"
+          formControlName='date' 
+        required />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="dp"
+        ></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #dp></ngx-mat-datetime-picker>
+      </mat-form-field>
+  </div>
+</div>
+<div class="col-md-12 col-sm-12 container-fluid row mt-4">
+    <div class="col-md-6">
+    </div>
+<button mat-raised-button color="primary" type="submit" class="text-center center-block">
+    Crear Streaming
+</button>
+</div>
+</div>
+</form>  
