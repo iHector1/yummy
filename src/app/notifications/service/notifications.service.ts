@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { stream } from 'src/app/shared/models/stream.inteface';
 
 @Injectable({   
   providedIn: 'root'
@@ -107,10 +108,7 @@ export class NotificationsService {
         })
       }
     });
-  }/*
-  senEmailChat() {
-    
-  }*/
+  }
 
   sendEmailRecipe(uidUser) {
     this.afs.collection<any>('follower/'+uidUser+'/users').valueChanges().subscribe(user=>{
@@ -138,6 +136,40 @@ export class NotificationsService {
             message: {
               subject: 'Nueva receta',
               html:`Tu cocinero favorito subio una nueva receta!,<a href='https://recetasonlineyummy.com/usuario/${recipeUser}'>click aqui</a>`
+              }
+            })
+            bander = false;
+        }
+      }
+    })
+  }
+
+  sendEmailStrem(uidUser,info_stream:stream) {
+    this.afs.collection<any>('follower/'+uidUser+'/users',ref=>ref.where('userPremium',"==",true)).valueChanges().subscribe(user=>{
+      console.log("hola", uidUser);
+      let contact = [];
+      user.forEach( ( x ) => {
+        console.log(x.uid);
+        this.emailStream(x.uid,info_stream.uid,info_stream.date);
+        contact.push( x );
+      });
+console.log(contact);
+})
+  }
+
+  private emailStream(uidUser,uidStream,dates){
+    let bander = true;
+    this.afs.collection('users', ref => ref.where('uid', '==', uidUser)).valueChanges().subscribe(user=>{
+      if (user[0]) {
+        const infoUser: any = user[0]
+        if (bander == true) {
+          console.log('si funciono pero no se porque no ');
+          this.afs.collection('mail').add({
+            uidUser:infoUser.uid,
+            to: infoUser.email,
+            message: {
+              subject: 'Nuevo stream',
+              html:`Nuevo stream de tu cocinero favorito,sera el ${dates.seconds*1000}!,<a href='https://recetasonlineyummy.com/stream/${uidStream}'>click aqui</a>`
               }
             })
             bander = false;
