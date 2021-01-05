@@ -60,13 +60,15 @@ export class VistaRecetaComponent implements OnInit {
   category: any;
   starCount=new Array();
   premiumRecipe: boolean;
+  uidRecipe: any;
   constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService,private saveService:RecipeSavedService) { 
   }
   public user$: Observable<User> = this.auth.afAuth.user;
   ngOnInit(): void {
+    this.uidRecipe = this.router.url.slice(8);
     this.isFollowing = false;
     this.RecipeService.retrieveUserDocumentFromRecipe(this.router.url.slice(8)).subscribe(recipe => {
-      if (recipe[0]) {
+      if (recipe[0]) { 
         const recipeVar: any = recipe[0];
         this.other = recipe[0];
         this.urlImage = recipeVar.principalPhoto;
