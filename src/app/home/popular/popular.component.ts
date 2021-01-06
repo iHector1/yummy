@@ -10,20 +10,8 @@ import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 export class PopularComponent implements OnInit {
   newest: any;
 	options1: any
-  contact: Array<infoRecipe>;
-  constructor(private afs: AngularFirestore) { 
-    
-    this.newest = this.afs.collection("infoRecipe", ref => ref.orderBy("timeStamp", "desc").where("uidCollection","==","Invierno")).valueChanges().subscribe(data => {
-      
-      this.contact = [];
-
-            data.forEach( ( x ) => {
-
-                this.contact.push( x );
-            } );
-console.log(this.contact);
-    }, err => { });
-    
+  contact=new Array();
+  constructor(private afs: AngularFirestore) {
     this.options1 = {
 			animation: {
 				animationClass: 'transition',
@@ -63,7 +51,17 @@ console.log(this.contact);
 		}
   }
 
-  ngOnInit(): void {
+	ngOnInit(): void {
+		this.newest = this.afs.collection("infoRecipe", ref => ref.orderBy("timeStamp", "desc").where("uidCollection","==","Invierno")).valueChanges().subscribe(data => {
+      
+			this.contact = [];
+	  
+				  data.forEach( ( x ) => {
+	  
+					  this.contact.push( x );
+				  } );
+	  console.log(this.contact);
+		  }, err => { });
   }
 
 }

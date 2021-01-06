@@ -15,7 +15,7 @@ export class MonthComponent implements OnInit {
 
   newest: any;
 	options1: any
-  contact: Array<infoRecipe>;
+  contact=new Array();
   constructor(private afs: AngularFirestore) {
     
 	this.newest = this.afs.collection("infoRecipe", ref => ref.where("uidSeason","==","Invierno")).valueChanges().subscribe(data => {

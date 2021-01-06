@@ -11,7 +11,7 @@ import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 export class NewestComponent implements OnInit {
   newest: any;
 	options1: any
-  contact: Array<infoRecipe>;
+  contact=new Array();
   constructor(private afs:AngularFirestore) { 
     this.newest = this.afs.collection("infoRecipe", ref => ref.orderBy("timeStamp", "desc")).valueChanges().subscribe(data => {
       
@@ -38,13 +38,13 @@ console.log(this.contact);
 				dragMany: true,
 			},
       arrows: true,
-			infinite: false,
+			infinite: true,
 			autoplay: {
 				enabled: true,
 				direction: 'right',
-				delay: 5000,
+				delay: 500,
 				stopOnHover: true,
-				speed: 6000,
+				speed: 600,
 			},
 			breakpoints: [
 				{
@@ -53,11 +53,11 @@ console.log(this.contact);
 				},
 				{
 					width: 991,
-					number: 3,
+					number: 4,
 				},
 				{
 					width: 9999,
-					number: 4,
+					number: 7,
 				},
 			],
 		}
