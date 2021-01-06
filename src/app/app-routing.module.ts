@@ -40,6 +40,8 @@ const routes: Routes = [
   { path: 'graficas', loadChildren: () => import('./graphics/graphics.module').then(m => m.GraphicsModule) },
   { path: 'streaming', loadChildren: () => import('./streaming/streaming.module').then(m => m.StreamingModule) },
   { path: 'crear-streaming', loadChildren: () => import('./streaming/create-streaming/create-streaming.module').then(m => m.CreateStreamingModule) },
+  { path: 'recetas_planeadas', loadChildren: () => import('./planned-recipes/planned-recipes.module').then(m => m.PlannedRecipesModule) },
+  { path: 'planear_receta', loadChildren: () => import('./plan-recipe/plan-recipe.module').then(m => m.PlanRecipeModule) },
   {
     path: '**',
     component:PageNotFoundComponent
