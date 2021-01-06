@@ -20,11 +20,12 @@
           </div>
       </div> 
       <div class="col-md-12 col-sm-12 row">
-        <div class="col-md-11 col-sm-12">
+        <div class="col-md-5 col-sm-12">
             <img src="{{imagePosition}}"
             alt=""
             class="img-fluid align-self-center"/>
         </div>  
+        <video #video *ngIf="imagePosition!=''" width="320" height="240" controls [src]="imagePosition"></video>
         <div class="col-md-1 col-sm-12">
             <button mat-raised-button type="button" (click)="advange()" color="primary"><mat-icon>fast_forward</mat-icon></button>
         </div>
