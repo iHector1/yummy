@@ -17,10 +17,8 @@
           <button *ngIf="show" mat-flat-button class="ml-3" (click)="buttonSaveAction()" color="{{colorSave}}">
             {{textSave}}
           </button>
-          <a class="ml-3 color_items"
-            ><mat-icon type="button" color="primary">calendar_today</mat-icon
-            >Programar receta</a
-          >
+          <button *ngIf="show" class="ml-3" mat-flat-button (click)="openDialog()" color="accent"><mat-icon>calendar_today</mat-icon
+            >Programar receta</button>
           <a routerLink="/usuario/{{ useruid }}" class="ml-3">{{
             displayName
           }}</a>
@@ -63,7 +61,7 @@
             ><mat-icon class="icon-blacks"> local_dining</mat-icon
             >{{ typeKitchen }}</a
           >
-          <button class="ml-3" routerLink="/pasos/{{uidRecipe}}" mat-flat-button color="warn">Paso a paso</button>
+          <button  class="ml-3" routerLink="/pasos/{{uidRecipe}}" mat-flat-button color="warn">Paso a paso</button>
         </div>
       </div>
     </div>

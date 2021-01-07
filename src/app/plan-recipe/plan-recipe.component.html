@@ -1,0 +1,32 @@
+
+    <h1>Planear Receta</h1>
+<div>    
+    <h3>Tiempo de la comida</h3>
+    <mat-form-field appearance="fill">
+        <mat-label>Timpo de la comida</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let food of foodTime|async" [value]="food.uid">
+            {{food.nameFoodTime}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+<div>
+    <h3>Fecha</h3>
+    <mat-form-field appearance="fill">
+        <mat-label>Fecha</mat-label>
+        <input
+          matInput
+          [matDatepicker]="dp"
+          [min]="minDate"/>
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="dp"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+      </mat-form-field>
+</div>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Confirmar</button>
+  </mat-dialog-actions>

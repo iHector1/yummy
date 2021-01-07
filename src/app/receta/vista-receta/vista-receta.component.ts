@@ -13,7 +13,8 @@ import { FollowService } from 'src/app/auth/services/follow.service';
 import { ChatService } from 'src/app/chat/service/chat.service';
 import { RecipeSavedComponent } from 'src/app/recipe-saved/recipe-saved.component';
 import { RecipeSavedService } from 'src/app/recipe-saved/service/recipe-saved.service';
-
+import { PlanRecipeComponent } from '../../plan-recipe/plan-recipe.component';
+import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-vista-receta',
   templateUrl: './vista-receta.component.html',
@@ -61,7 +62,7 @@ export class VistaRecetaComponent implements OnInit {
   starCount=new Array();
   premiumRecipe: boolean;
   uidRecipe: any;
-  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService,private saveService:RecipeSavedService) { 
+  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService,private saveService:RecipeSavedService,private dialog: MatDialog) { 
   }
   public user$: Observable<User> = this.auth.afAuth.user;
   ngOnInit(): void {
@@ -298,5 +299,8 @@ export class VistaRecetaComponent implements OnInit {
       doc.save('Test.pdf');
     });*/
     
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(PlanRecipeComponent);
   }
 }

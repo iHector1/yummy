@@ -36,7 +36,6 @@ const routes: Routes = [
   { path: 'chat', loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule) },
   { path: 'chat/:uidRoom', loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule) },
   { path: 'pasos/:id', loadChildren: () => import('./steps/steps.module').then(m => m.StepsModule) },
-  { path: 'recetas-programadas', loadChildren: () => import('./receta/schedule-recipes/schedule-recipes.module').then(m => m.ScheduleRecipesModule) },
   { path: 'graficas', loadChildren: () => import('./graphics/graphics.module').then(m => m.GraphicsModule) },
   { path: 'streaming', loadChildren: () => import('./streaming/streaming.module').then(m => m.StreamingModule) },
   { path: 'crear-streaming', loadChildren: () => import('./streaming/create-streaming/create-streaming.module').then(m => m.CreateStreamingModule) },
