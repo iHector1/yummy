@@ -45,8 +45,8 @@ export class VistaHelpsComponent implements OnInit {
           this.displayName = info.displayName;
           this.points = info.points;
           this.show2 = true;
-          console.log(this.displayName);
-          console.log(this.uidUser);
+          // console.log(this.displayName);
+          // console.log(this.uidUser);
           if (this.points>=3200) {
             this.show = true;
           }
@@ -89,7 +89,7 @@ export class VistaHelpsComponent implements OnInit {
       request: 0,
       uidRecipe: this.router.url.slice(8)
     };
-    console.log(commentAnswer);
+   // console.log(commentAnswer);
     this.helpService.insert_answer(commentAnswer);
     this.comentAnswerForm.reset();
   }

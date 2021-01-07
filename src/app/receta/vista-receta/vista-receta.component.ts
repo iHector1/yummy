@@ -98,7 +98,7 @@ export class VistaRecetaComponent implements OnInit {
         this.region = recipeVar.uidRegion;
         this.step = recipeVar.steps;
         this.photoStep = recipeVar.stepsPhoto;
-        console.log(this.cant.length);
+       // console.log(this.cant.length);
         this.saveCheck();
         
         this.oneIngredient(this.portions);
@@ -172,11 +172,11 @@ export class VistaRecetaComponent implements OnInit {
                 if (followinguser[0]) {
                   this.isFollowing = true;
                   const follow: any = followinguser[0];
-                  console.log(premium)
+                 // console.log(premium)
                   if (premium==true) {
                     this.checkUserPremium(follow);
                   }
-                  console.log(follow);
+                //  console.log(follow);
                 }
               });
             
@@ -187,8 +187,8 @@ export class VistaRecetaComponent implements OnInit {
               this.isUserName = uiUser2.displayName;
             }
           })
-        console.log("primero: ",uiUser.uid,"segundo: ",this.isUser);
-        console.log(this.show);
+       // console.log("primero: ",uiUser.uid,"segundo: ",this.isUser);
+       // console.log(this.show);
         });
         
       }
@@ -196,9 +196,9 @@ export class VistaRecetaComponent implements OnInit {
     })
   }
   checkUserPremium(follow: any) {
-    console.log(follow.userPremium);
+    //(follow.userPremium);
     if (follow.userPremium == false) {
-      console.log("si entro pero no funciono");
+      //console.log("si entro pero no funciono");
       this.router.navigate([`/ver_premium/${follow.uidFollower}`]);
     }
   }

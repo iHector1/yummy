@@ -50,7 +50,7 @@ export class RecipeSavedComponent implements OnInit {
     const { recipeSavedCategory } = this.recipeSavedForm.value;
     this.uidCategory = recipeSavedCategory;
     this.recipe = this.firestore.collection('saved', ref => ref.where("uidUser", "==", this.uidUser).where('uidCategory',"==",recipeSavedCategory)).valueChanges();
-    console.log(recipeSavedCategory);
+   // console.log(recipeSavedCategory);
     
   }
 }

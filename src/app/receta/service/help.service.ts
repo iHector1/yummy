@@ -19,7 +19,7 @@ export class HelpService {
   }
   insert_answer(answerComent: answerComment) {
     const commentRef: AngularFirestoreDocument<any> = this.afs.doc(`answer/${answerComent.uid}`);
-    console.log(answerComent.uidHelp);
+    //console.log(answerComent.uidHelp);
     this.noti.sendEmailAnswer(answerComent.uidHelp);
     return commentRef.set(answerComent, { merge: true });
   }

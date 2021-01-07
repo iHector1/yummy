@@ -54,7 +54,7 @@ export class SuperListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLocation();
-    console.log(this.router.url.slice(13));
+    //console.log(this.router.url.slice(13));
   }
   getLocation() {
     this.superlistService.getPosition().then(pos => {
@@ -89,14 +89,14 @@ export class SuperListComponent implements OnInit {
           uidUnit: superlistUnit,
           uidUser: this.inputUserid.nativeElement.value
         };
-        console.log(superlistInfo);
+       // console.log(superlistInfo);
         this.superlistService.superListCollection(superlistInfo);
         this.superlistForm.reset("");
         //this.router.navigate(['/home']);
       }
     }
     catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 

@@ -10,7 +10,7 @@ export class FilterCategoryPipe implements PipeTransform {
     const resultPosts = [];
     for (const post of value) {
       if (post.uidCategory == arg) {
-        console.log(post.uidCategory)
+       // console.log(post.uidCategory)
         resultPosts.push(post);
       };
     };

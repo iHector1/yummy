@@ -92,7 +92,7 @@ export class CrearRecetasComponent implements OnInit {
 
   ngOnInit(): void {
     this.user$.subscribe(user => {
-      console.log(user.uid);
+      //console.log(user.uid);
       this.firestore.collection('premiunCreator', ref => ref.where('uidUser', '==', user.uid)).valueChanges().subscribe(
         premium => {
           if (premium[0]) {
@@ -100,7 +100,7 @@ export class CrearRecetasComponent implements OnInit {
           } else {
             this.creatorPremium = true;
           }
-          console.log(this.creatorPremium);
+         // console.log(this.creatorPremium);
         }
       )
     });
@@ -170,15 +170,15 @@ export class CrearRecetasComponent implements OnInit {
           recipePremium:booelanPremium,
         };
         this.noti.sendEmailRecipe(this.inputUserid.nativeElement.value);
-        console.log(recipeInfo);
+       // console.log(recipeInfo);
         this.RecipeService.RecipeDataAdd(recipeInfo);
         this.RecipeService.RecipeDataAddRecipe(recipeInfo);
         this.router.navigate(['/home']);
      }
-      console.log(booelanPremium);
+     // console.log(booelanPremium);
     }
     catch (error) {
-      console.log(error);
+     // console.log(error);
     }
   }
 
@@ -244,7 +244,7 @@ export class CrearRecetasComponent implements OnInit {
 
   }
   onUpload(e) {
-    console.log(e);
+   // console.log(e);
     const id = Math.random().toString(36).substring(2);
     const file = e.target.files[0];
     const filePath = `Imagephoto/profile_${id}`;
@@ -271,7 +271,7 @@ export class CrearRecetasComponent implements OnInit {
       } else if (this.advanced>1) {
         this.typeCook = 40;
       }
-      console.log("comun ",this.common," medida", this.measureco, " avanzado",this.advanced,"puntaje",this.typeCook);
+      //console.log("comun ",this.common," medida", this.measureco, " avanzado",this.advanced,"puntaje",this.typeCook);
     }
     else{
       window.alert("La casilla del utensilio esta vacia, porfavor intenta de nuevo");

@@ -21,7 +21,7 @@ export class PlanRecipeComponent implements OnInit {
     time:new FormControl('')
   });
   constructor(public dialog: MatDialog, private router: Router, private afs: AngularFirestore,private _adapter: DateAdapter<any>) {
-    console.log(this.router.url.slice(8));
+   // console.log(this.router.url.slice(8));
     this.foodTime = this.afs.collection('foodTime').valueChanges();
     this._adapter.setLocale('mex');
    }
@@ -36,7 +36,7 @@ export class PlanRecipeComponent implements OnInit {
     }else if (time == "") {
       window.alert('Completa todos los campos');
     } else {
-      console.log(date,time); 
+      //console.log(date,time); 
     }
    
     

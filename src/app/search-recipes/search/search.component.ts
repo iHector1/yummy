@@ -44,7 +44,7 @@ export class SearchComponent implements OnInit {
         this.recipes.push(x);
       });
     })
-    console.log(this.recipes);
+   // console.log(this.recipes);
   }
 
 

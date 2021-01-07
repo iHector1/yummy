@@ -62,7 +62,7 @@ export class CreateStreamingComponent implements OnInit {
       this.ingredient.push(this.streamForm.controls.uidsIngredients.value["nameIngredient"]);
       this.unit.push(this.streamForm.controls.uidsUnit.value["unitName"]);
       this.cant.push( this.inputCant.nativeElement.value);
-      console.log(this.ingredient);
+    //  console.log(this.ingredient);
     }
     else {
       window.alert('ingrese todos los datos por favor');
@@ -100,7 +100,7 @@ export class CreateStreamingComponent implements OnInit {
         uidUser: this.uidUser,
         nameDisplay: this.displayName
       };
-      console.log(data);
+      //console.log(data);
      this.streamService.create_streaming(data);
       this.router.navigate(['/home']);
     }

@@ -129,13 +129,13 @@ export class ConfirguracionComponent implements OnInit {
     this.router.navigate(['/verificacion']);
     }    
     else {
-      console.log("verifica muy bien tus datos de usuario")
+      //console.log("verifica muy bien tus datos de usuario")
     }
   }
 
   //Envio de la foto de perfil a la base de datos
  onUpload(e) {
-    console.log(e);
+    //console.log(e);
     const id = Math.random().toString(36).substring(2);
     const file = e.target.files[0];
     const filePath = `photoUser/profile_${id}`;

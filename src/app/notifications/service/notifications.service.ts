@@ -27,16 +27,16 @@ export class NotificationsService {
   }
 
   sendEmailComment(uidRecipe) {
-    console.log('si envio 1');
+   // console.log('si envio 1');
     let use1 = true;
     this.afs.collection('infoRecipe', ref => ref.where('uid', '==', uidRecipe)).valueChanges().subscribe(recipe => {
       if (recipe[0]) {
         const recipes: any = recipe[0];
-    console.log('si envio 2');
+   // console.log('si envio 2');
         this.afs.collection('users', ref => ref.where('uid', '==', recipes.uidUser)).valueChanges().subscribe(user => {
           if (user[0]) {
             const user1: any = user[0];
-            console.log('si envio 3');
+         //   console.log('si envio 3');
             if (use1==true) {
               this.afs.collection('mail').add({
             uidUser:user1.uid,
@@ -60,11 +60,11 @@ export class NotificationsService {
     this.afs.collection('infoRecipe', ref => ref.where('uid', '==', uidRecipe)).valueChanges().subscribe(recipe => {
       if (recipe[0]) {
         const recipes: any = recipe[0];
-    console.log('si envio 2');
+   // console.log('si envio 2');
         this.afs.collection('users', ref => ref.where('uid', '==', recipes.uidUser)).valueChanges().subscribe(user => {
           if (user[0]) {
             const user1: any = user[0];
-            console.log('si envio 3');
+          //  console.log('si envio 3');
             if (use1==true) {
               this.afs.collection('mail').add({
                 uidUser:user1.uid,
@@ -84,7 +84,7 @@ export class NotificationsService {
   }
 
   sendEmailAnswer(uidHelp) {
-    console.log('entro');
+  //  console.log('entro');
     let bander = true;
     this.afs.collection('help', ref => ref.where('uid', '==', uidHelp)).valueChanges().subscribe(recipe => {
       if (recipe[0]) {
@@ -93,7 +93,7 @@ export class NotificationsService {
           if (user[0]) {
             let infoUser: any = user[0];
             if (bander == true) {
-              console.log('si funciono pero no se porque no ');
+           //  console.log('si funciono pero no se porque no ');
               this.afs.collection('mail').add({
                 uidUser:infoUser.uid,
                 to: infoUser.email,
@@ -112,14 +112,14 @@ export class NotificationsService {
 
   sendEmailRecipe(uidUser) {
     this.afs.collection<any>('follower/'+uidUser+'/users').valueChanges().subscribe(user=>{
-            console.log("hola", uidUser);
+           // console.log("hola", uidUser);
             let contact = [];
             user.forEach( ( x ) => {
-              console.log(x.uid);
+           //   console.log(x.uid);
               this.emailRecipe(x.uid,uidUser);
               contact.push( x );
             });
-      console.log(contact);
+     // console.log(contact);
     })
   }
 
@@ -129,7 +129,7 @@ export class NotificationsService {
       if (user[0]) {
         const infoUser: any = user[0]
         if (bander == true) {
-          console.log('si funciono pero no se porque no ');
+        //  console.log('si funciono pero no se porque no ');
           this.afs.collection('mail').add({
             uidUser:infoUser.uid,
             to: infoUser.email,
@@ -146,14 +146,14 @@ export class NotificationsService {
 
   sendEmailStrem(uidUser,info_stream:stream) {
     this.afs.collection<any>('follower/'+uidUser+'/users',ref=>ref.where('userPremium',"==",true)).valueChanges().subscribe(user=>{
-      console.log("hola", uidUser);
+     // console.log("hola", uidUser);
       let contact = [];
       user.forEach( ( x ) => {
-        console.log(x.uid);
+      //  console.log(x.uid);
         this.emailStream(x.uid,info_stream.uid,info_stream.date);
         contact.push( x );
       });
-console.log(contact);
+//console.log(contact);
 })
   }
 
@@ -163,7 +163,7 @@ console.log(contact);
       if (user[0]) {
         const infoUser: any = user[0]
         if (bander == true) {
-          console.log('si funciono pero no se porque no ');
+      //    console.log('si funciono pero no se porque no ');
           this.afs.collection('mail').add({
             uidUser:infoUser.uid,
             to: infoUser.email,

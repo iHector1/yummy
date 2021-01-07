@@ -21,7 +21,7 @@ export class NewestComponent implements OnInit {
 
                 this.contact.push( x );
             } );
-console.log(this.contact);
+//console.log(this.contact);
     }, err => { });
     
     this.options1 = {

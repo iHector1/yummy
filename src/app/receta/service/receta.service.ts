@@ -19,7 +19,7 @@ export class RecetaService {
 
   //Agregar receta a la colection
   public RecipeDataAdd(recipe: infoRecipe) {
-    console.log(recipe);
+   // console.log(recipe);
     const userRef: AngularFirestoreDocument<infoRecipe> = this.afs.doc(
       `infoRecipe/${recipe.uid}`
     );
@@ -28,7 +28,7 @@ export class RecetaService {
 
   //agregar receta a la colleciont recipe
   public RecipeDataAddRecipe(recipe: infoRecipe) {
-    console.log(recipe);
+   // console.log(recipe);
     const userRef: AngularFirestoreDocument<infoRecipe> = this.afs.doc(
       `recipe/${recipe.uid}`
     );

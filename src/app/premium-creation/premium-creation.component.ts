@@ -52,7 +52,7 @@ export class PremiumCreationComponent implements OnInit {
     this.router.navigate(['/home']);
   }
   onUpload(e) {
-    console.log(e);
+   // console.log(e);
     const file = e.target.files[0];
     if (file.size <2000000) {
       const id = Math.random().toString(36).substring(2);
@@ -61,7 +61,7 @@ export class PremiumCreationComponent implements OnInit {
     const task = this.storage.upload(filePath, file);
     this.uploadPercent = task.percentageChanges();
     task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe(value => {
-      console.log(this.urlImage);
+      //console.log(this.urlImage);
     });
     this.controlVideo = true;
     } else {
@@ -71,11 +71,11 @@ export class PremiumCreationComponent implements OnInit {
     
   }
   getDuration(e) {
-    console.log(this.urlImage);
+   // console.log(this.urlImage);
     const duration = e.target.duration;
     if (duration>60) {
       this.controlVideo = false;
-      console.log("el video debe de durar menos de un minuto")
+      //console.log("el video debe de durar menos de un minuto")
     } else {
       this.controlVideo = true;
     }

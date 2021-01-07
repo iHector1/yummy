@@ -24,7 +24,7 @@ export class StepsComponent implements OnInit {
   uidUser: string=null;
   constructor(private router: Router, private afs: AngularFirestore,private auth:AuthService,private stepsService:StepsService) {
     const id = this.router.url.slice(7);
-    console.log(id);
+   // console.log(id);
     this.afs.collection('infoRecipe', ref => ref.where('uid', '==', id)).valueChanges().subscribe(recipe => {
       if (recipe[0]) {
         const infoRecipe: any = recipe[0];
@@ -35,13 +35,13 @@ export class StepsComponent implements OnInit {
         this.lenghtSteps = this.steps.length;
         this.imagePosition = this.stepImage[0];
         this.stepPositions = this.steps[0];
-        console.log(this.imagePosition, this.steps);
-        console.log(this.Technique);
+     //   console.log(this.imagePosition, this.steps);
+      //  console.log(this.Technique);
       }
     });
     this.user$.subscribe(user => {
       this.uidUser = user.uid;
-      console.log(this.uidUser);
+    //  console.log(this.uidUser);
     })
    }
   user$: Observable<User> = this.auth.afAuth.user;

@@ -15,7 +15,7 @@ export class NotificationsComponent implements OnInit {
   constructor(private afs: AngularFirestore,private router:Router) {
     this.noti =this.afs.collection('mail', ref => ref.where('uidUser', '==', this.router.url.slice(16)).orderBy('delivery.startTime','desc')).valueChanges();
     this.noti.subscribe(notifi => {
-      console.log(notifi);
+    // console.log(notifi);
     })
    }
 

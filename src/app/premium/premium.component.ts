@@ -24,7 +24,7 @@ export class PremiumComponent implements OnInit {
   userPremium: string;
 
   constructor(private router: Router, private afs:AngularFirestore,private auth:AuthService,private follow:FollowService) {
-    console.log(this.router.url.slice(13));
+   // console.log(this.router.url.slice(13));
     this.afs.collection('premiunAd', ref => ref.where("uid", '==', this.router.url.slice(13))).valueChanges().subscribe(ad => {
       if (ad[0]) {
         const adVar: any = ad[0];
@@ -32,7 +32,7 @@ export class PremiumComponent implements OnInit {
         this.cost = adVar.cost;
         this.paypalAccount = adVar.paypalAccount;
         this.urlVideo = adVar.urlVideo;
-        console.log(this.urlVideo);
+       // console.log(this.urlVideo);
         this.afs.collection('infoUser', ref => ref.where("uid", "==", adVar.uid)).valueChanges().subscribe(user => {
           if (user[0]) {
             const infoUser: any = user[0];
@@ -49,7 +49,7 @@ export class PremiumComponent implements OnInit {
          this.paypalButtons = true;
        }
       else {
-        console.log("sientro pero no sirvo")
+       // console.log("sientro pero no sirvo")
         this.paypalButtons = false;
        }
      });
@@ -73,13 +73,13 @@ export class PremiumComponent implements OnInit {
       },
       onApprove: async (data, actions) => {
         const order = await actions.order.capture();
-        console.log(order);
+       // console.log(order);
         this.follow.followPremium(this.router.url.slice(13), this.userPremium);
         window.alert("Gracias por suscribirte!");
         this.router.navigate(['/home']);
       },
       onError: err =>{
-        console.log(err);
+       // console.log(err);
         
       },
       style: {

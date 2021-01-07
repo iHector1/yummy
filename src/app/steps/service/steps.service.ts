@@ -25,7 +25,7 @@ export class StepsService {
 
     if (this.bander == true) {
       const totalPoints = pointsAdd + pointsUser;
-      console.log(pointsAdd, pointsUser);
+     // console.log(pointsAdd, pointsUser);
       window.alert(`Tienes ${totalPoints} puntos`);
       this.afs.collection('infoUser').doc(uidUser).set({ points: totalPoints }, { merge: true });
       if (totalPoints >= 2200 && totalPoints < 3200 &&uidLevel!='NmKowqg5p15ZuQBxPVLB') {

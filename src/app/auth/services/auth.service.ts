@@ -40,11 +40,11 @@ export class AuthService extends RoleValidator{
       );
       this.exist(user);
       if (this.userExist) {
-        console.log("si existo",this.user$);
+        //console.log("si existo",this.user$);
         return user;
       }
     } catch (error) {
-      console.log(error);
+     // console.log(error);
     }
   }
   //metodo para el login con facebook
@@ -55,12 +55,12 @@ export class AuthService extends RoleValidator{
       );
       this.exist(user);
       if (this.userExist) {
-        console.log("si existo",this.user$);
+        //console.log("si existo",this.user$);
         return user;
       }
     }
     catch (error) {
-      console.log(error);
+      //console.log(error);
     }
 
   }
@@ -69,7 +69,7 @@ export class AuthService extends RoleValidator{
     try {
       return this.afAuth.sendPasswordResetEmail(email);//envio de correo electronico
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 
@@ -122,7 +122,7 @@ export class AuthService extends RoleValidator{
     try {
       await this.afAuth.signOut();
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 
@@ -178,7 +178,7 @@ export class AuthService extends RoleValidator{
     console.log(user.uid);
    await this.afs.collection('infoUser', ref => ref.where('uidUser','==',user.uid)).valueChanges().subscribe(users => {
       if (users[0]) {
-        console.log("sie xisto", users.values.toString());
+       // console.log("sie xisto", users.values.toString());
         this.userExist = true;
       } else {
         this.updateUserData(user);

@@ -59,7 +59,7 @@ export class ListComponent implements OnInit {
   }
   onFormSubmit(form: NgForm): void {
     const {search} = form.value;
-    console.log(search);
+   // console.log(search);
 
     if (form.invalid) {
       return;

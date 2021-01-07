@@ -40,7 +40,7 @@ export class Navbar2Component implements OnInit {
     try {
       await this.authSvc.logout();
     } catch (error) {
-      console.log(error);
+    //  console.log(error);
     }
   }
 }

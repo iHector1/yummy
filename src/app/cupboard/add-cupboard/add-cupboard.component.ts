@@ -68,13 +68,13 @@ export class AddCupboardComponent implements OnInit {
            uidUnit: cupboardUnit,
            uidUser: this.inputUserid.nativeElement.value
          };
-         console.log(cupboardInfo);
+        // console.log(cupboardInfo);
          this.cupboardService.cupboardCollection(cupboardInfo);
          this.cupboardForm.reset("");
       }
      }
      catch (error) {
-       console.log(error);
+       //console.log(error);
      }
    }
 

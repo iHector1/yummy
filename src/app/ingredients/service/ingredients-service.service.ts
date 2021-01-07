@@ -25,7 +25,7 @@ export class IngredientsServiceService {
            if (!this.uidIngredient["request"].some(x => x === uiserr)) {
              this.uidIngredient["request"].push(uiserr);
              this.requests=this.uidIngredient["request"];
-             console.log(this.uid, "  ", this.requests.length);
+             //console.log(this.uid, "  ", this.requests.length);
              this.ingredientDataUpdate(this.uidIngredient["request"],this.requests.length); 
              window.alert("Haz hecho una  solicitud a este ingrediente. ");
              this.flag2 = false;
@@ -46,7 +46,7 @@ export class IngredientsServiceService {
   }
   ingredientDataUpdate(request: any,requests:any) {
     this.flag = true;
-    console.log(this.uid, "  ", request);
+   // console.log(this.uid, "  ", request);
    this.afs.collection("ingredients")
     .doc(this.uid)
      .set({ request: request, requests: requests }, { merge: true });
@@ -54,9 +54,9 @@ export class IngredientsServiceService {
   }
 
   public ingredientDataAdd(ingredient: ingredient, food: any) {
-    console.log(food);
+    //console.log(food);
     let foood = food;
-     console.log(food);
+    // console.log(food);
     if (foood == "1") {
       this.uidkindfood = "oils";
     } else if (foood=="2") {
@@ -70,7 +70,7 @@ export class IngredientsServiceService {
     }
 
     this.flag = true;
-    console.log(ingredient);
+    //console.log(ingredient);
     const userRef: AngularFirestoreDocument<ingredient> = this.afs.doc(
       `${this.uidkindfood}/${ingredient.uid}`
     );
@@ -82,7 +82,7 @@ export class IngredientsServiceService {
   }
 
   ingredientDataAddtable(ingredient:ingredient) {
-    console.log(ingredient);
+   // console.log(ingredient);
     const userRef: AngularFirestoreDocument<ingredient> = this.afs.doc(
       `ingredients/${ingredient.uid}`
     );

@@ -42,7 +42,7 @@ public user$: Observable<User> = this.authService.afAuth.user;
     });
     this.subs = this.chatService.pathParam.subscribe(value => {
       this.paramValue = value;
-      console.log(this.paramValue);
+      //console.log(this.paramValue);
       this.afs.collection("rooms", ref => ref.where("id", '==', this.paramValue)).valueChanges().subscribe(room => {
         if (room[0]) {
           const uidRoom:any = room[0];
@@ -65,7 +65,7 @@ public user$: Observable<User> = this.authService.afAuth.user;
     
   }
   formSubmit(form: NgForm): void {
-    console.log("");
+   // console.log("");
     if (form.invalid) {
       return; 
     }

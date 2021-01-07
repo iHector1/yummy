@@ -107,7 +107,7 @@ export class UserComponent implements OnInit {
               followinguser => {
                 if (followinguser[0]) {
                   this.isFollowing = true;
-                  console.log("sie entro ");
+               //   console.log("sie entro ");
                 }
               });
             
@@ -118,8 +118,8 @@ export class UserComponent implements OnInit {
               this.isUserName = uiUser2.displayName;
             }
           })
-          console.log("primero: ", uiUser.uid, "segundo: ", this.isUser);
-          console.log(this.show);
+          // console.log("primero: ", uiUser.uid, "segundo: ", this.isUser);
+          // console.log(this.show);
         });
         
       }

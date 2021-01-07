@@ -69,7 +69,7 @@ export class CookWareRequestComponent implements OnInit {
      }
     }
     catch (error) {
-      console.log(error);
+     // console.log(error);
     }
   }
 
