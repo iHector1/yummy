@@ -5,6 +5,7 @@ import { PlanRecipeRoutingModule } from './plan-recipe-routing.module';
 import { PlanRecipeComponent } from './plan-recipe.component';
 import { AngularMaterialModule } from '../Angular_Material/angular_materia.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     CommonModule,
     PlanRecipeRoutingModule,
     AngularMaterialModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class PlanRecipeModule { }
