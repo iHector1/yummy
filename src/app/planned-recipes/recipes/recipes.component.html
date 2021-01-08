@@ -1,0 +1,13 @@
+
+
+      <div class="image" *ngFor="let reci of infoRecipe|async ">
+        <img class="card-img-top" mat-card-image src="{{reci.principalPhoto}}" alt="Pozole"/>
+      <div class="card-body">
+        <mat-card-title><a routerLink="/receta/{{reci.uid}}">{{reci.title}}</a></mat-card-title>
+        <div>
+             <mat-card-footer><a>{{date.seconds*1000|date:'dd/MM/yyyy'}}</a></mat-card-footer>
+        </div>
+       
+        <mat-card-footer *ngFor="let food of foodTime|async "><a>{{food.nameFoodTime}}</a></mat-card-footer>
+      </div>
+

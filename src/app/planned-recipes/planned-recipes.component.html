@@ -1,1 +1,19 @@
-<p>planned-recipes works!</p>
+<div class="card ml-2 mr-2 mt-2">
+  <div class="card-body">
+    <h1 class="text-center"> Recetas Planeadas </h1>
+    <div class="row">
+      <div
+        class="col-xs-12 col-sm-6 col-md-4"
+        *ngFor="let recipe of recipes | async"
+      >
+        <div class="card">
+          <app-recipes
+            [reciepe]="recipe.uidRecipe"
+            [time]="recipe.time"
+            [date]="recipe.date"
+          ></app-recipes>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
