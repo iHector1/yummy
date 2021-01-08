@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { plannedRecipe } from 'src/app/shared/models/plannedRecipe.interface';
 import { stream } from 'src/app/shared/models/stream.inteface';
 
 @Injectable({   
@@ -176,5 +177,30 @@ export class NotificationsService {
         }
       }
     })
+  }
+
+  senEmailPlanRecipe(recipe: plannedRecipe) {
+    let bander = true;
+    this.afs.collection('user', ref => ref.where('uid', '==', recipe.uidUser)).valueChanges().subscribe(user=>{
+      if (user[0]) { 
+        const infoUser: any = user[0];
+        this.afs.collection('foodTime', ref => ref.where('uid', '==', recipe.time)).valueChanges().subscribe(time => {
+          if (time[0]) {
+            const foodTime: any = time[0];
+            if (bander==true) {
+              this.afs.collection('mail').add({
+                uidUser:infoUser.uid,
+                to: infoUser.email,
+                message: {
+                  subject: 'Nueva Receta Planeada',
+                  html:`Tienes  ${foodTime.nameFoodTime} para el dia ${recipe.date.seconds*1000}!,<a href='https://recetasonlineyummy.com/receta/${recipe.uidRecipe}'>click aqui</a>`
+                  }
+                })
+                bander = false;
+            }
+          }
+        });
+      }
+  });
   }
 }

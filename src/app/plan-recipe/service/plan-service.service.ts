@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CupboardServiceService } from 'src/app/cupboard/service/cupboard-service.service';
+import { NotificationsService } from 'src/app/notifications/service/notifications.service';
 import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 import { plannedRecipe } from 'src/app/shared/models/plannedRecipe.interface';
 import { superList } from 'src/app/shared/models/superList.interface';
@@ -11,7 +12,7 @@ import { SuperlistService } from 'src/app/super-list/service/superlist.service';
 })
 export class PlanServiceService {
 
-  constructor(private afs: AngularFirestore,private superListService:SuperlistService,private cupboardService:CupboardServiceService) { }
+  constructor(private afs: AngularFirestore,private superListService:SuperlistService,private cupboardService:CupboardServiceService,private notifi:NotificationsService) { }
   
   add(recipe: plannedRecipe) {
     let bander = true;
@@ -24,6 +25,7 @@ export class PlanServiceService {
           this.afs.collection('plannedRecipe').doc(recipe.uid).set(recipe);
           this.cupboardUpdate(recipe);
           window.alert('Receta Planeada!');
+          this.notifi.senEmailPlanRecipe(recipe);
           bander = false;
         }
       }
