@@ -1,11 +1,14 @@
 
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {DateAdapter} from '@angular/material/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from '../auth/services/auth.service';
+import { plannedRecipe } from '../shared/models/plannedRecipe.interface';
+import { PlanServiceService } from './service/plan-service.service';
 
 @Component({
   selector: 'app-plan-recipe',
@@ -20,10 +23,11 @@ export class PlanRecipeComponent implements OnInit {
     date: new FormControl(''),
     time:new FormControl('')
   });
-  constructor(public dialog: MatDialog, private router: Router, private afs: AngularFirestore,private _adapter: DateAdapter<any>) {
-   // console.log(this.router.url.slice(8));
+  constructor(public dialog: MatDialog, private router: Router, private afs: AngularFirestore,private _adapter: DateAdapter<any>,@Inject(MAT_DIALOG_DATA) public data: plannedRecipe,private planService:PlanServiceService) {
+   // 
     this.foodTime = this.afs.collection('foodTime').valueChanges();
     this._adapter.setLocale('mex');
+    //console.log(data.uidUser);
    }
 
   ngOnInit(): void {
@@ -36,7 +40,15 @@ export class PlanRecipeComponent implements OnInit {
     }else if (time == "") {
       window.alert('Completa todos los campos');
     } else {
-      //console.log(date,time); 
+      const id = Math.random().toString(36).substring(2);
+      const plannedRecipe: plannedRecipe = {
+        uid: id,
+        uidRecipe: this.router.url.slice(8),
+        uidUser: this.data.uidUser,
+        time: time,
+        date:date
+      };
+     this.planService.add(plannedRecipe);
     }
    
     

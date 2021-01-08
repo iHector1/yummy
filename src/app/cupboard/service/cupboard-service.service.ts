@@ -17,21 +17,23 @@ export class CupboardServiceService {
   constructor(private afs: AngularFirestore) { }
 
   public cupboardCollection(myCupboard: myCupboard): void {
-    this.flag2 = true;
-    this.flag = true;
-    if (this.flag2) {
+    let flag2 = true;
+    let flag = true;
+    if (flag2) {
       this.afs.collection('myCupboard', ref => ref.where('uidUser', '==', myCupboard.uidUser).where('uidIngredient', '==', myCupboard.uidIngredient).where('uidUnit', '==', myCupboard.uidUnit)).valueChanges().subscribe(users => {
-        if(this.flag){
-        if (users[0]) {
+        if(flag){
+          if (users[0]) {
+          flag2 = false;
+          flag = false;
           this.list = users[0];
           this.cant = this.list['cant'];
           this.myCupboardUpdate(myCupboard);
           window.alert("Lista actualizada");
         } else {
+          flag2 = false;
+          flag = false;
           this.myCupboardDataAdd(myCupboard);
           window.alert("Ingrediente en la alacena");
-          this.flag2 = false;
-          this.flag = false;
           }
         }
       });
@@ -40,9 +42,7 @@ export class CupboardServiceService {
 
   //Actualizar la alacena
   myCupboardUpdate(myCupboard: myCupboard) {
-    let c = this.cant + myCupboard.cant;
-    this.flag2 = false;
-    this.flag = false;
+    let c = Number(this.cant) + Number(myCupboard.cant);
    this.afs.collection('myCupboard')
     .doc(this.list['uid'])
      .set({ cant:c }, { merge: true });
@@ -68,4 +68,7 @@ export class CupboardServiceService {
     const items=this.afs.collection('myCupboard', ref => ref.where("uidUser", "==", userUid)).doc(uidproduct).delete();
  }
 
+  substracItem(cant,uidDoc) {
+    this.afs.collection('myCupboard').doc(uidDoc).set({cant:cant},{merge:true});
+  }
 }

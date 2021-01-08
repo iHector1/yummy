@@ -301,6 +301,6 @@ export class VistaRecetaComponent implements OnInit {
     
   }
   openDialog() {
-    const dialogRef = this.dialog.open(PlanRecipeComponent);
+    const dialogRef = this.dialog.open(PlanRecipeComponent, { data: { uidUser: this.isUser } });
   }
 }
