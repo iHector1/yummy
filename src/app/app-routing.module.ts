@@ -41,6 +41,7 @@ const routes: Routes = [
   { path: 'crear-streaming', loadChildren: () => import('./streaming/create-streaming/create-streaming.module').then(m => m.CreateStreamingModule) },
   { path: 'recetas_planeadas/:id', loadChildren: () => import('./planned-recipes/planned-recipes.module').then(m => m.PlannedRecipesModule) },
   { path: 'planear_receta', loadChildren: () => import('./plan-recipe/plan-recipe.module').then(m => m.PlanRecipeModule) },
+  { path: 'opciones', loadChildren: () => import('./option-recipe/option-recipe.module').then(m => m.OptionRecipeModule) },
   {
     path: '**',
     component:PageNotFoundComponent

@@ -44,7 +44,7 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
     ShareButtonsModule.withConfig({
       debug: true
     }),
-    ShareIconsModule
+    ShareIconsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

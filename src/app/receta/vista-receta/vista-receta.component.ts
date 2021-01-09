@@ -14,7 +14,9 @@ import { ChatService } from 'src/app/chat/service/chat.service';
 import { RecipeSavedComponent } from 'src/app/recipe-saved/recipe-saved.component';
 import { RecipeSavedService } from 'src/app/recipe-saved/service/recipe-saved.service';
 import { PlanRecipeComponent } from '../../plan-recipe/plan-recipe.component';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { OptionRecipeComponent } from 'src/app/option-recipe/option-recipe.component';
+
 @Component({
   selector: 'app-vista-receta',
   templateUrl: './vista-receta.component.html',
@@ -62,6 +64,7 @@ export class VistaRecetaComponent implements OnInit {
   starCount=new Array();
   premiumRecipe: boolean;
   uidRecipe: any;
+  isUser2: any;
   constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService,private saveService:RecipeSavedService,private dialog: MatDialog) { 
   }
   public user$: Observable<User> = this.auth.afAuth.user;
@@ -160,6 +163,7 @@ export class VistaRecetaComponent implements OnInit {
       if (user[0]) {
         const uiUser:any = user[0];
         this.displayName = uiUser.displayName;
+        this.isUser2 = uiUser.uid;
         this.user$.subscribe(user => {
           this.isUser = user.uid;
           if (this.isUser == uiUser.uid ||this.isUser==null||this.isUser==undefined||this.isUser=="") {
@@ -302,5 +306,14 @@ export class VistaRecetaComponent implements OnInit {
   }
   openDialog() {
     const dialogRef = this.dialog.open(PlanRecipeComponent, { data: { uidUser: this.isUser } });
+  }
+  openOptions() {
+    let equal:boolean;
+    if (this.isUser==this.isUser2) {
+      equal = true;
+    } else {
+      equal = false;
+    }
+    this.dialog.open(OptionRecipeComponent, { data:equal});
   }
 }

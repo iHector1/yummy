@@ -1,0 +1,37 @@
+
+<mat-nav-list *ngIf='data==true'>
+    <a  mat-list-item  >
+        <span mat-line>Eliminar Receta</span>
+      </a>
+    
+      <a mat-list-item  >
+        <span mat-line>Editar Receta</span>
+      </a>
+</mat-nav-list>
+<mat-nav-list *ngIf='data==false'> 
+    <a  mat-list-item  (click)='firstOption()'>
+        <span mat-line>La receta no es coherente</span>
+        <span mat-line>El contenido de la receta no cumple con el objetivo esperado.</span>
+      </a>
+    
+      <a  mat-list-item  (click)='secondOption()'>
+        <span mat-line>Contenido inapropiado</span>
+        <span mat-line>La receta contiene fotos que no van de acuerdo a la descripción de los pasos</span>
+      </a>
+</mat-nav-list>
+<form [formGroup]="optionForm" >
+    <mat-form-field class="col-md-9 col-sm-12 mt-5" appearance="fill" *ngIf='!bander'>
+    <input
+    formControlName="coment"
+      matInput
+      placeholder="Inserta una pregunta"
+      required
+    />
+  </mat-form-field> 
+</form>
+<mat-dialog-actions align="end" *ngIf='data==false'>
+    <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary"[disabled]='bander' (click)='optionSubmit()'>
+      Confirmar
+    </button> 
+  </mat-dialog-actions> 
