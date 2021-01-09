@@ -65,6 +65,7 @@ export class VistaRecetaComponent implements OnInit {
   premiumRecipe: boolean;
   uidRecipe: any;
   isUser2: any;
+  showOption: boolean=false;
   constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService,private saveService:RecipeSavedService,private dialog: MatDialog) { 
   }
   public user$: Observable<User> = this.auth.afAuth.user;
@@ -168,8 +169,10 @@ export class VistaRecetaComponent implements OnInit {
           this.isUser = user.uid;
           if (this.isUser == uiUser.uid ||this.isUser==null||this.isUser==undefined||this.isUser=="") {
             this.show = false;  
+            this.showOption = true;
         }
-        else {
+          else {
+            this.showOption = true;
             this.show = true;
             this.follow.isFollowing(uid, this.isUser).subscribe(
               followinguser => {

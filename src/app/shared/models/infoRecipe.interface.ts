@@ -25,6 +25,7 @@ export interface infoRecipe{
   timeStamp?: Date;  //aqui
   stars?: number;
   request?: string[];
+  reports?: string[];
   recipePremium?: boolean;
 }
  
