@@ -42,6 +42,7 @@ const routes: Routes = [
   { path: 'recetas_planeadas/:id', loadChildren: () => import('./planned-recipes/planned-recipes.module').then(m => m.PlannedRecipesModule) },
   { path: 'planear_receta', loadChildren: () => import('./plan-recipe/plan-recipe.module').then(m => m.PlanRecipeModule) },
   { path: 'opciones', loadChildren: () => import('./option-recipe/option-recipe.module').then(m => m.OptionRecipeModule) },
+  { path: 'actualizar_receta/:id', loadChildren: () => import('./update-recipe/update-recipe.module').then(m => m.UpdateRecipeModule) },
   {
     path: '**',
     component:PageNotFoundComponent

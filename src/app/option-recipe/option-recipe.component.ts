@@ -2,11 +2,12 @@ import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, FormControlName, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/services/auth.service';
 import { User } from '../shared/models/user.inteface';
+import { UpdateRecipeComponent } from '../update-recipe/update-recipe.component';
 import { OptionServiceService } from './service/option-service.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class OptionRecipeComponent implements OnInit {
   });
   uidUser: string;
   nameOption: string;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private afs: AngularFirestore, private auth:AuthService,private optionService: OptionServiceService) { 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private afs: AngularFirestore, private auth:AuthService,private optionService: OptionServiceService,private dialog: MatDialog) { 
     this.user$.subscribe(user => {
       this.uidUser = user.uid;
     });
@@ -39,7 +40,10 @@ export class OptionRecipeComponent implements OnInit {
     this.bander = false;
     this.option = 2;
   }
-  delete() {
+  updateData() {
+    this.dialog.open(UpdateRecipeComponent);
+  }
+  deleteData() {
     this.afs.collection('infoRecipe').doc(this.router.url.slice(8)).delete();
     this.afs.collection('recipe').doc(this.router.url.slice(8)).delete();
   }

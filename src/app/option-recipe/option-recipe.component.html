@@ -1,25 +1,23 @@
 
 <mat-nav-list *ngIf='data==true'>
-    <a  mat-list-item  >
-        <span mat-line>Eliminar Receta</span>
+    <a  mat-list-item  mat-dialog-close>
+        <span mat-line (click)="deleteData()">Eliminar Receta</span>
       </a>
     
-      <a mat-list-item  >
+      <a mat-list-item (click)='updateData()' mat-dialog-close>
         <span mat-line>Editar Receta</span>
       </a>
 </mat-nav-list>
 <mat-nav-list *ngIf='data==false'> 
     <a  mat-list-item  (click)='firstOption()'>
         <span mat-line>La receta no es coherente</span>
-        <span mat-line>El contenido de la receta no cumple con el objetivo esperado.</span>
       </a>
     
       <a  mat-list-item  (click)='secondOption()'>
         <span mat-line>Contenido inapropiado</span>
-        <span mat-line>La receta contiene fotos que no van de acuerdo a la descripción de los pasos</span>
       </a>
 </mat-nav-list>
-<form [formGroup]="optionForm" >
+<form [formGroup]="optionForm" > 
     <mat-form-field class="col-md-9 col-sm-12 mt-5" appearance="fill" *ngIf='!bander'>
     <input
     formControlName="coment"
