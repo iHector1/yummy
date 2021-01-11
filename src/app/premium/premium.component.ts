@@ -73,7 +73,7 @@ export class PremiumComponent implements OnInit {
       },
       onApprove: async (data, actions) => {
         const order = await actions.order.capture();
-       // console.log(order);
+        console.log(order);
         this.follow.followPremium(this.router.url.slice(13), this.userPremium);
         window.alert("Gracias por suscribirte!");
         this.router.navigate(['/home']);

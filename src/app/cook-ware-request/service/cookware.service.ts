@@ -22,10 +22,10 @@ export class CookwareService {
   //Verificar existencia del utensilio
   public CookwareData(cookware: cookWare,uiserr:any): void{
     if (this.flag2) {
-      this.afs.collection('cookWare', ref => ref.where('nameCookWare', '==', cookware.nameCookWare)).valueChanges().subscribe(users => {
-        if (users[0]) {
+      this.afs.collection('cookWare', ref => ref.where('nameCookWare', '==', cookware.nameCookWare)).valueChanges().subscribe(cookWare => {
+        if (cookWare[0]) {
          if (this.flag == false) {
-            this.uidCookWare = users[0];
+            this.uidCookWare = cookWare[0];
            this.uid = this.uidCookWare["uid"];
            if (this.uidCookWare["requests"] < 3) {
              //verifica que el usuario no haya hecho solicitud otra vez

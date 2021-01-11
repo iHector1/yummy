@@ -66,6 +66,7 @@ export class VistaRecetaComponent implements OnInit {
   uidRecipe: any;
   isUser2: any;
   showOption: boolean=false;
+  userN: boolean;
   constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService,private saveService:RecipeSavedService,private dialog: MatDialog) { 
   }
   public user$: Observable<User> = this.auth.afAuth.user;
@@ -104,11 +105,10 @@ export class VistaRecetaComponent implements OnInit {
         this.photoStep = recipeVar.stepsPhoto;
        // console.log(this.cant.length);
         this.saveCheck();
-        
         this.oneIngredient(this.portions);
      }
     });
-    this.url =  'https://github.com/MurhafSousli/ngx-sharebuttons/issues/262';
+    this.url ="https://recetasonlineyummy.com/"+this.router.url;
   
     
   }
@@ -160,26 +160,41 @@ export class VistaRecetaComponent implements OnInit {
   }
   //checar usuario 
   user(uid, premium) {
+    console.log("si entro awevo que si 1");
     this.auth.getUser(uid).subscribe(user => {
+    console.log("si entro awevo que si 2");
       if (user[0]) {
+        console.log("si entro awevo que si 3");
         const uiUser:any = user[0];
         this.displayName = uiUser.displayName;
         this.isUser2 = uiUser.uid;
-        this.user$.subscribe(user => {
-          this.isUser = user.uid;
+          this.user$.subscribe(user => {
+            try {
+              this.isUser = user.uid;
+            } catch (err) {
+              console.log(err)
+            }
+            this.userN = false;
+            if (!this.isUser && this.premiumRecipe==true) {
+              this.router.navigate([`/ver_premium/${uiUser.uid}`]);
+            } console.log("si entro awevo que si 4");
           if (this.isUser == uiUser.uid ||this.isUser==null||this.isUser==undefined||this.isUser=="") {
             this.show = false;  
             this.showOption = true;
-        }
+             this.userN = true;
+            console.log(this.isUser);
+          } 
           else {
             this.showOption = true;
             this.show = true;
+            this.userN = true;
             this.follow.isFollowing(uid, this.isUser).subscribe(
               followinguser => {
                 if (followinguser[0]) {
                   this.isFollowing = true;
                   const follow: any = followinguser[0];
-                 // console.log(premium)
+                  console.log(premium);
+                  this.userN=true
                   if (premium==true) {
                     this.checkUserPremium(follow);
                   }
@@ -187,16 +202,17 @@ export class VistaRecetaComponent implements OnInit {
                 }
               });
             
-          }
+          } 
           this.auth.getUser(this.isUser).subscribe(user2 => {
             if (user2[0]) {
               const uiUser2 :any= user2[0];
               this.isUserName = uiUser2.displayName;
             }
           })
-       // console.log("primero: ",uiUser.uid,"segundo: ",this.isUser);
+        console.log("primero: ",uiUser.uid,"segundo: ",this.isUser);
        // console.log(this.show);
         });
+        
         
       }
       
@@ -204,8 +220,9 @@ export class VistaRecetaComponent implements OnInit {
   }
   checkUserPremium(follow: any) {
     //(follow.userPremium);
-    if (follow.userPremium == false) {
-      //console.log("si entro pero no funciono");
+    console.log(this.userN);
+    if (follow.userPremium == false ||this.userN==false) {
+      console.log("si entro pero no funciono");
       this.router.navigate([`/ver_premium/${follow.uidFollower}`]);
     }
   }

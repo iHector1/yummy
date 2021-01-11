@@ -54,7 +54,7 @@ export class PremiumCreationComponent implements OnInit {
   onUpload(e) {
    // console.log(e);
     const file = e.target.files[0];
-    if (file.size <2000000) {
+    if (file.size <20000000) {
       const id = Math.random().toString(36).substring(2);
     const filePath = `adPremium/profile_${id}`;
       const ref = this.storage.ref(filePath);
