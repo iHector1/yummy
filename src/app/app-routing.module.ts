@@ -43,6 +43,7 @@ const routes: Routes = [
   { path: 'planear_receta', loadChildren: () => import('./plan-recipe/plan-recipe.module').then(m => m.PlanRecipeModule) },
   { path: 'opciones', loadChildren: () => import('./option-recipe/option-recipe.module').then(m => m.OptionRecipeModule) },
   { path: 'actualizar_receta/:id', loadChildren: () => import('./update-recipe/update-recipe.module').then(m => m.UpdateRecipeModule) },
+  { path: 'updateUser', loadChildren: () => import('./update-user/update-user.module').then(m => m.UpdateUserModule) },
   {
     path: '**',
     component:PageNotFoundComponent

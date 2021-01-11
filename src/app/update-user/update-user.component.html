@@ -1,0 +1,19 @@
+<h1 class="text-center">Configuración</h1>
+<h2>Cambio de Estado</h2>
+<mat-form-field appearance="fill">
+    <mat-label required>Estado</mat-label>
+    <mat-select name="states" [(ngModel)]="state" required>
+      <mat-option (click)='updateState(state.uid)'
+        *ngFor="let state of states | async"
+        [value]="state.uid"
+     required >
+        {{ state.stateName }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+<h2>Cambiar foto de perfil</h2>
+<input type="file" id="inputImage" #inputImage (change)='onUpload($event)'  accept=".png">
+<button mat-raised-button color="primary" (click)="inputImage.click()"><mat-icon>image</mat-icon></button>
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close color="warn">Salir</button>
+</mat-dialog-actions>

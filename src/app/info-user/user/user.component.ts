@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { FollowService } from 'src/app/auth/services/follow.service';
 import { ChatService } from 'src/app/chat/service/chat.service';
 import { User } from 'src/app/shared/models/user.inteface';
+import { UpdateUserComponent } from 'src/app/update-user/update-user.component';
 
 @Component({
   selector: 'app-user',
@@ -29,12 +31,14 @@ export class UserComponent implements OnInit {
   colorButton: string;
 
   public user$: Observable<User> = this.auth.afAuth.user;
-  constructor(private firestore: AngularFirestore, private router: Router, private auth: AuthService, private follow: FollowService, private chat: ChatService) { }
+  userProfile: boolean;
+  constructor(private firestore: AngularFirestore, private router: Router, private auth: AuthService, private follow: FollowService, private chat: ChatService,private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.useruid = this.router.url.slice(9);
     this.isFollowing = false;
     this.premium = false;
+    this.userProfile = false;
     this.auth.getUser(this.useruid).subscribe(user => {
       if (user[0]) {
         const userVar: any = user[0];
@@ -60,10 +64,18 @@ export class UserComponent implements OnInit {
         this.user(this.useruid);
         this.recipes();
         this.followersandFollowings();
+        this.premiumUser(this.useruid);
       }
     });
 
 
+  }
+  premiumUser(useruid: any) {
+    this.firestore.collection('premiunCreator', ref => ref.where('uid', '==', useruid)).valueChanges().subscribe(user => {
+      if (user[0]) {
+        this.premium = true;
+      }
+    })
   }
   followersandFollowings() {
     this.follow.getFollowers(this.router.url.slice(9)).subscribe(follower => {
@@ -99,7 +111,7 @@ export class UserComponent implements OnInit {
           this.isUser = user.uid;
           if (this.isUser == uiUser.uid || this.isUser == null || this.isUser == undefined || this.isUser == "") {
             this.show = false;
-           
+            this.userProfile = true;
           }
           else {
             this.show = true;
@@ -135,4 +147,7 @@ export class UserComponent implements OnInit {
       return 'Seguir';
     }
   }
-}
+  openSetting() {
+    this.dialog.open(UpdateUserComponent);
+  }
+} 

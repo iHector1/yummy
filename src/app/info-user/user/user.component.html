@@ -20,6 +20,9 @@
       <button *ngIf="show" mat-flat-button class="ml-3" (click)="followUser()" color="{{colorButton}}">
         {{checkFollowing()}}
       </button>
+      <button *ngIf="userProfile" mat-raised-button color="accent" (click)='openSetting()' class="ml-3" >
+        <mat-icon>settings</mat-icon>
+      </button>
     </div>
 
     <div class="col-xs-12 col-sm-6 col-md-2">
