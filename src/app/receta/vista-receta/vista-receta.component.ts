@@ -160,11 +160,11 @@ export class VistaRecetaComponent implements OnInit {
   }
   //checar usuario 
   user(uid, premium) {
-    console.log("si entro awevo que si 1");
+    //console.log("si entro awevo que si 1");
     this.auth.getUser(uid).subscribe(user => {
-    console.log("si entro awevo que si 2");
+    //console.log("si entro awevo que si 2");
       if (user[0]) {
-        console.log("si entro awevo que si 3");
+        //console.log("si entro awevo que si 3");
         const uiUser:any = user[0];
         this.displayName = uiUser.displayName;
         this.isUser2 = uiUser.uid;
@@ -177,12 +177,12 @@ export class VistaRecetaComponent implements OnInit {
             this.userN = false;
             if (!this.isUser && this.premiumRecipe==true) {
               this.router.navigate([`/ver_premium/${uiUser.uid}`]);
-            } console.log("si entro awevo que si 4");
+            }// console.log("si entro awevo que si 4");
           if (this.isUser == uiUser.uid ||this.isUser==null||this.isUser==undefined||this.isUser=="") {
             this.show = false;  
             this.showOption = true;
              this.userN = true;
-            console.log(this.isUser);
+            //console.log(this.isUser);
           } 
           else {
             this.showOption = true;
