@@ -42,18 +42,18 @@ export class IngredientsComponent implements OnInit {
     try {
       const { ingredientName, kindFoodName, uidUnit } = this.ingredientForm.value;
       if (ingredientName == " ") {
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       } else if (ingredientName == "  ") {
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
       else if (ingredientName == "   ") {
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
       else if (ingredientName == "    ") {
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
       else if (ingredientName == "     ") {
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
       else {
         const id = Math.random().toString(36).substring(2);

@@ -66,18 +66,18 @@ export class SuperListComponent implements OnInit {
     try {
       const { superlistIngredients, superlistQuantity, superlistUnit } = this.superlistForm.value;
       if (superlistUnit == "" || superlistIngredients == "") {
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       } else if (superlistQuantity == " ") {
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
       else if (superlistQuantity == "  ") {
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
       else if (superlistQuantity == "   ") {
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
       else if (superlistQuantity == "    ") {
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
       else {
         const id = Math.random().toString(36).substring(2);

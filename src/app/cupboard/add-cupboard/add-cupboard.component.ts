@@ -46,18 +46,18 @@ export class AddCupboardComponent implements OnInit {
     try {
        const { cupboardIngredients, cupboardQuantity, cupboardUnit } = this.cupboardForm.value;
        if(cupboardUnit ==""||cupboardIngredients==""){
-         window.alert("Por favor que no esten vacíos ");
+         window.alert("Por favor que no estén vacíos ");
        } else if(cupboardQuantity ==" "){
-         window.alert("Por favor que no esten vacíos ");
+         window.alert("Por favor que no estén vacíos ");
        }
        else if(cupboardQuantity =="  "){
-         window.alert("Por favor que no esten vacíos ");
+         window.alert("Por favor que no estén vacíos ");
        }
        else if(cupboardQuantity =="   "){
-         window.alert("Por favor que no esten vacíos ");
+         window.alert("Por favor que no estén vacíos ");
        }
        else if(cupboardQuantity =="    "){
-         window.alert("Por favor que no esten vacíos ");
+         window.alert("Por favor que no estén vacíos ");
        }
       else {
          const id = Math.random().toString(36).substring(2);

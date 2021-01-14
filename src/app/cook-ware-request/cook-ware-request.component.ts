@@ -40,18 +40,18 @@ export class CookWareRequestComponent implements OnInit {
     try {
       const { cookwareName, cookwareDificulty } = this.cookWareForm.value;
       if(cookwareName ==" "){
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       } else if(cookwareName =="  "){
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
       else if(cookwareName =="   "){
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
       else if(cookwareName =="    "){
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
       else if(cookwareName =="     "){
-        window.alert("Por favor que no esten vacios ");
+        window.alert("Por favor que no estén vacíos ");
       }
      else {
         const id = Math.random().toString(36).substring(2);

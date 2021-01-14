@@ -115,13 +115,13 @@ export class CrearRecetasComponent implements OnInit {
       }
       let hours = 0;
       if (title == " "||title == "  "||title == "   "||title == "    "||title == "     "||title =="") {
-        window.alert("Por favor que no esten vacíos ");
+        window.alert("Por favor que no estén vacíos ");
       } 
       else if (portions == ""||portionsCalories == ""||cookTime =="") {
-        window.alert("Por favor que no esten vacíos.");
+        window.alert("Por favor que no estén vacíos.");
       }
       else if (uidsCategory == ""||uidsSeason == ""||uidsCollection == ""||uidsRegion == "") {
-        window.alert("Por favor que no esten vacíos.");
+        window.alert("Por favor que no estén vacíos.");
       }
       else if (this.step.length<=0) {
         window.alert("Por favor ingrese los pasos ");
@@ -201,7 +201,7 @@ export class CrearRecetasComponent implements OnInit {
       this.inputstep.nativeElement.value = "";
       this.stepImage.nativeElement.value = "";
     } else {
-      window.alert("Espacio vacio en pasos");
+      window.alert("Espacio vacío en pasos");
     }
 
   }
