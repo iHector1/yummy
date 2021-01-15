@@ -44,7 +44,8 @@ const routes: Routes = [
   { path: 'opciones', loadChildren: () => import('./option-recipe/option-recipe.module').then(m => m.OptionRecipeModule) },
   { path: 'actualizar_receta/:id', loadChildren: () => import('./update-recipe/update-recipe.module').then(m => m.UpdateRecipeModule) },
   { path: 'updateUser', loadChildren: () => import('./update-user/update-user.module').then(m => m.UpdateUserModule) },
-  { path: 'todos_streaming', loadChildren: () => import('./streaming/allstreaming/allstreaming.module').then(m => m.AllstreamingModule) },
+  { path: 'todos_streaming/:id', loadChildren: () => import('./streaming/allstreaming/allstreaming.module').then(m => m.AllstreamingModule) },
+  { path: 'ver_stream/:id', loadChildren: () => import('./streaming/viewstreaming/viewstreaming.module').then(m => m.ViewstreamingModule) },
   {
     path: '**',
     component:PageNotFoundComponent

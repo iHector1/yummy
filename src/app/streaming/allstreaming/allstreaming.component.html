@@ -2,29 +2,49 @@
 
 <div class=" col-sm-12 col-md-12" *ngIf="userPremium">
     <div>
-        <h1 class="text-center ml-5">Mis Streams del Dia</h1>
+        <h1 class="text-center ml-5">Mi stream del dia</h1>
     </div>
     <div class="row ml-5">
-        <div class="card" *ngFor="let stream of myStreams">
-            <div class="card-body">
-                <a>Streaming </a>
-                <a><app-username [uid]='stream.uid'></app-username></a>
-                <button mat-raised-button>Entrar</button>
+        <div class="col-xs-12 col-sm-6 col-md-4"*ngFor="let stream of myStreams">
+            <div class="card" >
+                <div class="card-body">
+                    <div>
+                    <mat-card-title>
+                        <a>Streaming</a>
+                        <a routerLink="/usuario/{{stream.uidUser}}"><app-username [uid]='stream.uidUser'></app-username></a>
+                    </mat-card-title>
+                    </div>
+                    <div>
+                        <mat-card-content>
+                        <a>{{stream.date.seconds*1000|date:'dd-MM-yyyy'}}</a>
+                        <button mat-raised-button routerLink="/streaming/{{stream.id}}">Entrar</button>
+                     </mat-card-content>
+                    </div>
+                    
+                </div>
             </div>
         </div>
     </div> 
 </div>
-<div class=" col-sm-12 col-md-12 ">
+<div class=" col-sm-12 col-md-12" >
     <div>
-        <h1 class="text-center ml-5">Streams del Dia</h1>
+        <h1 class="text-center ml-5">Streams del dia</h1>
     </div>
     <div class="row ml-5">
-        <div class="card">
-            <div class="card-body">
-                <a>Streaming </a>
-                <button mat-raised-button>Entrar</button>
+        <div class="col-xs-12 col-sm-6 col-md-4"*ngFor="let stream of otherStream">
+            <div class="card" >
+                <div class="card-body">
+                    <mat-card-title>
+                        <a>Streaming</a>
+                        <a routerLink="/usuario/{{stream.uidUser}}"><app-username [uid]='stream.uidUser'></app-username></a>
+                    </mat-card-title>
+                    <mat-card-content> 
+                        <a>{{stream.date.seconds*1000|date:'dd-MM-yyyy'}}</a>
+                        <button *ngIf="stream.id" mat-raised-button routerLink="/ver_stream/{{stream.uid}}">Entrar</button>
+                  </mat-card-content>
+                </div>
             </div>
         </div>
-    </div>
+    </div> 
 </div>
 <button mat-raised-button  *ngIf="userPremium" class="ml-3 mt-5" routerLink="/crear-streaming" color="primary">Crear stream</button>

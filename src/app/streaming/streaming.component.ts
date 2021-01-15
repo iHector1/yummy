@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 //import * as Peer from 'peerjs';
 declare var Peer: any;
 //import * as per from 'peerjs';
@@ -16,7 +18,7 @@ export class StreamingComponent implements OnInit {
   @ViewChild('myvideo') myVideo: any;
   @ViewChild('video2') myVideo2: any;
 
-  constructor() {
+  constructor(private afs:AngularFirestore,private router:Router) {
     
   }
 
@@ -25,7 +27,8 @@ export class StreamingComponent implements OnInit {
     console.log(this.peer.id); 
     let value;
     setTimeout(() => {
-      this.mypeerId = this.peer.id
+      this.mypeerId = this.peer.id;
+      this.afs.collection('stream').doc(this.router.url.slice(11)).set({id:this.mypeerId},{merge:true})
     }, 3000); 
     this.peer.on('connection', function(conn) {
       conn.on('data', function(data){
@@ -86,7 +89,7 @@ export class StreamingComponent implements OnInit {
       var call = localvar.call(fname, stream);
       call.on('stream', function(remotestream) {
         video2.srcObject  = remotestream;
-        console.log(video);
+        console.log(remotestream);
         video2.play();
       })
     }, function(err){
