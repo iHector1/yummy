@@ -37,13 +37,14 @@ const routes: Routes = [
   { path: 'chat/:uidRoom', loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule) },
   { path: 'pasos/:id', loadChildren: () => import('./steps/steps.module').then(m => m.StepsModule) },
   { path: 'graficas', loadChildren: () => import('./graphics/graphics.module').then(m => m.GraphicsModule) },
-  { path: 'streaming', loadChildren: () => import('./streaming/streaming.module').then(m => m.StreamingModule) },
+  { path: 'streaming/:id', loadChildren: () => import('./streaming/streaming.module').then(m => m.StreamingModule) },
   { path: 'crear-streaming', loadChildren: () => import('./streaming/create-streaming/create-streaming.module').then(m => m.CreateStreamingModule) },
   { path: 'recetas_planeadas/:id', loadChildren: () => import('./planned-recipes/planned-recipes.module').then(m => m.PlannedRecipesModule) },
   { path: 'planear_receta', loadChildren: () => import('./plan-recipe/plan-recipe.module').then(m => m.PlanRecipeModule) },
   { path: 'opciones', loadChildren: () => import('./option-recipe/option-recipe.module').then(m => m.OptionRecipeModule) },
   { path: 'actualizar_receta/:id', loadChildren: () => import('./update-recipe/update-recipe.module').then(m => m.UpdateRecipeModule) },
   { path: 'updateUser', loadChildren: () => import('./update-user/update-user.module').then(m => m.UpdateUserModule) },
+  { path: 'todos_streaming', loadChildren: () => import('./streaming/allstreaming/allstreaming.module').then(m => m.AllstreamingModule) },
   {
     path: '**',
     component:PageNotFoundComponent

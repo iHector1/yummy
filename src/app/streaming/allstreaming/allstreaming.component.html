@@ -1,0 +1,30 @@
+
+
+<div class=" col-sm-12 col-md-12" *ngIf="userPremium">
+    <div>
+        <h1 class="text-center ml-5">Mis Streams del Dia</h1>
+    </div>
+    <div class="row ml-5">
+        <div class="card" *ngFor="let stream of myStreams">
+            <div class="card-body">
+                <a>Streaming </a>
+                <a><app-username [uid]='stream.uid'></app-username></a>
+                <button mat-raised-button>Entrar</button>
+            </div>
+        </div>
+    </div> 
+</div>
+<div class=" col-sm-12 col-md-12 ">
+    <div>
+        <h1 class="text-center ml-5">Streams del Dia</h1>
+    </div>
+    <div class="row ml-5">
+        <div class="card">
+            <div class="card-body">
+                <a>Streaming </a>
+                <button mat-raised-button>Entrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<button mat-raised-button  *ngIf="userPremium" class="ml-3 mt-5" routerLink="/crear-streaming" color="primary">Crear stream</button>
