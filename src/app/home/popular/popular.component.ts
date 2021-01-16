@@ -12,56 +12,29 @@ export class PopularComponent implements OnInit {
 	options1: any
   contact=new Array();
   constructor(private afs: AngularFirestore) {
-    this.options1 = {
-			animation: {
-				animationClass: 'transition',
-				animationTime: 500,
-			},
-			swipe: {
-				swipeable: true,
-				swipeVelocity: .004,
-			},
-			drag: {
-				draggable: true,
-				dragMany: true,
-			},
-      arrows: true,
-			infinite: true,
-			autoplay: {
-				enabled: true,
-				direction: 'right',
-				delay: 5000,
-				stopOnHover: true,
-				speed: 6000,
-			},
-			breakpoints: [
-				{
-					width: 768,
-					number: 1,
-				},
-				{
-					width: 991,
-					number: 3,
-				},
-				{
-					width: 9999,
-					number: 4,
-				},
-			],
-		}
-  }
-
-	ngOnInit(): void {
-		this.newest = this.afs.collection("infoRecipe", ref => ref.orderBy("timeStamp", "desc").where("uidCollection","==","Invierno").limit(9)).valueChanges().subscribe(data => {
+    this.newest = this.afs.collection("infoRecipe", ref => ref.orderBy("timeStamp", "desc").where("uidCollection","==","Invierno").limit(9)).valueChanges().subscribe(data => {
       
 			this.contact = [];
 	  
 				  data.forEach( ( x ) => {
 	  
 					  this.contact.push( x );
-				  } );
+				  });
+				  this.slides = this.chunk(this.contact, 3)
 	  //console.log(this.contact);
 		  }, err => { });
+  }
+
+	ngOnInit(): void {
+		
+	}
+	slides: any = [[]];
+  chunk(arr: any, chunkSize: any) {
+    let R = [];
+    for (let i = 0, len = arr.length; i < len; i += chunkSize) {
+      R.push(arr.slice(i, i + chunkSize));
+    }
+    return R;
   }
 
 }

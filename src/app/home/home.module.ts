@@ -7,15 +7,16 @@ import { PopularComponent } from './popular/popular.component';
 import { NewestComponent } from './newest/newest.component';
 import { MonthComponent } from './month/month.component';
 import { AngularMaterialModule } from '../Angular_Material/angular_materia.module';
-import { NgxCarouselModule } from 'ngx-light-carousel'
+import { NameUserComponent } from './name-user/name-user.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
-  declarations: [HomeComponent, PopularComponent, NewestComponent, MonthComponent],
+  declarations: [HomeComponent, PopularComponent, NewestComponent, MonthComponent, NameUserComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
     AngularMaterialModule,
-    NgxCarouselModule
+    MDBBootstrapModule.forRoot()
   ]
 })
 export class HomeModule { }

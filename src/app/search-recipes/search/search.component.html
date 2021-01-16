@@ -89,9 +89,8 @@
                 <img class="card-img-top" mat-card-image src="{{recipe.principalPhoto}}" alt="Pozole"/>
               </div>
               <div class="card-body">
-                <mat-card-title>
-                  <a routerLink="/receta/{{recipe.uid}}">{{recipe.title}}</a>
-                </mat-card-title>
+                  <a class="card-title h4" routerLink="/receta/{{recipe.uid}}">{{recipe.title}}</a>
+                  <p class="card-text"><app-name-user [uid]="recipe.uidUser"></app-name-user></p>
               </div>
             </div>
           </div>

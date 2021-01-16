@@ -1,54 +1,45 @@
 
 <h1 style="text-align: center;">Recetas nuevas</h1>
 <hr class="my-4">
-<ngx-light-carousel [options]="options1" [data]="contact" class="wrapper c-accent"
-	style="display: block; margin-bottom: 100px;">
-	<section ngx-light-carousel-container class="content">
-		<article ngx-light-carousel-item *ngFor="let product of contact; let i = index" class="col-md-4 col-sm-12"> 
-			<div class="card mb-2">
-						<img class="card-img-top" mat-card-image src="{{product.principalPhoto}}">
-            <div class="card-body">
-              <mat-card-title>
-                <a routerLink="/receta/{{product.uid}}"> {{product.title}}</a>
-              </mat-card-title>
-              <mat-card-content>
-              </mat-card-content>
+
+
+	<div id="multi-new" class="carousel slide carousel-multi-item" data-ride="carousel">
+  
+        <!--/.Indicators-->
+  
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+  
+          <!--First slide-->
+          <div class="carousel-item " *ngFor="let item of slides; let i = index"[ngClass]="{'active': i == 0}">
+  
+            <div class="row">
+              <div class="col-md-4 col-sm-12"
+			  *ngFor="let card of item; let cardIndex = index">
+                <div class="card mb-2">
+                  <img class="card-img-top" src="{{card.principalPhoto}}"
+                    alt="Card image cap">
+                  <div class="card-body">
+                    <a class="card-title h4" routerLink="/receta/{{card.uid}}">{{card.title}}</a>
+                    <p class="card-text"><app-name-user [uid]="card.uidUser"></app-name-user></p>
+                  </div>
+                </div>
+              </div>
+  
           </div>
-			</div>
-		</article>
-		<ng-template #infiniteContainer></ng-template>
-	</section>
-
-	<ng-template #carouselContent let-product let-i="index">
-		<article class="col-md-4 col-sm-12">
-			<div>
-        <img class="card-img-top" mat-card-image src="{{product.principalPhoto}}">
-        <div class="card-body">
-          <mat-card-title>
-            <a routerLink="/receta/{{product.uid}}"> {{product.title}}</a>
-          </mat-card-title>
-          <mat-card-content>
-          </mat-card-content>
+          <!--/.First slide-->
+  
+          </div>
+          <!--/.Third slide-->
+  
+        </div>
+          <a class="carousel-control-prev w-auto" href="#multi-new" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+         </a>
+              <a class="carousel-control-next w-auto"href="#multi-new" data-slide="next">
+                  <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+      </a>
+  
       </div>
-  </div>
-		</article>
-	</ng-template>
-
-	<ng-template #carouselPrev>
-		<div class="click-area">
-		</div>
-	</ng-template>
-	<ng-template #carouselNext>
-		<div class="click-area">
-		</div>
-	</ng-template>
-
-	<ng-template #carouselDot let-model>
-		<div class="ball bg-accent"></div>
-	</ng-template>
-
-	<ng-template #carouselProgress let-progress>
-		<div class="progress"></div>
-	</ng-template>
-
-</ngx-light-carousel>

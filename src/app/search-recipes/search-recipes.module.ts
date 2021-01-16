@@ -11,9 +11,10 @@ import { FilterCategoryPipe } from './pipes/filter-category.pipe';
 import { FilterSeasonPipe } from './pipes/filter-season.pipe';
 import { FilterRegionPipe } from './pipes/filter-region.pipe';
 import { FilterCollectionPipe } from './pipes/filter-collection.pipe';
+import { NameUserComponent } from './name-user/name-user.component';
 
 @NgModule({
-  declarations: [SearchRecipesComponent, SearchComponent, FilterPipe,  FilterCategoryPipe, FilterSeasonPipe, FilterRegionPipe, FilterCollectionPipe],
+  declarations: [SearchRecipesComponent, SearchComponent, FilterPipe,  FilterCategoryPipe, FilterSeasonPipe, FilterRegionPipe, FilterCollectionPipe, NameUserComponent],
   imports: [
     CommonModule,
     SearchRecipesRoutingModule,

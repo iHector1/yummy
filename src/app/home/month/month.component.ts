@@ -20,54 +20,25 @@ export class MonthComponent implements OnInit {
     
 	this.newest = this.afs.collection("infoRecipe", ref => ref.where("uidSeason","==","Invierno").limit(9)).valueChanges().subscribe(data => {
       
-      this.contact = [];
+      this.contact = []; 
 
             data.forEach( ( x ) => {
 
                 this.contact.push( x );
-            } );
+			});
+			this.slides = this.chunk(this.contact, 3)
 //console.log(this.contact);
     }, err => { });
     
-    this.options1 = {
-			animation: {
-				animationClass: 'transition',
-				animationTime: 500,
-			},
-			swipe: {
-				swipeable: true,
-				swipeVelocity: .004,
-			},
-			drag: {
-				draggable: true,
-				dragMany: true,
-			},
-      arrows: true,
-			infinite: true,
-			autoplay: {
-				enabled: true,
-				direction: 'right',
-				delay: 5000,
-				stopOnHover: true,
-				speed: 6000,
-			},
-			breakpoints: [
-				{
-					width: 768,
-					number: 1,
-				},
-				{
-					width: 991,
-					number: 3,
-				},
-				{
-					width: 9999,
-					number: 4,
-				},
-			],
-		}
    }
-
+   slides: any = [[]];
+   chunk(arr: any, chunkSize: any) {
+	 let R = [];
+	 for (let i = 0, len = arr.length; i < len; i += chunkSize) {
+	   R.push(arr.slice(i, i + chunkSize));
+	 }
+	 return R;
+   }
   ngOnInit(): void {
   }
 }
