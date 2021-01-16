@@ -5,7 +5,7 @@
     <div class="card-body">
           <div class="col-md-12 col-sm-12">
               <h3 [innerHTML]="notifi.message.html"></h3>
-              <h3 class="float-right">{{notifi.delivery.startTime.seconds*1000|date:'medium'}}</h3>
+              <h3 class="float-right">{{notifi.delivery.startTime.seconds*1000|date:'dd-MM-yyyy'}} {{notifi.delivery.startTime.seconds*1000|date:'shortTime'}}</h3>
           </div>
     </div>
 </div>
