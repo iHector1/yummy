@@ -17,7 +17,9 @@ import { answerComment } from 'src/app/shared/models/answer.interface';
 export class VistaHelpsComponent implements OnInit {
   helps: Observable<any>;
   helpComment: any[] = [];
-  show: boolean=false;
+  show: boolean = false;
+  words = [
+    "pendejo","pendeja","zorra","joto","golfa","Caraponny","prostipirugolfa","caca","pene","pito","pinche","puto","verga","estupido","estupida","sonso","tonto","tonta","menso","mensa","meco","meca","hdsptm"];
   comentHelpForm = new FormGroup({
     coment: new FormControl('')
   });
@@ -64,10 +66,19 @@ export class VistaHelpsComponent implements OnInit {
   }
   insert_help() {
     const { coment } = this.comentHelpForm.value;
+    var commentd = coment;
+    for (var i = 0; i < this.words.length; i++) {
+      if (commentd.indexOf(this.words[i].toLowerCase()) !== -1) {
+        commentd = commentd.replace(
+          this.words[i].toLowerCase(),
+          this.pushAsterisksForWordLength(this.words[i].length)
+        );
+      }
+    }
     const id = Math.random().toString(36).substring(2);
     const commentHelp: helpComment = {
       uid: id,
-      helpComment: coment,
+      helpComment: commentd,
       timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
       uidRecipe: this.router.url.slice(8),
       uidUser: this.uidUser,
@@ -78,6 +89,15 @@ export class VistaHelpsComponent implements OnInit {
   }
   insert_answer(uidHelp) {
     const { comentAnswer } = this.comentAnswerForm.value;
+    var commentd = comentAnswer;
+    for (var i = 0; i < this.words.length; i++) {
+      if (commentd.indexOf(this.words[i].toLowerCase()) !== -1) {
+        commentd = commentd.replace(
+          this.words[i].toLowerCase(),
+          this.pushAsterisksForWordLength(this.words[i].length)
+        );
+      }
+    }
     const id = Math.random().toString(36).substring(2);
     const commentAnswer: answerComment = {
       uid:id,
@@ -85,7 +105,7 @@ export class VistaHelpsComponent implements OnInit {
       uidHelp: uidHelp, 
       uidUser: this.uidUser,
       displayName: this.displayName,
-      comment:comentAnswer,
+      comment:commentd,
       request: 0,
       uidRecipe: this.router.url.slice(8)
     };
@@ -93,5 +113,11 @@ export class VistaHelpsComponent implements OnInit {
     this.helpService.insert_answer(commentAnswer);
     this.comentAnswerForm.reset();
   }
-
+  pushAsterisksForWordLength(asterisksLength) {
+    var censoredWordArray = [];
+    for (var i = 0; i < asterisksLength; i++) {
+      censoredWordArray.push("*");
+    }
+    return censoredWordArray.join("");
+  }
 }

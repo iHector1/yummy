@@ -18,7 +18,8 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./coment.component.css']
 })
 export class ComentComponent implements OnInit {
-
+  words = [
+    "pendejo","pendeja","zorra","joto","golfa","Caraponny","prostipirugolfa","caca","pene","pito","pinche","puto","verga","estupido","estupida","sonso","tonto","tonta","menso","mensa","meco","meca","hdsptm"];
   dificultys: Observable<any[]>;// Variable para recibir la dificultad de la receta
 
   //variables del formulario
@@ -93,10 +94,19 @@ export class ComentComponent implements OnInit {
     const { coment, difficult, stars } = this.comentForm.value;
     const uidRecipe = this.router.url.slice(8)
    // console.log(coment, difficult, stars, uidRecipe);
+    var commentd = coment;
+    for (var i = 0; i < this.words.length; i++) {
+      if (commentd.indexOf(this.words[i].toLowerCase()) !== -1) {
+        commentd = commentd.replace(
+          this.words[i].toLowerCase(),
+          this.pushAsterisksForWordLength(this.words[i].length)
+        );
+      }
+    }
     const id = Math.random().toString(36).substring(2);
     const comment: comments = {
       uid:id,
-      comment: coment,
+      comment: commentd,
       difficult: difficult,
       stars: stars,
       uidRecipe: uidRecipe,
@@ -111,11 +121,17 @@ export class ComentComponent implements OnInit {
     this.requests = this.requests + 1;
     this.difficult = (this.difficult + difficult) / this.requests;
     this.stars = (this.stars + Number(stars)) / this.requests;
-   // console.log(this.stars);
+    console.log(this.stars);
      this.comments.insert_coment(comment);
     this.recipe.updateRecipe(this.requests, this.stars, this.difficult, this.router.url.slice(8));
     this.show = false;
     window.alert("haz hecho un comentario");
   }
-
+  pushAsterisksForWordLength(asterisksLength) {
+    var censoredWordArray = [];
+    for (var i = 0; i < asterisksLength; i++) {
+      censoredWordArray.push("*");
+    }
+    return censoredWordArray.join("");
+  }
 }
