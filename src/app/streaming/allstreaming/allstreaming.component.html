@@ -10,14 +10,14 @@
                 <div class="card-body">
                     <div>
                     <mat-card-title>
-                        <a>Streaming</a>
-                        <a routerLink="/usuario/{{stream.uidUser}}"><app-username [uid]='stream.uidUser'></app-username></a>
+                        <a>Streaming </a>
+                        <h5 routerLink="/usuario/{{stream.uidUser}}"><app-username [uid]='stream.uidUser'> </app-username> </h5>
                     </mat-card-title>
                     </div>
                     <div>
                         <mat-card-content>
                         <a>{{stream.date.seconds*1000|date:'dd-MM-yyyy'}}</a>
-                        <button mat-raised-button routerLink="/streaming/{{stream.id}}">Entrar</button>
+                        <button mat-raised-button routerLink="/streaming/{{stream.uid}}">Entrar</button>
                      </mat-card-content>
                     </div>
                     
@@ -36,11 +36,11 @@
                 <div class="card-body">
                     <mat-card-title>
                         <a>Streaming</a>
-                        <a routerLink="/usuario/{{stream.uidUser}}"><app-username [uid]='stream.uidUser'></app-username></a>
+                        <h5 routerLink="/usuario/{{stream.uidUser}}"><app-username [uid]='stream.uidUser'></app-username></h5>
                     </mat-card-title>
                     <mat-card-content> 
                         <a>{{stream.date.seconds*1000|date:'dd-MM-yyyy'}}</a>
-                        <button *ngIf="stream.id" mat-raised-button routerLink="/ver_stream/{{stream.uid}}">Entrar</button>
+                        <button *ngIf="stream.id" mat-raised-button routerLink="/ver_stream/{{stream.id}}">Entrar</button>
                   </mat-card-content>
                 </div>
             </div>

@@ -1,1 +1,11 @@
-<p>viewstreaming works!</p>
+<h1 class="text-center mt-5">Video en vivo</h1>
+
+<div class="col-md-12 col-sm-12">
+    <div class="mt-5 ml-5">
+        <video #video>
+        </video>
+    </div>
+</div>
+<button mat-raised-button *ngIf="boolean1" (click)="connect()">Conectarse</button>
+<input type="hidden" value={{other}} [(ngModel)]="mypeerId">
+<button mat-raised-button *ngIf="boolean2" (click)="videoconnect()">Ver camara</button>
