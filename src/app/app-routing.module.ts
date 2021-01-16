@@ -50,6 +50,10 @@ const routes: Routes = [
     path: '**',
     component:PageNotFoundComponent
   },
+  {
+    path: 'no_existe',
+    component:PageNotFoundComponent
+  }
 ];
 
 @NgModule({

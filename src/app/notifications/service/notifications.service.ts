@@ -160,6 +160,10 @@ export class NotificationsService {
 
   private emailStream(uidUser, uidStream, dates) {
     let bander = true;
+    var date = new Date(dates);
+    var day = date.getDate();
+    var month = date.getUTCMonth();
+    var datem = (`${day}/${month}`);
     this.afs.collection('users', ref => ref.where('uid', '==', uidUser)).valueChanges().subscribe(user => {
       if (user[0]) {
         const infoUser: any = user[0]
@@ -170,7 +174,7 @@ export class NotificationsService {
             to: infoUser.email,
             message: {
               subject: 'Nuevo stream',
-              html: `Nuevo stream de tu cocinero favorito,sera el ${dates.seconds * 1000}!,<a href='https://recetasonlineyummy.com/stream/${uidStream}'>click aqui</a>`
+              html: `Nuevo stream de tu cocinero favorito,sera el ${datem}!,<a href='https://recetasonlineyummy.com/stream/${uidStream}'>click aqui</a>`
             }
           })
           bander = false;

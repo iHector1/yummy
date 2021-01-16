@@ -106,6 +106,8 @@ export class VistaRecetaComponent implements OnInit {
        // console.log(this.cant.length);
         this.saveCheck();
         this.oneIngredient(this.portions);
+      } else {
+        this.router.navigate(['/no_existe']);
      }
     });
     this.url ="https://recetasonlineyummy.com/"+this.router.url;

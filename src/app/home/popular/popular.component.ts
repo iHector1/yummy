@@ -52,7 +52,7 @@ export class PopularComponent implements OnInit {
   }
 
 	ngOnInit(): void {
-		this.newest = this.afs.collection("infoRecipe", ref => ref.orderBy("timeStamp", "desc").where("uidCollection","==","Invierno")).valueChanges().subscribe(data => {
+		this.newest = this.afs.collection("infoRecipe", ref => ref.orderBy("timeStamp", "desc").where("uidCollection","==","Invierno").limit(9)).valueChanges().subscribe(data => {
       
 			this.contact = [];
 	  

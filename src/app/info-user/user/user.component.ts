@@ -65,6 +65,8 @@ export class UserComponent implements OnInit {
         this.recipes();
         this.followersandFollowings();
         this.premiumUser(this.useruid);
+      } else {
+        this.router.navigate(['/no_existe']);
       }
     });
 

@@ -39,6 +39,8 @@ export class PremiumComponent implements OnInit {
             this.displayName = infoUser.displayName;
           }
         })
+      } else {
+        this.router.navigate(['/no_existe']);
       }
     });
     this.user$.subscribe(user => {

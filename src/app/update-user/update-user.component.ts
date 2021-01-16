@@ -25,6 +25,8 @@ export class UpdateUserComponent implements OnInit {
       if (user[0]) {
         const infoUser: infoUser = user[0];
         this.state = infoUser.uidState;
+      } else {
+        this.router.navigate(['/no_existe']);
       }
     });
    }

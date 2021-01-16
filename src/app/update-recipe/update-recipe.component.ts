@@ -45,6 +45,8 @@ export class UpdateRecipeComponent implements OnInit {
         this.season = infoRecipe.uidSeason;
         this.collection = infoRecipe.uidCollection;
         this.region = infoRecipe.uidRegion;
+      } else {
+        this.router.navigate(['/no_existe']);
       }
     });
   }

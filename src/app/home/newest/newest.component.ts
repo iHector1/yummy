@@ -13,7 +13,7 @@ export class NewestComponent implements OnInit {
 	options1: any
   contact=new Array();
   constructor(private afs:AngularFirestore) { 
-    this.newest = this.afs.collection("infoRecipe", ref => ref.orderBy("timeStamp", "desc")).valueChanges().subscribe(data => {
+    this.newest = this.afs.collection("infoRecipe", ref => ref.orderBy("timeStamp", "desc").limit(9)).valueChanges().subscribe(data => {
       
       this.contact = [];
 
