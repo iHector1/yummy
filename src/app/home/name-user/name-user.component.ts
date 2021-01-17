@@ -17,7 +17,7 @@ export class NameUserComponent implements OnInit {
       if (user[0]) {
         const infoUser: infoUser = user[0];
         this.name = infoUser.displayName;
-        console.log(this.name);
+        //console.log(this.name);
       }
     })
   } 

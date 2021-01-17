@@ -1,0 +1,26 @@
+<div class="pb-3 col-sm-12 mt-4 table-responsive">
+    <table class="table table-striped table-hover">
+      <th>Ingrediente</th>
+      <th>Cantidad</th>
+      <tbody>
+        <tr *ngFor="let roale of ingredienuid; let i = index">
+          <td>{{ roale }}</td>
+          <td>{{ cant[i] }} {{ unit[i] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> 
+  <div class=" mt-4 ">
+    <div class="card-body container">
+      <a>Utensilios</a>
+      <div>
+        <mat-list role="list" *ngFor="let cookWare of cookud">
+          <mat-list-item role="listitem">{{ cookWare }}</mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </div>
+
+  <mat-dialog-actions align="end" >
+    <button mat-raised-button color="warn" mat-dialog-close>Salir</button>
+  </mat-dialog-actions> 

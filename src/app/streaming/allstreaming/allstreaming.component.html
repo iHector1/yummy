@@ -17,6 +17,7 @@
                     <div>
                         <mat-card-content>
                         <a>{{stream.date.seconds*1000|date:'dd-MM-yyyy'}}</a>
+                        <button  mat-raised-button (click)="openDialog(stream.uid)">Información</button>
                         <button mat-raised-button routerLink="/streaming/{{stream.uid}}">Entrar</button>
                      </mat-card-content>
                     </div>
@@ -40,6 +41,7 @@
                     </mat-card-title>
                     <mat-card-content> 
                         <a>{{stream.date.seconds*1000|date:'dd-MM-yyyy'}}</a>
+                        <button  mat-raised-button (click)="openDialog(stream.uid)" >Información</button>
                         <button *ngIf="stream.id" mat-raised-button routerLink="/ver_stream/{{stream.id}}">Entrar</button>
                   </mat-card-content>
                 </div>

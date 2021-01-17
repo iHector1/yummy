@@ -53,7 +53,8 @@ const routes: Routes = [
   {
     path: 'no_existe',
     component:PageNotFoundComponent
-  }
+  },
+  { path: 'info_stream', loadChildren: () => import('./info-stream/info-stream.module').then(m => m.InfoStreamModule) }
 ];
 
 @NgModule({

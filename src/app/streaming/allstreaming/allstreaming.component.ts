@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { FollowService } from 'src/app/auth/services/follow.service';
 import { User } from 'src/app/shared/models/user.inteface';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { InfoStreamComponent } from 'src/app/info-stream/info-stream.component';
 @Component({
   selector: 'app-allstreaming',
   templateUrl: './allstreaming.component.html',
@@ -17,7 +18,7 @@ export class AllstreamingComponent implements OnInit {
   userPremium: boolean=false;
   myStreams: any[]=[];
   otherStream: any[] = [];
-  constructor(private afs: AngularFirestore, private auth: AuthService, private router: Router,private follow:FollowService) {
+  constructor(private afs: AngularFirestore, private auth: AuthService, private router: Router,private follow:FollowService,public dialog: MatDialog) {
     var dates = new Date();
     var Now = dates.getDate();
       this.afs.collection('premiunCreator', ref => ref.where('uid', '==', this.router.url.slice(17))).valueChanges().subscribe(premium => {
@@ -62,5 +63,9 @@ export class AllstreamingComponent implements OnInit {
    }
   ngOnInit(): void {
   }
-
+  openDialog(uid): void {
+    const dialogRef = this.dialog.open(InfoStreamComponent, {
+      data: uid,
+    });
+  }
 }
