@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup ,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { helpComment } from 'src/app/shared/models/help.interface';
@@ -21,10 +21,10 @@ export class VistaHelpsComponent implements OnInit {
   words = [
     "pendejo","pendeja","zorra","joto","golfa","Caraponny","prostipirugolfa","caca","pene","pito","pinche","puto","verga","estupido","estupida","sonso","tonto","tonta","menso","mensa","meco","meca","hdsptm"];
   comentHelpForm = new FormGroup({
-    coment: new FormControl('')
+    coment: new FormControl('',[Validators.minLength(3),Validators.required])
   });
   comentAnswerForm = new FormGroup({
-    comentAnswer: new FormControl('')
+    comentAnswer: new FormControl('',[Validators.minLength(3),Validators.required])
   });
   uidUser: any;
   displayName: any;
@@ -66,7 +66,8 @@ export class VistaHelpsComponent implements OnInit {
   }
   insert_help() {
     const { coment } = this.comentHelpForm.value;
-    var commentd = coment;
+    if (!this.comentHelpForm.controls.coment.errors&&coment!=" ") {
+      var commentd = coment;
     for (var i = 0; i < this.words.length; i++) {
       if (commentd.indexOf(this.words[i].toLowerCase()) !== -1) {
         commentd = commentd.replace(
@@ -84,12 +85,16 @@ export class VistaHelpsComponent implements OnInit {
       uidUser: this.uidUser,
       displayName: this.displayName
     };
-    this.helpService.insert_help(commentHelp);
-    this.comentHelpForm.reset();
+     this.helpService.insert_help(commentHelp);
+     this.comentHelpForm.reset();
+    } else {
+      window.alert("completa el campo");
+    }
   }
   insert_answer(uidHelp) {
     const { comentAnswer } = this.comentAnswerForm.value;
-    var commentd = comentAnswer;
+    if (comentAnswer!=" "&&!this.comentAnswerForm.controls.comentAnswer.errors) {
+      var commentd = comentAnswer;
     for (var i = 0; i < this.words.length; i++) {
       if (commentd.indexOf(this.words[i].toLowerCase()) !== -1) {
         commentd = commentd.replace(
@@ -112,6 +117,11 @@ export class VistaHelpsComponent implements OnInit {
    // console.log(commentAnswer);
     this.helpService.insert_answer(commentAnswer);
     this.comentAnswerForm.reset();
+
+    } else {
+      window.alert('completa todos los campos');
+    }
+    
   }
   pushAsterisksForWordLength(asterisksLength) {
     var censoredWordArray = [];

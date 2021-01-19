@@ -2,7 +2,7 @@ import { Route } from '@angular/compiler/src/core';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'firebase';
 import { Observable } from 'rxjs';
@@ -24,9 +24,9 @@ export class ComentComponent implements OnInit {
 
   //variables del formulario
   comentForm = new FormGroup({
-    coment: new FormControl(''),
+    coment: new FormControl('',[Validators.minLength(3)]),
     difficult: new FormControl(''),
-    stars: new FormControl('')
+    stars: new FormControl('',[Validators.minLength(1),Validators.required])
   });
   uidUser: string;
   displayName: string;
@@ -92,8 +92,9 @@ export class ComentComponent implements OnInit {
 
   insert_coment() {
     const { coment, difficult, stars } = this.comentForm.value;
-    const uidRecipe = this.router.url.slice(8)
-   // console.log(coment, difficult, stars, uidRecipe);
+    if (!this.comentForm.controls.coment.errors&&difficult!=""&&!this.comentForm.controls.stars.errors&&coment!=" ") {
+       const uidRecipe = this.router.url.slice(8)
+    console.log(coment, difficult, stars, uidRecipe);
     var commentd = coment;
     for (var i = 0; i < this.words.length; i++) {
       if (commentd.indexOf(this.words[i].toLowerCase()) !== -1) {
@@ -127,6 +128,10 @@ export class ComentComponent implements OnInit {
     this.recipe.updateRecipe(this.requests, this.stars, this.difficult, this.router.url.slice(8));
     this.show = false;
     window.alert("haz hecho un comentario");
+    }else{
+      window.alert('Completa todos los campos');
+    }
+   
   }
   pushAsterisksForWordLength(asterisksLength) {
     var censoredWordArray = [];

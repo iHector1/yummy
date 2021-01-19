@@ -49,14 +49,12 @@ export class VistaRespuestasComponent implements OnInit {
       })
 
     });
-
-
 //preguntas destacadas
     this.answerHighlight=this.afs.collection('answer', ref => ref.where('uidHelp', '==', this.helpComment.uid).where('request', "==", 1).orderBy('time', 'asc')).valueChanges();
   }
   //mostrar mas respuestas
   more() {
-    this.limit = this.limit + 1;
+    this.limit = this.limit + 9;
     this.answer = this.afs.collection('answer',ref=>ref.where('uidHelp','==',this.helpComment.uid).where('request',"==",0).orderBy('time','asc').limit(this.limit)).valueChanges();
   }
   //destacar una pregunta

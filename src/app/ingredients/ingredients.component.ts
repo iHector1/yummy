@@ -22,12 +22,14 @@ export class IngredientsComponent implements OnInit {
   //variables del formulario
   ingredientForm = new FormGroup({
     kindFoodName: new FormControl('', [
-      //Validators.minLength(3)
+      Validators.required
     ]),
     ingredientName: new FormControl('', [
-      //Validators.required
+      Validators.required
     ]),
-    uidUnit: new FormControl('')
+    uidUnit: new FormControl('',[
+      Validators.minLength(2)
+    ])
   });
   constructor(firestore:AngularFirestore, private storage: AngularFireStorage, private ingredientService:IngredientsServiceService,private authService:AuthService,private router:Router) {
     this.uidUnit = firestore.collection('unitMeasurement').valueChanges();
@@ -54,6 +56,8 @@ export class IngredientsComponent implements OnInit {
       }
       else if (ingredientName == "     ") {
         window.alert("Por favor que no estén vacíos ");
+      } else if (this.ingredientForm.controls.kindFoodName.errors||this.ingredientForm.controls.uidUnit.errors) {
+        window.alert("Por favor que no estén vacíos ");
       }
       else {
         const id = Math.random().toString(36).substring(2);
@@ -65,9 +69,9 @@ export class IngredientsComponent implements OnInit {
           request: [this.inputUserid.nativeElement.value]
         };
 
-      //  console.log(ingredient, this.inputUserid.nativeElement.value, kindFoodName);
-        this.ingredientService.ingredientCollection(ingredient,this.inputUserid. nativeElement.value,kindFoodName);
-        this.router.navigate(['/home']);
+        console.log(ingredient, this.inputUserid.nativeElement.value, kindFoodName);
+         this.ingredientService.ingredientCollection(ingredient,this.inputUserid. nativeElement.value,kindFoodName);
+         this.router.navigate(['/home']);
       }
     }
     catch (err) {

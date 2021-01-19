@@ -16,7 +16,7 @@ export class OptionServiceService {
         const infoRecipe: infoRecipe = recipe[0];
         const array: string[] = infoRecipe.reports ? infoRecipe.reports : [];
         if (array.some(x => x === data.user)) {
-          window.alert('Ya has repostado esta receta');
+          window.alert('Ya has reportado esta receta');
         } else {
           
             window.alert('Reporte hecho!')

@@ -22,6 +22,7 @@
                     matInput
                     placeholder="60"
                     type="number"
+                    min="1"
                     [(value)]='cooktime'
                     [(ngModel)]='cooktime'
                     required
@@ -33,6 +34,7 @@
                     matInput
                     placeholder="5"
                     type="number"
+                    min="1"
                     [(value)]='portions'
                     [(ngModel)]='portions'
                     required
@@ -46,6 +48,7 @@
                     [(value)]='portionsCalories'
                     [(ngModel)]='portionsCalories'
                     placeholder="500"
+                    min="1"
                     required
                   />
                 </mat-form-field>

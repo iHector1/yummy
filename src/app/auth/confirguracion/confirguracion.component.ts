@@ -91,11 +91,11 @@ export class ConfirguracionComponent implements OnInit {
 
       }
       if (result > 5 || result < 9) {
-        point = 2200;
+        point = 1500;
         level = "NmKowqg5p15ZuQBxPVLB";
       }
       if (result == 10) {
-        point = 3200;
+        point = 3000;
         level = "XPskrj6Ci3m6dgVKfpN3";
       }
     } else {

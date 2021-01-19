@@ -28,11 +28,11 @@ export class StepsService {
      // console.log(pointsAdd, pointsUser);
       window.alert(`Tienes ${totalPoints} puntos`);
       this.afs.collection('infoUser').doc(uidUser).set({ points: totalPoints }, { merge: true });
-      if (totalPoints >= 2200 && totalPoints < 3200 &&uidLevel!='NmKowqg5p15ZuQBxPVLB') {
+      if (totalPoints >= 1500 && totalPoints < 3000 &&uidLevel!='NmKowqg5p15ZuQBxPVLB') {
         this.afs.collection('infoUser').doc(uidUser).set({ uidLevel: 'NmKowqg5p15ZuQBxPVLB' }, { merge: true });
         window.alert('Eres nivel Intermedio!');
       }
-      if (totalPoints >= 3200 && uidLevel!='XPskrj6Ci3m6dgVKfpN3') {
+      if (totalPoints >= 3000 && uidLevel!='XPskrj6Ci3m6dgVKfpN3') {
         this.afs.collection('infoUser').doc(uidUser).set({ uidLevel: 'XPskrj6Ci3m6dgVKfpN3' }, { merge: true });
         window.alert('Eres nivel Avanzado!');
       }

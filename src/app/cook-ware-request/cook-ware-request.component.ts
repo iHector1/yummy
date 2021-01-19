@@ -23,8 +23,10 @@ export class CookWareRequestComponent implements OnInit {
   //variables del formulario
   cookWareForm = new FormGroup({
     cookwareDificulty: new FormControl('', [
+      Validators.required
     ]),
     cookwareName: new FormControl('', [
+      Validators.required
     ]),
   });
 
@@ -51,6 +53,8 @@ export class CookWareRequestComponent implements OnInit {
         window.alert("Por favor que no estén vacíos ");
       }
       else if(cookwareName =="     "){
+        window.alert("Por favor que no estén vacíos ");
+      } else if (this.cookWareForm.controls.cookwareDificulty.errors) {
         window.alert("Por favor que no estén vacíos ");
       }
      else {

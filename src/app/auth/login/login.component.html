@@ -13,9 +13,6 @@
         </mat-form-field>
         <mat-form-field class="justifier">
             <input matInput [type]="hide ? 'password' : 'password'" placeholder="constraseña" formControlName="password" class="form-input" required>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
           </mat-form-field>
         <button mat-raised-button class="btn custom-btn" type="submit">  
               <mat-icon>input</mat-icon> Entrar

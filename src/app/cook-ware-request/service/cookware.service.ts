@@ -71,7 +71,7 @@ export class CookwareService {
       uidLevelCookWare: cookware.uidLevelCookWare,
       nameCookWare: cookware.nameCookWare,
       request : cookware.request,
-      requests:3
+      requests:1
     };
     return cookAreRef.set(data, { merge: true });
   }

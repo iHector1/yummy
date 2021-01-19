@@ -69,15 +69,19 @@ public user$: Observable<User> = this.authService.afAuth.user;
     if (form.invalid) {
       return; 
     }
-    const {message} = form.value;
-    form.resetForm();
-
-    this.afs.collection('rooms').doc(this.paramValue).collection('messages').add({
+    const { message } = form.value;
+    if (message!=""||message!=" ") {
+       this.afs.collection('rooms').doc(this.paramValue).collection('messages').add({
      message:message,
       uidUser: this.uidUser,
      nameDisplay: this.userName,
       time: firebase.firestore.FieldValue.serverTimestamp()
-    });
+       });
+      form.resetForm();
+    }else{
+      console.log('Completa todos los campos');
+    }
+    
   }
   chatData(ev: any) :void {
     if (ev.chatData !== undefined) {
