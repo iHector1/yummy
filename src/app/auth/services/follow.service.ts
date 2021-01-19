@@ -36,6 +36,7 @@ export class FollowService {
               uid: profileuid,
               uidUser: profileuid,
               uidFollowing: currentuid,
+              date: new Date(),
             };
             
             this.afs.collection( 'following/'+currentuid+'/users').doc(profileuid).set(data);
@@ -44,7 +45,8 @@ export class FollowService {
               uidUser: currentuid ,
              uidFollower: profileuid,
              userPremium: false,
-             date:firebase.firestore.FieldValue.serverTimestamp()
+             date: new Date(),
+             
             };
             this.afs.collection('follower/' + profileuid + '/users').doc(currentuid).set(datas);
             this.noti.sendEmailFollower(profileuid,currentuid);

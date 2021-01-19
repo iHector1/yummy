@@ -8,7 +8,7 @@
       <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
         <mat-form-field class="justifier">
           <mat-label>Inserta tu email</mat-label>
-          <input matInput placeholder="pat@example.com" formControlName="email" required>
+          <input matInput placeholder="pat@example.com" formControlName="email"  (change)="validation2()"required>
       </mat-form-field>
       <mat-form-field class="justifier">
           <input matInput [type]="hide ? 'password' : 'text'" placeholder="constraseña" formControlName="password" class="form-input" required  (change)="validation()"> 

@@ -90,6 +90,9 @@
               </div>
               <div class="card-body">
                   <a class="card-title h4" routerLink="/receta/{{recipe.uid}}">{{recipe.title}}</a>
+                  <h5 *ngIf='recipe.requests>=4'>{{recipe.stars}} estrellas</h5>
+                  <h5 *ngIf='recipe.requests<4'>0 estrellas</h5>
+                  <h5 *ngIf='!recipe.requests'>0 estrellas</h5>
                   <p class="card-text"><app-name-user [uid]="recipe.uidUser"></app-name-user></p>
               </div>
             </div>

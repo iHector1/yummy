@@ -121,6 +121,7 @@ export class ComentComponent implements OnInit {
     this.requests = this.requests + 1;
     this.difficult = (this.difficult + difficult) / this.requests;
     this.stars = (this.stars + Number(stars)) / this.requests;
+    this.stars = Math.round(this.stars);
     console.log(this.stars);
      this.comments.insert_coment(comment);
     this.recipe.updateRecipe(this.requests, this.stars, this.difficult, this.router.url.slice(8));

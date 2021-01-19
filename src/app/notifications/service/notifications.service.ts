@@ -20,7 +20,7 @@ export class NotificationsService {
           to: email1,
           message: {
             subject: 'Nuevo Seguidor',
-            html: `Tienes un nuevo seguidor !,<a href='https://recetasonlineyummy.com/usuario/${currentuid}'>click aqui</a>`
+            html: `Tienes un nuevo seguidor !,<a href='https://yummy-b4d83.web.app/usuario/${currentuid}'>click aqui</a>`
           }
         })
       }
@@ -44,7 +44,7 @@ export class NotificationsService {
                 to: user1.email,
                 message: {
                   subject: 'Nuevo Comentario',
-                  html: `Tienes un nuevo comentario en tu receta!<a href='https://recetasonlineyummy.com/receta/${uidRecipe}'>click aqui</a>`
+                  html: `Tienes un nuevo comentario en tu receta!<a href='https://yummy-b4d83.web.app/receta/${uidRecipe}'>click aqui</a>`
                 }
               })
               use1 = false;
@@ -72,7 +72,7 @@ export class NotificationsService {
                 to: user1.email,
                 message: {
                   subject: 'Alguien Necesita ayuda',
-                  html: `Alguien tiene una duda en tu receta!,ayudalo! ,<a href='https://recetasonlineyummy.com/receta/${uidRecipe}'> click aqui </a> `
+                  html: `Alguien tiene una duda en tu receta!,ayudalo! ,<a href='https://yummy-b4d83.web.app/receta/${uidRecipe}'> click aqui </a> `
                 }
               })
               use1 = false;
@@ -100,7 +100,7 @@ export class NotificationsService {
                 to: infoUser.email,
                 message: {
                   subject: 'Hey Respondieron tu pregunta',
-                  html: `Alguien tiene una respuesta para tu pregunta,revisalo!, <a href='https://recetasonlineyummy.com/receta/${recipes.uidRecipe}'>click aqui</a>`
+                  html: `Alguien tiene una respuesta para tu pregunta,revisalo!, <a href='https://yummy-b4d83.web.app/receta/${recipes.uidRecipe}'>click aqui</a>`
                 }
               })
               bander = false;
@@ -136,7 +136,7 @@ export class NotificationsService {
             to: infoUser.email,
             message: {
               subject: 'Nueva receta',
-              html: `Tu cocinero favorito subio una nueva receta!,<a href='https://recetasonlineyummy.com/usuario/${recipeUser}'>click aqui</a>`
+              html: `Tu cocinero favorito subio una nueva receta!,<a href='https://yummy-b4d83.web.app/usuario/${recipeUser}'>click aqui</a>`
             }
           })
           bander = false;
@@ -174,7 +174,7 @@ export class NotificationsService {
             to: infoUser.email,
             message: {
               subject: 'Nuevo stream',
-              html: `Nuevo stream de tu cocinero favorito,sera el ${datem}!,<a href='https://recetasonlineyummy.com/stream/${uidStream}'>click aqui</a>`
+              html: `Nuevo stream de tu cocinero favorito,sera el ${datem}!,<a href='https://yummy-b4d83.web.app/stream/${uidStream}'>click aqui</a>`
             }
           })
           bander = false;
@@ -185,6 +185,10 @@ export class NotificationsService {
 
   senEmailPlanRecipe(recipe: plannedRecipe) {
     let bander = true;
+    var date = new Date(recipe.date);
+    var day = date.getUTCDay();
+    var month = date.getUTCMonth();
+    var datepicker = (`${day}/${month}`);
     this.afs.collection('users', ref => ref.where('uid', '==', recipe.uidUser)).valueChanges().subscribe(user => {
       if (user[0]) {
         const infoUser: any = user[0];
@@ -197,7 +201,7 @@ export class NotificationsService {
                 to: infoUser.email,
                 message: {
                   subject: 'Nueva Receta Planeada',
-                  html: `Tienes  ${foodTime.nameFoodTime} para el dia ${recipe.date.seconds * 1000}!,<a href='https://recetasonlineyummy.com/receta/${recipe.uidRecipe}'>click aqui</a>`
+                  html: `Tienes  ${foodTime.nameFoodTime} para el dia ${datepicker}!,<a href='https://yummy-b4d83.web.app/receta/${recipe.uidRecipe}'>click aqui</a>`
                 }
               })
               bander = false;
@@ -209,7 +213,7 @@ export class NotificationsService {
   }
 
   sendEmailReport(report: any) {
-  //  console.log('si funciono');
+   console.log('si funciono');
     let bander = true;
     this.afs.collection('infoRecipe', ref => ref.where('uid', '==', report.recipe)).valueChanges().subscribe(recipe => {
       if (recipe[0]) {
@@ -224,7 +228,7 @@ export class NotificationsService {
               to: infoUser.email,
               message: {
                 subject: 'Reporte de Receta',
-                html: `Tienes un reporte de tu receta,${report.option} ,${report.coment},<a href='https://recetasonlineyummy.com/receta/${report.recipe}'>click aqui</a>`
+                html: `Tienes un reporte de tu receta,${report.option} ,${report.coment},<a href='https://yummy-b4d83.web.app/receta/${report.recipe}'>click aqui</a>`
               }
             })
            // console.log('si se manda');

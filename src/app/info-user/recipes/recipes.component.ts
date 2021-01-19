@@ -12,12 +12,12 @@ import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 })
 export class RecipesComponent implements OnInit {
   
-  recipe: Observable<infoRecipe[]>;
+  recipe: Observable<any[]>;
   displayName: any;
   constructor(private firestore: AngularFirestore,private router: Router, private auth: AuthService) { }
  
   ngOnInit(): void {
-    this.recipe = this.firestore.collection("infoRecipe", ref => ref.where("uidUser", "==", this.router.url.slice(9))).valueChanges();
+    this.recipe = this.firestore.collection("infoRecipe", ref => ref.where("uidUser", "==", this.router.url.slice(9)).orderBy("timeStamp", "desc")).valueChanges();
 
     this.auth.getUser(this.router.url.slice(9)).subscribe(user => {
       if (user[0]) {

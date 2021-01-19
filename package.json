@@ -23,6 +23,8 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
+    "@angular/service-worker": "~9.1.9",
+    "@angular/youtube-player": "^11.0.4",
     "@fortawesome/angular-fontawesome": "^0.8.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-brands-svg-icons": "^5.15.1",

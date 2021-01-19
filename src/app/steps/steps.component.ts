@@ -22,6 +22,7 @@ export class StepsComponent implements OnInit {
   index:any=0;
   lenghtSteps: number;
   uidUser: string=null;
+  videourl: any;
   constructor(private router: Router, private afs: AngularFirestore,private auth:AuthService,private stepsService:StepsService) {
     const id = this.router.url.slice(7);
    // console.log(id);
@@ -35,6 +36,10 @@ export class StepsComponent implements OnInit {
         this.lenghtSteps = this.steps.length;
         this.imagePosition = this.stepImage[0];
         this.stepPositions = this.steps[0];
+        this.videourl = infoRecipe.urlVideo;
+        console.log(this.videourl);
+        this.videourl = this.videourl.slice(32);
+        console.log(this.videourl);
      //   console.log(this.imagePosition, this.steps);
       //  console.log(this.Technique);
       }

@@ -121,6 +121,7 @@ export class AuthService extends RoleValidator{
   async logout(): Promise<void> {
     try {
       await this.afAuth.signOut();
+      this.router.navigate(['/home'])
     } catch (error) {
       //console.log(error);
     }

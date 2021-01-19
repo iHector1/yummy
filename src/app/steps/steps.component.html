@@ -4,34 +4,56 @@
       <h1 class="text-center">Paso a paso</h1>
       <div class="col-sm-12 col-md-12 row ml-3">
         <div class="col-sm-12 col-md-3">
-          <h4>Paso {{index+1}}</h4>
+          <h4>Paso {{ index + 1 }}</h4>
         </div>
         <div class="col-sm-12 col-md-9">
-          <h4>{{stepPositions}}</h4>
+          <h4>{{ stepPositions }}</h4>
         </div>
       </div>
       <div class="col-sm-12 col-md-12 row ml-3">
-          <div class="col-sm-12 col-md-3">
-              <h4 class="bold">Tecnica</h4>
-          </div>
-          <div class="col-sm-12 row col-md-9" *ngFor="let tecnique of Technique;let i=index;">
-              <app-technique [technique]="tecnique"></app-technique>
-              
-          </div>
-      </div> 
+        <div class="col-sm-12 col-md-3">
+          <h4 class="bold">Tecnica</h4>
+        </div>
+        <div
+          class="col-sm-12 row col-md-9"
+          *ngFor="let tecnique of Technique; let i = index"
+        >
+          <app-technique [technique]="tecnique"></app-technique>
+        </div>
+      </div>
       <div class="col-md-12 col-sm-12 row">
         <div class="col-md-5 col-sm-12">
-            <img src="{{imagePosition}}"
+          <img
+            src="{{ imagePosition }}"
             alt=""
-            class="img-fluid align-self-center"/>
-        </div>  
-        <video #video *ngIf="imagePosition!=''" width="320" height="240" controls [src]="imagePosition"></video>
-        <div class="col-md-1 col-sm-12">
-            <button mat-raised-button type="button" (click)="advange()" color="primary"><mat-icon>fast_forward</mat-icon></button>
+            class="img-fluid align-self-center"
+          />
         </div>
-        
+        <video
+          #video
+          *ngIf="imagePosition != ''"
+          width="320"
+          height="240"
+          controls
+          [src]="imagePosition"
+        ></video>
+
+        <div class="col-md-1 col-sm-12">
+          <button
+            mat-raised-button
+            type="button"
+            (click)="advange()"
+            color="primary"
+          >
+            <mat-icon>fast_forward</mat-icon>
+          </button>
+        </div>
+        <youtube-player *ngIf="videourl"
+          videoId="{{videourl}}"
+          [height]="250"
+          [width]="500">
+        </youtube-player>
       </div>
-     
     </div>
   </div>
 </div>

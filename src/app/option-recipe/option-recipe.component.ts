@@ -44,8 +44,10 @@ export class OptionRecipeComponent implements OnInit {
     this.dialog.open(UpdateRecipeComponent);
   }
   deleteData() {
+    console.log(this.router.url.slice(8));
     this.afs.collection('infoRecipe').doc(this.router.url.slice(8)).delete();
     this.afs.collection('recipe').doc(this.router.url.slice(8)).delete();
+    this.router.navigate(['/home']);
   }
   
   optionSubmit() {

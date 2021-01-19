@@ -12,13 +12,14 @@ export class PopularComponent implements OnInit {
 	options1: any
   contact=new Array();
   constructor(private afs: AngularFirestore) {
-    this.newest = this.afs.collection("infoRecipe", ref => ref.orderBy("timeStamp", "desc").where("uidCollection","==","Invierno").limit(9)).valueChanges().subscribe(data => {
+    this.newest = this.afs.collection("infoRecipe",ref=>ref.where('requests','>',4)).valueChanges().subscribe(data => {
       
 			this.contact = [];
 	  
 				  data.forEach( ( x ) => {
-	  
-					  this.contact.push( x );
+            if (x['stars']>4) {
+              this.contact.push( x );
+            }
 				  });
 				  this.slides = this.chunk(this.contact, 3)
 	  //console.log(this.contact);

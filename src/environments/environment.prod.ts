@@ -10,5 +10,6 @@ export const environment = {
     appId: "1:962970304833:web:9e19e7c0c85561172521c0",
     measurementId: "G-ET3HVKMQM9"
   },
-  mapBoxKey:'pk.eyJ1IjoiMTcxMDAxNDUiLCJhIjoiY2toa3U0bmRrMG1odzJ5b2h0Z2JzdDAwMiJ9.qO3ZvnsYwAKtDi1Ao3UIcA'
+  mapBoxKey:'pk.eyJ1IjoiMTcxMDAxNDUiLCJhIjoiY2toa3U0bmRrMG1odzJ5b2h0Z2JzdDAwMiJ9.qO3ZvnsYwAKtDi1Ao3UIcA',
+  sourceMap: true
 };

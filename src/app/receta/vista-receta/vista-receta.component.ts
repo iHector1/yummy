@@ -5,7 +5,7 @@ import { RecetaService } from '../service/receta.service';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { infoRecipe } from 'src/app/shared/models/infoRecipe.interface';
 import { AuthService } from "../../auth/services/auth.service";
 import { User } from 'src/app/shared/models/user.inteface';
@@ -67,13 +67,14 @@ export class VistaRecetaComponent implements OnInit {
   isUser2: any;
   showOption: boolean=false;
   userN: boolean;
-  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService,private saveService:RecipeSavedService,private dialog: MatDialog) { 
+  constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private router:Router,private auth:AuthService,private follow: FollowService,private chat:ChatService,private saveService:RecipeSavedService,private dialog: MatDialog,private route: ActivatedRoute) { 
   }
   public user$: Observable<User> = this.auth.afAuth.user;
   ngOnInit(): void {
-    this.uidRecipe = this.router.url.slice(8);
+    this.uidRecipe = this.route.snapshot.paramMap.get('id');
+    console.log(this.uidRecipe);
     this.isFollowing = false;
-    this.RecipeService.retrieveUserDocumentFromRecipe(this.router.url.slice(8)).subscribe(recipe => {
+    this.RecipeService.retrieveUserDocumentFromRecipe(this.uidRecipe).subscribe(recipe => {
       if (recipe[0]) { 
         const recipeVar: any = recipe[0];
         this.other = recipe[0];
@@ -110,8 +111,8 @@ export class VistaRecetaComponent implements OnInit {
         this.router.navigate(['/no_existe']);
      }
     });
-    this.url ="https://recetasonlineyummy.com/"+this.router.url;
-  
+    this.url ="https://yummy-b4d83.web.app"+this.router.url;
+    console.log(this.url);
     
   }
 
@@ -174,7 +175,8 @@ export class VistaRecetaComponent implements OnInit {
             try {
               this.isUser = user.uid;
             } catch (err) {
-              console.log(err)
+              console.log(err);
+              this.showOption = false;
             }
             this.userN = false;
             if (!this.isUser && this.premiumRecipe==true) {
@@ -182,7 +184,9 @@ export class VistaRecetaComponent implements OnInit {
             }// console.log("si entro awevo que si 4");
           if (this.isUser == uiUser.uid ||this.isUser==null||this.isUser==undefined||this.isUser=="") {
             this.show = false;  
-            this.showOption = true;
+            if (this.isUser == uiUser.uid) {
+              this.showOption = true;
+            }
              this.userN = true;
             //console.log(this.isUser);
           } 

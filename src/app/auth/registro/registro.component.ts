@@ -11,10 +11,9 @@ import { UsernameValidators} from '../../Validators/usernameValidator';
 export class RegistroComponent implements OnInit {
   hide = true;
   registerForm = new FormGroup({
-    email: new FormControl(''),
+    email: new FormControl('',Validators.email),
     password: new FormControl('', [
-      Validators.pattern("^(?=(?:[^A-Z]*[A-Z]){1})(?=(?:[^a-z]*[a-z]){2})(?=(?:[^0-9]*[0-9]){2}).{8,}$"),
-      Validators.minLength(8)
+      Validators.pattern("^(?=(?:[^A-Z]*[A-Z]){1})(?=(?:[^a-z]*[a-z]){2})(?=(?:[^0-9]*[0-9]){2}).{8,}$")
     ])
   });
   verification = false;
@@ -26,11 +25,15 @@ export class RegistroComponent implements OnInit {
   //registro con correo electronico 
   async onRegister() {
     const { email, password } = this.registerForm.value;
+    if (password==""||email=="") {
+      this.verification = false;
+    }
+    console.log(this.verification);
     try {
       if (this.verification) {
         const user = await this.authSvc.register(email, password);
       }else{
-        window.alert("no funciono intenta de nuevo");
+        window.alert("Completa todos los campos");
       }
     } catch (error) {
       //console.log(error);
@@ -38,12 +41,29 @@ export class RegistroComponent implements OnInit {
   }
 //    if (this.registerForm.controls.password.errors.pattern) {
   validation() { 
-    if (this.registerForm.controls.errors) {
-      
+    try {
+      if (this.registerForm.controls.password.errors.pattern) {
       window.alert("La contraseña debera contener 8 caracteres (minuscular,mayuculas,numeros) ");
       this.verification = false;
     }
     else{
+      this.verification = true; 
+    }
+    } catch (err) {
+      this.verification = true; 
+    }
+    
+  }
+  validation2() {
+    try {
+      if (this.registerForm.controls.email.errors.email) {
+      window.alert("Esa no es una cuenta de correo electronico");
+      this.verification = false;
+    }
+    else{
+      this.verification = true; 
+    }
+    } catch (err) {
       this.verification = true; 
     }
   }

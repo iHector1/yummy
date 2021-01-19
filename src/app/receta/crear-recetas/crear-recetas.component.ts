@@ -108,7 +108,6 @@ export class CrearRecetasComponent implements OnInit {
   }
 
   async create_recipe() {
-    try {
       let { title, cookTime, portions, portionsCalories, uidsCategory, uidsSeason, uidsCollection, uidsRegion, booelanPremium } = this.recipeForm.value;
       if (this.creatorPremium==true) {
         booelanPremium = false;
@@ -138,7 +137,7 @@ export class CrearRecetasComponent implements OnInit {
         const id = Math.random().toString(36).substring(2);
         if (cookTime>=60) {
           hours = 10;
-        } else if (cookTime=>120) { 
+        } else if (cookTime>=120) { 
           hours = 20;
          } else if (cookTime>180) {
           hours = 30;  
@@ -170,16 +169,12 @@ export class CrearRecetasComponent implements OnInit {
           recipePremium:booelanPremium,
         };
         this.noti.sendEmailRecipe(this.inputUserid.nativeElement.value);
-       // console.log(recipeInfo);
+        console.log(recipeInfo);
         this.RecipeService.RecipeDataAdd(recipeInfo);
         this.RecipeService.RecipeDataAddRecipe(recipeInfo);
         this.router.navigate(['/home']);
      }
      // console.log(booelanPremium);
-    }
-    catch (error) {
-     // console.log(error);
-    }
   }
 
   addIngredient() {
@@ -227,7 +222,7 @@ export class CrearRecetasComponent implements OnInit {
         this.kitchenAreaa = "Cocina Caliente";
         this.typeKitchen = 40;
       } else if (this.kitchenfria>this.kitchenhot && this.kitchenfria>=this.kitchenBar && this.kitchenfria>=this.kitchenPas) {
-        this.kitchenAreaa = "Cocina Fira";
+        this.kitchenAreaa = "Cocina Fria";
         this.typeKitchen = 30;
       } else if (this.kitchenPas>this.kitchenhot && this.kitchenPas>this.kitchenfria && this.kitchenPas>=this.kitchenBar) {
         this.kitchenAreaa = "Pasteleria o reposteria ";

@@ -1,7 +1,7 @@
 
 <mat-nav-list *ngIf='data==true'>
-    <a  mat-list-item  mat-dialog-close>
-        <span mat-line (click)="deleteData()">Eliminar Receta</span>
+    <a  mat-list-item (click)="deleteData()" mat-dialog-close>
+        <span mat-line >Eliminar Receta</span>
       </a>
     
       <a mat-list-item (click)='updateData()' mat-dialog-close>

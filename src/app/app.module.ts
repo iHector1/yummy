@@ -19,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
       debug: true
     }),
     ShareIconsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent],

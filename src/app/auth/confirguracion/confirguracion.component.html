@@ -13,7 +13,7 @@
                 matInput
                 placeholder="papasito33"
                 formControlName="nameDisplay"
-                required  (blur)="search($event)" 
+                required  (change)="search($event)" 
               />
             </mat-form-field>
           </div>
@@ -65,7 +65,7 @@
         <div class="center btn container-input-file">
           <h4>Foto de perfil :</h4>
           <input type="file"
-          accept=".jpeg" (change)="onUpload($event)">
+          accept=".jpeg,.jpg,.png" (change)="onUpload($event)">
         </div>
         <input #imageUser type="hidden" [value]="urlImage | async">
         <div *ngIf="user$ | async as user; " type="hidden">
