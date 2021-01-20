@@ -68,7 +68,8 @@ export class CupboardServiceService {
     const items=this.afs.collection('myCupboard', ref => ref.where("uidUser", "==", userUid)).doc(uidproduct).delete();
  }
 
-  substracItem(cant,uidDoc) {
+  substracItem(cant, uidDoc) {
+    window.alert('Alacena Actualizada');
     this.afs.collection('myCupboard').doc(uidDoc).set({cant:cant},{merge:true});
   }
 }

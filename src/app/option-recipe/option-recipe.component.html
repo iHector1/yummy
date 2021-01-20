@@ -10,11 +10,11 @@
 </mat-nav-list>
 <mat-nav-list *ngIf='data==false'> 
     <a  mat-list-item  (click)='firstOption()'>
-        <span mat-line>La receta no es coherente</span>
+        <span mat-line>La receta no es coherente: el contenido de la receta (pasos) no cumple con el objetivo esperado (título).</span>
       </a>
     
       <a  mat-list-item  (click)='secondOption()'>
-        <span mat-line>Contenido inapropiado</span>
+        <span mat-line>Contenido inapropiado: la receta contiene fotos que no van de acuerdo con la descripción de los pasos</span>
       </a>
 </mat-nav-list>
 <form [formGroup]="optionForm" > 

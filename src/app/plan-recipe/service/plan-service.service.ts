@@ -50,19 +50,19 @@ export class PlanServiceService {
 
   private cupboardUser(uidUser, uidIngredient,cant,uidUnit) {
     let bander = true;
+    var cant2 = Number(cant);
           this.afs.collection('myCupboard', ref => ref.where('uidUser', '==', uidUser).where('uidIngredient', "==", uidIngredient).where('uidUnit', "==", uidUnit)).valueChanges().subscribe(ingredient => {
             if (bander == true) {
               if (ingredient[0]) {
                 const infoCup: any = ingredient[0];
                 bander = false;
-                 // console.log(infoCup.cant,cant);
-                   if (infoCup.cant==cant) {
+                  console.log(infoCup.cant,cant2);
+                   if (infoCup.cant==cant2) {
                      this.cupboardService.deleteItems(uidUser, infoCup.uid);
-                }
-                if (infoCup.cant < cant) {
-                  //console.log('no puede ser con las tortillas');
+                }else if (infoCup.cant < cant2) {
+                  console.log('si soy mayor del que esta');
                   this.cupboardService.deleteItems(uidUser, infoCup.uid);
-                  infoCup.cant = (infoCup.cant - cant)*-1;
+                  infoCup.cant = (infoCup.cant - cant2)*-1;
                   const data: any = {
                     uid: Math.random().toString(36).substring(2),
                     uidUser: uidUser,
@@ -72,7 +72,8 @@ export class PlanServiceService {
                   };
                   this.listSuperUpdate(data);
                   }else {
-                     infoCup.cant = infoCup.cant - cant;
+                    console.log('si resto')
+                     infoCup.cant = infoCup.cant - cant2;
                     this.cupboardService.substracItem(infoCup.cant, infoCup.uid);
                   }
                   

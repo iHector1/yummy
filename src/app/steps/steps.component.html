@@ -1,6 +1,24 @@
 <div class="card mt-5 ml-5 mr-5">
   <div class="card-body">
     <div class="col-sm-12 col-md-12">
+      <button
+            mat-raised-button
+            type="button"
+            (click)="substrac()"
+            color="primary"
+            class="float-left"
+          >
+            <mat-icon>fast_rewind</mat-icon>
+      </button>
+      <button
+            mat-raised-button
+            type="button"
+            (click)="advange()"
+            color="primary"
+            class="float-right"
+          >
+            <mat-icon>fast_forward</mat-icon>
+          </button>
       <h1 class="text-center">Paso a paso</h1>
       <div class="col-sm-12 col-md-12 row ml-3">
         <div class="col-sm-12 col-md-3">
@@ -12,7 +30,7 @@
       </div>
       <div class="col-sm-12 col-md-12 row ml-3">
         <div class="col-sm-12 col-md-3">
-          <h4 class="bold">Tecnica</h4>
+          <h4 class="bold">Técnica</h4>
         </div>
         <div
           class="col-sm-12 row col-md-9"
@@ -29,24 +47,16 @@
             class="img-fluid align-self-center"
           />
         </div>
-        <video
+        <div class="col-md-12 col-sm-12 row">
+              <video
           #video
-          *ngIf="imagePosition != ''"
+          *ngIf="videoPosition != ''"
           width="320"
           height="240"
           controls
-          [src]="imagePosition"
+          [src]="videoPosition"
         ></video>
 
-        <div class="col-md-1 col-sm-12">
-          <button
-            mat-raised-button
-            type="button"
-            (click)="advange()"
-            color="primary"
-          >
-            <mat-icon>fast_forward</mat-icon>
-          </button>
         </div>
         <youtube-player *ngIf="videourl"
           videoId="{{videourl}}"
@@ -56,4 +66,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> 

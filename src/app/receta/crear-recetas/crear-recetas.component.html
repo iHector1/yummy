@@ -143,7 +143,7 @@
               <mat-form-field class="col-md-4 col-sm-12" appearance="fill">
                   <mat-label>Cantidad</mat-label>
                
-                <input matInput placeholder="5"  type="number" #cantt required/>
+                <input matInput placeholder="5" min="1"  type="number" #cantt required/>
               </mat-form-field>
               <mat-form-field appearance="fill" >
                   <mat-label>Medida</mat-label>
@@ -228,8 +228,12 @@
                maxlength="256" 
                required/><mat-hint align="end">{{stepp.value.length}} / 256</mat-hint>      
             </mat-form-field>
-            <input  mat-raised-button color="primary" class="text-center" type="file"accept=".jpeg,.jpg ,.jpng,.png , .mp4" (change)="onUpload($event)">
+            <h5>Foto</h5>
+            <input  mat-raised-button color="primary" class="text-center" type="file"accept=".jpeg,.jpg ,.jpng,.png " (change)="onUpload($event)">
             <input #image type="hidden"[value]="urlImage | async">
+            <h5>Video</h5>
+            <input  mat-raised-button color="primary" class="text-center" type="file"accept=".mp4" (change)="onUploadVideo($event)">
+            <input #video type="hidden"[value]="videoo | async">
       </div>
       <div class="row col-md-12 col-sm-12 mt-2">
         <h4 class=" overflow-visible badge badge-pill badge-primary ml-1 " *ngFor="let spte of step">{{spte}}</h4>

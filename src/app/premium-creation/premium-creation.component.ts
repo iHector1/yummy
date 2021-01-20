@@ -26,7 +26,10 @@ export class PremiumCreationComponent implements OnInit {
   controlVideo: boolean;
   videoUrl: any;
   uidUser: string;
+  urliImage2:any
   @ViewChild('inputVideo') inputVideo: ElementRef;
+  @ViewChild('inputImage') inputImage: ElementRef;
+
   constructor(private afs: AngularFirestore, private authService: AuthService, private storage: AngularFireStorage,private premiumService:PremiumService,private router:Router) {
     this.user$.subscribe(user => {
       this.uidUser = user.uid;
@@ -44,7 +47,8 @@ export class PremiumCreationComponent implements OnInit {
       message: message,
       urlVideo: this.inputVideo.nativeElement.value,
       paypalAccount: paypalCount,
-      cost: cost
+      cost: cost,
+      image:this.inputImage.nativeElement.value
     };
     this.authService.updateUserDataPremiun(this.uidUser);
     this.premiumService.createAd(dataAd);
@@ -80,4 +84,22 @@ export class PremiumCreationComponent implements OnInit {
       this.controlVideo = true;
     }
   }
+  onUploadImage(e) {
+    // console.log(e);
+     const file = e.target.files[0];
+     if (file.size <20000000) {
+       const id = Math.random().toString(36).substring(2);
+     const filePath = `adPremium/profile_${id}`;
+       const ref = this.storage.ref(filePath);
+     const task = this.storage.upload(filePath, file);
+     this.uploadPercent = task.percentageChanges();
+     task.snapshotChanges().pipe(finalize(() => this.urliImage2 = ref.getDownloadURL())).subscribe(value => {
+       //console.log(this.urlImage);
+     });
+     this.controlVideo = true;
+     } else {
+       window.alert("video demasiado grande, intente con otro");
+       this.controlVideo = false;
+     } 
+   }
 }

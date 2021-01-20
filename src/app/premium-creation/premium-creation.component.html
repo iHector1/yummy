@@ -29,7 +29,15 @@
         <input [value]="urlImage|async" #inputVideo type="hidden">
         <br>
         <br>
-
+        <div class="col-md-12">
+          <p>Inserta una imagen</p>
+        </div>
+        <div class="col-md-12">
+          <input type="file" accept=".jpeg,.jpg ,.jpng,.png"  (change)="onUploadImage($event)" >
+        </div>
+        <br>
+        <br>
+        <input [value]="urliImage2|async" #inputImage type="hidden">
         <mat-form-field class="col-md-4 col-sm-4">
           <mat-label>Costo</mat-label>
           <input

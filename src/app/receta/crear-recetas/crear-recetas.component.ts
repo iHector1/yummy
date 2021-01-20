@@ -65,12 +65,14 @@ export class CrearRecetasComponent implements OnInit {
   cant = new Array();//cantidad 
   step = new Array();//paso
   imageStep = new Array();//array de imagenes
+  videoStep = new Array();//array de imagenes
   description: string = "";
   technique = new Array();
   uidtechnique = new Array();
   @ViewChild('stepp') inputstep: ElementRef;
   @ViewChild('image') stepImage: ElementRef;
   @ViewChild('idUser') inputUserid: ElementRef;
+  @ViewChild('video') video: ElementRef;
   @ViewChild('image2') imageRecipe: ElementRef;
   @ViewChild('cantt') inputCant: ElementRef;
   uploadPercent: Observable<number>;
@@ -78,6 +80,7 @@ export class CrearRecetasComponent implements OnInit {
   urlImage: Observable<any>;
   creatorPremium: boolean = true;
   public user$: Observable<User> = this.authService.afAuth.user;
+  videoo: Observable<any>;
   constructor(private firestore:AngularFirestore, private storage: AngularFireStorage, private RecipeService:RecetaService,private authService:AuthService,private router:Router,private noti:NotificationsService) {
     this.uidUnit = this.firestore.collection('unit').valueChanges();
     this.uidCookWare = this.firestore.collection('cookWare',ref=>ref.where("requests",">=",3)).valueChanges();
@@ -166,7 +169,8 @@ export class CrearRecetasComponent implements OnInit {
           timeStamp: new Date(),
           urlVideo: this.recipeForm.controls.videoUrl.value,
           kitchenArea: this.kitchenAreaa,
-          recipePremium:booelanPremium,
+          recipePremium: booelanPremium,
+          video: this.videoStep
         };
         this.noti.sendEmailRecipe(this.inputUserid.nativeElement.value);
         console.log(recipeInfo);
@@ -193,8 +197,10 @@ export class CrearRecetasComponent implements OnInit {
     if (this.inputstep.nativeElement.value != "") { 
       this.step.push(this.inputstep.nativeElement.value);
       this.imageStep.push(this.stepImage.nativeElement.value);
+      this.videoStep.push(this.video.nativeElement.value);
       this.inputstep.nativeElement.value = "";
       this.stepImage.nativeElement.value = "";
+      this.video.nativeElement.value = "";
     } else {
       window.alert("Espacio vacío en pasos");
     }
@@ -248,6 +254,16 @@ export class CrearRecetasComponent implements OnInit {
     this.uploadPercent = task.percentageChanges();
     task.snapshotChanges().pipe(finalize(() => this.urlImage = ref.getDownloadURL())).subscribe();
   }
+  onUploadVideo(e) {
+    // console.log(e);
+     const id = Math.random().toString(36).substring(2);
+     const file = e.target.files[0];
+     const filePath = `videos/recipe_${id}`;
+     const ref = this.storage.ref(filePath);
+     const task = this.storage.upload(filePath, file);
+     this.uploadPercent = task.percentageChanges();
+     task.snapshotChanges().pipe(finalize(() => this.videoo = ref.getDownloadURL())).subscribe();
+   }
   addCookWare() {
     if (this.recipeForm.controls.uidsCookWare.value!=" " ) {
       this.cook.push(this.recipeForm.controls.uidsCookWare.value["nameCookWare"]);

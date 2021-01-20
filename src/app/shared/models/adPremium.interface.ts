@@ -5,4 +5,5 @@ export interface adPremium{
     urlVideo?: string;
     paypalAccount?: string;
     cost?: number;
+    image?: any;
 }

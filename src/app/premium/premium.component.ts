@@ -22,6 +22,7 @@ export class PremiumComponent implements OnInit {
   showLogin: boolean;
   paypalButtons: boolean=true;
   userPremium: string;
+  uirlImage: any;
 
   constructor(private router: Router, private afs:AngularFirestore,private auth:AuthService,private follow:FollowService) {
    // console.log(this.router.url.slice(13));
@@ -31,7 +32,8 @@ export class PremiumComponent implements OnInit {
         this.message = adVar.message;
         this.cost = adVar.cost;
         this.paypalAccount = adVar.paypalAccount;
-        this.urlVideo = adVar.urlVideo;
+        this.urlVideo = adVar.urlVideo ? adVar.urlVideo:" ";
+        this.uirlImage = adVar.image;
        // console.log(this.urlVideo);
         this.afs.collection('infoUser', ref => ref.where("uid", "==", adVar.uid)).valueChanges().subscribe(user => {
           if (user[0]) {

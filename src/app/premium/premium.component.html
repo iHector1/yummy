@@ -17,9 +17,10 @@
         <br>
         
         <div  class="row col-md-12 col-sm-12">
-          <video class="col-md-7" width="320" height="240" [src]="urlVideo" controls >
+          <video *ngIf='urlVideo!=" "' class="col-md-7" width="240" height="240" [src]="urlVideo" controls >
           </video>
-          <div class="card col-md-5 h-25 d-inline-block">
+          <img [src]="uirlImage" class="col-md-6">
+          <div class="card col-md-4 h-25 d-inline-block">
             <div class="card-body">
             <p class="text-center">${{cost}} pesos</p>
           </div>

@@ -17,6 +17,7 @@ export interface infoRecipe{
   kitchenArea?: string;
   count?: string[];
   stepsPhoto?: string[];
+  video?: string[];
   uidsTechnique?: string[];
   portions?: number;
   portionCalories?: number; 

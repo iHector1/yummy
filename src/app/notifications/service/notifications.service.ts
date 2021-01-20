@@ -213,7 +213,7 @@ export class NotificationsService {
   }
 
   sendEmailReport(report: any) {
-  //  console.log('si funciono');
+   console.log('si funciono');
     let bander = true;
     this.afs.collection('infoRecipe', ref => ref.where('uid', '==', report.recipe)).valueChanges().subscribe(recipe => {
       if (recipe[0]) {

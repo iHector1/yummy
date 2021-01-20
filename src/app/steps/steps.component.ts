@@ -23,6 +23,8 @@ export class StepsComponent implements OnInit {
   lenghtSteps: number;
   uidUser: string=null;
   videourl: any;
+  videosurl: any;
+  videoPosition: any;
   constructor(private router: Router, private afs: AngularFirestore,private auth:AuthService,private stepsService:StepsService) {
     const id = this.router.url.slice(7);
    // console.log(id);
@@ -35,6 +37,8 @@ export class StepsComponent implements OnInit {
         this.points = infoRecipe.points;
         this.lenghtSteps = this.steps.length;
         this.imagePosition = this.stepImage[0];
+        this.videosurl = infoRecipe.video ? infoRecipe.video:["","","","","","",""];
+        this.videoPosition = this.videosurl[0];
         this.stepPositions = this.steps[0];
         this.videourl = infoRecipe.urlVideo;
         console.log(this.videourl);
@@ -69,8 +73,20 @@ export class StepsComponent implements OnInit {
       this.router.navigate(['/home']);
     } else {
       this.imagePosition = this.stepImage[this.index];
-    this.stepPositions = this.steps[this.index];
+      this.stepPositions = this.steps[this.index];
+      this.videoPosition = this.videosurl[this.index];
+      
     }
+  }
+  substrac() {
+    
+    if (this.index > 0) {
+      this.index = this.index - 1;
+      this.imagePosition = this.stepImage[this.index];
+      this.stepPositions = this.steps[this.index];
+      this.videoPosition = this.videosurl[this.index];
+      
+    } 
   }
   private pointsUser() {
     this.stepsService.pointsUser(this.uidUser, this.points);
