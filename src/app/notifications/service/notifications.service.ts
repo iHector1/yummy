@@ -186,9 +186,10 @@ export class NotificationsService {
   senEmailPlanRecipe(recipe: plannedRecipe) {
     let bander = true;
     var date = new Date(recipe.date);
-    var day = date.getUTCDay();
-    var month = date.getUTCMonth();
-    var datepicker = (`${day}/${month}`);
+    var day = date.getDate();
+    var month = date.getUTCMonth()+1;
+    var year = date.getFullYear();
+    var datepicker = (`${day}/${month}/${year}`);
     this.afs.collection('users', ref => ref.where('uid', '==', recipe.uidUser)).valueChanges().subscribe(user => {
       if (user[0]) {
         const infoUser: any = user[0];
@@ -201,7 +202,7 @@ export class NotificationsService {
                 to: infoUser.email,
                 message: {
                   subject: 'Nueva Receta Planeada',
-                  html: `Tienes  ${foodTime.nameFoodTime} para el dia ${datepicker}!,<a href='https://yummy-b4d83.web.app/receta/${recipe.uidRecipe}'>click aqui</a>`
+                  html: `Tienes  ${foodTime.nameFoodTime} para el dia ${datepicker} !,<a href='https://yummy-b4d83.web.app/receta/${recipe.uidRecipe}'>click aqui</a>`
                 }
               })
               bander = false;

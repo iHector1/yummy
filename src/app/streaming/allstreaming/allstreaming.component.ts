@@ -43,7 +43,7 @@ export class AllstreamingComponent implements OnInit {
           if (x.userPremium == true) {
             this.getOtherStrems(x.uid);
           }
-        })
+        }) 
       })
    }
   private getOtherStrems(uid) {

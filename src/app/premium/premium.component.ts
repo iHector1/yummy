@@ -73,7 +73,7 @@ export class PremiumComponent implements OnInit {
               }
             }
           ]
-        })
+        }) 
       },
       onApprove: async (data, actions) => {
         const order = await actions.order.capture();

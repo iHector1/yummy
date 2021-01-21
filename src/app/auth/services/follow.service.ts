@@ -66,6 +66,7 @@ export class FollowService {
       });
     }
   followPremium(uidUserAd, uidPremium) {
-    this.afs.collection('follower/'+uidUserAd+'/users' ).doc(uidPremium).set({userPremium:true},{merge:true});
+    this.afs.collection('follower/' + uidUserAd + '/users').doc(uidPremium).set({ userPremium: true }, { merge: true });
+    this.afs.collection('following/'+uidPremium+'/users' ).doc(uidUserAd).set({userPremium:true},{merge:true});
   }
 }
