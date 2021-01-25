@@ -54,7 +54,9 @@ const routes: Routes = [
     path: 'no_existe',
     component:PageNotFoundComponent
   },
-  { path: 'info_stream', loadChildren: () => import('./info-stream/info-stream.module').then(m => m.InfoStreamModule) }
+  { path: 'info_stream', loadChildren: () => import('./info-stream/info-stream.module').then(m => m.InfoStreamModule) },
+  { path: 'comentoption', loadChildren: () => import('./option-comment/option-comment.module').then(m => m.OptionCommentModule) },
+  { path: 'helpoption', loadChildren: () => import('./option-help/option-help.module').then(m => m.OptionHelpModule) }
 ];
 
 @NgModule({
