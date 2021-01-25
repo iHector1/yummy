@@ -241,4 +241,21 @@ export class NotificationsService {
     });
 
   }
+
+  sendReminder(uidUser) {
+    this.afs.collection('users', ref => ref.where('uid', '==', uidUser)).valueChanges().subscribe(user1 => {
+      if (user1[0]) {
+        const user: any = user1[0];
+        const email1 = user.email;
+        this.afs.collection('mail').add({
+          uidUser: user.uid,
+          to: email1,
+          message: {
+            subject: 'Recetas de hoy',
+            html: `Tienes recetas planeadas para este dia!,<a href='https://yummy-b4d83.web.app/recetas_planeadas/${uidUser}'>click aqui</a>`
+          }
+        })
+      }
+    })
+  }
 }

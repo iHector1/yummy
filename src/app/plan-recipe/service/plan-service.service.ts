@@ -98,4 +98,36 @@ export class PlanServiceService {
   private listSuperUpdate(itemList: superList) {
     this.superListService.superListCollection(itemList);
   }
+
+  recipeofUser(user) {
+    var dates = new Date();
+    var date = dates.getDate();
+    var month = dates.getUTCMonth()+1;
+    var year = dates.getFullYear();
+    console.log(`${date}/${month}/${year}`);
+    this.afs.collection('plannedRecipe', ref => ref.where('uidUser', '==', user)).valueChanges().subscribe(recipes => {
+      let notice;
+      recipes.forEach((x) => {
+        var time = x['date'];
+        var dates2 = new Date( time.seconds* 1000);
+        var date2 = dates2.getDate();
+        var month2 = dates2.getUTCMonth() + 1;
+        var year2 = dates2.getFullYear();
+        var email = x['notice'] ? x['notice'] : false;
+        console.log(`${date2}/${month2}/${year2}`);
+        if (date2==date && month2==month && year2==year && email==false) {
+          this.noticeRecipe(x['uid']);
+          notice = true;
+          console.log(x);
+        }
+      })
+      if (notice==true) {
+        this.notifi.sendReminder(user);
+      }
+    })
+  }
+
+  private noticeRecipe(uidRecipe) {
+    this.afs.collection('plannedRecipe').doc(uidRecipe).set({notice:true},{merge:true})
+  }
 }

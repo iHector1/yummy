@@ -41,7 +41,14 @@ export class AllstreamingComponent implements OnInit {
       this.follow.getFollowing(this.router.url.slice(17)).subscribe(user=>{
         user.forEach((x) => {
           if (x.userPremium == true) {
-            this.getOtherStrems(x.uid);
+            var dateinit = new Date(x.datePremium.seconds*1000).getTime();
+            var datenow = new Date().getTime();
+            var diff = datenow - dateinit;
+            console.log(diff / (1000 * 60 * 60 * 24));
+            if ((diff / (1000 * 60 * 60 * 24))<30) {
+              this.getOtherStrems(x.uid);
+            }
+            
           }
         }) 
       })

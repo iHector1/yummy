@@ -7,6 +7,7 @@ import { User } from '../models/user.inteface';
 import { Router } from '@angular/router';
 import { FollowService } from 'src/app/auth/services/follow.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { PlanServiceService } from 'src/app/plan-recipe/service/plan-service.service';
 @Component({
   selector: 'app-navbar2',
   templateUrl: './navbar2.component.html',
@@ -23,11 +24,13 @@ export class Navbar2Component implements OnInit {
   hide: boolean;
   totalRecipes: number;
 
-  constructor(private breakpointObserver: BreakpointObserver, public authSvc: AuthService, private router: Router, private follow: FollowService,private afs:AngularFirestore) {
+  constructor(private breakpointObserver: BreakpointObserver, public authSvc: AuthService, private router: Router, private follow: FollowService,private afs:AngularFirestore,private plan:PlanServiceService) {
      
   }
   ngOnInit(): void {
     this.user$.subscribe(user => {
+      console.log(user.uid);
+      this.plan.recipeofUser(user.uid);
       this.follow.getFollowers(user.uid).subscribe(follower => {
         if (follower.length > 2) {
           this.hide = true;
@@ -38,15 +41,16 @@ export class Navbar2Component implements OnInit {
         console.log(this.hide);
       });
       this.afs.collection("infoRecipe", ref => ref.where("uidUser", "==", user.uid)).valueChanges().
-      subscribe(recipes => {
-        this.totalRecipes = recipes.length;
-        if (this.totalRecipes>49) {
-          this.hide = true;
-        } else {
-          this.hide = false;
-        }
-        console.log(this.hide);
-    })
+        subscribe(recipes => {
+          this.totalRecipes = recipes.length;
+          if (this.totalRecipes > 49) {
+            this.hide = true;
+          } else {
+            this.hide = false;
+          }
+          console.log(this.hide);
+        });
+      
     });
   }
   async logout() {
