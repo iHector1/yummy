@@ -1,1 +1,26 @@
-<p>option-help works!</p>
+<mat-nav-list>
+    <a  mat-list-item  (click)='firstOption()'>
+        <span mat-line>Spam</span>
+      </a>
+    
+      <a  mat-list-item  (click)='secondOption()'>
+        <span mat-line>Contenido inapropiado</span>
+      </a>
+    </mat-nav-list>
+    
+    <form [formGroup]="optionForm" > 
+    <mat-form-field class="col-md-9 col-sm-12 mt-5" appearance="fill" *ngIf='!bander'>
+    <input
+    formControlName="coment"
+      matInput
+      placeholder="Inserta tu reporte"
+      required
+    />
+    </mat-form-field> 
+    <mat-dialog-actions align="end" >
+    <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary"[disabled]='bander' (click)='optionSubmit()' mat-dialog-close>
+      Confirmar
+    </button> 
+    </mat-dialog-actions> 
+    </form>

@@ -287,5 +287,34 @@ export class NotificationsService {
        }
      });
  
+  }
+  sendEmailReportHelp(report: any) {
+    console.log('si funciono');
+    let bander = true;
+    console.log(report);
+     this.afs.collection('help', ref => ref.where('uid', '==', report.uidhelp)).valueChanges().subscribe(comment => {
+       if (comment[0]) {
+         const commentInfo: any = comment[0];
+        this.afs.collection('users', ref => ref.where('uid', '==', commentInfo.uidUser)).valueChanges().subscribe(user => {
+         if (user[0]) {
+           //console.log('si lo encuentro')
+           const infoUser: any = user[0];
+           if (bander == true) {
+             this.afs.collection('mail').add({
+               uidUser: infoUser.uid,
+               to: infoUser.email,
+               message: {
+                 subject: 'Reporte de Pregunta',
+                 html: `Tienes un reporte de tu pregunta,${report.option} ,${report.coment},<a href='https://yummy-b4d83.web.app/receta/${report.recipe}'>click aqui</a>`
+               }
+             })
+            // console.log('si se manda');
+             bander = false;
+           }
+         }
+       });
+       }
+     });
+ 
    }
 }

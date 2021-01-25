@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { User } from 'src/app/shared/models/user.inteface';
 import { HelpService } from 'src/app/receta/service/help.service';
 import { answerComment } from 'src/app/shared/models/answer.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { OptionHelpComponent } from 'src/app/option-help/option-help.component';
 @Component({
   selector: 'app-vista-helps',
   templateUrl: './vista-helps.component.html',
@@ -31,7 +33,7 @@ export class VistaHelpsComponent implements OnInit {
   com: any;
   points: number;
   show2: boolean=false;
-  constructor(private afs: AngularFirestore,private router:Router,private authService: AuthService,private helpService:HelpService) { 
+  constructor(private afs: AngularFirestore,private router:Router,private authService: AuthService,private helpService:HelpService,private dialog:MatDialog) { 
     this.helps = this.afs.collection('help', ref => ref.where('uidRecipe', '==', this.router.url.slice(8)).orderBy('timeStamp','asc')).valueChanges();
     this.afs.collection('help', ref => ref.where('uidRecipe', '==', this.router.url.slice(8))).valueChanges().subscribe((help: any[]) => {
       this.helpComment = help;
@@ -129,5 +131,8 @@ export class VistaHelpsComponent implements OnInit {
       censoredWordArray.push("*");
     }
     return censoredWordArray.join("");
+  }
+  openOptions(uidcoment) {
+    this.dialog.open(OptionHelpComponent, { data: { uidUser: this.uidUser ,uidHelp:uidcoment} });
   }
 }

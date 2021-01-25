@@ -1,6 +1,7 @@
 <div class="card mt-5 ml-5 mr-5 mb-5 " *ngFor="let comentHelp of helps|async">
     <div class="card-body">
           <div class="col-md-12 col-sm-12">
+            <button *ngIf="show2==true" mat-icon-button class='float-right' matTooltip="Opciones del comentario" (click)="openOptions(comentHelp.uid)"><mat-icon>more_vert</mat-icon></button>
             <a routerLink="/usuario/{{comentHelp.uidUser}}">{{comentHelp.displayName}}</a>  
             <h3>{{comentHelp.helpComment}}</h3>
           </div>
