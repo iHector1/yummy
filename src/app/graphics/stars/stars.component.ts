@@ -86,6 +86,10 @@ export class StarsComponent implements OnInit {
              if (mounth == 11) {
               var number = this.mounth[0];
               this.mounth[0]=number+Number(x['stars']);
+             }
+             if (mounth == 1) {
+              var number = this.mounth[2];
+              this.mounth[2]=number+1;
             }
            })
           // console.log(this.mounth[0]);

@@ -70,7 +70,8 @@ export class FollowersComponent implements OnInit {
   constructor(private afs: AngularFirestore,private auth:AuthService,private follow:FollowService) {
     this.user$.subscribe(user => {
         const uidUser:any = user.uid;
-        this.follow.getFollowers(uidUser).subscribe(follower => {
+      this.follow.getFollowers(uidUser).subscribe(follower => {
+        console.log(follower.length);
           follower.forEach((x) => {
             var time = x['date'];
             var timeSeconds = time.seconds * 1000;
@@ -85,6 +86,10 @@ export class FollowersComponent implements OnInit {
              var number = this.mounth[0];
              this.mounth[0]=number+1;
            }
+           if (mounth == 1) {
+            var number = this.mounth[2];
+            this.mounth[2]=number+1;
+          }
           })
           this.lineChartData['data'] = this.mounth;
            this.chart.update();
