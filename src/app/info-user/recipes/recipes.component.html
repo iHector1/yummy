@@ -10,8 +10,8 @@
             <div class="card-body">
               <mat-card-title><a routerLink="/receta/{{reci.uid}}">{{reci.title}}</a></mat-card-title>
               <mat-card-content><br>
-                <h5 *ngIf='reci.requests>=4'>{{reci.stars}} estrellas</h5>
-                <h5 *ngIf='reci.requests<4'>0 estrellas</h5>
+                <h5 *ngIf='reci.requests>4'>{{reci.stars}} estrellas</h5>
+                <h5 *ngIf='reci.requests<=4'>0 estrellas</h5>
                 <h5 *ngIf='!reci.requests'>0 estrellas</h5>
                 <br>
                <a> {{displayName}} </a>

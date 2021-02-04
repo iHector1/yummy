@@ -37,7 +37,7 @@ export class StepsComponent implements OnInit {
         this.points = infoRecipe.points;
         this.lenghtSteps = this.steps.length;
         this.imagePosition = this.stepImage[0];
-        this.videosurl = infoRecipe.video ? infoRecipe.video:["","","","","","",""];
+        this.videosurl = infoRecipe.video ? infoRecipe.video:["","","","","","","","","","","","","","","","","","",""];
         this.videoPosition = this.videosurl[0];
         this.stepPositions = this.steps[0];
         this.videourl = infoRecipe.urlVideo;
@@ -64,7 +64,7 @@ export class StepsComponent implements OnInit {
     if (this.index == this.lenghtSteps) {
     
       if (this.uidUser!=null) {
-        window.alert(`Fin de la receta, has gando: ${this.points}`);
+        window.alert(`Fin de la receta, has gando: ${this.points} puntos`);
         this.pointsUser();
       } else {
         window.alert('Fin de la receta!')

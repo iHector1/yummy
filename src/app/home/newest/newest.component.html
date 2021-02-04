@@ -21,8 +21,8 @@
                     alt="Card image cap">
                   <div class="card-body">
                     <a class="card-title h4" routerLink="/receta/{{card.uid}}">{{card.title}}</a>
-                    <h5 *ngIf='card.requests>=4'>{{card.stars}} estrellas</h5>
-                 	 <h5 *ngIf='card.requests<4'>0 estrellas</h5>
+                    <h5 *ngIf='card.requests>4'>{{card.stars}} estrellas</h5>
+                 	 <h5 *ngIf='card.requests<=4'>0 estrellas</h5>
                  	 <h5 *ngIf='!card.requests'>0 estrellas</h5>
                     <p class="card-text"><app-name-user [uid]="card.uidUser"></app-name-user></p>
                   </div>

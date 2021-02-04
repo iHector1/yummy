@@ -82,6 +82,7 @@ export class VistaRecetaComponent implements OnInit {
         this.typeKitchen = recipeVar.kitchenArea;
         this.portions = recipeVar.portions;
         this.urlImage = recipeVar.principalPhoto;
+        console.log(this.urlImage);
         this.cookud = recipeVar.uidsCookWare;
         this.title = recipeVar.title;
         this.cookTime = recipeVar.cookTime;
@@ -157,17 +158,18 @@ export class VistaRecetaComponent implements OnInit {
   //insertar las porciones en la varible 
   anyCant(portions: any) {
     for (let i = 0; i < this.cant.length; i++) {
-      this.cant[i] = this.cantOne[i] * portions;
-
+      var number;
+      number = (this.cantOne[i] * portions);
+      this.cant[i] = number.toFixed(2);
     }
   }
   //checar usuario 
   user(uid, premium) {
-    //console.log("si entro awevo que si 1"); 
+    console.log("si entro awevo que si 1"); 
     this.auth.getUser(uid).subscribe(user => {
-      //console.log("si entro awevo que si 2");
+      console.log("si entro awevo que si 2");
       if (user[0]) {
-        //console.log("si entro awevo que si 3");
+        console.log("si entro awevo que si 3");
         const uiUser: any = user[0];
         this.displayName = uiUser.displayName;
         this.isUser2 = uiUser.uid;
@@ -181,7 +183,7 @@ export class VistaRecetaComponent implements OnInit {
           this.userN = false;
           if (!this.isUser && this.premiumRecipe == true) {
             this.router.navigate([`/ver_premium/${uiUser.uid}`]);
-          }// console.log("si entro awevo que si 4");
+          } console.log("si entro awevo que si 4");
           if (this.isUser == uiUser.uid || this.isUser == null || this.isUser == undefined || this.isUser == "") {
             this.show = false;
             if (this.isUser == uiUser.uid) {
@@ -205,6 +207,10 @@ export class VistaRecetaComponent implements OnInit {
                     this.checkUserPremium(follow);
                   }
                   //  console.log(follow);
+                } else {
+                  if (premium == true) {
+                    this.router.navigate([`/ver_premium/${uiUser.uid}`]);
+                  }
                 }
               });
 
@@ -305,8 +311,10 @@ export class VistaRecetaComponent implements OnInit {
   buttonSaveAction() {
     if (this.isSave == true) {
       this.deleteSave();
+      this.isSave = false;
     } else {
       this.saveRecipe();
+      this.isSave = true;
     }
   }
   //elimitar receta guardada

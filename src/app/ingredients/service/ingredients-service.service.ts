@@ -39,7 +39,7 @@ export class IngredientsServiceService {
         } else {
           this.ingredientDataAdd(ingredient, food);
           this.ingredientDataAddtable(ingredient);
-          window.alert("Haz hecho una  solicitud a este ingrediente ");
+          window.alert("Haz hecho una  solicitud a este ingrediente");
           this.flag2 = false;
         }
       });
