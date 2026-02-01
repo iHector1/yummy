@@ -16,5 +16,10 @@ Esta es la base inicial para migrar el proyecto a Laravel (versión moderna).
    ```bash
    php artisan key:generate
    ```
+4. Instalar assets y compilar Tailwind:
+   ```bash
+   npm install
+   npm run dev
+   ```
 
 > Nota: Este commit solo crea la base del proyecto; no incluye la migración completa.
