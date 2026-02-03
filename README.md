@@ -1,6 +1,6 @@
 # Yummy (Laravel base)
 
-Esta es la base inicial para migrar el proyecto a Laravel (versión moderna).
+Esta es la base inicial para migrar el proyecto a Laravel 12.
 
 ## Próximos pasos
 
